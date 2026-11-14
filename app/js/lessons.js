@@ -207,7 +207,8 @@
       g.addEventListener('click', function () {
         SFX.pop();
         g.classList.add('tapped');
-        say(l.name, AR, 0.72);
+        if (window.LessonAudio && window.LessonAudio.has(l.id)) window.LessonAudio.play(l.id);
+        else say(l.name, AR, 0.72);
         setTimeout(function () { g.classList.remove('tapped'); }, 400);
         if (!stepReveal.done) {
           stepReveal.done = true;
@@ -246,7 +247,9 @@
       });
       s.appendChild(fr);
 
+      const hasLesson = !!(window.LessonAudio && window.LessonAudio.has(l.id));
       const play = ghostBtn('اسمع تاني', function () {
+        if (hasLesson) { window.LessonAudio.play(l.id); return; }
         say(l.sound + '، ' + l.sound, AR, 0.68);
         setTimeout(function () { say(l.name + ' ' + harakaAr(haraka) + ' ' + l.sound, AR, 0.7); }, 900);
       });
@@ -254,7 +257,8 @@
       const next = bigBtn('فهمته، يلا نلعب', 'primary', function () { done(); });
       s.appendChild(next);
       show(host, s);
-      say(l.sound + '، ' + l.sound, AR, 0.66);
+      if (hasLesson) window.LessonAudio.play(l.id);
+      else say(l.sound + '، ' + l.sound, AR, 0.66);
       setTimeout(function () { say(l.name + ' ' + harakaAr(haraka) + ' ' + l.sound, AR, 0.72); }, 1100);
     }
 
