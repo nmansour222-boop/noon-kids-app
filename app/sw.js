@@ -1,5 +1,5 @@
 /* Service Worker — التطبيق يعمل أوفلاين بعد أول فتح */
-const VERSION = 'noon-v1';
+const VERSION = 'noon-v2';
 const SHELL = [
   './',
   './index.html',
@@ -38,8 +38,13 @@ self.addEventListener('fetch', e => {
   if (url.hostname === 'cdn.islamic.network') {
     e.respondWith(
       caches.open('noon-audio').then(c =>
-        c.match(req).then(hit => hit || fetch(req).then(res => { if (res.ok) c.put(req, res.clone()); return res; })
-          .catch(() => hit))
+        c.match(req, { ignoreVary: true }).then(hit =>
+          hit || fetch(req).then(res => {
+            // ردود الـ CDN بلا CORS → نوعها opaque و ok=false، لكن يمكن تخزينها
+            if (res && (res.ok || res.type === 'opaque')) c.put(req, res.clone());
+            return res;
+          }).catch(() => hit)
+        )
       )
     );
     return;
