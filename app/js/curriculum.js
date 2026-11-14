@@ -103,17 +103,20 @@
     'c k', 'e', 'h', 'r', 'm', 'd',
     'g', 'o', 'u', 'l', 'f', 'b',
     'ai', 'j', 'oa', 'ie', 'ee', 'or',
-    'z', 'w', 'ng', 'v', 'oo',
+    'z', 'w', 'ng', 'v', 'oo', 'OO',
     'y', 'x', 'ch', 'sh', 'th', 'TH',
-    'qu', 'ou', 'oi', 'ue', 'er', 'ar', 'OO'
+    'qu', 'ou', 'oi', 'ue', 'er', 'ar'
   ];
+  /* oid = الرقم الأصلي للصوت (قبل إعادة الترتيب). نستخدمه في معرّفات الوحدات والإتقان
+     حتى لا يضيع تقدّم من بدأ بالنسخة القديمة، ولا يتأثر لو أُعيد الترتيب مستقبلاً.
+     المفاتيح حسّاسة لحالة الحرف: 'oo' (book) غير 'OO' (moon)، و'th' (three) غير 'TH' (this). */
   (function sortSounds() {
+    SOUNDS.forEach(function (s, i) { s.oid = i; });
     const rank = {};
-    PHONICS_ORDER.forEach(function (k, i) { rank[k.toLowerCase()] = i; });
+    PHONICS_ORDER.forEach(function (k, i) { rank[k] = i; });
     SOUNDS.sort(function (x, y) {
-      const rx = rank[String(x.s).toLowerCase()], ry = rank[String(y.s).toLowerCase()];
-      const ax = rx == null ? 900 + SOUNDS.indexOf(x) : rx;
-      const ay = ry == null ? 900 + SOUNDS.indexOf(y) : ry;
+      const ax = rank[x.s] == null ? 900 + x.oid : rank[x.s];
+      const ay = rank[y.s] == null ? 900 + y.oid : rank[y.s];
       return ax - ay;
     });
   })();

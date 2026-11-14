@@ -127,11 +127,19 @@
       s.settings = Object.assign({}, DEFAULT.settings, s.settings || {});
       state = s;
       save();
+      Store.syncTts();
       return true;
     },
     save: save,
-    reset() { state = clone(DEFAULT); save(); }
+    reset() { state = clone(DEFAULT); save(); Store.syncTts(); },
+
+    /** الصوت الآلي لنطق التعليمات وأسماء الحروف: تلقائي (مفعّل) ما لم يغيّره ولي الأمر صراحةً.
+     *  ملاحظة: التلاوة القرآنية لا تُنطق آلياً أبداً مهما كان هذا الإعداد. */
+    ttsOn() { const s = state.settings; return s.ttsUser ? !!s.tts : true; },
+    setTts(v) { state.settings.tts = !!v; state.settings.ttsUser = true; save(); Store.syncTts(); },
+    syncTts() { window.__ttsOff = !Store.ttsOn(); }
   };
 
   window.Store = Store;
+  Store.syncTts();
 })();

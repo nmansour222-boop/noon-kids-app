@@ -4,23 +4,13 @@
   const el = UI.el;
   const AR = 'ar-SA', EN = 'en-US';
 
-  /** الصوت: تسجيل بشري من audio/manifest.json أولاً، والتوليد الآلي لو مفعّل فقط */
+  /* ترتيب الصوت: تسجيل بشري للكلمة → صوت آلي (لو الجهاز بيدعم لغة النص) */
   function say(t, lang, rate) {
-    const L = (lang === EN || /^en/i.test(String(lang || ''))) ? 'en' : 'ar';
-    const word = String(t || '').trim();
-    function viaTTS() {
-      let on = false;
-      try { on = !!window.Store.get().settings.tts; } catch (e) {}
-      if (!on || !window.Audio2) return Promise.resolve(false);
-      return window.Audio2.say(word, lang || AR, rate).then(function () { return true; }, function () { return false; });
-    }
-    const A3 = window.Audio3;
-    if (!A3 || !A3.sayWord) return viaTTS();
-    const p2 = A3.ready ? Promise.resolve() : A3.load();
-    return p2.then(function () {
-      if (!A3.has(word, L) || !A3.src(word, L)) return viaTTS();
-      return Promise.resolve(A3.sayWord(word, L, { rate: rate })).then(function () { return true; });
-    }).catch(viaTTS);
+    const L = lang || AR;
+    const isEn = /^en/i.test(L);
+    if (window.A3 && A3.has && A3.has(t, isEn ? 'en' : 'ar')) return A3.sayWord(t, isEn ? 'en' : 'ar', rate);
+    if (!window.Store.ttsOn()) return Promise.resolve(false);
+    return window.Audio2.say(t, L, rate);
   }
   /* سجل مؤقتات: يمنع استمرار التلاوة/الأصوات بعد مغادرة الدرس */
   const TIMERS = [];

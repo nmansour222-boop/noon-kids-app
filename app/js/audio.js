@@ -17,13 +17,30 @@
     if (typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = refreshVoices;
   }
 
-  function pickVoice(lang) {
+  // اختيار الصوت: اختيار ولي الأمر أولاً، وبعده أفضل صوت متاح (عصبي/محسّن أعلى من المضغوط)
+  const VKEY = 'noon.voice.';
+  function savedVoice(base) { try { return localStorage.getItem(VKEY + base) || ''; } catch (e) { return ''; } }
+  function score(v, want) {
+    const l = (v.lang || '').toLowerCase().replace('_', '-'), n = (v.name || '').toLowerCase();
+    let sc = 0;
+    if (l === want) sc += 30; else if (l.split('-')[0] === want.split('-')[0]) sc += 10;
+    if (/neural|natural|online|enhanced|premium|siri|wavenet/.test(n)) sc += 40;
+    if (/google/.test(n)) sc += 15;
+    if (/compact|espeak|novelty/.test(n)) sc -= 20;
+    if (v.localService === false) sc += 5;
+    return sc;
+  }
+  function voicesFor(lang) {
     if (!voices.length) refreshVoices();
-    const want = lang.toLowerCase();
-    const base = want.split('-')[0];
-    let v = voices.find(x => (x.lang || '').toLowerCase() === want);
-    if (!v) v = voices.find(x => (x.lang || '').toLowerCase().startsWith(base));
-    return v || null;
+    const base = lang.toLowerCase().split('-')[0], want = lang.toLowerCase();
+    return voices.filter(x => ((x.lang || '').toLowerCase().replace('_', '-')).split('-')[0] === base)
+      .sort((a, b) => score(b, want) - score(a, want));
+  }
+  function pickVoice(lang) {
+    const list = voicesFor(lang);
+    const pref = savedVoice(lang.toLowerCase().split('-')[0]);
+    if (pref) { const m = list.find(x => x.name === pref); if (m) return m; }
+    return list[0] || null;
   }
 
   function say(text, lang, rate) {
@@ -69,9 +86,21 @@
     });
   }
 
+  let lastNotice = 0;
+  function noticeAyahFail() {
+    const t = Date.now();
+    if (t - lastNotice < 20000) return;
+    lastNotice = t;
+    if (window.UI && UI.toast) UI.toast('التلاوة محتاجة إنترنت أول مرة (أو نزّلها من شاشة ولي الأمر)', 3200);
+  }
+
   const Audio2 = {
     hasTTS() { return !!synth; },
     hasArabicVoice() { return !!pickVoice('ar-SA'); },
+    /** أصوات الجهاز للغة (للاختيار من شاشة ولي الأمر) */
+    voiceList(lang) { return voicesFor(lang).map(v => ({ name: v.name, lang: v.lang })); },
+    currentVoice(lang) { const v = pickVoice(lang); return v ? v.name : ''; },
+    setVoice(lang, name) { try { const k = VKEY + lang.toLowerCase().split('-')[0]; if (name) localStorage.setItem(k, name); else localStorage.removeItem(k); } catch (e) {} },
     unlock() {
       if (!synth) return;
       try {
@@ -97,18 +126,16 @@
         await new Promise(r => setTimeout(r, (line.gap != null ? line.gap : (gap || 260))));
       }
     },
-    playAyah(url, lang, text) {
-      return play(url).then(ok => {
-        if (!ok && text) return say(text, 'ar-SA', 0.78);
-        return ok;
-      });
+    /** التلاوة بصوت المقرئ فقط — لا نقرأ القرآن بصوت آلي أبداً. عند تعذّر الملف نُبلغ ولي الأمر ونكمل. */
+    playAyah(url) {
+      return play(url).then(ok => { if (!ok) noticeAyahFail(); return ok; });
     },
     async playAyahs(urls, rate) {
       const my = ++seqToken;
-      const el = document.getElementById('ayahAudio');
       for (const u of urls) {
         if (my !== seqToken) return;
-        await play(u, rate);
+        const ok = await play(u, rate);
+        if (!ok) { noticeAyahFail(); return; }
         await new Promise(r => setTimeout(r, 220));
       }
     },

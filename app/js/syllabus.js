@@ -129,9 +129,10 @@
 
   /* ---------------- الإنجليزية: وحدة لكل صوت ---------------- */
   const EN = C.sounds.map(function (s, i) {
-    const item = Object.assign({ idx: i, id: 's' + i }, s);
+    const k = s.oid;                       // معرّف ثابت (لا يتغيّر مع الترتيب)
+    const item = Object.assign({ idx: k, id: 's' + k }, s);
     return {
-      id: 'en.' + i,
+      id: 'en.' + k,
       track: 'en',
       order: i,
       title: 'الصوت ' + s.s,
@@ -141,16 +142,16 @@
       // التركيب لا يبدأ إلا بعد إتقان satpin (أول ٦ أصوات) — قبلها تعلّم الصوت ثم اكتبه
       lessons: (i >= 5
         ? [
-            { id: 'en.' + i + '.1meet',  type: 'enMeet' },
-            { id: 'en.' + i + '.2word',  type: 'enWord' },
-            { id: 'en.' + i + '.3blend', type: 'enBlend' },
-            { id: 'en.' + i + '.4write', type: 'enWrite' }
+            { id: 'en.' + k + '.1meet',  type: 'enMeet' },
+            { id: 'en.' + k + '.2word',  type: 'enWord' },
+            { id: 'en.' + k + '.3blend', type: 'enBlend' },
+            { id: 'en.' + k + '.4write', type: 'enWrite' }
           ]
         : [
-            { id: 'en.' + i + '.1meet',  type: 'enMeet' },
-            { id: 'en.' + i + '.2word',  type: 'enWord' },
-            { id: 'en.' + i + '.3write', type: 'enWrite' },
-            { id: 'en.' + i + '.4write2', type: 'enWrite' }
+            { id: 'en.' + k + '.1meet',  type: 'enMeet' },
+            { id: 'en.' + k + '.2word',  type: 'enWord' },
+            { id: 'en.' + k + '.3write', type: 'enWrite' },
+            { id: 'en.' + k + '.4write2', type: 'enWrite' }
           ])
     };
   });
@@ -276,7 +277,7 @@
   };
   Store.taughtSounds = function () {
     const st = Store.get();
-    return C.sounds.map(function (s, i) { return Object.assign({ idx: i }, s); })
+    return C.sounds.map(function (s) { return Object.assign({ idx: s.oid }, s); })
       .filter(function (s) { return !!st.lessons['en.' + s.idx + '.1meet']; });
   };
 })();

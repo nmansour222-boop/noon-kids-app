@@ -24,11 +24,14 @@
   function go(name, opts) {
     opts = opts || {};
     if (name !== 'parent') setZoom(false);
-    if (opts.push !== false) stack.push(name);
+    if (opts.push !== false && stack[stack.length - 1] !== name) {
+      stack.push(name);
+      try { history.pushState({ s: name, d: stack.length }, ''); } catch (e) {}
+    }
     showScreen(name, opts.dir);
   }
 
-  function back() {
+  function internalBack() {
     try { window.Lessons && Lessons.stopAll && Lessons.stopAll(); } catch (e) {}
     if (stack.length > 1) stack.pop();
     const name = stack[stack.length - 1] || 'home';
@@ -36,6 +39,23 @@
     showScreen(name, 'back');
     if (name === 'home') renderHome();
     if (name === 'track') renderTrack(state.track);
+  }
+
+  /* التنقّل: مكدّس داخلي + سجلّ المتصفح (history) حتى يعمل زر الرجوع في أندرويد داخل التطبيق
+     بدل ما يقفله. نفس الشاشة لا تُدفع مرتين (كان يتطلب ضغطتين على X بعد «كمان واحد؟»). */
+  let pendingBack = null;
+
+  function back() {
+    const before = stack.length;
+    if (before > 1 && history.state && history.state.d === before) {
+      pendingBack = before;
+      history.back();                       // popstate يكمل الباقي
+      setTimeout(function () {              // أمان: لو لم يصل popstate
+        if (pendingBack === before && stack.length === before) internalBack();
+      }, 250);
+    } else {
+      internalBack();
+    }
   }
 
   const state = { track: 'ar', unit: null, qa: /[?&]qa=1/.test(location.search) };
@@ -516,7 +536,25 @@
     }
 
     body.appendChild(el('div', 'setting-row',
-      '<span class="sr-label">الصوت الآلي (احتياطي — مقفول)</span><div class="switch ' + (s.settings.tts ? 'on' : '') + '" data-set="tts"></div>'));
+      '<span class="sr-label">الصوت الآلي لنطق التعليمات وأسماء الحروف</span><div class="switch ' + (Store.ttsOn() ? 'on' : '') + '" data-set="tts" role="switch" aria-checked="' + Store.ttsOn() + '"></div>'));
+    (function voiceRow() {
+      if (!window.Audio2 || !Audio2.hasTTS()) return;
+      const row = el('div', 'setting-row', '<span class="sr-label">صوت الجهاز العربي</span>');
+      const box = document.createElement('div'); box.style.cssText = 'display:flex;gap:8px;align-items:center;width:100%';
+      const list = Audio2.voiceList('ar-SA');
+      if (!list.length) {
+        box.innerHTML = '<span style="font-size:.8rem;opacity:.7">مفيش صوت عربي على الجهاز — الحروف والكلمات المسجّلة شغّالة عادي. ثبّت صوت عربي من إعدادات الجهاز (Text-to-speech).</span>';
+      } else {
+        const sel = document.createElement('select'); sel.setAttribute('aria-label', 'اختيار الصوت العربي'); sel.style.cssText = 'flex:1;min-width:0;padding:10px;border-radius:12px;font-family:inherit;font-size:.85rem';
+        const cur = Audio2.currentVoice('ar-SA');
+        list.forEach(function (v) { const o = document.createElement('option'); o.value = v.name; o.textContent = v.name + ' (' + v.lang + ')'; if (v.name === cur) o.selected = true; sel.appendChild(o); });
+        const t = el('button', 'btn ghost sm', 'جرّب');
+        sel.addEventListener('change', function () { Audio2.setVoice('ar-SA', sel.value); });
+        t.addEventListener('click', function () { SFX.click(); Audio2.setVoice('ar-SA', sel.value); Audio2.say('مَرْحَبًا يا بَطَل، أَنَا نُون', 'ar-SA', 0.86); });
+        box.appendChild(sel); box.appendChild(t);
+      }
+      row.style.flexWrap = 'wrap'; row.appendChild(box); body.appendChild(row);
+    })();
     body.appendChild(el('div', 'setting-row',
       '<span class="sr-label">حد الاستخدام اليومي</span><div style="display:flex;gap:6px">' +
       [10, 15, 20].map(function (m) {
@@ -583,10 +621,9 @@
 
     body.querySelector('[data-set="tts"]').addEventListener('click', function () {
       SFX.click();
-      s.settings.tts = !s.settings.tts;
-      Store.save();
-      window.__ttsOff = !s.settings.tts;
-      this.classList.toggle('on', s.settings.tts);
+      Store.setTts(!Store.ttsOn());
+      this.classList.toggle('on', Store.ttsOn());
+      this.setAttribute('aria-checked', String(Store.ttsOn()));
     });
     Array.prototype.forEach.call(body.querySelectorAll('[data-lim]'), function (b) {
       b.addEventListener('click', function () {
@@ -749,8 +786,19 @@
   // حساب وقت الاستخدام
   setInterval(function () { if (current === 'lesson') Store.addSeconds(5); }, 5000);
 
-  window.addEventListener('popstate', function () { if (stack.length > 1) back(); });
-  history.replaceState({ s: 'home' }, '');
+  window.addEventListener('popstate', function () {
+    if (pendingBack !== null && stack.length < pendingBack) { pendingBack = null; return; }  // اتعالجت بالأمان
+    pendingBack = null;
+    if (stack.length > 1) internalBack();
+  });
+  try { history.replaceState({ s: 'home', d: 1 }, ''); } catch (e) {}
+
+  // الأوفلاين: تسجيل الـ Service Worker (كان ناقصاً فلا يعمل التطبيق بلا إنترنت)
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
 
   renderHome();
   showScreen('home');
@@ -758,7 +806,7 @@
 
   // خطّافات للاختبار الآلي
   window.__app = {
-    go: go, back: back, state: state, session: session,
+    go: go, back: back, internalBack: internalBack, state: state, session: session,
     openUnit: openUnit, renderHome: renderHome, renderTrack: renderTrack,
     parent: function () { parentUnlocked = true; go('parent'); renderParent(); },
     current: function () { return current; }
@@ -766,4 +814,3 @@
 
   if (state.qa) window.__ready = true;
 })();
-try { if (window.Audio3) window.Audio3.load(); } catch (e) {}
