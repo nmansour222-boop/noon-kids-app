@@ -122,3 +122,8 @@
 | en | yellow | Speaker: Wodencafe
 Recorder: Wodencafe | CC0 | File:LL-Q1860_(eng)-Wodencafe-yellow.wav |
 | en | zebra | No machine-readable author provided. Dvortygirl assumed (based on copyright claims). | CC BY-SA 3.0 | File:En-us-zebra.ogg |
+
+
+## مقاطع من فيديو دراسي (نوفمبر)
+- 18 مقطعاً (أسماء حروف + كلمات) قُصّت بمزامنة صوتية وتحقق ترتيبي من فيديو قدّمه مالك التطبيق.
+- مقاطع أسماء الحروف تحتوي جملة «الحرف … هو …»؛ استبدلها بتسجيل مباشر عند توفره.
