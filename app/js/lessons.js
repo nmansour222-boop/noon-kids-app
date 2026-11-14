@@ -23,6 +23,7 @@
   /* إيقاف كامل: يُستدعى عند مغادرة الدرس أو الرجوع */
   function stopAll() {
     clearTimers();
+    try { window.LessonAudio && window.LessonAudio.stop && window.LessonAudio.stop(); } catch (e) {}
     try { window.Audio2 && window.Audio2.stop && window.Audio2.stop(); } catch (e) {}
     try { window.A3 && window.A3.stop && window.A3.stop(); } catch (e) {}
     try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {}
@@ -194,6 +195,13 @@
       s.appendChild(g);
       s.appendChild(el('div', 'glyph-name', l.name));
       s.appendChild(el('div', 'l-hint', 'دوس على الحرف عشان تسمع اسمه'));
+      if (window.LessonAudio && window.LessonAudio.has(l.id)) {
+        const lb = ghostBtn('اسمع شرح الحرف', function () {
+          SFX.click(); window.LessonAudio.play(l.id);
+        });
+        lb.style.marginTop = '10px';
+        s.appendChild(lb);
+      }
       show(host, s);
       say('ده حرف ' + l.name, AR, 0.78);
       g.addEventListener('click', function () {

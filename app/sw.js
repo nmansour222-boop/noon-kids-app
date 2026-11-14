@@ -1,5 +1,5 @@
 /* Service Worker — التطبيق يعمل أوفلاين بعد أول فتح */
-const VERSION = 'noon-v20';
+const VERSION = 'noon-v21';
 /* كاشات لا تُمسح عند تحديث الإصدار: التلاوة المنزّلة (~53 ميجا) وأصوات الكلمات */
 const KEEP = [VERSION, 'noon-audio', 'noon-words'];
 const SHELL = [
@@ -20,6 +20,7 @@ const SHELL = [
   './js/audio.js',
   './js/audio3.js',
   './js/tracing.js',
+  './js/lesson-audio.js',
   './js/lessons.js',
   './js/offline.js',
   './js/app.js',
