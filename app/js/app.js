@@ -766,3 +766,4 @@
 
   if (state.qa) window.__ready = true;
 })();
+try { if (window.Audio3) window.Audio3.load(); } catch (e) {}

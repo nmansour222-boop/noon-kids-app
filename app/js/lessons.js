@@ -4,48 +4,23 @@
   const el = UI.el;
   const AR = 'ar-SA', EN = 'en-US';
 
-  /** الصوت: تسجيل بشري من audio/ (m4a)، وإلا الصوت الآلي لو مفعّل */
-  let _au = null;
-  function playFiles(cands, onFail) {
-    const list = cands.slice();
-    function next() {
-      if (!list.length) { onFail(); return; }
-      const src = list.shift();
-      try {
-        if (_au) { try { _au.pause(); } catch (e) {} }
-        const a = new Audio(src);
-        _au = a;
-        a.onerror = next;
-        a.onended = function () { _au = null; };
-        const pr = a.play();
-        if (pr && pr.catch) pr.catch(next);
-      } catch (e) { next(); }
-    }
-    next();
-  }
-
-  function humanCands(t, lang) {
-    const key = String(t || '').trim();
-    const bare = key.replace(/[\u064B-\u0652\u0640]/g, '');
-    const en = lang === EN;
-    const dir = en ? 'audio/en/' : 'audio/ar/';
-    const out = [];
-    [key, bare, key.toLowerCase(), bare.toLowerCase()].forEach(function (k) {
-      if (k && out.indexOf(dir + k + '.m4a') < 0) out.push(dir + k + '.m4a');
-    });
-    return out;
-  }
-
+  /** الصوت: تسجيل بشري من audio/manifest.json أولاً، والتوليد الآلي لو مفعّل فقط */
   function say(t, lang, rate) {
-    return new Promise(function (resolve) {
-      playFiles(humanCands(t, lang), function () {
-        let on = false;
-        try { on = !!window.Store.get().settings.tts; } catch (e) {}
-        if (!on || !window.Audio2) { resolve(false); return; }
-        window.Audio2.say(t, lang || AR, rate).then(resolve, function () { resolve(false); });
-      });
-      setTimeout(resolve, 12000);
-    });
+    const L = (lang === EN || /^en/i.test(String(lang || ''))) ? 'en' : 'ar';
+    const word = String(t || '').trim();
+    function viaTTS() {
+      let on = false;
+      try { on = !!window.Store.get().settings.tts; } catch (e) {}
+      if (!on || !window.Audio2) return Promise.resolve(false);
+      return window.Audio2.say(word, lang || AR, rate).then(function () { return true; }, function () { return false; });
+    }
+    const A3 = window.Audio3;
+    if (!A3 || !A3.sayWord) return viaTTS();
+    const p2 = A3.ready ? Promise.resolve() : A3.load();
+    return p2.then(function () {
+      if (!A3.has(word, L) || !A3.src(word, L)) return viaTTS();
+      return Promise.resolve(A3.sayWord(word, L, { rate: rate })).then(function () { return true; });
+    }).catch(viaTTS);
   }
   /* سجل مؤقتات: يمنع استمرار التلاوة/الأصوات بعد مغادرة الدرس */
   const TIMERS = [];
