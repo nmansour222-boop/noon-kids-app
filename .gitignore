@@ -1,0 +1,7 @@
+noon-app.zip
+node_modules/
+.vercel/
+.netlify/
+*.log
+.DS_Store
+qa/

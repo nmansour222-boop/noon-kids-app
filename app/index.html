@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FFF7EC">
+<meta name="description" content="نون — تطبيق يعلّم الأطفال 4–5 سنوات القراءة والكتابة بالعربية والإنجليزية ويحفّظهم جزء عمّ وجزء تبارك باللعب.">
+<title>نون — تعلّم والعب</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri+Quran&family=Noto+Naskh+Arabic:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== الشريط العلوي ===== -->
+  <div class="topbar" id="topbar">
+    <div class="pill"><span class="ico">⭐</span><span id="starCount">0</span></div>
+    <div class="pill"><span class="ico">🔥</span><span id="streakCount">0</span></div>
+    <div class="spacer"></div>
+    <button class="icon-btn" id="btnParent" aria-label="ولي الأمر">👤</button>
+  </div>
+
+  <!-- ===== الرئيسية ===== -->
+  <section class="screen active" id="screen-home">
+    <div class="guide">
+      <div class="guide-face">🦉</div>
+      <div class="bubble" id="homeBubble">أهلاً بيك! أنا <b>نون</b> 🦉 يلا نلعب ونتعلّم حاجة جديدة النهاردة؟</div>
+    </div>
+
+    <div class="hero">
+      <button class="btn big" id="btnPlay">▶️ يلا نلعب</button>
+      <div class="worlds">
+        <div class="world w1" data-world="ar">
+          <span class="we">🔤</span>
+          <div class="wt">عربي</div>
+          <div class="wp" id="wpAr">0 من 28 حرف</div>
+          <div class="bar"><i id="barAr"></i></div>
+        </div>
+        <div class="world w2" data-world="en">
+          <span class="we">🔠</span>
+          <div class="wt">إنجليزي</div>
+          <div class="wp" id="wpEn">0 من 42 صوت</div>
+          <div class="bar"><i id="barEn"></i></div>
+        </div>
+        <div class="world w3" data-world="quran">
+          <span class="we">📖</span>
+          <div class="wt">قرآن</div>
+          <div class="wp" id="wpQuran">0 من 49 سورة</div>
+          <div class="bar"><i id="barQuran"></i></div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:12px">
+        <button class="btn ghost sm" id="btnTreasury">🏆 بيتي</button>
+        <button class="btn ghost sm" id="btnMap">🗺️ الخريطة</button>
+      </div>
+    </div>
+    <div class="foot">أصوات الحروف والكلمات مؤقتة (نطق آلي) لحين التسجيل البشري · تلاوة القرآن مسجّلة بصوت بشري</div>
+  </section>
+
+  <!-- ===== الجلسة ===== -->
+  <section class="screen" id="screen-session">
+    <div class="progress-dots" id="dots"></div>
+    <div class="stage" id="stage"></div>
+  </section>
+
+  <!-- ===== الخريطة / المكتبة ===== -->
+  <section class="screen" id="screen-map">
+    <div class="guide">
+      <div class="guide-face">🗺️</div>
+      <div class="bubble">اختار اللي نفسك تلعبه — كل ما تخلص حاجة، هتفتح اللي بعدها</div>
+    </div>
+    <div class="card" id="mapBody" style="margin-top:10px"></div>
+    <button class="btn ghost sm" id="btnBackHome1" style="margin-top:12px">🏠 رجوع للبيت</button>
+  </section>
+
+  <!-- ===== بيتي (المكافآت) ===== -->
+  <section class="screen" id="screen-treasury">
+    <div class="guide">
+      <div class="guide-face">🏆</div>
+      <div class="bubble" id="treasuryBubble">دي حاجاتك اللي جمعتها!</div>
+    </div>
+    <div class="card" id="treasuryBody" style="margin-top:10px"></div>
+    <button class="btn ghost sm" id="btnBackHome2" style="margin-top:12px">🏠 رجوع للبيت</button>
+  </section>
+
+  <!-- ===== ولي الأمر ===== -->
+  <section class="screen" id="screen-parent">
+    <div class="guide">
+      <div class="guide-face">👤</div>
+      <div class="bubble">مساحة ولي الأمر — محمية برقم</div>
+    </div>
+    <div class="card" id="parentBody" style="margin-top:10px"></div>
+    <button class="btn ghost sm" id="btnBackHome3" style="margin-top:12px">🏠 رجوع للبيت</button>
+  </section>
+
+</div>
+
+<div class="toast hidden" id="toast"><span id="toastText"></span></div>
+<div class="confetti" id="confetti"></div>
+
+<script src="js/quran-data.js"></script>
+<script src="js/curriculum.js"></script>
+<script src="js/store.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/tracing.js"></script>
+<script src="js/games.js"></script>
+<script src="js/app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  });
+}
+</script>
+</body>
+</html>
