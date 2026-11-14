@@ -4,16 +4,48 @@
   const el = UI.el;
   const AR = 'ar-SA', EN = 'en-US';
 
-  /** الصوت: تسجيل بشري أولاً، والصوت الآلي اختياري (مقفول افتراضياً) */
-  /* ترتيب الصوت: تسجيل بشري للكلمة → صوت آلي (لو الجهاز بيدعم لغة النص) */
+  /** الصوت: تسجيل بشري من audio/ (m4a)، وإلا الصوت الآلي لو مفعّل */
+  let _au = null;
+  function playFiles(cands, onFail) {
+    const list = cands.slice();
+    function next() {
+      if (!list.length) { onFail(); return; }
+      const src = list.shift();
+      try {
+        if (_au) { try { _au.pause(); } catch (e) {} }
+        const a = new Audio(src);
+        _au = a;
+        a.onerror = next;
+        a.onended = function () { _au = null; };
+        const pr = a.play();
+        if (pr && pr.catch) pr.catch(next);
+      } catch (e) { next(); }
+    }
+    next();
+  }
+
+  function humanCands(t, lang) {
+    const key = String(t || '').trim();
+    const bare = key.replace(/[\u064B-\u0652\u0640]/g, '');
+    const en = lang === EN;
+    const dir = en ? 'audio/en/' : 'audio/ar/';
+    const out = [];
+    [key, bare, key.toLowerCase(), bare.toLowerCase()].forEach(function (k) {
+      if (k && out.indexOf(dir + k + '.m4a') < 0) out.push(dir + k + '.m4a');
+    });
+    return out;
+  }
+
   function say(t, lang, rate) {
-    const L = lang || AR;
-    const isEn = /^en/i.test(L);
-    if (window.A3 && A3.has && A3.has(t, isEn ? 'en' : 'ar')) return A3.sayWord(t, isEn ? 'en' : 'ar', rate);
-    let on = false;
-    try { on = !!window.Store.get().settings.tts; } catch (e) {}
-    if (!on) return Promise.resolve(false);
-    return window.Audio2.say(t, L, rate);
+    return new Promise(function (resolve) {
+      playFiles(humanCands(t, lang), function () {
+        let on = false;
+        try { on = !!window.Store.get().settings.tts; } catch (e) {}
+        if (!on || !window.Audio2) { resolve(false); return; }
+        window.Audio2.say(t, lang || AR, rate).then(resolve, function () { resolve(false); });
+      });
+      setTimeout(resolve, 12000);
+    });
   }
   /* سجل مؤقتات: يمنع استمرار التلاوة/الأصوات بعد مغادرة الدرس */
   const TIMERS = [];
