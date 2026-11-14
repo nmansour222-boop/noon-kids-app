@@ -1,19 +1,36 @@
 /* Service Worker — التطبيق يعمل أوفلاين بعد أول فتح */
-const VERSION = 'noon-v3';
+const VERSION = 'noon-v8';
 const SHELL = [
   './',
   './index.html',
   './css/app.css',
   './js/quran-data.js',
+  './js/glyphs.js',
+  './js/glyph.js',
   './js/curriculum.js',
   './js/store.js',
+  './js/pedagogy.js',
+  './js/thinking.js',
+  './js/syllabus.js',
+  './js/sfx.js',
+  './js/ui.js',
   './js/audio.js',
+  './js/audio3.js',
   './js/tracing.js',
-  './js/games.js',
+  './js/lessons.js',
   './js/app.js',
+  './fonts/baloo.woff2',
+  './fonts/cairo.woff2',
+  './fonts/naskh.woff2',
+  './fonts/amiri-400.woff2',
+  './fonts/amiri-700.woff2',
+  './fonts/quran.woff2',
+  './fonts/emoji.woff2',
   './manifest.webmanifest',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './icons/icon-maskable.png',
+  './icons/apple-touch-icon.png'
 ];
 
 self.addEventListener('install', e => {
@@ -46,6 +63,16 @@ self.addEventListener('fetch', e => {
           }).catch(() => hit)
         )
       )
+    );
+    return;
+  }
+
+  // أصوات الدروس: تخزين عند أول تشغيل لتعمل أوفلاين
+  if (url.origin === location.origin && url.pathname.indexOf('/audio/') >= 0) {
+    e.respondWith(
+      caches.open('noon-words').then(c => c.match(req).then(hit => hit ||
+        fetch(req).then(res => { if (res && res.ok) c.put(req, res.clone()); return res; })
+      ))
     );
     return;
   }

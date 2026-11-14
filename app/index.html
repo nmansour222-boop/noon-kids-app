@@ -2,119 +2,108 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#FFF7EC">
-<meta name="description" content="نون — تطبيق يعلّم الأطفال 4–5 سنوات القراءة والكتابة بالعربية والإنجليزية ويحفّظهم جزء عمّ وجزء تبارك باللعب.">
-<title>نون — تعلّم والعب</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FF6B45">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="description" content="نون — تطبيق تعليمي للأطفال ٤–٥ سنوات: قراءة وكتابة العربية والإنجليزية وتحفيظ جزء عمّ وجزء تبارك.">
+<title>نون — تعلّم باللعب</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri+Quran&family=Noto+Naskh+Arabic:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-<div class="app">
+<div id="app">
 
-  <!-- ===== الشريط العلوي ===== -->
-  <div class="topbar" id="topbar">
-    <div class="pill"><span class="ico">⭐</span><span id="starCount">0</span></div>
-    <div class="pill"><span class="ico">🔥</span><span id="streakCount">0</span></div>
-    <div class="spacer"></div>
-    <button class="icon-btn" id="btnParent" aria-label="ولي الأمر">👤</button>
-  </div>
-
-  <!-- ===== الرئيسية ===== -->
-  <section class="screen active" id="screen-home">
-    <div class="guide">
-      <div class="guide-face">🦉</div>
-      <div class="bubble" id="homeBubble">أهلاً بيك! أنا <b>نون</b> 🦉 يلا نلعب ونتعلّم حاجة جديدة النهاردة؟</div>
+  <!-- ============ الرئيسية: ثلاث مسارات منفصلة ============ -->
+  <section class="screen" id="s-home">
+    <div class="topbar">
+      <span class="chip stars" id="homeStars">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="#FFB020"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+        <span id="homeStarsN">0</span>
+      </span>
+      <span class="chip streak" id="homeStreak" hidden>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF6B5A"><path d="M12 2s5 5.2 5 9.4A5 5 0 0 1 7 11.4C7 7.2 12 2 12 2z"/><circle cx="12" cy="15" r="2.2" fill="#FFE7E2"/></svg>
+        <span id="homeStreakN">0</span>
+      </span>
+      <span class="grow"></span>
+      <button class="round-btn" id="btnParent" aria-label="شاشة ولي الأمر"></button>
     </div>
 
-    <div class="hero">
-      <button class="btn big" id="btnPlay">▶️ يلا نلعب</button>
-      <div class="worlds">
-        <div class="world w1" data-world="ar">
-          <span class="we">🔤</span>
-          <div class="wt">عربي</div>
-          <div class="wp" id="wpAr">0 من 28 حرف</div>
-          <div class="bar"><i id="barAr"></i></div>
-        </div>
-        <div class="world w2" data-world="en">
-          <span class="we">🔠</span>
-          <div class="wt">إنجليزي</div>
-          <div class="wp" id="wpEn">0 من 42 صوت</div>
-          <div class="bar"><i id="barEn"></i></div>
-        </div>
-        <div class="world w3" data-world="quran">
-          <span class="we">📖</span>
-          <div class="wt">قرآن</div>
-          <div class="wp" id="wpQuran">0 من 49 سورة</div>
-          <div class="bar"><i id="barQuran"></i></div>
-        </div>
+    <div class="scroll">
+      <div class="hero">
+        <div class="hero-owl" id="heroOwl"></div>
+        <h1 class="hero-title">أهلاً يا بطل</h1>
+        <p class="hero-sub">اختار هنتعلم إيه النهارده</p>
       </div>
-      <div class="grid-2" style="margin-top:12px">
-        <button class="btn ghost sm" id="btnTreasury">🏆 بيتي</button>
-        <button class="btn ghost sm" id="btnMap">🗺️ الخريطة</button>
-      </div>
+
+      <div class="tracks" id="trackCards"></div>
     </div>
-    <div class="foot">أصوات الحروف والكلمات مؤقتة (نطق آلي) لحين التسجيل البشري · تلاوة القرآن مسجّلة بصوت بشري</div>
+
+    <div class="home-foot">
+      <button class="btn ghost" id="btnParent2">لولي الأمر</button>
+    </div>
   </section>
 
-  <!-- ===== الجلسة ===== -->
-  <section class="screen" id="screen-session">
-    <div class="progress-dots" id="dots"></div>
-    <div class="stage" id="stage"></div>
+  <!-- ============ مسار واحد (عربي / إنجليزي / قرآن) ============ -->
+  <section class="screen" id="s-track" hidden>
+    <div class="topbar">
+      <button class="round-btn" id="trackBack" aria-label="رجوع"></button>
+      <div class="grow"></div>
+      <span class="chip stars">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="#FFB020"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+        <span id="trackStarsN">0</span>
+      </span>
+    </div>
+    <div class="track-head">
+      <h1 class="th-title" id="trackTitle">العربية</h1>
+      <p class="th-sub" id="trackSub"></p>
+      <div class="bar"><i id="trackBar" style="width:0%"></i></div>
+    </div>
+    <div class="scroll">
+      <div class="path" id="trackPath"></div>
+    </div>
   </section>
 
-  <!-- ===== الخريطة / المكتبة ===== -->
-  <section class="screen" id="screen-map">
-    <div class="guide">
-      <div class="guide-face">🗺️</div>
-      <div class="bubble">اختار اللي نفسك تلعبه — كل ما تخلص حاجة، هتفتح اللي بعدها</div>
+  <!-- ============ الدرس ============ -->
+  <section class="screen" id="s-lesson" hidden>
+    <div class="lesson-top">
+      <button class="round-btn soft" id="lessonClose" aria-label="إغلاق"></button>
+      <div class="segments" id="lessonSegs"></div>
     </div>
-    <div class="card" id="mapBody" style="margin-top:10px"></div>
-    <button class="btn ghost sm" id="btnBackHome1" style="margin-top:12px">🏠 رجوع للبيت</button>
+    <div class="l-host" id="lessonHost"></div>
   </section>
 
-  <!-- ===== بيتي (المكافآت) ===== -->
-  <section class="screen" id="screen-treasury">
-    <div class="guide">
-      <div class="guide-face">🏆</div>
-      <div class="bubble" id="treasuryBubble">دي حاجاتك اللي جمعتها!</div>
+  <!-- ============ ولي الأمر ============ -->
+  <section class="screen" id="s-parent" hidden>
+    <div class="topbar">
+      <button class="round-btn" id="parentBack" aria-label="رجوع"></button>
+      <div class="grow"></div>
+      <b style="font-size:16px">لوحة ولي الأمر</b>
     </div>
-    <div class="card" id="treasuryBody" style="margin-top:10px"></div>
-    <button class="btn ghost sm" id="btnBackHome2" style="margin-top:12px">🏠 رجوع للبيت</button>
-  </section>
-
-  <!-- ===== ولي الأمر ===== -->
-  <section class="screen" id="screen-parent">
-    <div class="guide">
-      <div class="guide-face">👤</div>
-      <div class="bubble">مساحة ولي الأمر — محمية برقم</div>
-    </div>
-    <div class="card" id="parentBody" style="margin-top:10px"></div>
-    <button class="btn ghost sm" id="btnBackHome3" style="margin-top:12px">🏠 رجوع للبيت</button>
+    <div class="scroll" id="parentBody"></div>
   </section>
 
 </div>
-
-<div class="toast hidden" id="toast"><span id="toastText"></span></div>
-<div class="confetti" id="confetti"></div>
+<div id="toast"></div>
+<div id="confetti"></div>
 
 <script src="js/quran-data.js"></script>
+<script src="js/glyphs.js"></script>
+<script src="js/glyph.js"></script>
 <script src="js/curriculum.js"></script>
 <script src="js/store.js"></script>
+<script src="js/pedagogy.js"></script>
+<script src="js/thinking.js"></script>
+<script src="js/syllabus.js"></script>
+<script src="js/sfx.js"></script>
+<script src="js/ui.js"></script>
 <script src="js/audio.js"></script>
+<script src="js/audio3.js"></script>
 <script src="js/tracing.js"></script>
-<script src="js/games.js"></script>
+<script src="js/lessons.js"></script>
 <script src="js/app.js"></script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('sw.js').catch(function () {});
-  });
-}
-</script>
 </body>
 </html>

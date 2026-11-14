@@ -1,177 +1,135 @@
-/* ============ الحالة والتقدّم: تكرار متباعد + مكافآت ============ */
+/* ============ حالة التطبيق: تقدّم خطّي + مكافآت + إعدادات ============ */
 (function () {
   'use strict';
-  const KEY = 'noon_app_state_v1';
-  const INTERVALS = [1, 3, 7, 14, 30]; // أيام حسب قوة العنصر (0..4)
+  const KEY = 'noon_state_v2';
 
   const DEFAULT = {
     childName: '',
     stars: 0,
     streak: 0,
     lastDay: null,
-    days: {},              // '2025-01-01' -> seconds
-    items: {},             // 'ar:seen' -> {lv, due, seen, ok, bad, last}
-    surahs: {},            // 112 -> {done:true, at:ts, ayahsDone:n}
+    days: {},
+    lessons: {},        // lessonId -> timestamp
+    items: {},          // 'ar:ba' -> {seen, ok, bad}
+    surahs: {},         // surahNumber -> {ayahsDone, done}
     sessions: 0,
     seconds: 0,
-    settings: { tts: true, limitMin: 20, pin: '1234', showEnglish: true },
-    friends: [],
-    puzzle: 0,
-    history: []            // [{at, track, item}]
+    settings: { tts: true, limitMin: 20, pin: '1234' },
+    history: []
   };
 
   let state = load();
 
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function load() {
     try {
       const raw = localStorage.getItem(KEY);
-      if (!raw) return JSON.parse(JSON.stringify(DEFAULT));
-      const s = Object.assign(JSON.parse(JSON.stringify(DEFAULT)), JSON.parse(raw));
+      if (!raw) return clone(DEFAULT);
+      const s = Object.assign(clone(DEFAULT), JSON.parse(raw));
       s.settings = Object.assign({}, DEFAULT.settings, s.settings || {});
       return s;
-    } catch (e) { return JSON.parse(JSON.stringify(DEFAULT)); }
+    } catch (e) { return clone(DEFAULT); }
   }
-  function save() {
-    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
-  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
   function today() {
     const d = new Date();
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
-  function dayDiff(a, b) {
-    const da = new Date(a + 'T00:00:00'), db = new Date(b + 'T00:00:00');
-    return Math.round((db - da) / 86400000);
-  }
+  function dayDiff(a, b) { return Math.round((new Date(b + 'T00:00:00') - new Date(a + 'T00:00:00')) / 86400000); }
 
   const Store = {
     get() { return state; },
     save,
+    today,
 
-    /* ---- جلسة اليوم والستريك ---- */
     touchToday() {
       const t = today();
       if (state.lastDay !== t) {
-        if (state.lastDay && dayDiff(state.lastDay, t) === 1) state.streak += 1;
-        else if (state.lastDay && dayDiff(state.lastDay, t) > 1) state.streak = 1; // ما بتنكسرش للصفر
-        else if (!state.lastDay) state.streak = 1;
+        if (!state.lastDay) state.streak = 1;
+        else if (dayDiff(state.lastDay, t) === 1) state.streak += 1;
+        else state.streak = 1;
         state.lastDay = t;
         save();
       }
       return state.streak;
     },
     secondsToday() { return state.days[today()] || 0; },
-    addSeconds(n) {
-      const t = today();
-      state.days[t] = (state.days[t] || 0) + n;
-      state.seconds += n;
-      save();
-    },
+    addSeconds(n) { state.days[today()] = (state.days[today()] || 0) + n; state.seconds += n; save(); },
     limitReached() {
-      if (!state.settings.limitMin) return false;
-      return this.secondsToday() >= state.settings.limitMin * 60;
+      const lim = state.settings.limitMin;
+      return !!lim && this.secondsToday() >= lim * 60;
     },
 
-    /* ---- عناصر التعلم ---- */
-    keyOf(track, id) { return track + ':' + id; },
-    item(track, id) {
-      const k = this.keyOf(track, id);
-      if (!state.items[k]) state.items[k] = { lv: 0, due: null, seen: 0, ok: 0, bad: 0, last: null };
-      return state.items[k];
+    lessonDone(id) { return !!state.lessons[id]; },
+    markLesson(id) {
+      if (!state.lessons[id]) { state.lessons[id] = Date.now(); save(); }
     },
-    strength(track, id) { return this.item(track, id).lv; },
-    mastered(track, id) { return this.item(track, id).lv >= 3; },
+    doneCount(track) {
+      const list = window.SYLLABUS.forTrack(track);
+      let n = 0;
+      list.forEach(function (l) { if (state.lessons[l.id]) n++; });
+      return n;
+    },
+    trackTotal(track) { return window.SYLLABUS.forTrack(track).length; },
+    trackProgress(track) { return this.doneCount(track) / Math.max(1, this.trackTotal(track)); },
+    currentLesson(track) {
+      const list = window.SYLLABUS.forTrack(track);
+      for (let i = 0; i < list.length; i++) if (!state.lessons[list[i].id]) return list[i];
+      return list[list.length - 1] || null;
+    },
+    isUnlocked(track, lessonId) {
+      const list = window.SYLLABUS.forTrack(track);
+      const idx = list.findIndex(function (l) { return l.id === lessonId; });
+      if (idx < 0) return false;
+      if (idx === 0) return true;
+      return !!state.lessons[list[idx - 1].id];
+    },
 
-    /** تسجيل محاولة: النجاح يرفع المستوى، والخطأ ينزل بحد أدنى 1 */
-    mark(track, id, ok) {
-      const it = this.item(track, id);
-      const t = today();
-      it.seen += 1;
-      it.last = Date.now();
-      if (ok) {
-        it.ok += 1;
-        it.lv = Math.min(4, it.lv + 1);
-      } else {
-        it.bad += 1;
-        it.lv = Math.max(1, it.lv - 1);
-      }
-      const days = INTERVALS[Math.min(it.lv, INTERVALS.length - 1)];
-      const d = new Date(); d.setDate(d.getDate() + days);
-      it.due = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    record(track, id, ok) {
+      const k = track + ':' + id;
+      if (!state.items[k]) state.items[k] = { seen: 0, ok: 0, bad: 0 };
+      state.items[k].seen += 1;
+      if (ok) state.items[k].ok += 1; else state.items[k].bad += 1;
       save();
-      return it;
     },
+    item(track, id) { return state.items[track + ':' + id] || { seen: 0, ok: 0, bad: 0 }; },
 
-    /** العناصر المستحقة للمراجعة (أو التي لم تُدرس) */
-    due(track, list) {
-      const t = today();
-      return list.filter(x => {
-        const it = state.items[this.keyOf(track, x.id)];
-        if (!it) return true;              // جديد
-        if (!it.due) return true;
-        return it.due <= t;
-      });
-    },
-
-    /* ---- اختيار درس اليوم ---- */
-    nextLetter() {
-      const L = window.CURRICULUM.letters;
-      for (const l of L) if (!this.mastered('ar', l.id)) return l;
-      return L[state.sessions % L.length]; // كله متقن → مراجعة دورية
-    },
-    nextSound() {
-      const S = window.CURRICULUM.sounds;
-      for (let i = 0; i < S.length; i++) if (!this.mastered('en', 's' + i)) return Object.assign({ idx: i, id: 's' + i }, S[i]);
-      return Object.assign({ idx: 0, id: 's0' }, S[state.sessions % S.length]);
-    },
-    letterProgress() {
-      const L = window.CURRICULUM.letters;
-      return L.filter(l => this.mastered('ar', l.id)).length / L.length;
-    },
-    soundProgress() {
-      const S = window.CURRICULUM.sounds;
-      let n = 0; S.forEach((_, i) => { if (this.mastered('en', 's' + i)) n++; });
-      return n / S.length;
-    },
-    quranProgress() {
-      const total = window.QURAN ? window.QURAN.length : 49;
-      return Object.keys(state.surahs).filter(k => state.surahs[k].done).length / total;
-    },
-
-    /* ---- القرآن ---- */
     surahDone(n) { return !!(state.surahs[n] && state.surahs[n].done); },
-    markSurah(n, ayahsDone, totalAyahs) {
-      if (!state.surahs[n]) state.surahs[n] = { done: false, ayahsDone: 0 };
+    markSurah(n, ayahsDone, total) {
+      if (!state.surahs[n]) state.surahs[n] = { ayahsDone: 0, done: false };
       state.surahs[n].ayahsDone = Math.max(state.surahs[n].ayahsDone || 0, ayahsDone);
-      if (totalAyahs && state.surahs[n].ayahsDone >= totalAyahs) {
+      if (total && state.surahs[n].ayahsDone >= total) {
         state.surahs[n].done = true;
         state.surahs[n].at = Date.now();
       }
       save();
       return state.surahs[n].done;
     },
-    nextSurah() {
-      const st = window.CURRICULUM.stations;
-      for (const s of st) for (const n of s.surahs) if (!this.surahDone(n)) return n;
-      return 1;
+    surahsDoneCount() {
+      return Object.keys(state.surahs).filter(function (k) { return state.surahs[k] && state.surahs[k].done; }).length;
     },
 
-    /* ---- مكافآت ---- */
     addStars(n) { state.stars += n; save(); return state.stars; },
-    addPuzzle() { state.puzzle = (state.puzzle + 1) % 6; save(); return state.puzzle; },
-    addFriend(f) { if (f && state.friends.indexOf(f) < 0) { state.friends.push(f); save(); } },
-
-    /* ---- سجل ---- */
     logSession(track, label) {
       state.sessions += 1;
-      state.history.unshift({ at: Date.now(), track, label });
-      state.history = state.history.slice(0, 60);
+      state.history.unshift({ at: Date.now(), track: track, label: label });
+      state.history = state.history.slice(0, 80);
       save();
     },
 
-    reset() {
-      state = JSON.parse(JSON.stringify(DEFAULT));
+    /** نسخة احتياطية قابلة للاستعادة */
+    exportJSON() {
+      return { app: 'noon', version: 2, at: Date.now(), state: state };
+    },
+    importJSON(obj) {
+      if (!obj || !obj.state || obj.app !== 'noon') return false;
+      const s = Object.assign(clone(DEFAULT), obj.state);
+      s.settings = Object.assign({}, DEFAULT.settings, s.settings || {});
+      state = s;
       save();
-    }
+      return true;
+    },
+    reset() { state = clone(DEFAULT); save(); }
   };
 
   window.Store = Store;
