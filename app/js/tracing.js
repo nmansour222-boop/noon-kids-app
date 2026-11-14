@@ -35,14 +35,42 @@
   }
 
   /** يرسم حرفاً على canvas بواسطة مساراته الحقيقية ويُرجع خريطة نقاطه */
+  /** يرسم الحرف مساراتٍ حقيقية (Path2D) — لا يعتمد على تحميل الخط، فلا يخرج فارغًا أبدًا */
+  function paintPaths(g, ch, marks, latin, W, H, fill, stroke, mode) {
+    const G = window.Glyph;
+    if (!G || !G.has || !G.has(ch, latin)) return false;
+    const L = G.layout(ch, marks, latin);
+    const b = L.box;
+    const w = Math.max(1, b[2] - b[0]), h = Math.max(1, b[3] - b[1]);
+    const k = Math.min((W * 0.80) / w, (H * 0.80) / h);
+    const tx = W / 2 - ((b[0] + b[2]) / 2) * k;
+    const ty = H / 2 + ((b[1] + b[3]) / 2) * k;
+    g.save();
+    g.transform(k, 0, 0, -k, tx, ty);
+    g.lineJoin = 'round'; g.lineCap = 'round';
+    L.paths.forEach(function (p) {
+      const path = new Path2D(p.d);
+      g.save();
+      g.translate(p.dx || 0, p.dy || 0);
+      if (p.s && p.s !== 1) g.scale(p.s, p.s);
+      if (mode !== 'fill') { g.lineWidth = (stroke || 2) / k; g.strokeStyle = stroke; g.stroke(path); }
+      if (mode !== 'stroke') { g.fillStyle = fill; g.fill(path); }
+      g.restore();
+    });
+    g.restore();
+    return true;
+  }
+
   function rasterize(ch, marks, latin) {
     const c = document.createElement('canvas');
     c.width = c.height = MS;
     const g = c.getContext('2d', { willReadFrequently: true });
     g.fillStyle = '#000'; g.fillRect(0, 0, MS, MS);
     g.fillStyle = '#fff';
-    const t = drawFitted(g, textOf(ch, marks), MS, MS, latin, 0.8);
-    g.fillText(textOf(ch, marks), t.x, t.y);
+    if (!paintPaths(g, ch, marks, latin, MS, MS, '#fff', '#fff', 'fill')) {
+      const t = drawFitted(g, textOf(ch, marks), MS, MS, latin, 0.8);
+      g.fillText(textOf(ch, marks), t.x, t.y);
+    }
 
     const d = g.getImageData(0, 0, MS, MS).data;
     const m = new Uint8Array(MS * MS);
@@ -95,12 +123,21 @@
       this.drawing = false;
       this.attempts = 0;
       this.locked = false;
-      this.fit();
       this.bind();
+      const self = this;
+      this.cssW = 300; this.cssH = 300; this.dpr = 1;
+      requestAnimationFrame(function () {
+        self.fit();
+        self.paint();
+      });
       this.render();
-      this._onResize = () => { this.fit(); this.render(); };
+      this._onResize = () => { this.fit(); this.paint(); };
       window.addEventListener('resize', this._onResize);
-      this._anim = setInterval(() => { if (!this.points.length && !this.locked) this.render(); }, 380);
+      if (window.ResizeObserver && this.canvas.parentElement) {
+        this._ro = new ResizeObserver(() => { this.fit(); this.paint(); });
+        this._ro.observe(this.canvas.parentElement);
+      }
+      this._anim = setInterval(() => { if (!this.points.length && !this.locked) this.paint(); }, 520);
     }
 
     fit() {
@@ -161,7 +198,7 @@
       this.canvas.addEventListener('pointermove', this._move);
       this.canvas.addEventListener('pointerup', this._up);
       this.canvas.addEventListener('pointercancel', this._up);
-      this.canvas.addEventListener('pointerleave', () => { if (this.drawing) { this.drawing = false; this.evaluate(); } });
+      this.canvas.addEventListener('pointerleave', () => { /* لا نُنهي: الطفل قد يخرج قليلًا ثم يكمل */ });
     }
 
     markAt(x, y, r) {
@@ -179,7 +216,7 @@
         }
       }
     }
-    stamp(p) { this.markAt(p.x, p.y, this.cssW * 0.08); }
+    stamp(p) { this.markAt(p.x, p.y, this.cssW * 0.055); }
     stampLine(a, b) {
       const d = Math.hypot(b.x - a.x, b.y - a.y);
       const steps = Math.max(1, Math.ceil(d / 3));
@@ -213,7 +250,7 @@
       return 0;
     }
 
-    render() {
+    paint() {
       const g = this.canvas.getContext('2d');
       const W = this.cssW, H = this.cssH;
       g.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
@@ -221,19 +258,19 @@
       g.fillStyle = '#FFFFFF';
       g.fillRect(0, 0, W, H);
 
-      // الحرف كدليل: نصّ من الخط نفسه (نقاط وهمزات صحيحة) بتعبئة باهتة وحدود واضحة
+      // الحرف كدليل: من مساراته الحقيقية (نقاط وهمزات في مكانها) — بلا انتظار الخط
       g.save();
-      const txt = textOf(this.ch, this.marks);
-      const t = drawFitted(g, txt, W, H, this.latin, 0.78);
-      g.textAlign = 'center';
-      g.textBaseline = 'alphabetic';
-      g.lineJoin = 'round';
-      g.lineCap = 'round';
-      g.fillStyle = this.latin ? '#DCF0EC' : '#F6E0D6';
-      g.fillText(txt, t.x, t.y);
-      g.lineWidth = Math.max(1.6, t.size * 0.009);
-      g.strokeStyle = this.latin ? '#8FCFC5' : '#D9B09A';
-      g.strokeText(txt, t.x, t.y);
+      g.lineJoin = 'round'; g.lineCap = 'round';
+      const fillC = this.latin ? '#DCF0EC' : '#F6E0D6';
+      const lineC = this.latin ? '#8FCFC5' : '#D9B09A';
+      if (!paintPaths(g, this.ch, this.marks, this.latin, W, H, fillC, lineC, 'both')) {
+        const txt = textOf(this.ch, this.marks);
+        const t = drawFitted(g, txt, W, H, this.latin, 0.78);
+        g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+        g.fillStyle = fillC; g.fillText(txt, t.x, t.y);
+        g.lineWidth = Math.max(1.4, t.size * 0.008);
+        g.strokeStyle = lineC; g.strokeText(txt, t.x, t.y);
+      }
       g.restore();
 
       // نقطة البداية النابضة
@@ -250,7 +287,7 @@
       // خط إصبع الطفل
       if (this.points.length) {
         g.strokeStyle = this.latin ? '#12A594' : '#FF6B5A';
-        g.lineWidth = Math.max(13, W * 0.08);
+        g.lineWidth = Math.max(10, W * 0.055);
         g.lineCap = 'round';
         g.lineJoin = 'round';
         g.globalAlpha = 0.9;
@@ -263,6 +300,11 @@
       }
     }
 
+    render() {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => { this._raf = 0; this.paint(); });
+    }
+
     clear() {
       this.points = [];
       this.covered = new Uint8Array(MS * MS);
@@ -273,6 +315,8 @@
 
     destroy() {
       clearInterval(this._anim);
+      if (this._raf) cancelAnimationFrame(this._raf);
+      if (this._ro) this._ro.disconnect();
       window.removeEventListener('resize', this._onResize);
       this.canvas.removeEventListener('pointerdown', this._down);
       this.canvas.removeEventListener('pointermove', this._move);

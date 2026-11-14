@@ -202,6 +202,18 @@
         glyphEl(l.ch, [haraka], { size: 52, color: 'var(--coral-d)' }) + '<span class="eq-lbl">صوته</span>'));
       s.appendChild(eq);
 
+      // أشكال الحرف: منفصل / أول / وسط / آخر
+      const joins = 'اأإآدذرزوهـء'.indexOf(l.ch) < 0;
+      const fr = el('div', 'forms-row');
+      const forms = joins
+        ? [[l.ch, 'منفصل'], [l.ch + 'ـ', 'أول'], ['ـ' + l.ch + 'ـ', 'وسط'], ['ـ' + l.ch, 'آخر']]
+        : [[l.ch, 'منفصل'], ['ـ' + l.ch, 'آخر']];
+      forms.forEach(function (f) {
+        fr.appendChild(el('div', 'form-card',
+          '<span class="form-glyph">' + f[0] + '</span><span class="form-lbl">' + f[1] + '</span>'));
+      });
+      s.appendChild(fr);
+
       const play = ghostBtn('اسمع تاني', function () {
         say(l.sound + '، ' + l.sound, AR, 0.68);
         setTimeout(function () { say(l.name + ' ' + harakaAr(haraka) + ' ' + l.sound, AR, 0.7); }, 900);
@@ -495,6 +507,20 @@
      القرآن
      ======================================================= */
 
+  /** تشغيل متكرر بطيء (تحفيظ) */
+  function slowPlay(ayahs, times) {
+    const list = ayahs.map(function (a) { return a.audio; });
+    let n = 0;
+    function round() {
+      if (n >= (times || 2)) return;
+      n++;
+      window.Audio2.playAyahs(list, 0.8).catch(function () {});
+    }
+    round();
+    const id = setInterval(function () { if (n >= (times || 2)) { clearInterval(id); return; } round(); }, 4200 * list.length);
+    return id;
+  }
+
   function ayahBlock(ayahs, opts) {
     opts = opts || {};
     const box = el('div', 'ayah-box');
@@ -518,13 +544,11 @@
       s.appendChild(ayahBlock(ayahs, { numbers: true }));
       s.appendChild(el('div', 'l-hint', 'اسمع الآية كويس، وبعدين نردّد مع بعض'));
       const row = el('div', 'row-2');
-      row.appendChild(ghostBtn('اسمع تاني', function () {
-        window.Audio2.playAyahs(ayahs.map(function (a) { return a.audio; }));
-      }));
+      row.appendChild(ghostBtn('اسمع تاني', function () { slowPlay(ayahs, 1); }));
       row.appendChild(bigBtn('ردّد معايا', 'primary', function () { phase = 1; step2(); }));
       s.appendChild(row);
       show(host, s);
-      setTimeout(function () { window.Audio2.playAyahs(ayahs.map(function (a) { return a.audio; })); }, 450);
+      setTimeout(function () { slowPlay(ayahs, 3); }, 400);
     }
 
     function step2() {
@@ -1079,16 +1103,132 @@
     setTimeout(revealNext, 12000);
   }
 
+
+  /* =======================================================
+     الأرقام ١–١٠٠
+     ======================================================= */
+
+  function numCount(host, lesson, unit, done) {
+    const st = lesson.stage;
+    const nums = lesson.nums;
+    let i = 0;
+
+    function one() {
+      if (i >= nums.length) {
+        const s = center();
+        s.appendChild(el('div', 'praise-text', 'خلصنا العدّ!'));
+        s.appendChild(bigBtn('يلا نكتب', 'primary', function () { done(); }));
+        show(host, s);
+        return;
+      }
+      const n = nums[i];
+      const s = center();
+      s.appendChild(eyebrow('عُدّ معايا'));
+      const box = el('div', 'count-box');
+      for (let k = 0; k < Math.min(n, 20); k++) box.appendChild(el('span', 'count-dot'));
+      s.appendChild(box);
+      s.appendChild(el('div', 'num-big', NUMBERS.toAr(n)));
+      s.appendChild(el('div', 'l-hint', NUMBERS.name(n)));
+      const nb = bigBtn('التالي', 'primary', function () {
+        i++;
+        if (n >= 10 && i % 5 === 0) { gentleBreak(host, function () { one(); }); return; }
+        one();
+      });
+      s.appendChild(nb);
+      show(host, s);
+      say(NUMBERS.name(n), AR, 0.72);
+      setTimeout(function () { say(NUMBERS.toAr(n), AR, 0.6); }, 900);
+    }
+    one();
+  }
+
+  function numWrite(host, lesson, unit, done) {
+    const nums = lesson.nums;
+    let i = 0;
+    function one() {
+      if (i >= nums.length) {
+        const s = center();
+        s.appendChild(el('div', 'praise-text', 'كتبت الأرقام كلها!'));
+        s.appendChild(bigBtn('يلا للاختبار', 'primary', function () { done(); }));
+        show(host, s);
+        return;
+      }
+      const n = nums[i];
+      traceLesson(host, NUMBERS.toAr(n), [], false, unit, function () { i++; one(); }, NUMBERS.name(n));
+    }
+    one();
+  }
+
+  function numTest(host, lesson, unit, done) {
+    const nums = lesson.nums;
+    const pick = shuffle(nums).slice(0, 4);
+    let idx = 0, right = 0;
+
+    function q() {
+      if (idx >= pick.length) {
+        const ok = right >= 3;
+        const s = center();
+        s.appendChild(el('div', 'praise-art', UI.mascot(100, ok ? 'celebrate' : 'happy')));
+        s.appendChild(el('div', 'praise-text', ok ? 'نجحت! المرحلة اللي بعدها اتفتحت' : 'خلّينا نراجع شوية'));
+        s.appendChild(bigBtn(ok ? 'يلا نكمل' : 'أعد المحاولة', 'primary', function () {
+          if (!ok) { idx = 0; right = 0; q(); } else done();
+        }));
+        show(host, s);
+        if (ok) { SFX.levelup(); UI.burst(20); }
+        return;
+      }
+      const target = pick[idx];
+      const s = center();
+      s.appendChild(eyebrow('فين رقم ' + NUMBERS.name(target) + '؟'));
+      const grid = el('div', 'nums-grid');
+      const opts = shuffle([target].concat(shuffle(nums.filter(function (x) { return x !== target; })).slice(0, 2)));
+      opts.forEach(function (o) {
+        const b = el('button', 'num-tile', NUMBERS.toAr(o));
+        b.dataset.n = o;
+        b.addEventListener('click', function () {
+          if (o === target) {
+            right++; b.classList.add('right'); SFX.correct();
+            say(NUMBERS.name(target), AR, 0.75);
+            setTimeout(function () { idx++; q(); }, 600);
+          } else {
+            b.classList.add('wrong'); SFX.wrong();
+            setTimeout(function () { b.classList.remove('wrong'); }, 400);
+            say('ده ' + NUMBERS.name(o) + '، دور على ' + NUMBERS.name(target), AR, 0.72);
+          }
+        });
+        grid.appendChild(b);
+      });
+      s.appendChild(grid);
+      show(host, s);
+      say('فين رقم ' + NUMBERS.name(target) + '؟', AR, 0.72);
+    }
+    q();
+  }
+
+  /** استراحة قصيرة لطيفة */
+  function gentleBreak(host, onContinue) {
+    const s = center();
+    s.appendChild(el('div', 'praise-art', UI.mascot(96, 'sleepy')));
+    s.appendChild(el('div', 'l-eyebrow', 'استراحة قصيرة'));
+    s.appendChild(el('div', 'l-hint', 'شرب مية وحرّك جسمك شوية، وبعدها نكمل'));
+    const b = bigBtn('رجعت، يلا نكمل', 'primary', onContinue);
+    s.appendChild(b);
+    show(host, s);
+    say('خلّينا نرتاح شوية. اشرب مية وارجع', AR, 0.72);
+  }
+
   /* ---------- التوجيه ---------- */
   const MAP = {
     arMeet: arMeet, arFind: arFind, arWord: arWord, arWrite: arWrite,
     arHMeet: arHMeet, arHEar: arHEar, arHPick: arHPick,
     enMeet: enMeet, enWord: enWord, enWrite: enWrite, enBlend: enBlend,
     qLearn: qLearn, qRecall: qRecall,
+    numCount: numCount, numWrite: numWrite, numTest: numTest,
     mixReview: mixReview, thinkIt: thinkLesson, arReadWord: arReadWord
   };
 
   window.Lessons = {
+    breakPrompt: gentleBreak,
     run: function (host, lesson, unit, onDone) {
       const fn = MAP[lesson.type];
       if (!fn) { onDone(); return; }

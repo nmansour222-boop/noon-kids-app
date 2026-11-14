@@ -32,6 +32,9 @@
       try {
         const u = new SpeechSynthesisUtterance(text);
         const v = pickVoice(lang || 'ar-SA');
+        // لا ننطق العربية بلكنة أجنبية: لو مفيش صوت عربي على الجهاز نسكت بدل ما نخرّب النطق
+        const base = (lang || 'ar-SA').toLowerCase().split('-')[0];
+        if (!v && voices.length && base !== 'en') { window.__noArabicVoice = true; return resolve(false); }
         if (v) u.voice = v;
         u.lang = (v && v.lang) || lang || 'ar-SA';
         u.rate = rate || 0.86;
@@ -46,13 +49,14 @@
     });
   }
 
-  function play(url) {
+  function play(url, rate) {
     return new Promise(resolve => {
       try {
         if (currentAudio) { currentAudio.pause(); currentAudio = null; }
         const a = new Audio();
         a.preload = 'auto';
         a.src = url;
+        if (rate && rate !== 1) { a.preservesPitch = true; a.playbackRate = rate; }
         currentAudio = a;
         const done = ok => { if (currentAudio === a) currentAudio = null; resolve(ok); };
         a.onended = () => done(true);
@@ -99,11 +103,12 @@
         return ok;
       });
     },
-    async playAyahs(urls) {
+    async playAyahs(urls, rate) {
       const my = ++seqToken;
+      const el = document.getElementById('ayahAudio');
       for (const u of urls) {
         if (my !== seqToken) return;
-        await play(u);
+        await play(u, rate);
         await new Promise(r => setTimeout(r, 220));
       }
     },

@@ -129,6 +129,7 @@
       save();
       return true;
     },
+    save: save,
     reset() { state = clone(DEFAULT); save(); }
   };
 

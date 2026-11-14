@@ -1,656 +1,929 @@
 {
- "version": 3,
+ "version": 4,
  "codec": "aac/m4a (iOS+Android)",
  "sources": [
-  "Shtooka Project — Arabic (CC BY 3.0 US)",
-  "Wikimedia Commons En-us recordings (CC BY-SA 3.0 / PD)"
+  "Shtooka Project (CC BY 3.0 US)",
+  "Lingua Libre (CC BY-SA 4.0)"
  ],
+ "note": "كل التسجيلات بشرية — لا يوجد توليد آلي في هذا الملف.",
  "items": {
-  "ar:بَاب": {
-   "file": "audio/ar/بَاب.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-باب.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+  "ar:أَسَد": {
+   "file": "audio/ar/أسد.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fenakhay Recorder: Fenakhay",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fenakhay-أسد.wav",
    "format": "m4a",
-   "bytes": 9115
+   "bytes": 7730
+  },
+  "ar:أَرْنَب": {
+   "file": "audio/ar/أرنب.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fenakhay Recorder: Fenakhay",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fenakhay-أرنب.wav",
+   "format": "m4a",
+   "bytes": 8210
+  },
+  "ar:بَطَّة": {
+   "file": "audio/ar/بطة.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-بطة.wav",
+   "format": "m4a",
+   "bytes": 7899
+  },
+  "ar:بَاب": {
+   "file": "audio/ar/باب.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-باب.ogg",
+   "format": "m4a",
+   "bytes": 7121
   },
   "ar:تُفَّاحَة": {
-   "file": "audio/ar/تُفَّاحَة.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-تفاحة.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/تفاحة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-تفاحة.ogg",
    "format": "m4a",
    "bytes": 10045
   },
+  "ar:تَنُّورَة": {
+   "file": "audio/ar/تنورة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-تنورة.ogg",
+   "format": "m4a",
+   "bytes": 10091
+  },
   "ar:ثَعْلَب": {
-   "file": "audio/ar/ثَعْلَب.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-ثعلب.oga?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/ثعلب.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "İZAY",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-ثعلب.oga",
    "format": "m4a",
    "bytes": 9168
   },
+  "ar:ثَوْر": {
+   "file": "audio/ar/ثور.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-ثور.wav",
+   "format": "m4a",
+   "bytes": 6719
+  },
+  "ar:جَمَل": {
+   "file": "audio/ar/جمل.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Spotless Mind1988 Recorder: Spotless Mind1988",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Spotless_Mind1988-جمل.wav",
+   "format": "m4a",
+   "bytes": 6716
+  },
   "ar:جَبَل": {
-   "file": "audio/ar/جَبَل.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-جبل.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/جبل.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-جبل.ogg",
    "format": "m4a",
    "bytes": 8548
   },
   "ar:حِصَان": {
-   "file": "audio/ar/حِصَان.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-حصان.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/حصان.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-حصان.ogg",
    "format": "m4a",
-   "bytes": 9650
+   "bytes": 10317
   },
-  "ar:خَرُوف": {
-   "file": "audio/ar/خَرُوف.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-خروف.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+  "ar:حُوت": {
+   "file": "audio/ar/حوت.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-حوت.wav",
    "format": "m4a",
-   "bytes": 8297
+   "bytes": 8356
   },
   "ar:خُبْز": {
-   "file": "audio/ar/خُبْز.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-خبز.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/خبز.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-خبز.ogg",
    "format": "m4a",
    "bytes": 7966
   },
+  "ar:خَرُوف": {
+   "file": "audio/ar/خروف.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-خروف.ogg",
+   "format": "m4a",
+   "bytes": 8297
+  },
   "ar:دُبّ": {
-   "file": "audio/ar/دُبّ.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-دب.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/دب.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-دب.ogg",
    "format": "m4a",
    "bytes": 8910
   },
-  "ar:ذَهَب": {
-   "file": "audio/ar/ذَهَب.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-ذهب.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+  "ar:دِيك": {
+   "file": "audio/ar/ديك.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fjmustak Recorder: Fjmustak",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fjmustak-ديك.wav",
    "format": "m4a",
-   "bytes": 7730
+   "bytes": 6600
+  },
+  "ar:ذِئْب": {
+   "file": "audio/ar/ذئب.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-ذئب.wav",
+   "format": "m4a",
+   "bytes": 7286
+  },
+  "ar:ذَهَب": {
+   "file": "audio/ar/ذهب.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-ذهب.ogg",
+   "format": "m4a",
+   "bytes": 7500
+  },
+  "ar:رِيشَة": {
+   "file": "audio/ar/ريشة.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fjmustak Recorder: Fjmustak",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fjmustak-ريشة.wav",
+   "format": "m4a",
+   "bytes": 6910
   },
   "ar:رَمْل": {
-   "file": "audio/ar/رَمْل.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-رمل.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/رمل.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-رمل.ogg",
    "format": "m4a",
    "bytes": 8286
   },
+  "ar:زَرَافَة": {
+   "file": "audio/ar/زرافة.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-زرافة.wav",
+   "format": "m4a",
+   "bytes": 8605
+  },
   "ar:زَهْرَة": {
-   "file": "audio/ar/زَهْرَة.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-زهرة.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/زهرة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-زهرة.ogg",
    "format": "m4a",
    "bytes": 9135
   },
+  "ar:سَمَكَة": {
+   "file": "audio/ar/سمكة.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-سمكة.wav",
+   "format": "m4a",
+   "bytes": 9790
+  },
   "ar:سَاعَة": {
-   "file": "audio/ar/سَاعَة.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-ساعة.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/ساعة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-ساعة.ogg",
    "format": "m4a",
    "bytes": 8260
   },
+  "ar:شَمْس": {
+   "file": "audio/ar/شمس.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-شمس.ogg",
+   "format": "m4a",
+   "bytes": 9467
+  },
   "ar:شَجَرَة": {
-   "file": "audio/ar/شَجَرَة.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-شجرة.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/شجرة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Zannane Mohamed, Heulin Frederic",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-شجرة.ogg",
    "format": "m4a",
    "bytes": 8552
   },
-  "ar:شَمْس": {
-   "file": "audio/ar/شَمْس.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-شمس.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+  "ar:صَقْر": {
+   "file": "audio/ar/صقر.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-صقر.wav",
    "format": "m4a",
-   "bytes": 9496
+   "bytes": 7305
   },
   "ar:صَابُون": {
-   "file": "audio/ar/صَابُون.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-صابون.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/صابون.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-صابون.ogg",
    "format": "m4a",
    "bytes": 10626
   },
+  "ar:ضِفْدَع": {
+   "file": "audio/ar/ضفدع.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-ضفدع.wav",
+   "format": "m4a",
+   "bytes": 9240
+  },
   "ar:ضَوْء": {
-   "file": "audio/ar/ضَوْء.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-ضوء.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/ضوء.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-ضوء.ogg",
    "format": "m4a",
    "bytes": 10667
   },
   "ar:طَائِر": {
-   "file": "audio/ar/طَائِر.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-طائر.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/طائر.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-طائر.ogg",
    "format": "m4a",
    "bytes": 8683
   },
+  "ar:طَمَاطِم": {
+   "file": "audio/ar/طماطم.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-طماطم.wav",
+   "format": "m4a",
+   "bytes": 8895
+  },
   "ar:ظَرْف": {
-   "file": "audio/ar/ظَرْف.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-ظرف.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/ظرف.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-ظرف.ogg",
    "format": "m4a",
    "bytes": 7428
   },
-  "ar:عَيْن": {
-   "file": "audio/ar/عَيْن.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-عين.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+  "ar:ظَبْي": {
+   "file": "audio/ar/ظبي.m4a",
+   "license": "CC BY 4.0",
+   "author": "Speaker: Al-jahbaḏ Recorder: Al-jahbaḏ",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Al-jahbaḏ-ظبي.wav",
    "format": "m4a",
-   "bytes": 8338
+   "bytes": 8117
   },
-  "ar:قَمَر": {
-   "file": "audio/ar/قَمَر.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-قمر.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+  "ar:عَيْن": {
+   "file": "audio/ar/عين.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-عين.ogg",
    "format": "m4a",
-   "bytes": 8297
+   "bytes": 9524
+  },
+  "ar:عِنَب": {
+   "file": "audio/ar/عنب.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-عنب.wav",
+   "format": "m4a",
+   "bytes": 7607
+  },
+  "ar:غُرَاب": {
+   "file": "audio/ar/غراب.m4a",
+   "license": "CC0",
+   "author": "Speaker: Shahjina Recorder: Shahjina",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Shahjina-غراب.wav",
+   "format": "m4a",
+   "bytes": 6926
+  },
+  "ar:غَيْمَة": {
+   "file": "audio/ar/غيمة.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fjmustak Recorder: Fjmustak",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fjmustak-غيمة.wav",
+   "format": "m4a",
+   "bytes": 6923
+  },
+  "ar:فِيل": {
+   "file": "audio/ar/فيل.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-فيل.wav",
+   "format": "m4a",
+   "bytes": 8730
+  },
+  "ar:فَرَاشَة": {
+   "file": "audio/ar/فراشة.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fjmustak Recorder: Fjmustak",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fjmustak-فراشة.wav",
+   "format": "m4a",
+   "bytes": 7999
   },
   "ar:قِطّ": {
-   "file": "audio/ar/قِطّ.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-قط.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/قط.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-قط.ogg",
    "format": "m4a",
-   "bytes": 8651
+   "bytes": 6368
   },
-  "ar:كَلْب": {
-   "file": "audio/ar/كَلْب.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-كلب.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+  "ar:قَمَر": {
+   "file": "audio/ar/قمر.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-قمر.ogg",
    "format": "m4a",
-   "bytes": 7465
+   "bytes": 8632
   },
   "ar:كِتَاب": {
-   "file": "audio/ar/كِتَاب.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-كِتَابٌ.oga?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/كتاب.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-كتاب.ogg",
    "format": "m4a",
-   "bytes": 10391
+   "bytes": 8295
+  },
+  "ar:كَلْب": {
+   "file": "audio/ar/كلب.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-كلب.ogg",
+   "format": "m4a",
+   "bytes": 6731
+  },
+  "ar:لَيْمُون": {
+   "file": "audio/ar/ليمون.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-ليمون.wav",
+   "format": "m4a",
+   "bytes": 13670
   },
   "ar:لُعْبَة": {
-   "file": "audio/ar/لُعْبَة.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-لعبة.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/لعبة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-لعبة.ogg",
    "format": "m4a",
    "bytes": 10928
   },
-  "ar:مِفْتَاح": {
-   "file": "audio/ar/مِفْتَاح.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-مفتاح.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+  "ar:مَوْز": {
+   "file": "audio/ar/موز.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-موز.wav",
    "format": "m4a",
-   "bytes": 11747
+   "bytes": 9216
+  },
+  "ar:مِفْتَاح": {
+   "file": "audio/ar/مفتاح.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-مفتاح.ogg",
+   "format": "m4a",
+   "bytes": 13952
   },
   "ar:نَجْمَة": {
-   "file": "audio/ar/نَجْمَة.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-نجمة.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/نجمة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-نجمة.ogg",
    "format": "m4a",
    "bytes": 8888
   },
-  "ar:هَدِيَّة": {
-   "file": "audio/ar/هَدِيَّة.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-هدية.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+  "ar:نَمِر": {
+   "file": "audio/ar/نمر.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-نمر.wav",
    "format": "m4a",
-   "bytes": 9510
+   "bytes": 8516
+  },
+  "ar:هَاتِف": {
+   "file": "audio/ar/هاتف.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-هاتف.wav",
+   "format": "m4a",
+   "bytes": 9726
+  },
+  "ar:هَدِيَّة": {
+   "file": "audio/ar/هدية.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-هدية.ogg",
+   "format": "m4a",
+   "bytes": 6618
+  },
+  "ar:وَرْدَة": {
+   "file": "audio/ar/وردة.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-وردة.wav",
+   "format": "m4a",
+   "bytes": 8463
+  },
+  "ar:وَلَد": {
+   "file": "audio/ar/ولد.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-ولد.wav",
+   "format": "m4a",
+   "bytes": 9108
   },
   "ar:يَد": {
-   "file": "audio/ar/يَد.m4a.m4a",
-   "license": "CC BY 3.0 US",
-   "author": "Shtooka Project — Nhaily Mustapha",
-   "source": "https://commons.wikimedia.org/wiki/File:Ar-يد.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/ar/يد.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-يد.ogg",
    "format": "m4a",
    "bytes": 7741
   },
+  "ar:يَاسَمِين": {
+   "file": "audio/ar/ياسمين.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fjmustak Recorder: Fjmustak",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fjmustak-ياسمين.wav",
+   "format": "m4a",
+   "bytes": 8636
+  },
   "en:ant": {
-   "file": "audio/en/ant.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-ant.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/ant.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-ant.ogg",
    "format": "m4a",
    "bytes": 5780
   },
   "en:apple": {
-   "file": "audio/en/apple.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-apple.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/apple.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-apple.ogg",
    "format": "m4a",
    "bytes": 4802
   },
   "en:bed": {
-   "file": "audio/en/bed.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-bed.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/bed.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-bed.ogg",
    "format": "m4a",
    "bytes": 5363
   },
   "en:bee": {
-   "file": "audio/en/bee.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-bee.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/bee.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-bee.ogg",
    "format": "m4a",
    "bytes": 4843
   },
   "en:blue": {
-   "file": "audio/en/blue.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-blue.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/blue.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-blue.ogg",
    "format": "m4a",
    "bytes": 4918
   },
   "en:boat": {
-   "file": "audio/en/boat.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-boat.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/boat.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-boat.ogg",
    "format": "m4a",
    "bytes": 4606
   },
   "en:book": {
-   "file": "audio/en/book.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-book.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/book.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-book.ogg",
    "format": "m4a",
    "bytes": 4938
   },
   "en:box": {
-   "file": "audio/en/box.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-box.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/box.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-box.ogg",
    "format": "m4a",
    "bytes": 5738
   },
   "en:bus": {
-   "file": "audio/en/bus.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-bus.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/bus.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-bus.ogg",
    "format": "m4a",
    "bytes": 7682
   },
   "en:cat": {
-   "file": "audio/en/cat.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-cat.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/cat.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-cat.ogg",
    "format": "m4a",
    "bytes": 4682
   },
   "en:cheese": {
-   "file": "audio/en/cheese.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-cheese.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/cheese.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "No machine-readable author provided. Dvortygirl assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-cheese.ogg",
    "format": "m4a",
    "bytes": 5461
   },
   "en:coin": {
-   "file": "audio/en/coin.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-coin.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/coin.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-coin.ogg",
    "format": "m4a",
    "bytes": 5482
   },
   "en:cup": {
-   "file": "audio/en/cup.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-cup.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/cup.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-cup.ogg",
    "format": "m4a",
    "bytes": 5734
   },
   "en:dog": {
-   "file": "audio/en/dog.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-dog.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/dog.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-dog.ogg",
    "format": "m4a",
    "bytes": 5160
   },
   "en:egg": {
-   "file": "audio/en/egg.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-egg.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/egg.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-egg.ogg",
    "format": "m4a",
    "bytes": 4577
   },
+  "en:fan": {
+   "file": "audio/en/fan.m4a",
+   "license": "CC0",
+   "author": "Speaker: Wodencafe Recorder: Wodencafe",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-Wodencafe-fan.wav",
+   "format": "m4a",
+   "bytes": 6039
+  },
   "en:fish": {
-   "file": "audio/en/fish.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-fish.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/fish.m4a",
+   "license": "Public domain",
+   "author": "Lingua Libre",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-fish.ogg",
    "format": "m4a",
    "bytes": 5712
   },
   "en:flower": {
-   "file": "audio/en/flower.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-flower.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/flower.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-flower.ogg",
    "format": "m4a",
    "bytes": 5131
   },
   "en:goat": {
-   "file": "audio/en/goat.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-goat.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/goat.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-goat.ogg",
    "format": "m4a",
    "bytes": 4336
   },
   "en:hat": {
-   "file": "audio/en/hat.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-hat.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/hat.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-hat.ogg",
    "format": "m4a",
    "bytes": 5462
   },
+  "en:house": {
+   "file": "audio/en/house.m4a",
+   "license": "CC0",
+   "author": "Speaker: Wodencafe Recorder: Wodencafe",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-Wodencafe-house.wav",
+   "format": "m4a",
+   "bytes": 6934
+  },
   "en:insect": {
-   "file": "audio/en/insect.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-insect.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/insect.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-insect.ogg",
    "format": "m4a",
    "bytes": 8065
   },
   "en:jam": {
-   "file": "audio/en/jam.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-jam.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/jam.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-jam.ogg",
    "format": "m4a",
    "bytes": 6748
   },
   "en:juice": {
-   "file": "audio/en/juice.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-juice.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/juice.m4a",
+   "license": "Public domain",
+   "author": "No machine-readable author provided. Dominic assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-juice.ogg",
    "format": "m4a",
    "bytes": 6600
   },
   "en:lion": {
-   "file": "audio/en/lion.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-lion.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/lion.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-lion.ogg",
    "format": "m4a",
    "bytes": 5995
   },
   "en:map": {
-   "file": "audio/en/map.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-map.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/map.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-map.ogg",
    "format": "m4a",
    "bytes": 4636
   },
   "en:moon": {
-   "file": "audio/en/moon.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-moon.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/moon.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-moon.ogg",
    "format": "m4a",
    "bytes": 4857
   },
   "en:mouse": {
-   "file": "audio/en/mouse.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-mouse.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/mouse.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-mouse.ogg",
    "format": "m4a",
    "bytes": 6104
   },
   "en:net": {
-   "file": "audio/en/net.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-net.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/net.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-net.ogg",
    "format": "m4a",
    "bytes": 4868
   },
+  "en:octopus": {
+   "file": "audio/en/octopus.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-octopus.ogg",
+   "format": "m4a",
+   "bytes": 9785
+  },
+  "en:orange": {
+   "file": "audio/en/orange.m4a",
+   "license": "CC0",
+   "author": "Speaker: Wodencafe Recorder: Wodencafe",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-Wodencafe-orange.wav",
+   "format": "m4a",
+   "bytes": 7472
+  },
   "en:pan": {
-   "file": "audio/en/pan.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-pan.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/pan.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pan.ogg",
    "format": "m4a",
    "bytes": 6626
   },
   "en:pat": {
-   "file": "audio/en/pat.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-pat.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/pat.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pat.ogg",
    "format": "m4a",
    "bytes": 5248
   },
   "en:pen": {
-   "file": "audio/en/pen.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-pen.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/pen.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pen.ogg",
    "format": "m4a",
    "bytes": 5703
   },
   "en:pie": {
-   "file": "audio/en/pie.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-pie.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/pie.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "No machine-readable author provided. Dvortygirl assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pie.ogg",
    "format": "m4a",
    "bytes": 4875
   },
   "en:pig": {
-   "file": "audio/en/pig.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-pig.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/pig.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pig.ogg",
    "format": "m4a",
    "bytes": 4568
   },
   "en:pin": {
-   "file": "audio/en/pin.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-pin.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/pin.m4a",
+   "license": "Public domain",
+   "author": "Lingua Libre",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pin.ogg",
    "format": "m4a",
    "bytes": 7940
   },
   "en:queen": {
-   "file": "audio/en/queen.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-queen.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/queen.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-queen.ogg",
    "format": "m4a",
    "bytes": 5161
   },
   "en:rabbit": {
-   "file": "audio/en/rabbit.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-rabbit.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/rabbit.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-rabbit.ogg",
    "format": "m4a",
    "bytes": 7759
   },
   "en:rain": {
-   "file": "audio/en/rain.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-rain.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/rain.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-rain.ogg",
    "format": "m4a",
    "bytes": 5436
   },
   "en:ring": {
-   "file": "audio/en/ring.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-ring.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/ring.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-ring.ogg",
    "format": "m4a",
    "bytes": 4854
   },
   "en:sheep": {
-   "file": "audio/en/sheep.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-sheep.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/sheep.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-sheep.ogg",
    "format": "m4a",
    "bytes": 5447
   },
   "en:shell": {
-   "file": "audio/en/shell.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-shell.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/shell.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-shell.ogg",
    "format": "m4a",
    "bytes": 7440
   },
+  "en:sip": {
+   "file": "audio/en/sip.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Vealhurl Recorder: Vealhurl",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-Vealhurl-sip.wav",
+   "format": "m4a",
+   "bytes": 6633
+  },
   "en:sit": {
-   "file": "audio/en/sit.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-sit.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/sit.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-sit.ogg",
    "format": "m4a",
    "bytes": 5136
   },
+  "en:snap": {
+   "file": "audio/en/snap.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-snap.ogg",
+   "format": "m4a",
+   "bytes": 3493
+  },
   "en:star": {
-   "file": "audio/en/star.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-star.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/star.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "No machine-readable author provided. Dvortygirl assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-star.ogg",
    "format": "m4a",
    "bytes": 5987
   },
   "en:sun": {
-   "file": "audio/en/sun.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-Sun.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/sun.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-sun.ogg",
    "format": "m4a",
    "bytes": 7721
   },
   "en:tap": {
-   "file": "audio/en/tap.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-tap.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/tap.m4a",
+   "license": "Public domain",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-tap.ogg",
    "format": "m4a",
    "bytes": 4582
   },
   "en:this": {
-   "file": "audio/en/this.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-this.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/this.m4a",
+   "license": "Public domain",
+   "author": "Lingua Libre",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-this.ogg",
    "format": "m4a",
    "bytes": 7954
   },
   "en:three": {
-   "file": "audio/en/three.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-three.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/three.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-three.ogg",
    "format": "m4a",
    "bytes": 5153
   },
   "en:tiger": {
-   "file": "audio/en/tiger.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-tiger.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/tiger.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-tiger.ogg",
    "format": "m4a",
    "bytes": 7426
   },
   "en:tin": {
-   "file": "audio/en/tin.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-tin.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/tin.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "No machine-readable author provided. Dvortygirl assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-tin.ogg",
    "format": "m4a",
    "bytes": 5168
   },
   "en:tip": {
-   "file": "audio/en/tip.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-tip.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/tip.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-tip.ogg",
    "format": "m4a",
    "bytes": 7179
   },
   "en:top": {
-   "file": "audio/en/top.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-top.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/top.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-top.ogg",
    "format": "m4a",
    "bytes": 5253
   },
   "en:umbrella": {
-   "file": "audio/en/umbrella.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-umbrella.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/umbrella.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-umbrella.ogg",
    "format": "m4a",
    "bytes": 6301
   },
   "en:van": {
-   "file": "audio/en/van.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-van.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/van.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-van.ogg",
    "format": "m4a",
    "bytes": 7423
   },
   "en:water": {
-   "file": "audio/en/water.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-water.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/water.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-water.ogg",
    "format": "m4a",
    "bytes": 6072
   },
   "en:zebra": {
-   "file": "audio/en/zebra.m4a.m4a",
-   "license": "CC BY-SA 3.0 / PD",
-   "author": "Dvortygirl (US English)",
-   "source": "https://commons.wikimedia.org/wiki/File:En-us-zebra.ogg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+   "file": "audio/en/zebra.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "No machine-readable author provided. Dvortygirl assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-zebra.ogg",
    "format": "m4a",
    "bytes": 6041
   }

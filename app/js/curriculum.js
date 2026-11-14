@@ -7,7 +7,7 @@
   const LETTERS = [
     { id: 'alef',  ch: 'أ', base: 'ا', name: 'أَلِف',  sound: 'أَ', words: [{ w: 'أَسَد', e: '🦁' }, { w: 'أَرْنَب', e: '🐰' }] },
     { id: 'ba',    ch: 'ب', base: 'ب', name: 'بَاء',  sound: 'بَ', words: [{ w: 'بَطَّة', e: '🦆' }, { w: 'بَاب', e: '🚪' }] },
-    { id: 'ta',    ch: 'ت', base: 'ت', name: 'تَاء',  sound: 'تَ', words: [{ w: 'تُفَّاحَة', e: '🍎' }, { w: 'تَاج', e: '👑' }] },
+    { id: 'ta',    ch: 'ت', base: 'ت', name: 'تَاء',  sound: 'تَ', words: [{ w: 'تُفَّاحَة', e: '🍎' }, { w: 'تَنُّورَة', e: '👗' }] },
     { id: 'tha',   ch: 'ث', base: 'ث', name: 'ثَاء',  sound: 'ثَ', words: [{ w: 'ثَعْلَب', e: '🦊' }, { w: 'ثَوْر', e: '🐂' }] },
     { id: 'jeem',  ch: 'ج', base: 'ج', name: 'جِيم',  sound: 'جَ', words: [{ w: 'جَمَل', e: '🐪' }, { w: 'جَبَل', e: '⛰️' }] },
     { id: 'ha',    ch: 'ح', base: 'ح', name: 'حَاء',  sound: 'حَ', words: [{ w: 'حِصَان', e: '🐴' }, { w: 'حُوت', e: '🐳' }] },
@@ -90,7 +90,7 @@
     { w: 'bed', e: '🛏️' }, { w: 'top', e: '🎯' }, { w: 'fan', e: '🪭' },
     // مرحلة satpin — كلمات تُبنى من أول ٦ أصوات فقط (Synthetic Phonics)
     { w: 'pin', e: '📌' }, { w: 'pan', e: '🍳' }, { w: 'tap', e: '🚰' },
-    { w: 'nap', e: '😴' }, { w: 'tin', e: '🥫' }, { w: 'sit', e: '🪑' },
+    { w: 'snap', e: '🫰' }, { w: 'tin', e: '🥫' }, { w: 'sit', e: '🪑' },
     { w: 'ant', e: '🐜' }, { w: 'tip', e: '👆' }, { w: 'sip', e: '🥤' },
     { w: 'pat', e: '🐾' }
   ];

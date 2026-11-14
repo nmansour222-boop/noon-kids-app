@@ -184,13 +184,37 @@
   const QU2 = withReview(QU, 'qu', 3, 2);
 
   const BY_TRACK = { ar: AR, en: EN2, qu: QU2 };
-  const ALL = AR.concat(EN2, QU2);
+  const ALL = AR.concat(EN2, QU2, (TRACKS.num ? TRACKS.num.units : []));
   const BY_ID = {};
   ALL.forEach(function (u) { BY_ID[u.id] = u; });
 
+  /* ---------- الأرقام: ١٠ مراحل، كل مرحلة تفتح بعد اختبار اللي قبلها ---------- */
+  (function buildNumbers() {
+    if (!window.NUMBERS) return;
+    const units = [];
+    window.NUMBERS.stages.forEach(function (st) {
+      const nums = [];
+      for (let n = st.from; n <= st.to; n++) nums.push(n);
+      units.push({
+        id: 'num.' + st.from + '-' + st.to,
+        track: 'num',
+        title: 'الأرقام ' + st.from + '–' + st.to,
+        sub: 'نعدّ ونكتب من ' + st.from + ' لـ ' + st.to,
+        glyph: String(st.from),
+        station: null,
+        lessons: [
+          { id: 'num.' + st.from + '.count', type: 'numCount', stage: st, nums: nums },
+          { id: 'num.' + st.from + '.write', type: 'numWrite', stage: st, nums: nums },
+          { id: 'num.' + st.from + '.test', type: 'numTest', stage: st, nums: nums }
+        ]
+      });
+    });
+    TRACKS.num = { key: 'num', name: 'الأرقام ١–١٠٠', units: units };
+  })();
+
   window.SYLLABUS = {
     tracks: TRACKS,
-    forTrack: function (t) { return BY_TRACK[t] || []; },
+    forTrack: function (t) { return BY_TRACK[t] || (TRACKS[t] && TRACKS[t].units) || []; },
     all: function () { return ALL; },
     harakat: HARAKAT,
     unit: function (id) { return BY_ID[id]; },
@@ -231,7 +255,7 @@
     if (idx <= 0) return true;
     return Store.unitDone(list[idx - 1].id);
   };
-  Store.trackUnits = function (t) { return BY_TRACK[t] || []; };
+  Store.trackUnits = function (t) { return BY_TRACK[t] || (TRACKS[t] && TRACKS[t].units) || []; };
   Store.trackDone = function (t) {
     return (BY_TRACK[t] || []).filter(function (u) { return Store.unitDone(u.id); }).length;
   };

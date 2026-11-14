@@ -1,10 +1,11 @@
 /* Service Worker — التطبيق يعمل أوفلاين بعد أول فتح */
-const VERSION = 'noon-v9';
+const VERSION = 'noon-v10';
 const SHELL = [
   './',
   './index.html',
   './css/app.css',
   './js/quran-data.js',
+  './js/numbers.js',
   './js/glyphs.js',
   './js/glyph.js',
   './js/curriculum.js',
@@ -18,6 +19,7 @@ const SHELL = [
   './js/audio3.js',
   './js/tracing.js',
   './js/lessons.js',
+  './js/offline.js',
   './js/app.js',
   './fonts/baloo.woff2',
   './fonts/cairo.woff2',
@@ -25,6 +27,7 @@ const SHELL = [
   './fonts/amiri.woff2',
   './fonts/quran.woff2',
   './fonts/emoji.woff2',
+  './privacy.html',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',

@@ -23,6 +23,7 @@
 
   function go(name, opts) {
     opts = opts || {};
+    if (name !== 'parent') setZoom(false);
     if (opts.push !== false) stack.push(name);
     showScreen(name, opts.dir);
   }
@@ -48,17 +49,44 @@
       '<img class="hero-art" src="icons/icon-192.png" alt="نون" width="106" height="106">' +
       '</div>';
 
+    // رف المكافأة: نجوم حتى الشارة التالية
+    const shelf = document.getElementById('rewardShelf');
+    if (shelf) {
+      const per = 10, have = s.stars % per, next = per - have;
+      shelf.innerHTML = '<span class="rs-ico">🏅</span><span class="rs-txt">فاضل ' + next + ' نجمة وتاخد شارة</span>' +
+        '<span class="rs-bar"><i style="width:' + Math.round(have / per * 100) + '%"></i></span>';
+    }
+
+    // مراجعة تلقائية لما اتعلمه قبل كده
+    const rev = document.getElementById('reviewSlot');
+    if (rev) {
+      rev.innerHTML = '';
+      const learned = [];
+      ['ar', 'en', 'num', 'qu'].forEach(function (t) {
+        Store.trackUnits(t).forEach(function (u) { if (Store.unitDone(u.id)) learned.push(u); });
+      });
+      if (learned.length) {
+        const pickU = learned[Math.floor(Math.random() * learned.length)];
+        const card = el('button', 'review-card',
+          '<span class="rc-ico">🔁</span><span><span class="rc-t">مراجعة سريعة</span><br>' +
+          '<span class="rc-s">' + pickU.title + ' — نفتكرها مع بعض؟</span></span>');
+        card.addEventListener('click', function () { SFX.tap(); openUnit(pickU); });
+        rev.appendChild(card);
+      }
+    }
+
     const host = $('trackCards');
     host.innerHTML = '';
-    ['ar', 'en', 'qu'].forEach(function (k) {
+    ['ar', 'en', 'qu', 'num'].forEach(function (k) {
       const t = SYLLABUS.tracks[k];
       const units = Store.trackUnits(k);
       const done = Store.trackDone(k);
       const pct = units.length ? Math.round(done / units.length * 100) : 0;
-      const icon = k === 'ar' ? 'أ' : (k === 'en' ? 'A' : UI.icon('book', 30));
+      const icon = k === 'ar' ? 'أ' : (k === 'en' ? 'A' : (k === 'num' ? '١٢٣' : UI.icon('book', 30)));
       const meta = k === 'qu'
         ? done + ' من ' + units.length + ' سورة'
-        : done + ' من ' + units.length + (k === 'ar' ? ' حرف' : ' صوت');
+        : (k === 'num' ? done + ' من ' + units.length + ' مرحلة'
+          : done + ' من ' + units.length + (k === 'ar' ? ' حرف' : ' صوت'));
 
       const card = el('button', 'track-card ' + k + '-theme');
       card.innerHTML =
@@ -96,6 +124,7 @@
     path.innerHTML = '';
 
     let lastStation = null;
+    const nodes = [];   // تُضاف على دفعات: أولاً ما يراه الطفل، ثم الباقي في وقت الفراغ
     units.forEach(function (u, i) {
       const isDone = Store.unitDone(u.id);
       const unlocked = Store.unitUnlocked(u.id);
@@ -103,7 +132,7 @@
 
       if (track === 'qu' && u.station && u.station !== lastStation) {
         lastStation = u.station;
-        path.appendChild(el('div', 'station-label', u.station));
+        nodes.push(el('div', 'station-label', u.station));
       }
 
       const btn = el('button', 'unit' + (isDone ? ' done' : '') + (isCurrent ? ' current' : '') + (unlocked ? '' : ' locked') + (u.kind === 'review' ? ' review-unit' : '') + (u.kind === 'think' ? ' think-unit' : '') + (u.kind === 'haraka' ? ' haraka-unit' : ''));
@@ -132,8 +161,29 @@
         SFX.tap();
         openUnit(u);
       });
-      path.appendChild(btn);
+      nodes.push(btn);
     });
+
+    // عرض فوري لأول ١٤ وحدة + الباقي على دفعات (يقلّل زمن أول رسم كثيرًا)
+    let shown = 0;
+    const FIRST = 14, CHUNK = 10;
+    function flush(n) {
+      const end = Math.min(nodes.length, shown + n);
+      const frag = document.createDocumentFragment();
+      for (; shown < end; shown++) frag.appendChild(nodes[shown]);
+      path.appendChild(frag);
+    }
+    flush(FIRST);
+    if (shown < nodes.length) {
+      const idle = window.requestIdleCallback || function (fn) { return setTimeout(fn, 60); };
+      (function step() {
+        if (current !== 'track') return;
+        idle(function () {
+          flush(CHUNK);
+          if (shown < nodes.length) step();
+        }, { timeout: 400 });
+      })();
+    }
   }
 
   /* ================= الدرس ================= */
@@ -201,6 +251,11 @@
       Store.logSession(u.track, u.title);
       if (first) Store.addStars(1);
       session.idx++;
+      session.done = (session.done || 0) + 1;
+      if (session.done % 4 === 0 && session.idx < u.lessons.length) {
+        Lessons.breakPrompt($('lessonHost'), function () { runLesson(); });
+        return;
+      }
       if (session.idx >= u.lessons.length) finishUnit();
       else runLesson();
     });
@@ -246,36 +301,44 @@
   /* ================= ولي الأمر ================= */
   let parentUnlocked = false;
 
+  /* التكبير: مقفول في شاشات الطفل، مفتوح في شاشة ولي الأمر */
+  function setZoom(allow) {
+    let m = document.querySelector('meta[name=viewport]');
+    if (!m) { m = document.createElement('meta'); m.name = 'viewport'; document.head.appendChild(m); }
+    m.setAttribute('content', 'width=device-width, initial-scale=1, viewport-fit=cover' +
+      (allow ? ', maximum-scale=5, user-scalable=yes' : ', maximum-scale=1, user-scalable=no'));
+  }
+
   function renderParent() {
+    setZoom(true);
     const body = $('parentBody');
     const s = Store.get();
     if (!parentUnlocked) {
       body.innerHTML = '';
       const c = el('div', 'l-center');
-      c.appendChild(el('div', 'l-eyebrow', 'اكتب الرمز السري'));
-      const dots = el('div', 'pin-dots');
-      for (let i = 0; i < 4; i++) dots.appendChild(el('i'));
-      c.appendChild(dots);
-      const pad = el('div', 'pinpad');
-      let buf = '';
-      '123456789'.split('').concat(['', '0', '⌫']).forEach(function (k) {
-        const b = el('button', 'pin-key', k);
-        if (!k) { b.style.visibility = 'hidden'; }
-        b.addEventListener('click', function () {
+      c.appendChild(el('div', 'l-eyebrow', 'سؤال لولي الأمر'));
+      const a = 2 + Math.floor(Math.random() * 7);
+      const b2 = 1 + Math.floor(Math.random() * 8);
+      c.appendChild(el('div', 'gate-q', a + ' + ' + b2 + ' = ؟'));
+      const grid = el('div', 'gate-grid');
+      const ans = a + b2;
+      const opts = [ans].concat([ans + 1, ans - 1, ans + 2].filter(function (x) { return x > 0; })).slice(0, 3);
+      opts.sort(function () { return Math.random() - 0.5; });
+      opts.forEach(function (o) {
+        const btn = el('button', 'gate-opt', String(o));
+        btn.addEventListener('click', function () {
           SFX.click();
-          if (k === '⌫') buf = buf.slice(0, -1);
-          else if (buf.length < 4) buf += k;
-          Array.prototype.forEach.call(dots.children, function (d, i) { d.classList.toggle('on', i < buf.length); });
-          if (buf.length === 4) {
-            setTimeout(function () {
-              if (buf === (Store.get().settings.pin || '1234')) { parentUnlocked = true; renderParent(); }
-              else { SFX.wrong(); UI.toast('الرمز غلط'); buf = ''; Array.prototype.forEach.call(dots.children, function (d) { d.classList.remove('on'); }); }
-            }, 160);
+          if (o === ans) { parentUnlocked = true; renderParent(); }
+          else {
+            SFX.wrong(); UI.toast('حاول تاني');
+            btn.classList.add('wrong');
+            btn.textContent = a + ' + ' + b2 + ' = ' + (a + b2 + 1) + '؟';
           }
         });
-        pad.appendChild(b);
+        grid.appendChild(btn);
       });
-      c.appendChild(pad);
+      c.appendChild(grid);
+      c.appendChild(el('div', 'l-hint', 'ده سؤال بسيط عشان الطفل ميدخلش لوحده'));
       body.appendChild(c);
       return;
     }
@@ -302,9 +365,110 @@
     g3.appendChild(el('div', 'stat', '<b>' + due + '</b><span>مستحق للمراجعة</span>'));
     body.appendChild(g3);
 
+    // ---------- التلاوة بدون إنترنت ----------
+    const off = el('div', 'off-card');
+    off.appendChild(el('div', 'off-title', 'التلاوة بدون إنترنت'));
+    const offStat = el('div', 'off-status', 'بنحسب…');
+    off.appendChild(offStat);
+    const bar = el('div', 'off-bar');
+    const fill = el('i');
+    bar.appendChild(fill);
+    off.appendChild(bar);
+    const offRow = el('div', 'off-actions');
+    const dlBtn = el('button', 'btn primary sm', 'نزّل التلاوة');
+    const rmBtn = el('button', 'btn ghost sm', 'حذف');
+    offRow.appendChild(dlBtn); offRow.appendChild(rmBtn);
+    off.appendChild(offRow);
+    body.appendChild(off);
+
+    let offBusy = false;
+    function paintOff(st) {
+      const pct = st.total ? Math.round(st.cached / st.total * 100) : 0;
+      fill.style.width = pct + '%';
+      if (!st.ok) { offStat.textContent = 'المتصفح لا يدعم التنزيل'; return; }
+      if (st.cached >= st.total && st.total) {
+        offStat.textContent = 'التلاوة كاملة على الجهاز ✓ (' + st.total + ' آية) — تشتغل بدون نت';
+      } else if (st.cached === 0) {
+        offStat.textContent = 'مش منزّلة — حوالي ' + st.estMb + ' ميجا (' + st.total + ' آية)';
+      } else {
+        offStat.textContent = 'منزّل ' + st.cached + ' من ' + st.total + ' آية (' + pct + '%)';
+      }
+    }
+    function refreshOff() {
+      if (!window.Offline) { offStat.textContent = 'غير متاح'; return; }
+      window.Offline.status().then(paintOff).catch(function () { offStat.textContent = 'تعذّر الحساب'; });
+    }
+    refreshOff();
+
+    dlBtn.addEventListener('click', function () {
+      if (offBusy || !window.Offline) return;
+      offBusy = true; dlBtn.disabled = true;
+      offStat.textContent = 'بننزّل… سيبه مفتوح';
+      window.Offline.start(function (pr) {
+        fill.style.width = Math.round(pr.done / pr.total * 100) + '%';
+        offStat.textContent = 'بننزّل ' + pr.done + ' من ' + pr.total + ' آية…';
+      }).then(function (r) {
+        offBusy = false; dlBtn.disabled = false;
+        UI.toast(r.failed ? 'خلصنا مع ' + r.failed + ' آية فشلت — جرّب تاني' : 'التلاوة جاهزة أوفلاين');
+        refreshOff();
+      }).catch(function () {
+        offBusy = false; dlBtn.disabled = false;
+        offStat.textContent = 'التنزيل اتوقف — جرّب تاني';
+      });
+    });
+
+    rmBtn.addEventListener('click', function () {
+      if (offBusy || !window.Offline) return;
+      offBusy = true;
+      window.Offline.clear().then(function () { offBusy = false; UI.toast('اتحذفت التلاوة'); refreshOff(); });
+    });
+
+    // ---------- تشخيص الصوت ----------
+    const diag = el('div', 'off-card');
+    diag.style.marginTop = '12px';
+    const nHuman = (window.A3 && A3.coverage) ? A3.coverage().human : 0;
+    const arVoice = window.Audio2 && Audio2.hasArabicVoice ? Audio2.hasArabicVoice() : false;
+    diag.innerHTML = '<div class="off-title">الصوت على هذا الجهاز</div>' +
+      '<div class="off-status">تسجيلات بشرية جاهزة: <b>' + nHuman + '</b> كلمة — بتشتغل بدون إنترنت بعد أول مرة.<br>' +
+      'نطق الحروف (صوت آلي) ' + (arVoice ? 'متاح على الجهاز ✓' : 'غير متاح — التطبيق هيعتمد على التسجيلات البشرية والصور بدل ما ينطق بلكنة غلط') + '.</div>';
+    body.appendChild(diag);
+
     body.appendChild(el('div', 'parent-note',
       'بنستخدم التكرار المتباعد: كل ما الطفل يتقن حاجة بنعيدها بعد يوم، ٣ أيام، أسبوع، أسبوعين، شهر. ' +
-      'الصوت الحالي مؤقت (TTS) ولازم يتستبدل بتسجيلات بشرية قبل الاستخدام الطويل.'));
+      'كلمات المنهج كلها بتسجيلات بشرية (١١٥/١١٥)؛ الصوت المؤقت باقي في أصوات الحروف المجردة بس.'));
+
+    // ---------- اسم الطفل (للتقارير والشهادات) ----------
+    const nameRow = el('div', 'setting-row');
+    nameRow.innerHTML = '<span class="sr-label">اسم الطفل</span>';
+    const nameIn = document.createElement('input');
+    nameIn.className = 'name-in';
+    nameIn.type = 'text';
+    nameIn.placeholder = 'اكتب الاسم';
+    nameIn.value = s.childName || '';
+    nameIn.setAttribute('aria-label', 'اسم الطفل');
+    nameIn.addEventListener('change', function () {
+      Store.get().childName = nameIn.value.trim().slice(0, 24);
+      Store.save();
+      UI.toast('تم الحفظ');
+    });
+    nameRow.appendChild(nameIn);
+    body.appendChild(nameRow);
+
+    // ---------- شهادات الإتمام ----------
+    const doneTracks = ['ar', 'en', 'qu'].filter(function (k) {
+      const t = Store.trackUnits(k).length;
+      return t && Store.trackDone(k) >= t;
+    });
+    if (doneTracks.length) {
+      const certWrap = el('div', 'cert-btns');
+      doneTracks.forEach(function (k) {
+        const label = { ar: 'شهادة العربية', en: 'شهادة الإنجليزية', qu: 'شهادة القرآن' }[k];
+        const b = el('button', 'btn ghost sm', label);
+        b.addEventListener('click', function () { openCert(k); });
+        certWrap.appendChild(b);
+      });
+      body.appendChild(certWrap);
+    }
 
     body.appendChild(el('div', 'setting-row',
       '<span class="sr-label">صوت الحروف (مؤقت)</span><div class="switch ' + (s.settings.tts ? 'on' : '') + '" data-set="tts"></div>'));
@@ -313,6 +477,12 @@
       [15, 20, 25].map(function (m) {
         return '<button class="btn sm ' + (s.settings.limitMin === m ? 'primary' : 'ghost') + '" data-lim="' + m + '">' + m + ' د</button>';
       }).join('') + '</div>'));
+
+    const priv = el('a', 'btn ghost wide', 'سياسة الخصوصية');
+    priv.href = 'privacy.html';
+    priv.target = '_blank';
+    priv.style.marginTop = '12px';
+    body.appendChild(priv);
 
     const reset = el('button', 'btn ghost wide', 'تصفير التقدّم');
     reset.style.marginTop = '16px';
@@ -387,19 +557,48 @@
   function openReport() {
     const s = Store.get();
     const P = window.Pedagogy;
+    const TR = { ar: 'العربية', en: 'الإنجليزية', qu: 'القرآن' };
     const wrap = el('div', 'report');
     const days = Object.keys(s.days || {}).sort().slice(-7);
     const mins = days.reduce(function (a, d) { return a + Math.round((s.days[d] || 0) / 60); }, 0);
-    const lines = [];
-    ['ar', 'en', 'qu'].forEach(function (k) {
-      const name = { ar: 'العربية', en: 'الإنجليزية', qu: 'القرآن' }[k];
-      const done = Store.trackDone(k), total = Store.trackUnits(k).length;
-      const due = P.Review.due(k).length;
-      lines.push('<tr><td>' + name + '</td><td>' + done + ' / ' + total + '</td><td>' +
-        Math.round(done / Math.max(1, total) * 100) + '%</td><td>' + due + '</td></tr>');
-    });
     const mastered = P.Mastery.masteredCount('ar') + P.Mastery.masteredCount('en') + P.Mastery.masteredCount('qu');
-    const cur = Store.currentLesson('ar');
+    const name = (s.childName || '').trim();
+
+    function pct(done, total) { return Math.round(done / Math.max(1, total) * 100); }
+
+    // ---------- جدول التقدّم ----------
+    const rows = [];
+    let totalDue = 0;
+    ['ar', 'en', 'qu', 'num'].forEach(function (k) {
+      const done = Store.trackDone(k), total = Store.trackUnits(k).length;
+      const due = P.Review.due(k).length; totalDue += due;
+      const p = pct(done, total);
+      rows.push('<tr><td class="rt-name">' + TR[k] + '</td>' +
+        '<td><bdi>' + done + ' / ' + total + '</bdi></td>' +
+        '<td><div class="rt-bar"><i style="width:' + p + '%"></i></div></td>' +
+        '<td>' + p + '%</td>' +
+        '<td>' + (due ? due : '—') + '</td></tr>');
+    });
+
+    // ---------- المستحق للمراجعة (أسماء) ----------
+    function nameOf(track, id) {
+      if (track === 'qu') {
+        const q = (window.QURAN || []).filter(function (x) { return String(x.n) === String(id); })[0];
+        return q ? ('سورة ' + q.name) : id;
+      }
+      return id;
+    }
+    const dueAll = [];
+    ['ar', 'en', 'qu', 'num'].forEach(function (k) {
+      P.Review.due(k, 6).forEach(function (it) { dueAll.push({ t: k, n: nameOf(k, it.id), sc: it.score }); });
+    });
+    const dueHtml = dueAll.length
+      ? '<ul class="rep-list">' + dueAll.map(function (d) {
+          return '<li><span>' + d.n + '</span><em>' + TR[d.t] + '</em></li>';
+        }).join('') + '</ul>'
+      : '<p class="rep-note">مفيش عناصر مستحقة للمراجعة حاليًا.</p>';
+
+    // ---------- التوصية ----------
     const rec = (function () {
       if (mins === 0) return 'لسه مفيش استخدام مسجّل الأسبوع ده. ابدأ بجلسة ١٠ دقايق ٣ مرات أسبوعياً.';
       if (mastered < 6) return 'الطفل في مرحلة التأسيس: ركّز على درس واحد يومياً + مراجعة الكروت القديمة قبل الجديد.';
@@ -408,28 +607,83 @@
     })();
 
     const av = (window.A3 && A3.coverage) ? A3.coverage() : { human: 0 };
-    wrap.innerHTML =
-      '<h2>تقرير «نون» الأسبوعي</h2>' +
-      '<p class="rep-meta">' + Store.today() + ' · وقت الأسبوع: ' + mins + ' دقيقة · عناصر متقنة: ' + mastered + '</p>' +
-      '<table class="rep-table"><thead><tr><th>المسار</th><th>المكتمل</th><th>النسبة</th><th>مستحق للمراجعة</th></tr></thead><tbody>' +
-      lines.join('') + '</tbody></table>' +
-      '<h3>التوصية</h3><p class="rep-note">' + rec + '</p>' +
-      '<h3>الدرس القادم</h3><p class="rep-note">' + (cur ? cur.title : '—') + '</p>' +
-      '<h3>الأصوات</h3><p class="rep-note">تسجيلات بشرية متاحة: ' + av.human +
-      ' — الباقي صوت مؤقت (TTS) لحين استبداله. المصدر: Wikimedia Commons / Lingua Libre (CC BY-SA 4.0).</p>' +
-      '<p class="rep-foot">تقرير آلي من تطبيق «نون» — لا يخرج أي شيء من الجهاز.</p>';
+    const cur = Store.currentLesson('ar');
 
+    wrap.innerHTML =
+      '<header class="rep-head">' +
+        '<div class="rep-mark">نون</div>' +
+        '<div class="rep-titles"><h1>تقرير التقدّم الأسبوعي</h1>' +
+        '<p>' + (name ? 'الطفل: <b>' + name + '</b> · ' : '') + Store.today() + '</p></div>' +
+      '</header>' +
+      '<div class="rep-kpis">' +
+        '<div><b>' + mins + '</b><span>دقيقة هذا الأسبوع</span></div>' +
+        '<div><b>' + mastered + '</b><span>عنصر متقَن</span></div>' +
+        '<div><b>' + totalDue + '</b><span>مستحق للمراجعة</span></div>' +
+        '<div><b>' + s.stars + '</b><span>نجوم</span></div>' +
+      '</div>' +
+      '<h2>تقدّم المسارات</h2>' +
+      '<table class="rep-table"><thead><tr><th>المسار</th><th>المكتمل</th><th>النسبة</th><th></th><th>مراجعة</th></tr></thead>' +
+      '<tbody>' + rows.join('') + '</tbody></table>' +
+      '<h2>مستحق للمراجعة</h2>' + dueHtml +
+      '<h2>التوصية</h2><p class="rep-note">' + rec + '</p>' +
+      '<h2>الدرس القادم</h2><p class="rep-note">' + (cur ? cur.title : '—') + '</p>' +
+      '<h2>جودة الصوت</h2><p class="rep-note">كلمات المنهج كلها بتسجيلات بشرية (' + av.human +
+        ' ملفًا). الصوت المؤقت (TTS) باقٍ في أصوات الحروف المجردة فقط. المصدر: Shtooka Project وLingua Libre عبر ويكيميديا كومنز — CC BY / CC BY-SA.</p>' +
+      '<div class="rep-sign"><span>توقيع ولي الأمر</span><span class="rep-line"></span><span>التاريخ</span></div>' +
+      '<p class="rep-foot">تقرير آلي من تطبيق «نون» — كل البيانات على الجهاز ولا يخرج منه شيء.</p>';
+
+    // ---------- الشهادات (للمسارات المكتملة) ----------
+    const certs = [];
+    ['ar', 'en', 'qu', 'num'].forEach(function (k) {
+      const done = Store.trackDone(k), total = Store.trackUnits(k).length;
+      if (total && done >= total) certs.push(k);
+    });
+    certs.forEach(function (k) {
+      wrap.appendChild(certNode(TR[k], name, s.stars));
+    });
+
+    mountReport(wrap);
+  }
+
+  /* شهادة إتمام — تُطبع كصفحة مستقلة */
+  function certNode(trackName, name, stars) {
+    const c = el('div', 'cert-page');
+    c.innerHTML =
+      '<div class="cert-frame">' +
+        '<div class="cert-eyebrow">تطبيق نون · رحلة التعلّم</div>' +
+        '<h2>شهادة إتمام</h2>' +
+        '<p class="cert-to">تُمنح هذه الشهادة إلى</p>' +
+        '<div class="cert-name">' + (name || '________________') + '</div>' +
+        '<p class="cert-body">لإتمامه مسار <b>' + trackName + '</b> كاملًا، وإتقان دروسه ومراجعاته<br>' +
+        'في القراءة والكتابة والفهم والاستنتاج.</p>' +
+        '<div class="cert-stars">' + '★'.repeat(Math.min(5, Math.max(1, Math.round((stars || 0) / 20)))) + '</div>' +
+        '<div class="cert-foot"><span>' + Store.today() + '</span><span class="cert-seal">نون</span><span>توقيع المعلم</span></div>' +
+      '</div>';
+    return c;
+  }
+
+  function mountReport(wrap) {
     const host = document.createElement('div');
     host.className = 'report-overlay';
+    const bar = el('div', 'report-bar');
+    const print = el('button', 'btn primary sm', 'طباعة / حفظ PDF');
+    print.addEventListener('click', function () { window.print(); });
     const close = el('button', 'btn ghost sm', 'إغلاق');
     close.addEventListener('click', function () { host.remove(); });
-    const print = el('button', 'btn primary sm', 'طباعة / PDF');
-    print.addEventListener('click', function () { window.print(); });
-    const bar = el('div', 'report-bar');
     bar.appendChild(print); bar.appendChild(close);
     host.appendChild(bar);
     host.appendChild(wrap);
     document.body.appendChild(host);
+    return host;
+  }
+
+  /* شهادة مسار واحد (زر منفصل) */
+  function openCert(track) {
+    const s = Store.get();
+    const TR = { ar: 'العربية', en: 'الإنجليزية', qu: 'القرآن' };
+    const wrap = el('div', 'report');
+    wrap.appendChild(certNode(TR[track] || 'العربية', (s.childName || '').trim(), s.stars));
+    mountReport(wrap);
   }
 
   /* ================= التهيئة ================= */
@@ -442,7 +696,8 @@
   $('parentBack').addEventListener('click', function () { SFX.click(); parentUnlocked = false; back(); });
 
   document.addEventListener('pointerdown', function once() {
-    SFX.unlock(); Audio2.unlock(); document.removeEventListener('pointerdown', once);
+    SFX.unlock(); Audio2.unlock(); if (window.A3 && A3.unlock) A3.unlock();
+    document.removeEventListener('pointerdown', once);
   });
 
   // حساب وقت الاستخدام

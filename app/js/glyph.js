@@ -117,9 +117,23 @@
   const FIXED_AR = [-120, -310, 890, 1130];
   const FIXED_EN = [-40, -240, 700, 780];
 
+  /** ذاكرة مؤقتة: نفس الحرف/الحركة/المقاس يُبنى مرة واحدة فقط */
+  const _svgCache = new Map();
+  function svgCached(ch, opts, make) {
+    const key = ch + '|' + (opts.marks || []).join(',') + '|' + (opts.size || '') + '|' +
+      (opts.color || '') + '|' + (opts.latin ? 1 : 0) + '|' + (opts.emBox ? 1 : 0) + '|' + (opts.cls || '');
+    let v = _svgCache.get(key);
+    if (v == null) { v = make(); if (_svgCache.size < 900) _svgCache.set(key, v); }
+    return v;
+  }
+
   /** SVG جاهز للعرض */
   function svg(ch, opts) {
     opts = opts || {};
+    return svgCached(ch, opts, function () { return svgBuild(ch, opts); });
+  }
+
+  function svgBuild(ch, opts) {
     const L = layout(ch, opts.marks || [], opts.latin);
     if (opts.emBox) {
       const fixed = opts.latin ? FIXED_EN : FIXED_AR;
