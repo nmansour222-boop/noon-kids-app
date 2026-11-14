@@ -79,7 +79,11 @@
 
     const grid = el('div', 'grid-3');
     options.forEach(op => {
-      const c = el('button', 'tap-card', op.e);
+      const c = el('button', 'tap-card');
+      c.style.display = 'flex';
+      c.style.flexDirection = 'column';
+      c.innerHTML = '<span style="font-size:42px;line-height:1.1">' + op.e + '</span>' +
+                    '<span style="font-size:13px;color:var(--ink-soft);margin-top:4px">' + op.w + '</span>';
       c.setAttribute('aria-label', op.w);
       c.addEventListener('click', () => {
         if (op.ok) {
