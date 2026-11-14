@@ -183,11 +183,6 @@
   const EN2 = withReview(EN, 'en', 4, 3);
   const QU2 = withReview(QU, 'qu', 3, 2);
 
-  const BY_TRACK = { ar: AR, en: EN2, qu: QU2 };
-  const ALL = AR.concat(EN2, QU2, (TRACKS.num ? TRACKS.num.units : []));
-  const BY_ID = {};
-  ALL.forEach(function (u) { BY_ID[u.id] = u; });
-
   /* ---------- الأرقام: ١٠ مراحل، كل مرحلة تفتح بعد اختبار اللي قبلها ---------- */
   (function buildNumbers() {
     if (!window.NUMBERS) return;
@@ -211,6 +206,13 @@
     });
     TRACKS.num = { key: 'num', name: 'الأرقام ١–١٠٠', units: units };
   })();
+
+  const BY_TRACK = { ar: AR, en: EN2, qu: QU2 };
+  if (TRACKS.num) BY_TRACK.num = TRACKS.num.units;
+  const ALL = AR.concat(EN2, QU2, (TRACKS.num ? TRACKS.num.units : []));
+  const BY_ID = {};
+  ALL.forEach(function (u) { BY_ID[u.id] = u; });
+
 
   window.SYLLABUS = {
     tracks: TRACKS,
