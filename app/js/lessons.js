@@ -477,7 +477,8 @@
       });
     }
 
-    setTimeout(build, 30);
+    (window.Tracer.loadFonts ? window.Tracer.loadFonts() : Promise.resolve()).then(function () { setTimeout(build, 30); });
+    setTimeout(build, 1800);
 
     // مساعدة تلقائية: بعد ٣ محاولات بدون نجاح نكمّل الحرف مع الطفل
     canvas.addEventListener('pointerup', function () {

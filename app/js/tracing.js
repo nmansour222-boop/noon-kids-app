@@ -3,6 +3,36 @@
   'use strict';
   const MS = 220;          // دقة مصفوفة الحرف
   const TOL = 6;           // تسامح (خلايا) حول الحرف
+  const FAM_AR = '"Amiri", serif';
+  const FAM_EN = '"Baloo Bhaijaan 2", system-ui, sans-serif';
+  const MK = { fatha: '\u064E', damma: '\u064F', kasra: '\u0650', sukun: '\u0652', shadda: '\u0651', fathatan: '\u064B', dammatan: '\u064C', kasratan: '\u064D' };
+
+  /** نصّ الحرف مع حركاته — الخط نفسه يضع النقاط والهمزات */
+  function textOf(ch, marks) {
+    if (!marks || !marks.length) return ch;
+    const shadda = marks.indexOf('shadda') >= 0 ? MK.shadda : '';
+    const vowel = marks.filter(function (m) { return m !== 'shadda'; }).map(function (m) { return MK[m] || ''; }).join('');
+    return ch + shadda + vowel;
+  }
+
+  /** يرسم النصّ بحجم يناسب المساحة ويُرجع التحويل المستخدم */
+  function drawFitted(g, txt, W, H, latin, fill) {
+    const fam = latin ? FAM_EN : FAM_AR;
+    const probe = 200;
+    g.font = '700 ' + probe + 'px ' + fam;
+    const m = g.measureText(txt);
+    const asc = m.actualBoundingBoxAscent || probe * 0.75;
+    const desc = m.actualBoundingBoxDescent || probe * 0.25;
+    const gw = Math.max(1, (m.actualBoundingBoxLeft || 0) + (m.actualBoundingBoxRight || m.width));
+    const gh = Math.max(1, asc + desc);
+    const k = Math.min((W * fill) / gw, (H * fill) / gh);
+    const size = probe * k;
+    g.font = '700 ' + size + 'px ' + fam;
+    g.textAlign = 'center';
+    g.textBaseline = 'alphabetic';
+    const x = W / 2, y = H / 2 + ((asc - desc) / 2) * k;
+    return { x: x, y: y, size: size, fam: fam };
+  }
 
   /** يرسم حرفاً على canvas بواسطة مساراته الحقيقية ويُرجع خريطة نقاطه */
   function rasterize(ch, marks, latin) {
@@ -11,7 +41,8 @@
     const g = c.getContext('2d', { willReadFrequently: true });
     g.fillStyle = '#000'; g.fillRect(0, 0, MS, MS);
     g.fillStyle = '#fff';
-    Glyph.drawOnCanvas(g, ch, { marks: marks, latin: latin }, MS, MS, 0.8);
+    const t = drawFitted(g, textOf(ch, marks), MS, MS, latin, 0.8);
+    g.fillText(textOf(ch, marks), t.x, t.y);
 
     const d = g.getImageData(0, 0, MS, MS).data;
     const m = new Uint8Array(MS * MS);
@@ -190,26 +221,19 @@
       g.fillStyle = '#FFFFFF';
       g.fillRect(0, 0, W, H);
 
-      // الحرف كدليل: مسار مفرّغ (outline) واضح
+      // الحرف كدليل: نصّ من الخط نفسه (نقاط وهمزات صحيحة) بتعبئة باهتة وحدود واضحة
       g.save();
-      const shape = Glyph.layout(this.ch, this.marks, this.latin);
-      const [x0, y0, x1, y1] = shape.box;
-      const w = Math.max(1, x1 - x0), h = Math.max(1, y1 - y0);
-      const k = Math.min((W * 0.74) / w, (H * 0.74) / h);
-      const tx = W / 2 - ((x0 + x1) / 2) * k;
-      const ty = H / 2 + ((y0 + y1) / 2) * k;
-      g.transform(k, 0, 0, -k, tx, ty);
-      g.lineWidth = 7 / k;
+      const txt = textOf(this.ch, this.marks);
+      const t = drawFitted(g, txt, W, H, this.latin, 0.78);
+      g.textAlign = 'center';
+      g.textBaseline = 'alphabetic';
       g.lineJoin = 'round';
       g.lineCap = 'round';
-      g.strokeStyle = this.latin ? '#A9D8D0' : '#E4C3B2';
-      g.fillStyle = this.latin ? '#F4FBF9' : '#FEF6F1';
-      shape.paths.forEach(function (p) {
-        const path = new Path2D(p.d);
-        g.save(); g.translate(p.dx || 0, p.dy || 0);
-        g.fill(path); g.stroke(path);
-        g.restore();
-      });
+      g.fillStyle = this.latin ? '#DCF0EC' : '#F6E0D6';
+      g.fillText(txt, t.x, t.y);
+      g.lineWidth = Math.max(1.6, t.size * 0.009);
+      g.strokeStyle = this.latin ? '#8FCFC5' : '#D9B09A';
+      g.strokeText(txt, t.x, t.y);
       g.restore();
 
       // نقطة البداية النابضة
@@ -255,6 +279,14 @@
       this.canvas.removeEventListener('pointerup', this._up);
     }
   }
+
+  Tracer.loadFonts = function () {
+    if (!document.fonts || !document.fonts.load) return Promise.resolve();
+    return Promise.all([
+      document.fonts.load('700 200px "Amiri"'),
+      document.fonts.load('700 200px "Baloo Bhaijaan 2"')
+    ]).catch(function () {});
+  };
 
   window.Tracer = Tracer;
 })();
