@@ -1,9 +1,13 @@
 # نون — تطبيق تعليمي للأطفال 4–5 سنوات
 
 > ### 🔗 التطبيق شغّال أونلاين
-> - **Netlify:** https://noon-kids-app.netlify.app
-> - **GitHub Pages:** https://nmansour222-boop.github.io/noon-kids-app/
-> - **الكود:** https://github.com/nmansour222-boop/noon-kids-app
+> | الاستضافة | اللينك |
+> |---|---|
+> | **Vercel** | https://noon-kids-app.vercel.app |
+> | **Netlify** | https://noon-kids-app.netlify.app |
+> | **GitHub Pages** | https://nmansour222-boop.github.io/noon-kids-app/ |
+>
+> الكود: https://github.com/nmansour222-boop/noon-kids-app
 
 تطبيق ويب (PWA) يعمل على الموبايل والتابلت، يعلّم **القراءة والكتابة بالعربية والإنجليزية** ويحفّظ **جزء عمّ ثم جزء تبارك**، بأسلوب لعب لا درس.
 
