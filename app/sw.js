@@ -1,5 +1,5 @@
 /* Service Worker — التطبيق يعمل أوفلاين بعد أول فتح */
-const VERSION = 'noon-v10';
+const VERSION = 'noon-v11';
 const SHELL = [
   './',
   './index.html',
@@ -15,6 +15,7 @@ const SHELL = [
   './js/syllabus.js',
   './js/sfx.js',
   './js/ui.js',
+  './js/human.js',
   './js/audio.js',
   './js/audio3.js',
   './js/tracing.js',

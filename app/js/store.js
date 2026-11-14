@@ -14,7 +14,7 @@
     surahs: {},         // surahNumber -> {ayahsDone, done}
     sessions: 0,
     seconds: 0,
-    settings: { tts: true, limitMin: 20, pin: '1234' },
+    settings: { tts: false, limitMin: 20, pin: '1234' },
     history: []
   };
 

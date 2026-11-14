@@ -472,7 +472,7 @@
     }
 
     body.appendChild(el('div', 'setting-row',
-      '<span class="sr-label">صوت الحروف (مؤقت)</span><div class="switch ' + (s.settings.tts ? 'on' : '') + '" data-set="tts"></div>'));
+      '<span class="sr-label">الصوت الآلي (احتياطي — مقفول)</span><div class="switch ' + (s.settings.tts ? 'on' : '') + '" data-set="tts"></div>'));
     body.appendChild(el('div', 'setting-row',
       '<span class="sr-label">حد الاستخدام اليومي</span><div style="display:flex;gap:6px">' +
       [15, 20, 25].map(function (m) {

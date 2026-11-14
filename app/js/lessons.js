@@ -4,7 +4,14 @@
   const el = UI.el;
   const AR = 'ar-SA', EN = 'en-US';
 
-  function say(t, lang, rate) { return window.Audio2.say(t, lang || AR, rate); }
+  /** الصوت: تسجيل بشري أولاً، والصوت الآلي اختياري (مقفول افتراضياً) */
+  function say(t, lang, rate) {
+    if (window.Human && window.Human.has(t)) return window.Human.play(t);
+    let on = true;
+    try { on = !!window.Store.get().settings.tts; } catch (e) {}
+    if (!on) return Promise.resolve(false);
+    return window.Audio2.say(t, lang || AR, rate);
+  }
   function clear(host) { host.innerHTML = ''; return host; }
   /** يعرض الشاشة ويحوّل كل تعليمة نصية إلى زر صوت + نص صغير (الطفل لا يقرأ) */
   function show(host, node) {
