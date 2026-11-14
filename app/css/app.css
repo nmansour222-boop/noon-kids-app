@@ -259,6 +259,8 @@ img { max-width: 100%; }
 .l-eyebrow { font-size: 15px; font-weight: 800; color: var(--ink-soft); letter-spacing: .2px; }
 .l-hint { font-size: 15.5px; color: var(--ink-soft); font-weight: 600; line-height: 1.55; max-width: 340px; }
 .l-hint b.ok { color: var(--leaf); }
+.prompt-row { display: flex; align-items: center; gap: 8px; justify-content: center; }
+.prompt-row .bubble { max-width: 270px; }
 .hint-row { display: flex; align-items: center; justify-content: center; gap: 8px; max-width: 340px; }
 .hint-row .l-hint { font-size: 13.5px; opacity: .8; text-align: right; margin: 0; }
 .hint-spk {

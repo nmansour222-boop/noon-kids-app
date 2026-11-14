@@ -28,6 +28,20 @@
       row.appendChild(h);
       h.classList.add('muted');
     });
+    // كل سؤال/تعليمة كبيرة تبقى قابلة للسمع بلمسة أيقونة
+    Array.prototype.forEach.call(node.querySelectorAll('.l-eyebrow, .bubble'), function (t) {
+      if (t.dataset.spoken) return;
+      t.dataset.spoken = '1';
+      const txt = t.textContent.trim();
+      const wrap = el('div', 'prompt-row');
+      const spk = el('button', 'hint-spk', UI.icon('sound', 18));
+      spk.setAttribute('aria-label', 'اسمع');
+      spk.addEventListener('click', function (e) { e.stopPropagation(); SFX.click(); say(txt.replace(/[«»]/g, ''), AR, 0.72); });
+      t.parentNode.insertBefore(wrap, t);
+      wrap.appendChild(spk);
+      wrap.appendChild(t);
+    });
+
     const first = node.querySelector('.l-hint');
     if (first && first.dataset.text) setTimeout(function () { say(first.dataset.text.replace(/[«»]/g, ''), AR, 0.7); }, 220);
     return node;
