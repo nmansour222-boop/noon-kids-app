@@ -6,7 +6,32 @@
 
   function say(t, lang, rate) { return window.Audio2.say(t, lang || AR, rate); }
   function clear(host) { host.innerHTML = ''; return host; }
-  function show(host, node) { clear(host); node.classList.add('l-screen'); host.appendChild(node); return node; }
+  /** يعرض الشاشة ويحوّل كل تعليمة نصية إلى زر صوت + نص صغير (الطفل لا يقرأ) */
+  function show(host, node) {
+    clear(host);
+    node.classList.add('l-screen');
+    host.appendChild(node);
+    Array.prototype.forEach.call(node.querySelectorAll('.l-hint'), function (h) {
+      if (h.dataset.spoken) return;
+      h.dataset.spoken = '1';
+      h.dataset.text = h.textContent.trim();
+      const row = el('div', 'hint-row');
+      const b = el('button', 'hint-spk', UI.icon('sound', 18));
+      b.setAttribute('aria-label', 'اسمع التعليمة');
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        SFX.click();
+        say(h.dataset.text.replace(/[«»]/g, ''), AR, 0.72);
+      });
+      h.parentNode.insertBefore(row, h);
+      row.appendChild(b);
+      row.appendChild(h);
+      h.classList.add('muted');
+    });
+    const first = node.querySelector('.l-hint');
+    if (first && first.dataset.text) setTimeout(function () { say(first.dataset.text.replace(/[«»]/g, ''), AR, 0.7); }, 220);
+    return node;
+  }
   function center(cls) { return el('div', 'l-center ' + (cls || '')); }
 
   function eyebrow(txt) { return el('div', 'l-eyebrow', txt); }
@@ -51,12 +76,20 @@
   }
 
   /* رسم الحرف من مساراته: حركات في مكانها دائماً */
+  const MK = { fatha: '\u064E', damma: '\u064F', kasra: '\u0650', sukun: '\u0652', shadda: '\u0651', fathatan: '\u064B', dammatan: '\u064C', kasratan: '\u064D' };
+
+  /** حرف + حركات كنصّ حقيقي: الخط يضع الحركات في مكانها الصحيح */
   function glyphEl(ch, marks, opts) {
     opts = opts || {};
-    return Glyph.svg(ch, {
-      marks: marks || [], size: opts.size || 130, color: opts.color || '',
-      cls: opts.cls || '', latin: !!opts.latin, emBox: !!opts.emBox
-    });
+    let txt = ch;
+    if (marks && marks.length) {
+      const upper = marks.filter(function (m) { return m === 'shadda'; });
+      const vowel = marks.filter(function (m) { return m !== 'shadda'; });
+      txt = ch + upper.map(function (m) { return MK[m]; }).join('') + vowel.map(function (m) { return MK[m]; }).join('');
+    }
+    const size = opts.size || 120;
+    const style = 'font-size:' + size + 'px;' + (opts.color ? 'color:' + opts.color + ';' : '');
+    return '<span class="gtext ' + (opts.latin ? 'latin ' : '') + (opts.cls || '') + '" style="' + style + '">' + txt + '</span>';
   }
 
   const MARK_OF = { '\u064E': 'fatha', '\u064F': 'damma', '\u0650': 'kasra', '\u0652': 'sukun', '\u0651': 'shadda', '\u064B': 'fathatan', '\u064C': 'dammatan', '\u064D': 'kasratan' };
@@ -119,7 +152,7 @@
       s.appendChild(el('div', 'bubble', 'أنا نون! هعلّمك حرف جديد'));
       s.appendChild(el('div', 'bubble-owl', UI.mascot(64, 'happy')));
       const g = el('button', 'glyph-tap');
-      g.innerHTML = glyphEl(l.ch, [], { size: 158, color: 'var(--coral)' });
+      g.innerHTML = glyphEl(l.ch, [], { size: 132, color: 'var(--coral)' });
       s.appendChild(g);
       s.appendChild(el('div', 'glyph-name', l.name));
       s.appendChild(el('div', 'l-hint', 'دوس على الحرف عشان تسمع اسمه'));
@@ -145,14 +178,14 @@
       const eq = el('div', 'eq-row');
       const mk = splitAr(l.sound)[0];
       eq.appendChild(el('div', 'eq-card',
-        glyphEl(l.ch, [], { size: 84, color: 'var(--ink)' }) + '<span class="eq-lbl">' + l.name + '</span>'));
+        glyphEl(l.ch, [], { size: 52, color: 'var(--ink)' }) + '<span class="eq-lbl">' + l.name + '</span>'));
       eq.appendChild(el('div', 'eq-op', '+'));
       const haraka = (mk && mk.marks[0]) || 'fatha';
       eq.appendChild(el('div', 'eq-card',
         '<span class="eq-haraka">' + Glyph.mark(haraka, { size: 62, color: 'var(--coral)' }) + '</span><span class="eq-lbl">' + harakaAr(haraka) + '</span>'));
       eq.appendChild(el('div', 'eq-op', '='));
       eq.appendChild(el('div', 'eq-card result',
-        glyphEl(l.ch, [haraka], { size: 84, color: 'var(--coral-d)' }) + '<span class="eq-lbl">صوته</span>'));
+        glyphEl(l.ch, [haraka], { size: 52, color: 'var(--coral-d)' }) + '<span class="eq-lbl">صوته</span>'));
       s.appendChild(eq);
 
       const play = ghostBtn('اسمع تاني', function () {
@@ -189,13 +222,13 @@
     s.appendChild(eyebrow('فين حرف ' + l.name + '؟'));
     if (unit.order < 8) {
       s.appendChild(el('div', 'model-row',
-        '<span class="model-label">زي ده</span>' + glyphEl(l.ch, [], { size: 46, color: 'var(--coral)', emBox: true })));
+        '<span class="model-label">زي ده</span>' + glyphEl(l.ch, [], { size: 34, color: 'var(--coral)' })));
     }
     const grid = el('div', 'letters-grid');
     s.appendChild(grid);
 
     options.forEach(function (o) {
-      const b = el('button', 'letter-tile', glyphEl(o.ch, [], { size: 166, color: 'var(--ink)', emBox: true }));
+      const b = el('button', 'letter-tile', glyphEl(o.ch, [], { size: 66, color: 'var(--ink)' }));
       b.dataset.ch = o.ch;
       b.addEventListener('click', function () {
         if (solved) return;
@@ -255,7 +288,7 @@
             sp.appendChild(el('div', 'word-big', op.w));
             sp.appendChild(el('div', 'word-arrow', '↓'));
             const first = splitAr(op.w)[0];
-            const card = el('div', 'first-letter', glyphEl(first.ch, first.marks, { size: 82, color: 'var(--coral)', emBox: true }));
+            const card = el('div', 'first-letter', glyphEl(first.ch, first.marks, { size: 60, color: 'var(--coral)' }));
             sp.appendChild(card);
             sp.appendChild(el('div', 'l-hint', '«' + op.w + '» بتبدأ بحرف ' + l.name));
             const n = bigBtn('تمام!', 'primary', function () { done(); });
@@ -299,7 +332,7 @@
       s.appendChild(el('div', 'bubble', 'ده صوت جديد — اسمعه الأول'));
       s.appendChild(el('div', 'bubble-owl', UI.mascot(64, 'happy')));
       const g = el('button', 'glyph-tap');
-      g.innerHTML = glyphEl(lc, [], { size: 200, color: 'var(--teal)', latin: true, emBox: true });
+      g.innerHTML = glyphEl(lc, [], { size: 132, color: 'var(--teal)', latin: true });
       s.appendChild(g);
       s.appendChild(el('div', 'l-hint', 'دوس على الحرف عشان تسمع صوته'));
       show(host, s);

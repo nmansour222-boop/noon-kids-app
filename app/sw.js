@@ -1,5 +1,5 @@
 /* Service Worker — التطبيق يعمل أوفلاين بعد أول فتح */
-const VERSION = 'noon-v8';
+const VERSION = 'noon-v9';
 const SHELL = [
   './',
   './index.html',
@@ -22,8 +22,7 @@ const SHELL = [
   './fonts/baloo.woff2',
   './fonts/cairo.woff2',
   './fonts/naskh.woff2',
-  './fonts/amiri-400.woff2',
-  './fonts/amiri-700.woff2',
+  './fonts/amiri.woff2',
   './fonts/quran.woff2',
   './fonts/emoji.woff2',
   './manifest.webmanifest',

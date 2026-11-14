@@ -1,8 +1,7 @@
 /* ================= «نون» — نظام تصميم v2 ================= */
 @font-face { font-family: 'Baloo Bhaijaan 2'; src: url('../fonts/baloo.woff2') format('woff2'); font-weight: 400 800; font-display: swap; }
 @font-face { font-family: 'Cairo'; src: url('../fonts/cairo.woff2') format('woff2'); font-weight: 400 800; font-display: swap; }
-@font-face { font-family: 'Amiri'; src: url('../fonts/amiri-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
-@font-face { font-family: 'Amiri'; src: url('../fonts/amiri-700.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Amiri'; src: url('../fonts/amiri.woff2') format('woff2'); font-weight: 400 700; font-display: swap; }
 @font-face { font-family: 'Naskh'; src: url('../fonts/naskh.woff2') format('woff2'); font-weight: 400 700; font-display: swap; }
 @font-face { font-family: 'NunEmoji'; src: url('../fonts/emoji.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'QuranFont'; src: url('../fonts/quran.woff2') format('woff2'); font-weight: 400; font-display: swap; }
@@ -33,7 +32,7 @@
   --sh-2: 0 10px 26px rgba(90, 62, 40, .10);
   --sh-3: 0 20px 48px rgba(90, 62, 40, .16);
   --ui: 'Baloo Bhaijaan 2', 'Cairo', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --ar: 'Naskh', 'Amiri', 'Baloo Bhaijaan 2', serif;
+  --ar: 'Amiri', 'Naskh', serif;
   --q: 'QuranFont', 'Amiri', 'Naskh', serif;
   --latin: 'Baloo Bhaijaan 2', ui-rounded, system-ui, sans-serif;
 }
@@ -260,6 +259,14 @@ img { max-width: 100%; }
 .l-eyebrow { font-size: 15px; font-weight: 800; color: var(--ink-soft); letter-spacing: .2px; }
 .l-hint { font-size: 15.5px; color: var(--ink-soft); font-weight: 600; line-height: 1.55; max-width: 340px; }
 .l-hint b.ok { color: var(--leaf); }
+.hint-row { display: flex; align-items: center; justify-content: center; gap: 8px; max-width: 340px; }
+.hint-row .l-hint { font-size: 13.5px; opacity: .8; text-align: right; margin: 0; }
+.hint-spk {
+  flex: none; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--sky-l); color: var(--sky); display: grid; place-items: center;
+  box-shadow: 0 4px 10px rgba(61,139,253,.16);
+}
+.hint-spk:active { transform: scale(.92); }
 .row-2 { display: flex; gap: 10px; width: 100%; margin-top: auto; padding-top: 14px; }
 .row-2 .btn { flex: 1; }
 .fade-up { animation: fadeUp .3s ease both; }
@@ -340,16 +347,33 @@ img { max-width: 100%; }
 .eq-haraka { font-family: var(--ar); font-size: 62px; font-weight: 700; line-height: 1.3; color: var(--coral); }
 .eq-lbl { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); }
 
+/* ---------- الحرف كنصّ (يستخدم مواقع الحركات من الخط نفسه) ---------- */
+.gtext {
+  font-family: var(--ar);
+  font-weight: 700;
+  line-height: 2.1;
+  display: inline-block;
+  color: var(--ink);
+  font-feature-settings: 'mark' 1, 'mkmk' 1, 'curs' 0;
+  text-rendering: optimizeLegibility;
+  padding: 0 .06em;
+}
+.gtext.latin { font-family: var(--latin); line-height: 1.5; font-weight: 800; }
+
 /* ---------- الحرف الكبير (SVG) ---------- */
 .g-svg { display: block; }
 .glyph-line { display: flex; justify-content: center; }
 .sound-chip .g-svg { display: block; }
-.letter-tile .g-svg, .model-row .g-svg { margin: 0 auto; }
+.letter-tile { overflow: hidden; }
+.letter-tile .gtext { line-height: 1.5; }
+.model-row .gtext { line-height: 1.6; }
+.eq-card .gtext { line-height: 1.9; }
+.first-letter .gtext { line-height: 1.7; }
 .spell-cell .g-svg { margin: 0 auto; }
 
 /* ---------- الحرف الكبير ---------- */
 .glyph-tap { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 0; }
-.glyph {
+.glyph, .gtext.big {
   font-family: var(--ar);
   font-size: clamp(120px, 34vw, 168px);
   line-height: 1.5;
@@ -364,7 +388,7 @@ img { max-width: 100%; }
 .glyph.small { font-size: clamp(84px, 24vw, 116px); line-height: 1.55; }
 .glyph.latin { font-family: var(--latin); color: var(--teal); }
 .glyph.latin.lower { font-size: .78em; color: var(--teal); }
-.glyph-tap .tapped .glyph { transform: scale(1.08); }
+.glyph-tap .tapped .glyph, .gtext.big { transform: scale(1.08); }
 .glyph-name { font-family: var(--ar); font-size: 32px; font-weight: 700; color: var(--ink); line-height: 1.7; }
 .glyph-name.latin { font-family: var(--latin); }
 .sound-chip {
@@ -568,7 +592,7 @@ img { max-width: 100%; }
 
 /* ---------- استجابة ---------- */
 @media (max-height: 700px) {
-  .glyph { font-size: clamp(96px, 26vw, 130px); }
+  .glyph, .gtext.big { font-size: clamp(96px, 26vw, 130px); }
   .hero-owl svg { width: 74px; height: 74px; }
   .hero-title { font-size: 23px; }
   .track-card { padding: 14px 16px; }
