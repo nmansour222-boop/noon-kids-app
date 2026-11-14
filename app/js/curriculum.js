@@ -60,7 +60,7 @@
     { g: 5, s: 'v', ar: 'ف', w: 'van',    e: '🚐' },
     { g: 5, s: 'w', ar: 'و', w: 'water',  e: '💧' },
     { g: 6, s: 'x', ar: 'كس', w: 'box',   e: '📦' },
-    { g: 6, s: 'y', ar: 'ي', w: 'yo-yo',  e: '🪀' },
+    { g: 6, s: 'y', ar: 'ي', w: 'yellow', e: '🟡' },
     { g: 5, s: 'z', ar: 'ز', w: 'zebra',  e: '🦓' },
     { g: 5, s: 'OO', ar: 'أوو', w: 'moon', e: '🌕' },
     { g: 6, s: 'TH', ar: 'ذ', w: 'this',   e: '👉' },
@@ -94,6 +94,29 @@
     { w: 'ant', e: '🐜' }, { w: 'tip', e: '👆' }, { w: 'sip', e: '🥤' },
     { w: 'pat', e: '🐾' }
   ];
+
+  /* ترتيب Synthetic Phonics القياسي (Letters and Sounds):
+     satpin → ck e h r m d → g o u l f b → ai j oa ie ee or → z w ng v oo → y x ch sh th → qu ou oi ue er ar.
+     الترتيب في المصفوفة أعلاه أبجدي للقراءة فقط؛ التدريس يمشي بترتيب PHONICS. */
+  const PHONICS_ORDER = [
+    's', 'a', 't', 'p', 'i', 'n',
+    'c k', 'e', 'h', 'r', 'm', 'd',
+    'g', 'o', 'u', 'l', 'f', 'b',
+    'ai', 'j', 'oa', 'ie', 'ee', 'or',
+    'z', 'w', 'ng', 'v', 'oo',
+    'y', 'x', 'ch', 'sh', 'th', 'TH',
+    'qu', 'ou', 'oi', 'ue', 'er', 'ar', 'OO'
+  ];
+  (function sortSounds() {
+    const rank = {};
+    PHONICS_ORDER.forEach(function (k, i) { rank[k.toLowerCase()] = i; });
+    SOUNDS.sort(function (x, y) {
+      const rx = rank[String(x.s).toLowerCase()], ry = rank[String(y.s).toLowerCase()];
+      const ax = rx == null ? 900 + SOUNDS.indexOf(x) : rx;
+      const ay = ry == null ? 900 + SOUNDS.indexOf(y) : ry;
+      return ax - ay;
+    });
+  })();
 
   // ---------------- القرآن: ترتيب التحفيظ بالسهولة (داخل جزء عمّ) ----------------
   // 1=الفاتحة | 2..6 = محطات جزء عمّ | 7 = جزء تبارك

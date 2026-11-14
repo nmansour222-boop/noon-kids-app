@@ -138,12 +138,20 @@
       sub: s.w,
       glyph: s.s,
       sound: item,
-      lessons: [
-        { id: 'en.' + i + '.1meet',  type: 'enMeet' },
-        { id: 'en.' + i + '.2word',  type: 'enWord' },
-        { id: 'en.' + i + '.3blend', type: 'enBlend' },
-        { id: 'en.' + i + '.4write', type: 'enWrite' }
-      ]
+      // التركيب لا يبدأ إلا بعد إتقان satpin (أول ٦ أصوات) — قبلها تعلّم الصوت ثم اكتبه
+      lessons: (i >= 5
+        ? [
+            { id: 'en.' + i + '.1meet',  type: 'enMeet' },
+            { id: 'en.' + i + '.2word',  type: 'enWord' },
+            { id: 'en.' + i + '.3blend', type: 'enBlend' },
+            { id: 'en.' + i + '.4write', type: 'enWrite' }
+          ]
+        : [
+            { id: 'en.' + i + '.1meet',  type: 'enMeet' },
+            { id: 'en.' + i + '.2word',  type: 'enWord' },
+            { id: 'en.' + i + '.3write', type: 'enWrite' },
+            { id: 'en.' + i + '.4write2', type: 'enWrite' }
+          ])
     };
   });
 

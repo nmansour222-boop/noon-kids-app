@@ -119,4 +119,6 @@
 | en | umbrella | Dvortygirl | CC BY-SA 3.0 | File:En-us-umbrella.ogg |
 | en | van | Dvortygirl | CC BY-SA 3.0 | File:En-us-van.ogg |
 | en | water | Dvortygirl | CC BY-SA 3.0 | File:En-us-water.ogg |
+| en | yellow | Speaker: Wodencafe
+Recorder: Wodencafe | CC0 | File:LL-Q1860_(eng)-Wodencafe-yellow.wav |
 | en | zebra | No machine-readable author provided. Dvortygirl assumed (based on copyright claims). | CC BY-SA 3.0 | File:En-us-zebra.ogg |

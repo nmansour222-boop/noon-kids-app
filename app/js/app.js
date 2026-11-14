@@ -76,6 +76,32 @@
       }
     }
 
+    /** عدّاد دقيق: الحروف ٢٨، الأصوات ٤٢، السور بعددها الحقيقي (لا الوحدات) */
+    function unitCounts(k, units) {
+      function doneU(u) { return Store.unitDone(u.id); }
+      if (k === 'ar') {
+        const L = units.filter(function (u) { return u.letter; });
+        return { done: L.filter(doneU).length, total: L.length, noun: 'حرف' };
+      }
+      if (k === 'en') {
+        const S2 = units.filter(function (u) { return u.sound; });
+        return { done: S2.filter(doneU).length, total: S2.length, noun: 'صوت' };
+      }
+      if (k === 'qu') {
+        const byS = {};
+        units.forEach(function (u) {
+          const n = u.surah && u.surah.n;
+          if (n == null) return;
+          byS[n] = byS[n] || { all: 0, done: 0 };
+          byS[n].all++; if (doneU(u)) byS[n].done++;
+        });
+        const keys = Object.keys(byS);
+        const full = keys.filter(function (n) { return byS[n].done >= byS[n].all; }).length;
+        return { done: full, total: keys.length, noun: 'سورة' };
+      }
+      return { done: units.filter(doneU).length, total: units.length, noun: 'مرحلة' };
+    }
+
     const host = $('trackCards');
     host.innerHTML = '';
     ['ar', 'en', 'qu', 'num'].forEach(function (k) {
@@ -84,10 +110,8 @@
       const done = Store.trackDone(k);
       const pct = units.length ? Math.round(done / units.length * 100) : 0;
       const icon = k === 'ar' ? 'أ' : (k === 'en' ? 'A' : (k === 'num' ? '١٢٣' : UI.icon('book', 30)));
-      const meta = k === 'qu'
-        ? done + ' من ' + units.length + ' سورة'
-        : (k === 'num' ? done + ' من ' + units.length + ' مرحلة'
-          : done + ' من ' + units.length + (k === 'ar' ? ' حرف' : ' صوت'));
+      const cnt = unitCounts(k, units);
+      const meta = cnt.done + ' من ' + cnt.total + ' ' + cnt.noun;
 
       const card = el('button', 'track-card ' + k + '-theme');
       card.innerHTML =
@@ -258,6 +282,8 @@
         return;
       }
       if (session.idx >= u.lessons.length) finishUnit();
+      // حد الاستخدام يُفحص بين الدروس أيضًا، لا عند فتح الوحدة فقط
+      else if (Store.limitReached()) showLimit();
       else runLesson();
     });
   }
@@ -301,6 +327,7 @@
 
   /* ================= ولي الأمر ================= */
   let parentUnlocked = false;
+  let gateFails = 0;
 
   /* التكبير: مقفول في شاشات الطفل، مفتوح في شاشة ولي الأمر */
   function setZoom(allow) {
@@ -318,23 +345,38 @@
       body.innerHTML = '';
       const c = el('div', 'l-center');
       c.appendChild(el('div', 'l-eyebrow', 'سؤال لولي الأمر'));
-      const a = 2 + Math.floor(Math.random() * 7);
-      const b2 = 1 + Math.floor(Math.random() * 8);
+      // سؤالان عشوائيان + خيارات مولّدة عشوائيًا (لا موضع ثابت للإجابة)
+      const a = 11 + Math.floor(Math.random() * 39);
+      const b2 = 6 + Math.floor(Math.random() * 29);
+      const ans = a + b2;
       c.appendChild(el('div', 'gate-q', a + ' + ' + b2 + ' = ؟'));
       const grid = el('div', 'gate-grid');
-      const ans = a + b2;
-      const opts = [ans].concat([ans + 1, ans - 1, ans + 2].filter(function (x) { return x > 0; })).slice(0, 3);
-      opts.sort(function () { return Math.random() - 0.5; });
+
+      function fisher(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+        }
+        return arr;
+      }
+      const set = new Set([ans]);
+      while (set.size < 4) {
+        const d = ans + (Math.random() < 0.5 ? -1 : 1) * (1 + Math.floor(Math.random() * 9));
+        if (d > 0) set.add(d);
+      }
+      const opts = fisher(Array.from(set));
+      let lock = false;
       opts.forEach(function (o) {
         const btn = el('button', 'gate-opt', String(o));
         btn.addEventListener('click', function () {
-          SFX.click();
-          if (o === ans) { parentUnlocked = true; renderParent(); }
-          else {
-            SFX.wrong(); UI.toast('حاول تاني');
-            btn.classList.add('wrong');
-            btn.textContent = a + ' + ' + b2 + ' = ' + (a + b2 + 1) + '؟';
-          }
+          if (lock) return;
+          if (o === ans) { SFX.click(); parentUnlocked = true; renderParent(); return; }
+          // غلط: قفل ١.٢ ثانية + سؤال جديد — لا يُسمح بالدخول بالتخمين
+          lock = true; SFX.wrong();
+          btn.classList.add('wrong');
+          gateFails++;
+          UI.toast(gateFails >= 2 ? 'سؤال جديد — جرّب تحسبها' : 'مش صح، حاول تاني');
+          setTimeout(renderParent, 1200);
         });
         grid.appendChild(btn);
       });
@@ -346,7 +388,7 @@
 
     body.innerHTML = '';
     const grid = el('div', 'stat-grid');
-    [['ar', 'العربية'], ['en', 'الإنجليزية'], ['qu', 'القرآن']].forEach(function (p) {
+    [['ar', 'العربية'], ['en', 'الإنجليزية'], ['qu', 'القرآن'], ['num', 'الأرقام']].forEach(function (p) {
       const st = el('div', 'stat', '<b>' + Store.trackDone(p[0]) + '/' + Store.trackUnits(p[0]).length + '</b><span>' + p[1] + '</span>');
       grid.appendChild(st);
     });
@@ -475,7 +517,7 @@
       '<span class="sr-label">الصوت الآلي (احتياطي — مقفول)</span><div class="switch ' + (s.settings.tts ? 'on' : '') + '" data-set="tts"></div>'));
     body.appendChild(el('div', 'setting-row',
       '<span class="sr-label">حد الاستخدام اليومي</span><div style="display:flex;gap:6px">' +
-      [15, 20, 25].map(function (m) {
+      [10, 15, 20].map(function (m) {
         return '<button class="btn sm ' + (s.settings.limitMin === m ? 'primary' : 'ghost') + '" data-lim="' + m + '">' + m + ' د</button>';
       }).join('') + '</div>'));
 
@@ -558,7 +600,7 @@
   function openReport() {
     const s = Store.get();
     const P = window.Pedagogy;
-    const TR = { ar: 'العربية', en: 'الإنجليزية', qu: 'القرآن' };
+    const TR = { ar: 'العربية', en: 'الإنجليزية', qu: 'القرآن', num: 'الأرقام' };
     const wrap = el('div', 'report');
     const days = Object.keys(s.days || {}).sort().slice(-7);
     const mins = days.reduce(function (a, d) { return a + Math.round((s.days[d] || 0) / 60); }, 0);
@@ -583,6 +625,7 @@
 
     // ---------- المستحق للمراجعة (أسماء) ----------
     function nameOf(track, id) {
+      if (track === 'num') return 'مرحلة ' + id;
       if (track === 'qu') {
         const q = (window.QURAN || []).filter(function (x) { return String(x.n) === String(id); })[0];
         return q ? ('سورة ' + q.name) : id;
@@ -681,7 +724,7 @@
   /* شهادة مسار واحد (زر منفصل) */
   function openCert(track) {
     const s = Store.get();
-    const TR = { ar: 'العربية', en: 'الإنجليزية', qu: 'القرآن' };
+    const TR = { ar: 'العربية', en: 'الإنجليزية', qu: 'القرآن', num: 'الأرقام' };
     const wrap = el('div', 'report');
     wrap.appendChild(certNode(TR[track] || 'العربية', (s.childName || '').trim(), s.stars));
     mountReport(wrap);

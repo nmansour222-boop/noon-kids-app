@@ -5,16 +5,31 @@
   const AR = 'ar-SA', EN = 'en-US';
 
   /** الصوت: تسجيل بشري أولاً، والصوت الآلي اختياري (مقفول افتراضياً) */
+  /* ترتيب الصوت: تسجيل بشري للكلمة → صوت آلي (لو الجهاز بيدعم لغة النص) */
   function say(t, lang, rate) {
-    if (window.Human && window.Human.has(t)) return window.Human.play(t);
-    let on = true;
+    const L = lang || AR;
+    const isEn = /^en/i.test(L);
+    if (window.A3 && A3.has && A3.has(t, isEn ? 'en' : 'ar')) return A3.sayWord(t, isEn ? 'en' : 'ar', rate);
+    let on = false;
     try { on = !!window.Store.get().settings.tts; } catch (e) {}
     if (!on) return Promise.resolve(false);
-    return window.Audio2.say(t, lang || AR, rate);
+    return window.Audio2.say(t, L, rate);
   }
+  /* سجل مؤقتات: يمنع استمرار التلاوة/الأصوات بعد مغادرة الدرس */
+  const TIMERS = [];
+  function later(fn, ms) { const id = setTimeout(fn, ms); TIMERS.push(id); return id; }
+  function every(fn, ms) { const id = setInterval(fn, ms); TIMERS.push(id); return id; }
+  function clearTimers() {
+    while (TIMERS.length) { clearTimeout(TIMERS.pop()); }
+    try { window.Audio2 && window.Audio2.stop && window.Audio2.stop(); } catch (e) {}
+    try { window.A3 && window.A3.stop && window.A3.stop(); } catch (e) {}
+    try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {}
+  }
+
   function clear(host) { host.innerHTML = ''; return host; }
   /** يعرض الشاشة ويحوّل كل تعليمة نصية إلى زر صوت + نص صغير (الطفل لا يقرأ) */
   function show(host, node) {
+    clearTimers();
     clear(host);
     node.classList.add('l-screen');
     host.appendChild(node);
@@ -456,6 +471,33 @@
     wrap.appendChild(canvas);
     const ring = el('div', 'ring', '0%');
     wrap.appendChild(ring);
+
+    // دليل اتجاه الرسم: نقطة تتحرك على مسار الحرف
+    try {
+      const L = Glyph.layout(ch, marks || [], latin);
+      const [x0, y0, x1, y1] = L.box;
+      const w = Math.max(1, x1 - x0), h = Math.max(1, y1 - y0);
+      const fill = 0.78;
+      const padX = w * (1 / fill - 1) / 2, padY = h * (1 / fill - 1) / 2;
+      const base = L.paths.filter(function (p) { return p.part === 'base'; })[0] || L.paths[0];
+      if (base) {
+        const guide = el('div', 'trace-guide');
+        guide.innerHTML =
+          '<svg viewBox="' + (x0 - padX) + ' ' + (-(y1 + padY)) + ' ' + (w + padX * 2) + ' ' + (h + padY * 2) + '" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">' +
+          '<g transform="scale(1,-1)">' +
+            '<path id="guidePath" d="' + base.d + '" transform="translate(' + (base.dx || 0) + ',' + (base.dy || 0) + ')" fill="none" stroke="#FF6B5A" stroke-opacity=".55" stroke-width="' + Math.max(6, h * 0.012) + '" stroke-linecap="round" stroke-dasharray="14 12" class="guide-dash"/>' +
+            '<circle r="' + Math.max(7, h * 0.016) + '" fill="#FF6B5A">' +
+              '<animateMotion dur="3s" repeatCount="indefinite"><mpath href="#guidePath"/></animateMotion>' +
+            '</circle>' +
+          '</g></svg>';
+        wrap.appendChild(guide);
+        canvas.addEventListener('pointerdown', function hide() {
+          guide.style.opacity = '0';
+          setTimeout(function () { guide.remove(); }, 400);
+          canvas.removeEventListener('pointerdown', hide);
+        });
+      }
+    } catch (e) {}
     s.appendChild(wrap);
 
     const msg = el('div', 'l-hint', 'امشي بإصبعك على الحرف');
@@ -491,7 +533,10 @@
         latin: latin,
         onProgress: function (p) {
           ring.textContent = Math.round(p.coverage * 100) + '%';
-          if (p.coverage >= 0.38) success();
+          // النجاح يحتاج تغطية الحرف **و** أن يكون الإصبع على الحرف — لا شخبطة عشوائية
+          const onLetter = (p.onTarget == null ? 1 : p.onTarget);
+          if (p.coverage >= 0.55 && onLetter >= 0.6) success();
+          else if (p.coverage >= 0.30 && onLetter < 0.6) msg.textContent = 'إصبعك بعيد عن الحرف — جرّب فوق الحرف نفسه';
         }
       });
     }
@@ -503,9 +548,10 @@
     canvas.addEventListener('pointerup', function () {
       if (succeeded) return;
       tries++;
-      if (tries >= 3) {
-        msg.innerHTML = 'تعالى نكتبه مع بعض';
-        setTimeout(success, 600);
+      if (tries >= 2) {
+        // سقالة: نُظهر مسار الحرف أوضح ونرحّب بالمساعدة — لكن لا نمنح النجاح بلا كتابة
+        wrap.classList.add('traced');
+        msg.innerHTML = 'امشي بإصبعك على الخط الواضح — أنا معاك';
       }
     });
   }
@@ -524,7 +570,7 @@
       window.Audio2.playAyahs(list, 0.8).catch(function () {});
     }
     round();
-    const id = setInterval(function () { if (n >= (times || 2)) { clearInterval(id); return; } round(); }, 4200 * list.length);
+    const id = every(function () { if (n >= (times || 2)) { clearInterval(id); return; } round(); }, 4200 * list.length);
     return id;
   }
 
@@ -593,26 +639,92 @@
   function qRecall(host, lesson, unit, done) {
     const ayahs = lesson.ayahs;
     const surah = lesson.surah;
-    const s = center();
-    s.appendChild(eyebrow('سورة ' + surah.name + ' · دورك'));
-    const box = el('div', 'ayah-box hidden-text');
-    ayahs.forEach(function (a) { box.appendChild(el('div', 'ayah-line q', a.text)); });
-    s.appendChild(box);
-    s.appendChild(el('div', 'l-hint', 'اسمع الأول… وبعدين قولها لوحدك'));
-    const play = ghostBtn('اسمع', function () { window.Audio2.playAyahs(ayahs.map(function (a) { return a.audio; })); });
-    s.appendChild(play);
-    const reveal = bigBtn('قلتها', 'primary', function () {
-      box.classList.remove('hidden-text');
-      window.Store.markSurah(surah.n, lesson.start + ayahs.length, surah.ayahs.length);
-      window.SFX.correct();
-      say('ما شاء الله', AR, 0.85);
-      setTimeout(function () { done(); }, 900);
-    });
-    s.appendChild(reveal);
-    show(host, s);
-    setTimeout(function () { window.Audio2.playAyahs(ayahs.map(function (a) { return a.audio; })); }, 400);
-  }
 
+    // المرحلة ١: اسمع واقرأ
+    function listen() {
+      const s = center();
+      s.appendChild(eyebrow('سورة ' + surah.name + ' · اسمع الأول'));
+      const box = el('div', 'ayah-box');
+      ayahs.forEach(function (a) { box.appendChild(el('div', 'ayah-line q', a.text)); });
+      s.appendChild(box);
+      s.appendChild(el('div', 'l-hint', 'اسمع الآية مرتين وبعدها نقولها مع بعض'));
+      const play = ghostBtn('اسمع', function () {
+        window.Audio2.playAyahs(ayahs.map(function (a) { return a.audio; })).catch(function () {});
+      });
+      s.appendChild(play);
+      s.appendChild(bigBtn('دورك', 'primary', function () { recall(); }));
+      show(host, s);
+      later(function () { window.Audio2.playAyahs(ayahs.map(function (a) { return a.audio; })).catch(function () {}); }, 350);
+    }
+
+    // المرحلة ٢: حاول لوحدك (نص مخفي) — ثم فحص
+    function recall() {
+      const s = center();
+      s.appendChild(eyebrow('قولها لوحدك'));
+      const box = el('div', 'ayah-box blurred');
+      ayahs.forEach(function (a) { box.appendChild(el('div', 'ayah-line q', a.text)); });
+      s.appendChild(box);
+      s.appendChild(el('div', 'l-hint', 'قولها بصوتك — وبعدين نختبر سمعك'));
+      s.appendChild(bigBtn('جاهز للاختبار', 'primary', function () { check(); }));
+      show(host, s);
+    }
+
+    // المرحلة ٣: فحص استرجاع — يسمع آية ويختارها من النص
+    function check() {
+      if (ayahs.length < 2) { verified(); return; }
+      const targetIdx = Math.random() < 0.5 ? 0 : 1;
+      const target = ayahs[targetIdx];
+      const s = center();
+      s.appendChild(eyebrow('اسمع واختار'));
+      s.appendChild(el('div', 'l-hint', 'هسمعك آية — دوس على الآية اللي سمعتها'));
+
+      const playAgain = ghostBtn('اسمع تاني', function () {
+        window.Audio2.playAyahs([target.audio]).catch(function () {});
+      });
+      s.appendChild(playAgain);
+
+      const grid = el('div', 'recall-grid');
+      let answered = false;
+      ayahs.forEach(function (a, i) {
+        const b = el('button', 'ayah-choice q', a.text);
+        b.addEventListener('click', function () {
+          if (answered) return;
+          if (i === targetIdx) {
+            answered = true;
+            b.classList.add('right'); SFX.correct();
+            verified();
+          } else {
+            b.classList.add('wrong'); SFX.wrong();
+            later(function () { b.classList.remove('wrong'); }, 500);
+            window.Audio2.playAyahs([target.audio]).catch(function () {});
+            s.querySelector('.l-hint').textContent = 'سمعها كويس… اختار تاني';
+          }
+        });
+        grid.appendChild(b);
+      });
+      s.appendChild(grid);
+      show(host, s);
+      later(function () { window.Audio2.playAyahs([target.audio]).catch(function () {}); }, 400);
+    }
+
+    // بعد النجاح: تسجيل الحفظ
+    function verified() {
+      const s = center();
+      s.appendChild(el('div', 'praise-art', UI.mascot(110, 'celebrate')));
+      s.appendChild(el('div', 'praise-text', 'ما شاء الله'));
+      s.appendChild(el('div', 'l-hint', 'سمّعها لبابا أو ماما عشان نثبّتها'));
+      const b = bigBtn('كمل', 'primary', function () {
+        window.Store.markSurah(surah.n, lesson.start + ayahs.length, surah.ayahs.length);
+        SFX.levelup(); UI.burst(12);
+        done();
+      });
+      s.appendChild(b);
+      show(host, s);
+      say('ما شاء الله', AR, 0.85);
+    }
+
+    listen();
+  }
 
   /* =======================================================
      الحركات: تعليم مباشر + تمييز سمعي + تمييز بصري
@@ -945,32 +1057,56 @@
     const doneSurahs = Object.keys(st.surahs || {}).filter(function (k) { return st.surahs[k] && st.surahs[k].done; });
     const n = doneSurahs.length ? parseInt(doneSurahs[doneSurahs.length - 1], 10) : 1;
     const surah = (window.QURAN || []).find(function (x) { return x.n === n; });
-    const s = center();
     if (!surah) { done(); return; }
-    s.appendChild(el('div', 'review-badge', 'مراجعة'));
-    s.appendChild(eyebrow('سورة ' + surah.name + ' · سمّع لنفسك'));
-    const box = el('div', 'ayah-box hidden-text');
-    surah.ayahs.slice(0, Math.min(3, surah.ayahs.length)).forEach(function (a) {
-      box.appendChild(el('div', 'ayah-line q', a.text));
-    });
-    s.appendChild(box);
-    s.appendChild(el('div', 'l-hint', 'اسمع… وبعدين قولها من غير ما تبص'));
-    const row = el('div', 'row-2');
-    row.appendChild(ghostBtn('اسمع', function () {
-      window.Audio2.playAyahs(surah.ayahs.slice(0, 3).map(function (a) { return a.audio; }));
-    }));
-    row.appendChild(bigBtn('قلتها', 'primary', function () {
-      box.classList.remove('hidden-text');
-      SFX.correct();
-      setTimeout(done, 700);
-    }));
-    s.appendChild(row);
-    show(host, s);
-    setTimeout(function () {
-      window.Audio2.playAyahs(surah.ayahs.slice(0, 3).map(function (a) { return a.audio; }));
-    }, 350);
-  }
+    const pool = surah.ayahs.slice(0, Math.min(3, surah.ayahs.length));
+    const targetIdx = Math.floor(Math.random() * pool.length);
+    const target = pool[targetIdx];
 
+    function listenStep() {
+      const s = center();
+      s.appendChild(el('div', 'review-badge', 'مراجعة'));
+      s.appendChild(eyebrow('سورة ' + surah.name + ' · اسمع'));
+      const box = el('div', 'ayah-box');
+      pool.forEach(function (a) { box.appendChild(el('div', 'ayah-line q', a.text)); });
+      s.appendChild(box);
+      s.appendChild(el('div', 'l-hint', 'اسمع الآية كويس — بعدها هنختبر سمعك'));
+      s.appendChild(bigBtn('جاهز', 'primary', function () { checkStep(); }));
+      show(host, s);
+      later(function () { window.Audio2.playAyahs([target.audio]).catch(function () {}); }, 300);
+    }
+
+    function checkStep() {
+      const s = center();
+      s.appendChild(el('div', 'review-badge', 'مراجعة'));
+      s.appendChild(eyebrow('اسمع واختار الآية'));
+      s.appendChild(el('div', 'l-hint', 'هسمعك آية من السورة — دوس عليها'));
+      s.appendChild(ghostBtn('اسمع تاني', function () {
+        window.Audio2.playAyahs([target.audio]).catch(function () {});
+      }));
+      const grid = el('div', 'recall-grid');
+      let answered = false;
+      pool.forEach(function (a, i) {
+        const b = el('button', 'ayah-choice q', a.text);
+        b.addEventListener('click', function () {
+          if (answered) return;
+          if (i === targetIdx) {
+            answered = true; b.classList.add('right'); SFX.correct();
+            later(function () { done(); }, 600);
+          } else {
+            b.classList.add('wrong'); SFX.wrong();
+            later(function () { b.classList.remove('wrong'); }, 500);
+            window.Audio2.playAyahs([target.audio]).catch(function () {});
+          }
+        });
+        grid.appendChild(b);
+      });
+      s.appendChild(grid);
+      show(host, s);
+      later(function () { window.Audio2.playAyahs([target.audio]).catch(function () {}); }, 350);
+    }
+
+    listenStep();
+  }
 
   /* =======================================================
      التفكير: فهم · تصنيف · سبب ونتيجة · تتابع · استنتاج
@@ -1189,15 +1325,21 @@
       s.appendChild(eyebrow('فين رقم ' + NUMBERS.name(target) + '؟'));
       const grid = el('div', 'nums-grid');
       const opts = shuffle([target].concat(shuffle(nums.filter(function (x) { return x !== target; })).slice(0, 2)));
+      let firstTry = true, answered = false;
       opts.forEach(function (o) {
         const b = el('button', 'num-tile', NUMBERS.toAr(o));
         b.dataset.n = o;
         b.addEventListener('click', function () {
+          if (answered) return;
           if (o === target) {
-            right++; b.classList.add('right'); SFX.correct();
+            answered = true;
+            // تُحسب صحيحة فقط لو كانت المحاولة الأولى لهذا السؤال
+            if (firstTry) right++;
+            b.classList.add('right'); SFX.correct();
             say(NUMBERS.name(target), AR, 0.75);
             setTimeout(function () { idx++; q(); }, 600);
           } else {
+            firstTry = false;               // الغلط يُسقط درجة السؤال
             b.classList.add('wrong'); SFX.wrong();
             setTimeout(function () { b.classList.remove('wrong'); }, 400);
             say('ده ' + NUMBERS.name(o) + '، دور على ' + NUMBERS.name(target), AR, 0.72);

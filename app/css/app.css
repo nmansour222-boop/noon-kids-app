@@ -729,3 +729,32 @@ img { max-width: 100%; }
 .review-card .rc-t { font-size: 15px; font-weight: 800; color: var(--plum); }
 .review-card .rc-s { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); }
 .num-big { text-shadow: 0 2px 0 rgba(0,0,0,.04); }
+
+/* ---------- فحص استرجاع القرآن ---------- */
+.ayah-box.blurred .ayah-line { filter: blur(6px); opacity: .45; transition: filter .2s, opacity .2s; }
+.recall-grid { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 10px; }
+.ayah-choice {
+  font-family: 'Amiri', 'Naskh', serif; font-size: 21px; line-height: 1.9;
+  background: #fff; border: 2px solid var(--line); border-radius: 16px;
+  padding: 12px 14px; text-align: center; color: var(--ink);
+  box-shadow: 0 3px 0 rgba(0,0,0,.04);
+}
+.ayah-choice.right { border-color: #22c55e; background: #F0FDF4; }
+.ayah-choice.wrong { border-color: var(--coral); background: #FFF1EE; animation: nudge .3s; }
+
+/* ---------- سقالة الكتابة بعد محاولتين ---------- */
+.trace-wrap.traced canvas { box-shadow: inset 0 0 0 3px #FFE0B2; }
+.trace-wrap.traced::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(255,193,7,.10), transparent 70%);
+}
+
+/* ---------- أهداف لمس بحجم مريح (44px كحد أدنى) ---------- */
+.hint-spk { width: 44px; height: 44px; }
+.back-btn, .icon-btn, .l-close { min-width: 44px; min-height: 44px; }
+
+/* دليل اتجاه كتابة الحرف */
+.trace-guide { position: absolute; inset: 0; pointer-events: none; transition: opacity .3s; opacity: .95; }
+.trace-guide svg { display: block; width: 100%; height: 100%; }
+.guide-dash { animation: dashMove 1.2s linear infinite; }
+@keyframes dashMove { to { stroke-dashoffset: -52; } }
