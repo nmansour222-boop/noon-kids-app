@@ -1,5 +1,5 @@
 /* Service Worker — التطبيق يعمل أوفلاين بعد أول فتح */
-const VERSION = 'noon-v2';
+const VERSION = 'noon-v3';
 const SHELL = [
   './',
   './index.html',
@@ -52,13 +52,18 @@ self.addEventListener('fetch', e => {
 
   if (url.origin !== location.origin) return; // خطوط جوجل وغيرها: شبكة فقط
 
+  // استراتيجية: نعرض المخزّن فوراً ونجدّده في الخلفية (stale-while-revalidate)
+  // حتى يستلم المستخدمون أي تحديث تلقائياً دون انتظار إصدار جديد.
   e.respondWith(
-    caches.match(req).then(hit => hit || fetch(req).then(res => {
-      if (res.ok) {
-        const copy = res.clone();
-        caches.open(VERSION).then(c => c.put(req, copy));
-      }
-      return res;
-    }).catch(() => caches.match('./index.html')))
+    caches.match(req).then(hit => {
+      const fresh = fetch(req).then(res => {
+        if (res && res.ok) {
+          const copy = res.clone();
+          caches.open(VERSION).then(c => c.put(req, copy));
+        }
+        return res;
+      }).catch(() => hit || caches.match('./index.html'));
+      return hit || fresh;
+    })
   );
 });
