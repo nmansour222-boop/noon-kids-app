@@ -31,6 +31,7 @@
   function back() {
     if (stack.length > 1) stack.pop();
     const name = stack[stack.length - 1] || 'home';
+    if (name !== 'parent') setZoom(false);
     showScreen(name, 'back');
     if (name === 'home') renderHome();
     if (name === 'track') renderTrack(state.track);
