@@ -19,8 +19,13 @@
   const TIMERS = [];
   function later(fn, ms) { const id = setTimeout(fn, ms); TIMERS.push(id); return id; }
   function every(fn, ms) { const id = setInterval(fn, ms); TIMERS.push(id); return id; }
+  /* إلغاء المؤقتات فقط — لا يقطع صوتًا بدأ للتو */
   function clearTimers() {
     while (TIMERS.length) { clearTimeout(TIMERS.pop()); }
+  }
+  /* إيقاف كامل: يُستدعى عند مغادرة الدرس أو الرجوع */
+  function stopAll() {
+    clearTimers();
     try { window.Audio2 && window.Audio2.stop && window.Audio2.stop(); } catch (e) {}
     try { window.A3 && window.A3.stop && window.A3.stop(); } catch (e) {}
     try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {}
@@ -1376,7 +1381,7 @@
     mixReview: mixReview, thinkIt: thinkLesson, arReadWord: arReadWord
   };
 
-  window.Lessons = {
+  window.Lessons = { stopAll: stopAll,
     breakPrompt: gentleBreak,
     run: function (host, lesson, unit, onDone) {
       const fn = MAP[lesson.type];

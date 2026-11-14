@@ -29,6 +29,7 @@
   }
 
   function back() {
+    try { window.Lessons && Lessons.stopAll && Lessons.stopAll(); } catch (e) {}
     if (stack.length > 1) stack.pop();
     const name = stack[stack.length - 1] || 'home';
     if (name !== 'parent') setZoom(false);
@@ -215,6 +216,7 @@
   const session = { unit: null, idx: 0, started: false };
 
   function openUnit(u) {
+    try { window.Lessons && Lessons.stopAll && Lessons.stopAll(); } catch (e) {}
     if (Store.limitReached()) { showLimit(); return; }
     state.unit = u;
     // ابدأ من أول درس غير مكتمل، أو من الأول لو الوحدة مكتملة (مراجعة)

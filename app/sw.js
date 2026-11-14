@@ -1,5 +1,5 @@
 /* Service Worker — التطبيق يعمل أوفلاين بعد أول فتح */
-const VERSION = 'noon-v17';
+const VERSION = 'noon-v18';
 const SHELL = [
   './',
   './index.html',
