@@ -120,6 +120,7 @@
       this.covered = new Uint8Array(MS * MS);
       this.coveredCount = 0;
       this.points = [];
+      this.starts = [];
       this.drawing = false;
       this.attempts = 0;
       this.locked = false;
@@ -170,6 +171,7 @@
         if (this.canvas.setPointerCapture) this.canvas.setPointerCapture(e.pointerId);
         this.drawing = true;
         const p = pt(e);
+        this.starts.push(this.points.length);
         this.points.push(p);
         this.stamp(p);
         this.render();
@@ -291,10 +293,18 @@
         g.lineCap = 'round';
         g.lineJoin = 'round';
         g.globalAlpha = 0.9;
+        // كل لمسة (ضغطة) خط مستقل: مفيش وصل بين النقط المنفصلة
+        const starts = (this.starts && this.starts.length ? this.starts : [0]).slice().sort((a, b) => a - b);
         g.beginPath();
-        g.moveTo(this.points[0].x, this.points[0].y);
-        for (let i = 1; i < this.points.length; i++) g.lineTo(this.points[i].x, this.points[i].y);
-        if (this.points.length === 1) g.lineTo(this.points[0].x + 0.1, this.points[0].y + 0.1);
+        for (let k = 0; k < starts.length; k++) {
+          const from = starts[k], to = k + 1 < starts.length ? starts[k + 1] : this.points.length;
+          if (to <= from) continue;
+          const q0 = this.points[from];
+          g.moveTo(q0.x, q0.y);
+          for (let i = from + 1; i < to; i++) g.lineTo(this.points[i].x, this.points[i].y);
+          // لمسة واحدة (نقطة) ترسم كدايرة صغيرة
+          if (to - from === 1) g.lineTo(q0.x + 0.1, q0.y + 0.1);
+        }
         g.stroke();
         g.globalAlpha = 1;
       }
@@ -307,6 +317,7 @@
 
     clear() {
       this.points = [];
+      this.starts = [];
       this.covered = new Uint8Array(MS * MS);
       this.coveredCount = 0;
       this.locked = false;
