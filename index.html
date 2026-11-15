@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FF6B45">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="description" content="نون — تطبيق تعليمي للأطفال ٤–٥ سنوات: قراءة وكتابة العربية والإنجليزية وتحفيظ جزء عمّ وجزء تبارك.">
+<title>نون — تعلّم باللعب</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ الرئيسية: ثلاث مسارات منفصلة ============ -->
+  <section class="screen" id="s-home">
+    <div class="topbar">
+      <span class="chip stars" id="homeStars">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="#FFB020"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+        <span id="homeStarsN">0</span>
+      </span>
+      <span class="chip streak" id="homeStreak" hidden>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF6B5A"><path d="M12 2s5 5.2 5 9.4A5 5 0 0 1 7 11.4C7 7.2 12 2 12 2z"/><circle cx="12" cy="15" r="2.2" fill="#FFE7E2"/></svg>
+        <span id="homeStreakN">0</span>
+      </span>
+      <span class="grow"></span>
+      <button class="round-btn" id="btnParent" aria-label="شاشة ولي الأمر"></button>
+    </div>
+
+    <div class="scroll">
+      <div class="hero">
+        <div class="hero-owl" id="heroOwl"></div>
+        <h1 class="hero-title">أهلاً يا بطل</h1>
+        <p class="hero-sub">اختار هنتعلم إيه النهارده</p>
+      </div>
+
+      <div id="reviewSlot"></div>
+        <div class="tracks" id="trackCards"></div>
+        <div class="reward-shelf" id="rewardShelf"></div>
+    </div>
+
+    <div class="home-foot">
+      <button class="btn ghost" id="btnParent2">لولي الأمر</button>
+    </div>
+  </section>
+
+  <!-- ============ مسار واحد (عربي / إنجليزي / قرآن) ============ -->
+  <section class="screen" id="s-track" hidden>
+    <div class="topbar">
+      <button class="round-btn" id="trackBack" aria-label="رجوع"></button>
+      <div class="grow"></div>
+      <span class="chip stars">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="#FFB020"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+        <span id="trackStarsN">0</span>
+      </span>
+    </div>
+    <div class="track-head">
+      <h1 class="th-title" id="trackTitle">العربية</h1>
+      <p class="th-sub" id="trackSub"></p>
+      <div class="bar"><i id="trackBar" style="width:0%"></i></div>
+    </div>
+    <div class="scroll">
+      <div class="path" id="trackPath"></div>
+    </div>
+  </section>
+
+  <!-- ============ الدرس ============ -->
+  <section class="screen" id="s-lesson" hidden>
+    <div class="lesson-top">
+      <button class="round-btn soft" id="lessonClose" aria-label="إغلاق"></button>
+      <div class="segments" id="lessonSegs"></div>
+    </div>
+    <div class="l-host" id="lessonHost"></div>
+  </section>
+
+  <!-- ============ ولي الأمر ============ -->
+  <section class="screen" id="s-parent" hidden>
+    <div class="topbar">
+      <button class="round-btn" id="parentBack" aria-label="رجوع"></button>
+      <div class="grow"></div>
+      <b style="font-size:16px">لوحة ولي الأمر</b>
+    </div>
+    <div class="scroll" id="parentBody"></div>
+  </section>
+
+</div>
+<div id="toast"></div>
+<div id="confetti"></div>
+
+<script src="js/quran-data.js"></script>
+<script src="js/numbers.js"></script>
+<script src="js/glyphs.js"></script>
+<script src="js/glyph.js"></script>
+<script src="js/curriculum.js"></script>
+<script src="js/store.js"></script>
+<script src="js/pedagogy.js"></script>
+<script src="js/thinking.js"></script>
+<script src="js/syllabus.js"></script>
+<script src="js/sfx.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/audio3.js"></script>
+<script src="js/tracing.js"></script>
+<script src="js/lesson-audio.js"></script>
+<script src="js/lessons.js"></script>
+<script src="js/offline.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
