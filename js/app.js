@@ -2,7 +2,6 @@
 (function () {
   'use strict';
   const el = UI.el;
-  const esc = UI.esc;
   const $ = function (id) { return document.getElementById(id); };
   const SCREENS = { home: 's-home', track: 's-track', lesson: 's-lesson', parent: 's-parent' };
 
@@ -19,17 +18,12 @@
     void next.offsetWidth;
     next.classList.add(dir === 'back' ? 'enter-back' : 'enter-fwd');
     if (prev) prev.hidden = true;
-    // مغادرة لوحة ولي الأمر بأي طريقة (زر داخلي، رجوع النظام/المتصفح) تقفلها من جديد
-    if (current === 'parent' && name !== 'parent') { parentUnlocked = false; closeOverlays(); }
     current = name;
-    activeTick();
-  }
-  function closeOverlays() {
-    Array.prototype.forEach.call(document.querySelectorAll('.report-overlay'), function (o) { o.remove(); });
   }
 
   function go(name, opts) {
     opts = opts || {};
+    if (name !== 'parent') setZoom(false);
     if (opts.push !== false && stack[stack.length - 1] !== name) {
       stack.push(name);
       try { history.pushState({ s: name, d: stack.length }, ''); } catch (e) {}
@@ -41,6 +35,7 @@
     try { window.Lessons && Lessons.stopAll && Lessons.stopAll(); } catch (e) {}
     if (stack.length > 1) stack.pop();
     const name = stack[stack.length - 1] || 'home';
+    if (name !== 'parent') setZoom(false);
     showScreen(name, 'back');
     if (name === 'home') renderHome();
     if (name === 'track') renderTrack(state.track);
@@ -56,7 +51,7 @@
       pendingBack = before;
       history.back();                       // popstate يكمل الباقي
       setTimeout(function () {              // أمان: لو لم يصل popstate
-        if (pendingBack === before && stack.length === before) { pendingBack = null; internalBack(); }
+        if (pendingBack === before && stack.length === before) internalBack();
       }, 250);
     } else {
       internalBack();
@@ -96,19 +91,47 @@
         const pickU = learned[Math.floor(Math.random() * learned.length)];
         const card = el('button', 'review-card',
           '<span class="rc-ico">🔁</span><span><span class="rc-t">مراجعة سريعة</span><br>' +
-          '<span class="rc-s">' + esc(pickU.title) + ' — نفتكرها مع بعض؟</span></span>');
+          '<span class="rc-s">' + pickU.title + ' — نفتكرها مع بعض؟</span></span>');
         card.addEventListener('click', function () { SFX.tap(); openUnit(pickU); });
         rev.appendChild(card);
       }
+    }
+
+    /** عدّاد دقيق: الحروف ٢٨، الأصوات ٤٢، السور بعددها الحقيقي (لا الوحدات) */
+    function unitCounts(k, units) {
+      function doneU(u) { return Store.unitDone(u.id); }
+      if (k === 'ar') {
+        const L = units.filter(function (u) { return u.letter; });
+        return { done: L.filter(doneU).length, total: L.length, noun: 'حرف' };
+      }
+      if (k === 'en') {
+        const S2 = units.filter(function (u) { return u.sound; });
+        return { done: S2.filter(doneU).length, total: S2.length, noun: 'صوت' };
+      }
+      if (k === 'qu') {
+        const byS = {};
+        units.forEach(function (u) {
+          const n = u.surah && u.surah.n;
+          if (n == null) return;
+          byS[n] = byS[n] || { all: 0, done: 0 };
+          byS[n].all++; if (doneU(u)) byS[n].done++;
+        });
+        const keys = Object.keys(byS);
+        const full = keys.filter(function (n) { return byS[n].done >= byS[n].all; }).length;
+        return { done: full, total: keys.length, noun: 'سورة' };
+      }
+      return { done: units.filter(doneU).length, total: units.length, noun: 'مرحلة' };
     }
 
     const host = $('trackCards');
     host.innerHTML = '';
     ['ar', 'en', 'qu', 'num'].forEach(function (k) {
       const t = SYLLABUS.tracks[k];
-      const cnt = trackCounts(k);
-      const pct = cnt.pct;
+      const units = Store.trackUnits(k);
+      const done = Store.trackDone(k);
+      const pct = units.length ? Math.round(done / units.length * 100) : 0;
       const icon = k === 'ar' ? 'أ' : (k === 'en' ? 'A' : (k === 'num' ? '١٢٣' : UI.icon('book', 30)));
+      const cnt = unitCounts(k, units);
       const meta = cnt.done + ' من ' + cnt.total + ' ' + cnt.noun;
 
       const card = el('button', 'track-card ' + k + '-theme');
@@ -130,35 +153,17 @@
     });
   }
 
-  /** عدّاد موحّد لكل الشاشات: المحتوى الحقيقي (٢٨ حرف / ٤٢ صوت / ٤٩ سورة / ١٠ مراحل)
-   *  منفصل عن عدد وحدات المنهج (اللي فيها حركات وقراءة وتفكير ومراجعة). */
-  function trackCounts(k) {
-    const units = Store.trackUnits(k);
-    function doneU(u) { return Store.unitDone(u.id); }
-    let core;
-    if (k === 'ar') core = { list: units.filter(function (u) { return u.letter; }), noun: 'حرف' };
-    else if (k === 'en') core = { list: units.filter(function (u) { return u.sound; }), noun: 'صوت' };
-    else if (k === 'qu') core = { list: units.filter(function (u) { return u.surah; }), noun: 'سورة' };
-    else core = { list: units, noun: 'مرحلة' };
-    const unitsDone = units.filter(doneU).length;
-    return {
-      done: core.list.filter(doneU).length, total: core.list.length, noun: core.noun,
-      unitsDone: unitsDone, unitsTotal: units.length,
-      pct: units.length ? Math.round(unitsDone / units.length * 100) : 0
-    };
-  }
-
   /* ================= مسار ================= */
   function renderTrack(track) {
     const t = SYLLABUS.tracks[track];
     const units = Store.trackUnits(track);
-    const cnt = trackCounts(track);
+    const done = Store.trackDone(track);
     $('trackTitle').textContent = t.name;
     $('trackStarsN').textContent = Store.get().stars;
-    $('trackBar').style.width = cnt.pct + '%';
-    $('trackSub').textContent = (track === 'qu' ? 'بنحفظ بالسهل الأول — ' : 'منهج متدرّج — ') +
-      'خلصنا ' + cnt.done + ' من ' + cnt.total + ' ' + cnt.noun +
-      (cnt.unitsTotal !== cnt.total ? ' · ' + cnt.unitsDone + ' من ' + cnt.unitsTotal + ' وحدة' : '');
+    $('trackBar').style.width = (units.length ? Math.round(done / units.length * 100) : 0) + '%';
+    $('trackSub').textContent = track === 'qu'
+      ? 'بنحفظ بالسهل الأول — خلصنا ' + done + ' من ' + units.length + ' سورة'
+      : 'منهج متدرّج — خلصنا ' + done + ' من ' + units.length + (track === 'ar' ? ' حرف' : ' صوت');
 
     const path = $('trackPath');
     path.className = 'path ' + track + '-path';
@@ -185,15 +190,14 @@
       else if (!unlocked) nodeInner = UI.icon('lock', 22);
       else if (u.kind === 'haraka') nodeInner = Glyph.svg('ب', [u.haraka.key], { size: 46, color: 'var(--coral)' });
       else if (track === 'ar') nodeInner = Glyph.svg(u.letter.ch, [], { size: 48, color: 'var(--coral)', emBox: true });
-      else if (track === 'en') nodeInner = Glyph.svg(String(u.sound.disp).split(' ')[0], [], { size: 60, color: 'var(--teal)', latin: true, emBox: true }) +
-        (u.sound.tag ? '<span class="snd-tag">' + esc(u.sound.tag) + '</span>' : '');
+      else if (track === 'en') nodeInner = Glyph.svg(String(u.glyph).toLowerCase(), [], { size: 60, color: 'var(--teal)', latin: true, emBox: true });
       else nodeInner = UI.icon('book', 24);
 
       btn.innerHTML =
         '<span class="unit-node">' + nodeInner + '</span>' +
         '<span class="unit-body">' +
-          '<span class="unit-title">' + esc(u.title) + '</span>' +
-          '<span class="unit-sub">' + (isDone ? 'خلصناه ✓' : (unlocked ? esc(u.sub) : 'مقفول')) + '</span>' +
+          '<span class="unit-title">' + u.title + '</span>' +
+          '<span class="unit-sub">' + (isDone ? 'خلصناه ✓' : (unlocked ? u.sub : 'مقفول')) + '</span>' +
           (isCurrent || (isDone === false && prog > 0) ? '<span class="mini-bar"><i style="width:' + prog + '%"></i></span>' : '') +
         '</span>' +
         '<span class="unit-count">' + u.lessons.length + ' ' + (u.lessons.length > 2 ? 'خطوات' : 'خطوة') + '</span>';
@@ -242,8 +246,6 @@
       if (!st.lessons[u.lessons[i].id]) { idx = i; break; }
     }
     const allDone = u.lessons.every(function (l) { return !!st.lessons[l.id]; });
-    // وحدة اتقفلت قبل نظام المكافأة الواحدة: نعتبر مكافأتها اتاخدت (إعادة التدريب بلا نجوم إضافية)
-    if (allDone && !Store.unitRewarded(u.id)) Store.claimUnitReward(u.id);
     session.unit = u;
     session.idx = allDone ? 0 : idx;
     session.started = false;
@@ -314,16 +316,12 @@
     host.innerHTML = '';
     const s = el('div', 'l-screen');
     const c = el('div', 'l-center praise');
-    // مكافأة إتمام الوحدة مرة واحدة فقط — إعادة التدريب لا تضيف نجوماً
-    const firstTime = Store.claimUnitReward(u.id);
-    const bonus = firstTime ? (u.track === 'qu' ? 3 : 2) : 0;
     c.innerHTML = '<div class="praise-art">' + UI.mascot(120, 'celebrate') + '</div>' +
-      '<div class="eyebrow l-eyebrow">' + esc(u.track === 'qu' ? 'سورة ' + u.surah.name : u.title) + '</div>' +
+      '<div class="eyebrow l-eyebrow">' + (u.track === 'qu' ? 'سورة ' + u.surah.name : u.title) + '</div>' +
       '<div class="praise-text">' + (u.track === 'qu' ? 'ربنا يبارك فيك' : 'خلصنا!') + '</div>' +
       '<div class="l-hint" style="font-size:17px">' +
-        (u.track === 'qu' ? 'سمّعها لبابا أو ماما' : (firstTime ? 'اتعلمت ' + u.lessons.length + ' حاجات جديدة النهارده' : 'راجعناها تاني — برافو عليك')) +
-      '</div>' +
-      (bonus ? '<div class="unit-bonus" data-bonus="' + bonus + '">+' + bonus + ' ⭐</div>' : '');
+        (u.track === 'qu' ? 'سمّعها لبابا أو ماما' : 'اتعلمت ' + u.lessons.length + ' حاجات جديدة النهارده') +
+      '</div>';
     const next = el('button', 'btn primary wide', 'كمان واحد؟');
     next.style.maxWidth = '300px';
     next.addEventListener('click', function () {
@@ -340,7 +338,7 @@
     c.appendChild(home);
     s.appendChild(c);
     host.appendChild(s);
-    if (bonus) Store.addStars(bonus);
+    Store.addStars(u.track === 'qu' ? 3 : 2);
     SFX.levelup();
     UI.burst(26);
     Store.logSession(u.track, u.title + ' (وحدة كاملة)');
@@ -353,7 +351,16 @@
   let parentUnlocked = false;
   let gateFails = 0;
 
+  /* التكبير: مقفول في شاشات الطفل، مفتوح في شاشة ولي الأمر */
+  function setZoom(allow) {
+    let m = document.querySelector('meta[name=viewport]');
+    if (!m) { m = document.createElement('meta'); m.name = 'viewport'; document.head.appendChild(m); }
+    m.setAttribute('content', 'width=device-width, initial-scale=1, viewport-fit=cover' +
+      (allow ? ', maximum-scale=5, user-scalable=yes' : ', maximum-scale=1, user-scalable=no'));
+  }
+
   function renderParent() {
+    setZoom(true);
     const body = $('parentBody');
     const s = Store.get();
     if (!parentUnlocked) {
@@ -402,17 +409,9 @@
     }
 
     body.innerHTML = '';
-    if (!Store.storageOk() || !Store.probeStorage()) {
-      body.appendChild(el('div', 'storage-warn',
-        '⚠️ التقدّم مش بيتحفظ على الجهاز دلوقتي (مساحة التخزين ممتلية أو المتصفح مانعها — مثلاً وضع التصفح الخفي). ' +
-        'اعمل «نسخة احتياطية» من تحت، وفضّي مساحة أو افتح التطبيق في وضع عادي.'));
-    }
     const grid = el('div', 'stat-grid');
     [['ar', 'العربية'], ['en', 'الإنجليزية'], ['qu', 'القرآن'], ['num', 'الأرقام']].forEach(function (p) {
-      const c = trackCounts(p[0]);
-      const st = el('div', 'stat', '<b><bdi>' + c.done + '/' + c.total + '</bdi></b><span>' + p[1] + ' · ' + c.noun + '</span>' +
-        '<small class="stat-sub">' + c.unitsDone + ' من ' + c.unitsTotal + ' وحدة</small>');
-      st.dataset.track = p[0];
+      const st = el('div', 'stat', '<b>' + Store.trackDone(p[0]) + '/' + Store.trackUnits(p[0]).length + '</b><span>' + p[1] + '</span>');
       grid.appendChild(st);
     });
     body.appendChild(grid);
@@ -501,9 +500,7 @@
 
     body.appendChild(el('div', 'parent-note',
       'بنستخدم التكرار المتباعد: كل ما الطفل يتقن حاجة بنعيدها بعد يوم، ٣ أيام، أسبوع، أسبوعين، شهر. ' +
-      'كلمات المنهج بتسجيلات بشرية، وأسماء وأصوات الحروف العربية الـ٢٨ كمان. أصوات الإنجليزي المجرّدة (الفونيمات) لسه مش مسجّلة — ' +
-      'عشان كده التطبيق بيسمّع الطفل كلمة المثال بصوت بشري بدل ما ينطق رمز الحرف بصوت آلي. ' +
-      'خطوة «قولها لوحدك» في القرآن ما فيهاش تقييم صوتي: الاختبار بيقيس إن الطفل يميّز الآية بالسمع، والتسميع الحقيقي بيكون لولي الأمر.'));
+      'كلمات المنهج كلها بتسجيلات بشرية (١١٥/١١٥)؛ الصوت المؤقت باقي في أصوات الحروف المجردة بس.'));
 
     // ---------- اسم الطفل (للتقارير والشهادات) ----------
     const nameRow = el('div', 'setting-row');
@@ -514,13 +511,10 @@
     nameIn.placeholder = 'اكتب الاسم';
     nameIn.value = s.childName || '';
     nameIn.setAttribute('aria-label', 'اسم الطفل');
-    nameIn.maxLength = 24;
     nameIn.addEventListener('change', function () {
-      // نص عادي فقط: بنشيل علامات HTML، والعرض نفسه بيعمل escape كمان
-      const clean = nameIn.value.replace(/[<>"'`&\u0000-\u001F]/g, '').trim().slice(0, 24);
-      Store.get().childName = clean;
-      nameIn.value = clean;
-      UI.toast(Store.save() ? 'تم الحفظ' : 'مقدرناش نحفظ — التخزين ممتلي أو محظور');
+      Store.get().childName = nameIn.value.trim().slice(0, 24);
+      Store.save();
+      UI.toast('تم الحفظ');
     });
     nameRow.appendChild(nameIn);
     body.appendChild(nameRow);
@@ -542,8 +536,7 @@
     }
 
     body.appendChild(el('div', 'setting-row',
-      '<span class="sr-label" id="ttsLbl">الصوت الآلي لنطق التعليمات وأسماء الحروف</span>' +
-      '<button type="button" class="switch ' + (Store.ttsOn() ? 'on' : '') + '" data-set="tts" role="switch" aria-labelledby="ttsLbl" aria-checked="' + Store.ttsOn() + '"></button>'));
+      '<span class="sr-label">الصوت الآلي لنطق التعليمات وأسماء الحروف</span><div class="switch ' + (Store.ttsOn() ? 'on' : '') + '" data-set="tts" role="switch" aria-checked="' + Store.ttsOn() + '"></div>'));
     (function voiceRow() {
       if (!window.Audio2 || !Audio2.hasTTS()) return;
       const row = el('div', 'setting-row', '<span class="sr-label">صوت الجهاز العربي</span>');
@@ -565,7 +558,7 @@
     body.appendChild(el('div', 'setting-row',
       '<span class="sr-label">حد الاستخدام اليومي</span><div style="display:flex;gap:6px">' +
       [10, 15, 20].map(function (m) {
-        return '<button type="button" class="btn sm ' + (s.settings.limitMin === m ? 'primary' : 'ghost') + '" data-lim="' + m + '" aria-pressed="' + (s.settings.limitMin === m) + '">' + m + ' د</button>';
+        return '<button class="btn sm ' + (s.settings.limitMin === m ? 'primary' : 'ghost') + '" data-lim="' + m + '">' + m + ' د</button>';
       }).join('') + '</div>'));
 
     const priv = el('a', 'btn ghost wide', 'سياسة الخصوصية');
@@ -577,7 +570,7 @@
     const reset = el('button', 'btn ghost wide', 'تصفير التقدّم');
     reset.style.marginTop = '16px';
     reset.addEventListener('click', function () {
-      if (reset.dataset.confirm === '1') { const ok = Store.reset(); parentUnlocked = false; renderParent(); renderHome(); UI.toast(ok ? 'اتصفّر' : 'اتصفّر هنا بس مقدرناش نحفظ على الجهاز'); return; }
+      if (reset.dataset.confirm === '1') { Store.reset(); parentUnlocked = false; renderParent(); UI.toast('اتصفّر'); return; }
       reset.dataset.confirm = '1';
       reset.textContent = 'متأكد؟ دوس تاني';
     });
@@ -593,34 +586,28 @@
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
       a.download = 'noon-backup-' + Store.today() + '.json';
-      document.body.appendChild(a);
       a.click();
-      a.remove();
-      setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
-      UI.toast('اتعمل ملف النسخة — اتأكد إنه نزل في التنزيلات (فيه اسم الطفل وسجلّه)', 3600);
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+      UI.toast('اتحفظت النسخة');
     });
     const bImp = el('button', 'btn ghost sm', 'استعادة');
     const file = document.createElement('input');
     file.type = 'file';
-    file.accept = 'application/json,.json';
+    file.accept = 'application/json';
     file.style.display = 'none';
     file.addEventListener('change', function () {
       const f = file.files && file.files[0];
-      file.value = '';
       if (!f) return;
-      if (f.size > 2 * 1024 * 1024) { UI.toast('الملف كبير قوي — ده مش ملف نسخة «نون»'); return; }
       const fr = new FileReader();
       fr.onload = function () {
-        let obj = null;
-        try { obj = JSON.parse(fr.result); } catch (e) { UI.toast('ملف غير صالح'); return; }
-        const ok = Store.importJSON(obj);
-        UI.toast(ok ? 'اترجعت البيانات' : (obj && obj.app === 'noon' && Store.storageOk() === false ? 'مقدرناش نحفظ — التخزين ممتلي أو محظور' : 'ملف غير صالح'));
-        if (ok) { renderParent(); renderHome(); }
+        try {
+          const ok = Store.importJSON(JSON.parse(fr.result));
+          UI.toast(ok ? 'اترجعت البيانات' : 'ملف غير صالح');
+          if (ok) { renderParent(); renderHome(); }
+        } catch (e) { UI.toast('ملف غير صالح'); }
       };
-      fr.onerror = function () { UI.toast('مقدرناش نقرا الملف'); };
       fr.readAsText(f);
     });
-    bImp.addEventListener('click', function () { SFX.click(); file.click(); });   // كان الزر بلا أي فعل
     tools.appendChild(bExp);
     tools.appendChild(bImp);
     body.appendChild(tools);
@@ -632,7 +619,6 @@
     rep.addEventListener('click', function () { SFX.click(); openReport(); });
     body.appendChild(rep);
 
-    // زر حقيقي: يشتغل باللمس وبلوحة المفاتيح (Enter / Space) وقارئ الشاشة يقرا حالته
     body.querySelector('[data-set="tts"]').addEventListener('click', function () {
       SFX.click();
       Store.setTts(!Store.ttsOn());
@@ -655,49 +641,33 @@
     const P = window.Pedagogy;
     const TR = { ar: 'العربية', en: 'الإنجليزية', qu: 'القرآن', num: 'الأرقام' };
     const wrap = el('div', 'report');
-    // آخر ٧ أيام تقويمية من النهارده — الأيام القديمة لا تدخل في «هذا الأسبوع»
-    const week = Store.lastDays(7);
-    const mins = Math.round(week.reduce(function (a, d) { return a + d.seconds; }, 0) / 60);
+    const days = Object.keys(s.days || {}).sort().slice(-7);
+    const mins = days.reduce(function (a, d) { return a + Math.round((s.days[d] || 0) / 60); }, 0);
     const mastered = P.Mastery.masteredCount('ar') + P.Mastery.masteredCount('en') + P.Mastery.masteredCount('qu');
     const name = (s.childName || '').trim();
 
     function pct(done, total) { return Math.round(done / Math.max(1, total) * 100); }
 
-    // ---------- جدول التقدّم: المحتوى الحقيقي + الوحدات بشكل منفصل ----------
+    // ---------- جدول التقدّم ----------
     const rows = [];
     let totalDue = 0;
     ['ar', 'en', 'qu', 'num'].forEach(function (k) {
-      const c = trackCounts(k);
+      const done = Store.trackDone(k), total = Store.trackUnits(k).length;
       const due = P.Review.due(k).length; totalDue += due;
-      rows.push('<tr data-track="' + k + '"><td class="rt-name">' + TR[k] + '</td>' +
-        '<td><bdi>' + c.done + ' / ' + c.total + '</bdi> ' + c.noun + '</td>' +
-        '<td><bdi>' + c.unitsDone + ' / ' + c.unitsTotal + '</bdi></td>' +
-        '<td><div class="rt-bar"><i style="width:' + c.pct + '%"></i></div> ' + c.pct + '%</td>' +
+      const p = pct(done, total);
+      rows.push('<tr><td class="rt-name">' + TR[k] + '</td>' +
+        '<td><bdi>' + done + ' / ' + total + '</bdi></td>' +
+        '<td><div class="rt-bar"><i style="width:' + p + '%"></i></div></td>' +
+        '<td>' + p + '%</td>' +
         '<td>' + (due ? due : '—') + '</td></tr>');
     });
 
-    // ---------- أيام الأسبوع ----------
-    const weekHtml = '<div class="rep-week">' + week.map(function (d) {
-      return '<span data-day="' + d.day + '"><b>' + Math.round(d.seconds / 60) + '</b><em>' + d.day.slice(5) + '</em></span>';
-    }).join('') + '</div>';
-
-    // ---------- المستحق للمراجعة (أسماء مفهومة) ----------
+    // ---------- المستحق للمراجعة (أسماء) ----------
     function nameOf(track, id) {
       if (track === 'num') return 'مرحلة ' + id;
       if (track === 'qu') {
         const q = (window.QURAN || []).filter(function (x) { return String(x.n) === String(id); })[0];
         return q ? ('سورة ' + q.name) : id;
-      }
-      if (track === 'ar') {
-        const l = CURRICULUM.letterById(id);
-        if (l) return 'حرف ' + l.ch;
-        if (/^h\./.test(id)) { const h = (SYLLABUS.harakat || []).filter(function (x) { return 'h.' + x.key === id; })[0]; if (h) return h.name; }
-        if (/^read\./.test(id)) return 'قراءة «' + id.slice(5) + '»';
-      }
-      if (track === 'en') {
-        const sd = CURRICULUM.sounds.filter(function (x) { return String(x.oid) === String(id); })[0];
-        if (sd) return 'صوت ' + sd.disp + (sd.tag ? ' (' + sd.tag + ')' : '') + ' — ' + sd.w;
-        if (/^blend\./.test(id)) return 'تركيب ' + id.slice(6);
       }
       return id;
     }
@@ -707,65 +677,58 @@
     });
     const dueHtml = dueAll.length
       ? '<ul class="rep-list">' + dueAll.map(function (d) {
-          return '<li><span>' + esc(d.n) + '</span><em>' + TR[d.t] + '</em></li>';
+          return '<li><span>' + d.n + '</span><em>' + TR[d.t] + '</em></li>';
         }).join('') + '</ul>'
       : '<p class="rep-note">مفيش عناصر مستحقة للمراجعة حاليًا.</p>';
 
-    // ---------- الدرس القادم: الوحدة الحقيقية والخطوة فيها لكل مسار ----------
-    const nextHtml = '<ul class="rep-list rep-next">' + ['ar', 'en', 'qu', 'num'].map(function (k) {
-      const c = Store.currentLesson(k);
-      if (!c) return '';
-      const txt = c.finished ? 'المسار خلص ✓' : (c.unit.title + ' — خطوة ' + c.step + ' من ' + c.steps);
-      return '<li data-track="' + k + '"><span>' + esc(txt) + '</span><em>' + TR[k] + '</em></li>';
-    }).join('') + '</ul>';
-
     // ---------- التوصية ----------
     const rec = (function () {
-      if (mins === 0) return 'لسه مفيش استخدام مسجّل آخر ٧ أيام. ابدأ بجلسة ١٠ دقايق ٣ مرات أسبوعياً.';
+      if (mins === 0) return 'لسه مفيش استخدام مسجّل الأسبوع ده. ابدأ بجلسة ١٠ دقايق ٣ مرات أسبوعياً.';
       if (mastered < 6) return 'الطفل في مرحلة التأسيس: ركّز على درس واحد يومياً + مراجعة الكروت القديمة قبل الجديد.';
       if (P.Mastery.masteredCount('ar') >= 10) return 'أساس الحروف ثابت. ابدأ إدخال قراءة الكلمات (بَاب / مَاء / نُور) وجلسة قرآن قصيرة.';
       return 'التقدّم منتظم. الأفضل تقسيم الجلسة: ٥ دقايق مراجعة + ١٠ دقايق درس جديد.';
     })();
 
-    const quDone = Store.surahsDoneCount(), quHeard = Store.surahsHeardCount();
+    const av = (window.A3 && A3.coverage) ? A3.coverage() : { human: 0 };
+    const cur = Store.currentLesson('ar');
 
     wrap.innerHTML =
       '<header class="rep-head">' +
         '<div class="rep-mark">نون</div>' +
         '<div class="rep-titles"><h1>تقرير التقدّم الأسبوعي</h1>' +
-        '<p>' + (name ? 'الطفل: <b class="rep-child">' + esc(name) + '</b> · ' : '') + Store.today() + '</p></div>' +
+        '<p>' + (name ? 'الطفل: <b>' + name + '</b> · ' : '') + Store.today() + '</p></div>' +
       '</header>' +
       '<div class="rep-kpis">' +
-        '<div><b class="rep-mins">' + mins + '</b><span>دقيقة آخر ٧ أيام</span></div>' +
+        '<div><b>' + mins + '</b><span>دقيقة هذا الأسبوع</span></div>' +
         '<div><b>' + mastered + '</b><span>عنصر متقَن</span></div>' +
         '<div><b>' + totalDue + '</b><span>مستحق للمراجعة</span></div>' +
         '<div><b>' + s.stars + '</b><span>نجوم</span></div>' +
       '</div>' +
-      '<h2>آخر ٧ أيام (دقايق)</h2>' + weekHtml +
       '<h2>تقدّم المسارات</h2>' +
-      '<table class="rep-table"><thead><tr><th>المسار</th><th>المحتوى</th><th>الوحدات</th><th>النسبة</th><th>مراجعة</th></tr></thead>' +
+      '<table class="rep-table"><thead><tr><th>المسار</th><th>المكتمل</th><th>النسبة</th><th></th><th>مراجعة</th></tr></thead>' +
       '<tbody>' + rows.join('') + '</tbody></table>' +
-      '<h2>القرآن: إيه اللي اتقاس فعلاً</h2><p class="rep-note">' +
-        'سور خلصها الطفل في التطبيق: <b>' + quDone + '</b> — منها <b>' + quHeard + '</b> سمّعها لولي الأمر وأكّد ولي الأمر إنها صح. ' +
-        'التطبيق ما بيسمعش صوت الطفل ولا بيقيّم التلاوة؛ اختباره بيقيس تمييز الآية بالسمع والنص بس. التسميع والتصحيح مسؤولية ولي الأمر أو المحفّظ.</p>' +
       '<h2>مستحق للمراجعة</h2>' + dueHtml +
       '<h2>التوصية</h2><p class="rep-note">' + rec + '</p>' +
-      '<h2>الدرس القادم</h2>' + nextHtml +
-      '<h2>جودة الصوت</h2><p class="rep-note">كلمات المنهج وأسماء وأصوات الحروف العربية بتسجيلات بشرية. أصوات الإنجليزي المجرّدة لسه مش مسجّلة، فالتطبيق بيسمّع كلمة المثال بصوت بشري بدلها. ' +
-        'المصادر: Shtooka Project وLingua Libre عبر ويكيميديا كومنز — CC BY / CC BY-SA. التلاوة: الشيخ مشاري العفاسي عبر cdn.islamic.network.</p>' +
+      '<h2>الدرس القادم</h2><p class="rep-note">' + (cur ? cur.title : '—') + '</p>' +
+      '<h2>جودة الصوت</h2><p class="rep-note">كلمات المنهج كلها بتسجيلات بشرية (' + av.human +
+        ' ملفًا). الصوت المؤقت (TTS) باقٍ في أصوات الحروف المجردة فقط. المصدر: Shtooka Project وLingua Libre عبر ويكيميديا كومنز — CC BY / CC BY-SA.</p>' +
       '<div class="rep-sign"><span>توقيع ولي الأمر</span><span class="rep-line"></span><span>التاريخ</span></div>' +
-      '<p class="rep-foot">تقرير آلي من تطبيق «نون» — بيانات الطفل محفوظة على الجهاز فقط. (التلاوة بتتجاب من خدمة خارجية — التفاصيل في سياسة الخصوصية.)</p>';
+      '<p class="rep-foot">تقرير آلي من تطبيق «نون» — كل البيانات على الجهاز ولا يخرج منه شيء.</p>';
 
     // ---------- الشهادات (للمسارات المكتملة) ----------
+    const certs = [];
     ['ar', 'en', 'qu', 'num'].forEach(function (k) {
-      const total = Store.trackUnits(k).length;
-      if (total && Store.trackDone(k) >= total) wrap.appendChild(certNode(TR[k], name, s.stars));
+      const done = Store.trackDone(k), total = Store.trackUnits(k).length;
+      if (total && done >= total) certs.push(k);
+    });
+    certs.forEach(function (k) {
+      wrap.appendChild(certNode(TR[k], name, s.stars));
     });
 
     mountReport(wrap);
   }
 
-  /* شهادة إتمام — تُطبع كصفحة مستقلة. الاسم يُكتب كنص فقط (textContent) */
+  /* شهادة إتمام — تُطبع كصفحة مستقلة */
   function certNode(trackName, name, stars) {
     const c = el('div', 'cert-page');
     c.innerHTML =
@@ -773,38 +736,27 @@
         '<div class="cert-eyebrow">تطبيق نون · رحلة التعلّم</div>' +
         '<h2>شهادة إتمام</h2>' +
         '<p class="cert-to">تُمنح هذه الشهادة إلى</p>' +
-        '<div class="cert-name"></div>' +
-        '<p class="cert-body">لإتمامه مسار <b class="cert-track"></b> كاملًا، وإتقان دروسه ومراجعاته<br>' +
+        '<div class="cert-name">' + (name || '________________') + '</div>' +
+        '<p class="cert-body">لإتمامه مسار <b>' + trackName + '</b> كاملًا، وإتقان دروسه ومراجعاته<br>' +
         'في القراءة والكتابة والفهم والاستنتاج.</p>' +
         '<div class="cert-stars">' + '★'.repeat(Math.min(5, Math.max(1, Math.round((stars || 0) / 20)))) + '</div>' +
         '<div class="cert-foot"><span>' + Store.today() + '</span><span class="cert-seal">نون</span><span>توقيع المعلم</span></div>' +
       '</div>';
-    c.querySelector('.cert-name').textContent = name || '________________';
-    c.querySelector('.cert-track').textContent = trackName;
     return c;
   }
 
-  /* نافذة التقرير/الشهادة: لها خانة في سجلّ المتصفح، فزر الرجوع يقفلها هي الأول */
   function mountReport(wrap) {
-    closeOverlays();
     const host = document.createElement('div');
     host.className = 'report-overlay';
-    host.setAttribute('role', 'dialog');
-    host.setAttribute('aria-modal', 'true');
     const bar = el('div', 'report-bar');
     const print = el('button', 'btn primary sm', 'طباعة / حفظ PDF');
     print.addEventListener('click', function () { window.print(); });
     const close = el('button', 'btn ghost sm', 'إغلاق');
-    close.addEventListener('click', function () {
-      if (history.state && history.state.ov) history.back();   // popstate يقفلها
-      else host.remove();
-    });
+    close.addEventListener('click', function () { host.remove(); });
     bar.appendChild(print); bar.appendChild(close);
     host.appendChild(bar);
     host.appendChild(wrap);
     document.body.appendChild(host);
-    try { history.pushState({ s: current, d: stack.length, ov: 1 }, ''); } catch (e) {}
-    close.focus();
     return host;
   }
 
@@ -824,49 +776,20 @@
   $('trackBack').innerHTML = UI.icon('back', 20);
   $('trackBack').addEventListener('click', function () { SFX.click(); back(); });
   $('parentBack').innerHTML = UI.icon('back', 20);
-  $('parentBack').addEventListener('click', function () { SFX.click(); parentUnlocked = false; closeOverlays(); back(); });
+  $('parentBack').addEventListener('click', function () { SFX.click(); parentUnlocked = false; back(); });
 
   document.addEventListener('pointerdown', function once() {
     SFX.unlock(); Audio2.unlock(); if (window.A3 && A3.unlock) A3.unlock();
     document.removeEventListener('pointerdown', once);
   });
 
-  /* حساب وقت الاستخدام بالزمن الفعلي المنقضي (طوابع زمنية) — مش بعدّ نبضات setInterval.
-     بيعدّ بس والطفل في درس والصفحة ظاهرة؛ الخلفية/قفل الشاشة بيوقف العدّ، والمؤقت البطيء ما بيقللش الوقت. */
-  let tickFrom = 0, carry = 0;
-  const MAX_GAP = 60000;   // فجوة أكبر من دقيقة بين قراءتين = الجهاز كان نايم → ما تتحسبش
-  function counting() { return current === 'lesson' && document.visibilityState !== 'hidden'; }
-  function flushTime() {
-    const now = Date.now();
-    if (tickFrom) {
-      const gap = now - tickFrom;
-      if (gap > 0 && gap <= MAX_GAP) carry += gap;
-    }
-    tickFrom = counting() ? now : 0;
-    if (carry >= 1000) {
-      const sec = Math.floor(carry / 1000);
-      carry -= sec * 1000;
-      Store.addSeconds(sec);
-    }
-  }
-  function activeTick() { flushTime(); }
-  setInterval(flushTime, 2000);
-  document.addEventListener('visibilitychange', flushTime);
-  window.addEventListener('pagehide', flushTime);
+  // حساب وقت الاستخدام
+  setInterval(function () { if (current === 'lesson') Store.addSeconds(5); }, 5000);
 
-  window.addEventListener('popstate', function (e) {
-    // نافذة تقرير مفتوحة؟ الرجوع يقفلها هي بس
-    const ov = document.querySelector('.report-overlay');
-    if (ov) {
-      ov.remove();
-      if (!e.state || !e.state.ov) { const d0 = (e.state && e.state.d) || 1; if (d0 >= stack.length) return; }
-      else return;
-    }
-    const d = (e.state && e.state.d) || 1;
+  window.addEventListener('popstate', function () {
+    if (pendingBack !== null && stack.length < pendingBack) { pendingBack = null; return; }  // اتعالجت بالأمان
     pendingBack = null;
-    // نرجع لحد العمق المطلوب (رجوع النظام/المتصفح) — كل خروج من ولي الأمر بيقفله
-    let guard = 10;
-    while (stack.length > d && stack.length > 1 && guard--) internalBack();
+    if (stack.length > 1) internalBack();
   });
   try { history.replaceState({ s: 'home', d: 1 }, ''); } catch (e) {}
 
@@ -886,8 +809,6 @@
     go: go, back: back, internalBack: internalBack, state: state, session: session,
     openUnit: openUnit, renderHome: renderHome, renderTrack: renderTrack,
     parent: function () { parentUnlocked = true; go('parent'); renderParent(); },
-    isParentUnlocked: function () { return parentUnlocked; },
-    trackCounts: trackCounts, openReport: openReport, flushTime: flushTime,
     current: function () { return current; }
   };
 

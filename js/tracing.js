@@ -120,12 +120,11 @@
       this.covered = new Uint8Array(MS * MS);
       this.coveredCount = 0;
       this.points = [];
-      this.starts = [];
+      this.strokes = [];
       this.drawing = false;
       this.attempts = 0;
       this.locked = false;
       this.bind();
-      Tracer.live = (Tracer.live || 0) + 1;   // عدّاد للاختبار: المتتبّعات الحيّة
       const self = this;
       this.cssW = 300; this.cssH = 300; this.dpr = 1;
       requestAnimationFrame(function () {
@@ -172,8 +171,8 @@
         if (this.canvas.setPointerCapture) this.canvas.setPointerCapture(e.pointerId);
         this.drawing = true;
         const p = pt(e);
-        this.starts.push(this.points.length);
         this.points.push(p);
+        this.strokes.push([p]);
         this.stamp(p);
         this.render();
       };
@@ -183,6 +182,7 @@
         const p = pt(e);
         const last = this.points[this.points.length - 1];
         this.points.push(p);
+        if (this.strokes.length) this.strokes[this.strokes.length - 1].push(p);
         this.stampLine(last, p);
         this.render();
         const now = Date.now();
@@ -294,19 +294,13 @@
         g.lineCap = 'round';
         g.lineJoin = 'round';
         g.globalAlpha = 0.9;
-        // كل لمسة (ضغطة) خط مستقل: مفيش وصل بين النقط المنفصلة
-        const starts = (this.starts && this.starts.length ? this.starts : [0]).slice().sort((a, b) => a - b);
-        g.beginPath();
-        for (let k = 0; k < starts.length; k++) {
-          const from = starts[k], to = k + 1 < starts.length ? starts[k + 1] : this.points.length;
-          if (to <= from) continue;
-          const q0 = this.points[from];
-          g.moveTo(q0.x, q0.y);
-          for (let i = from + 1; i < to; i++) g.lineTo(this.points[i].x, this.points[i].y);
-          // لمسة واحدة (نقطة) ترسم كدايرة صغيرة
-          if (to - from === 1) g.lineTo(q0.x + 0.1, q0.y + 0.1);
-        }
-        g.stroke();
+        this.strokes.forEach(function (st) {
+          g.beginPath();
+          g.moveTo(st[0].x, st[0].y);
+          for (let i = 1; i < st.length; i++) g.lineTo(st[i].x, st[i].y);
+          if (st.length === 1) g.lineTo(st[0].x + 0.1, st[0].y + 0.1);   // نقطة
+          g.stroke();
+        });
         g.globalAlpha = 1;
       }
     }
@@ -318,7 +312,7 @@
 
     clear() {
       this.points = [];
-      this.starts = [];
+      this.strokes = [];
       this.covered = new Uint8Array(MS * MS);
       this.coveredCount = 0;
       this.locked = false;
@@ -333,9 +327,6 @@
       this.canvas.removeEventListener('pointerdown', this._down);
       this.canvas.removeEventListener('pointermove', this._move);
       this.canvas.removeEventListener('pointerup', this._up);
-      this.canvas.removeEventListener('pointercancel', this._up);
-      this.destroyed = true;
-      Tracer.live = Math.max(0, (Tracer.live || 1) - 1);
     }
   }
 

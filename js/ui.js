@@ -9,13 +9,6 @@
     return e;
   };
 
-  /** هروب HTML لأي نص جاي من المستخدم أو من ملف استعادة — لا يدخل innerHTML نص خام أبداً */
-  function esc(v) {
-    return String(v == null ? '' : v).replace(/[&<>"'`]/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' }[c];
-    });
-  }
-
   const ICONS = {
     sound: '<path d="M4 9v6h3l4 3V6L7 9H4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/>',
     play: '<path d="M7 5.5v13l11-6.5z"/>',
@@ -76,12 +69,7 @@
   function toast(msg, ms) {
     let t = document.getElementById('toast');
     if (!t) { t = el('div', 'toast'); t.id = 'toast'; document.body.appendChild(t); }
-    t.textContent = '';
-    const sp = document.createElement('span');
-    sp.textContent = String(msg == null ? '' : msg);
-    t.appendChild(sp);
-    t.setAttribute('role', 'status');
-    t.setAttribute('aria-live', 'polite');
+    t.innerHTML = '<span>' + msg + '</span>';
     t.classList.add('show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove('show'), ms || 1800);
@@ -109,5 +97,5 @@
     burst(10);
   }
 
-  window.UI = { el, esc, icon, iconBtn, mascot, toast, burst, starsFly };
+  window.UI = { el, icon, iconBtn, mascot, toast, burst, starsFly };
 })();

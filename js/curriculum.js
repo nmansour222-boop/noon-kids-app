@@ -110,22 +110,6 @@
   /* oid = الرقم الأصلي للصوت (قبل إعادة الترتيب). نستخدمه في معرّفات الوحدات والإتقان
      حتى لا يضيع تقدّم من بدأ بالنسخة القديمة، ولا يتأثر لو أُعيد الترتيب مستقبلاً.
      المفاتيح حسّاسة لحالة الحرف: 'oo' (book) غير 'OO' (moon)، و'th' (three) غير 'TH' (this). */
-  /* عرض الصوت: الرمز كما يُكتب فعلاً (حروف صغيرة) + وسم يميّز الأزواج المتشابهة كتابةً.
-     لا نعتمد على حالة الحروف (oo/OO أو th/TH) للتمييز — الطفل يرى «oo · طويل» مقابل «oo · قصير»
-     ويرى دائماً كلمة المثال بصورتها. */
-  const TAGS = {
-    'OO': { tag: 'طويل', ipa: '/uː/' }, 'oo': { tag: 'قصير', ipa: '/ʊ/' },
-    'TH': { tag: 'مجهور', ipa: '/ð/' }, 'th': { tag: 'مهموس', ipa: '/θ/' }
-  };
-  SOUNDS.forEach(function (x) {
-    x.disp = x.s === 'c k' ? 'c k' : x.s.toLowerCase();
-    const t = TAGS[x.s];
-    if (t) { x.tag = t.tag; x.ipa = t.ipa; }
-    // هل كلمة المثال تبدأ بالصوت؟ (moon/book/box/ring… الصوت في النص مش في الأول)
-    const parts = x.disp.split(' ');
-    x.initial = parts.some(function (p) { return x.w.indexOf(p) === 0; });
-  });
-
   (function sortSounds() {
     SOUNDS.forEach(function (s, i) { s.oid = i; });
     const rank = {};

@@ -9,7 +9,8 @@
     el: null, lastSrc: '',
     badge: { human: 0, tts: 0, miss: 0 },
 
-    key(word, lang) { return lang + ':' + word; },
+    // 'ar-SA' و'en-US' تُختزل إلى 'ar' و'en' حتى تلاقي تسجيلاتها
+    key(word, lang) { return String(lang || '').toLowerCase().split('-')[0] + ':' + word; },
 
     has(word, lang) {
       const it = this.manifest[this.key(word, lang)];
@@ -77,6 +78,7 @@
             self.badge.miss++;
             const lang = /\/en\//.test(src) ? 'en' : 'ar';
             const word = decodeURIComponent((src.split('/').pop() || '').replace(/\.m4a$/, ''));
+            if (/^(name|sound|g)-/.test(word)) { finish(false); return; }   // مقاطع الحروف: لا نحوّلها لنطق آلي باسم الملف
             if (window.Audio2) window.Audio2.say(word, lang === 'en' ? 'en-US' : 'ar-SA', rate || 0.85).then(finish);
             else finish(false);
           };

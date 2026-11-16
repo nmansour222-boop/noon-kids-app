@@ -63,9 +63,8 @@
       track: track,
       kind: 'think',
       order: 700 + i,
-      title: track === 'en' ? 'Think with me' : 'فكّر معايا',
-      sub: track === 'en' ? 'فهم واستنتاج — بالإنجليزي' : 'فهم واستنتاج',
-      lang: track === 'en' ? 'en' : 'ar',
+      title: 'فكّر معايا',
+      sub: 'فهم واستنتاج',
       glyph: '💡',
       think: true,
       lessons: [
@@ -136,12 +135,11 @@
       id: 'en.' + k,
       track: 'en',
       order: i,
-      title: 'الصوت ' + s.disp + (s.tag ? ' (' + s.tag + ')' : ''),
+      title: 'الصوت ' + s.s,
       sub: s.w,
-      glyph: s.disp,
+      glyph: s.s,
       sound: item,
-      // التركيب لا يبدأ إلا بعد إتقان satpin (أول ٦ أصوات) — قبلها: تعلّم الصوت، كلمته، اكتبه، ثم تمييز سمعي
-      // (الخطوة الرابعة كانت كتابة ثانية مطابقة؛ صارت «اسمع واختار» — نفس المعرّف حتى لا يضيع تقدّم محفوظ)
+      // التركيب لا يبدأ إلا بعد إتقان satpin (أول ٦ أصوات) — قبلها تعلّم الصوت ثم اكتبه
       lessons: (i >= 5
         ? [
             { id: 'en.' + k + '.1meet',  type: 'enMeet' },
@@ -153,7 +151,7 @@
             { id: 'en.' + k + '.1meet',  type: 'enMeet' },
             { id: 'en.' + k + '.2word',  type: 'enWord' },
             { id: 'en.' + k + '.3write', type: 'enWrite' },
-            { id: 'en.' + k + '.4write2', type: 'enPick' }
+            { id: 'en.' + k + '.4write2', type: 'enWrite' }
           ])
     };
   });
@@ -201,15 +199,11 @@
     window.NUMBERS.stages.forEach(function (st) {
       const nums = [];
       for (let n = st.from; n <= st.to; n++) nums.push(n);
-      // الصفر جزء من أول مرحلة (مفهوم «مفيش ولا حاجة») — المعرّف ثابت حتى لا يضيع التقدّم
-      const first = st.i === 0;
-      if (first) nums.unshift(0);
-      const lo = first ? 0 : st.from;
       units.push({
         id: 'num.' + st.from + '-' + st.to,
         track: 'num',
-        title: 'الأرقام ' + lo + '–' + st.to,
-        sub: 'نعدّ ونكتب من ' + lo + ' لـ ' + st.to,
+        title: 'الأرقام ' + st.from + '–' + st.to,
+        sub: 'نعدّ ونكتب من ' + st.from + ' لـ ' + st.to,
         glyph: String(st.from),
         station: null,
         lessons: [
@@ -219,7 +213,7 @@
         ]
       });
     });
-    TRACKS.num = { key: 'num', name: 'الأرقام ٠–١٠٠', units: units };
+    TRACKS.num = { key: 'num', name: 'الأرقام ١–١٠٠', units: units };
   })();
 
   const BY_TRACK = { ar: AR, en: EN2, qu: QU2 };

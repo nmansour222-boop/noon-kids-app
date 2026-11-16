@@ -1,5 +1,5 @@
 /* Service Worker — التطبيق يعمل أوفلاين بعد أول فتح */
-const VERSION = 'noon-v24';
+const VERSION = 'noon-v26';
 /* كاشات لا تُمسح عند تحديث الإصدار: التلاوة المنزّلة (~53 ميجا) وأصوات الكلمات */
 const KEEP = [VERSION, 'noon-audio', 'noon-words'];
 const SHELL = [
@@ -38,54 +38,43 @@ const SHELL = [
   './icons/apple-touch-icon.png'
 ];
 
-/* التثبيت: الهيكل كله لازم يتخزّن بنجاح، وإلا يفشل التثبيت ويفضل الإصدار القديم شغّال.
-   ممنوع ابتلاع خطأ addAll — فشل التخزين المسبق يمنع التفعيل ومسح الكاش القديم. */
 self.addEventListener('install', e => {
   e.waitUntil((async () => {
-    const tmp = VERSION + '-staging';
-    await caches.delete(tmp);
-    const c = await caches.open(tmp);
-    await c.addAll(SHELL.map(u => new Request(u, { cache: 'reload' })));   // يرمي لو أي ملف ناقص/404
-    // تحقّق إضافي: كل ملف أساسي موجود فعلاً في الكاش المؤقت
-    for (const u of SHELL) {
-      const hit = await c.match(u);
-      if (!hit || !hit.ok) throw new Error('precache incomplete: ' + u);
-    }
-    // انقل الكاش المؤقت لاسم الإصدار بعد النجاح فقط
-    const final = await caches.open(VERSION);
-    for (const req of await c.keys()) await final.put(req, await c.match(req));
-    await caches.delete(tmp);
-
-    // تسجيلات الكلمات البشرية (~١ ميجا): اختيارية — فشلها لا يمنع التثبيت ولا يمسح شيئاً
+    try { const c = await caches.open(VERSION); await c.addAll(SHELL); } catch (err) {}
+    // تخزين مسبق لتسجيلات الكلمات البشرية (~١ ميجا) حتى تكون الدروس مسموعة أوفلاين من أول مرة
     try {
       const r = await fetch('audio/manifest.json', { cache: 'no-cache' });
-      if (r.ok) {
-        const copy = r.clone();
-        const j = await r.json();
-        const words = await caches.open('noon-words');
-        await words.put('audio/manifest.json', copy);
-        const files = Object.keys(j.items || {}).map(k => j.items[k].file).filter(Boolean);
-        for (let i = 0; i < files.length; i += 8) {
-          await Promise.all(files.slice(i, i + 8).map(f =>
-            fetch(f).then(res => { if (res && res.ok) return words.put(f, res); }).catch(() => {})
-          ));
-        }
+      const copy = r.clone();
+      const j = await r.json();
+      const words = await caches.open('noon-words');
+      await words.put('audio/manifest.json', copy);
+      const files = Object.keys(j.items || {}).map(k => j.items[k].file).filter(Boolean);
+      for (let i = 0; i < files.length; i += 8) {
+        await Promise.all(files.slice(i, i + 8).map(f =>
+          fetch(f).then(res => { if (res && res.ok) return words.put(f, res); }).catch(() => {})
+        ));
       }
     } catch (err) {}
-    await self.skipWaiting();   // لا يُستدعى إلا بعد نجاح تخزين الهيكل
+    // شرح الحروف (28 ملف ≈ 5 ميجا): نخزّنه أوفلاين أيضاً
+    try {
+      const txt = await (await fetch('js/lesson-audio.js')).text();
+      const lessons = (txt.match(/audio\/ar\/lessons\/[a-z]+\.mp3/g) || []);
+      const words2 = await caches.open('noon-words');
+      for (let i = 0; i < lessons.length; i += 6) {
+        await Promise.all(lessons.slice(i, i + 6).map(f =>
+          fetch(f).then(res => { if (res && res.ok) return words2.put(f, res); }).catch(() => {})
+        ));
+      }
+    } catch (err) {}
+    await self.skipWaiting();
   })());
 });
 
-/* التفعيل يحدث فقط بعد نجاح التثبيت — وقتها بس نمسح كاشات الإصدارات القديمة */
 self.addEventListener('activate', e => {
-  e.waitUntil((async () => {
-    const ok = await caches.has(VERSION);
-    if (ok) {
-      const keys = await caches.keys();
-      await Promise.all(keys.filter(k => KEEP.indexOf(k) < 0).map(k => caches.delete(k)));
-    }
-    await self.clients.claim();
-  })());
+  e.waitUntil(
+    caches.keys().then(keys => Promise.all(keys.filter(k => KEEP.indexOf(k) < 0).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
 });
 
 /* سفاري يشترط ردّ 206 على طلبات Range للصوت — نقتطع الجزء المطلوب من الملف المخزّن */

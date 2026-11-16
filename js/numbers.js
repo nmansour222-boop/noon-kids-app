@@ -18,7 +18,7 @@
     'أحد عشر', 'اثنا عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر', 'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر', 'عشرون'];
   const TENS = { 2: 'عشرون', 3: 'ثلاثون', 4: 'أربعون', 5: 'خمسون', 6: 'ستون', 7: 'سبعون', 8: 'ثمانون', 9: 'تسعون' };
 
-  STAGES.forEach(function (st) { st.title = 'من ' + toAr(st.i === 0 ? 0 : st.from) + ' إلى ' + toAr(st.to); });
+  STAGES.forEach(function (st) { st.title = 'من ' + toAr(st.from) + ' إلى ' + toAr(st.to); });
 
   window.NUMBERS = {
     stages: STAGES,
@@ -33,7 +33,6 @@
       const tensName = TENS[tens];
       if (!tensName) return String(n);
       if (!ones) return tensName;
-      // فصحى: «واحد وعشرون» — الواو ملتصقة بالعقد بلا فراغ
       return NAMES[ones] + ' و' + tensName;
     },
     /** ١٠٠٠ وأكثر لا تُدرَّس هنا */

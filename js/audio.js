@@ -7,7 +7,6 @@
   let voices = [];
   let currentAudio = null;
   let seqToken = 0;
-  let currentDone = null;   // إنهاء وعد التشغيل الحالي عند الإيقاف (بدل ما يفضل معلّق ٤٥ ثانية)
 
   function refreshVoices() {
     if (!synth) return;
@@ -70,14 +69,13 @@
   function play(url, rate) {
     return new Promise(resolve => {
       try {
-        if (currentAudio) { currentAudio.pause(); currentAudio = null; if (currentDone) currentDone(false); }
+        if (currentAudio) { currentAudio.pause(); currentAudio = null; }
         const a = new Audio();
         a.preload = 'auto';
         a.src = url;
         if (rate && rate !== 1) { a.preservesPitch = true; a.playbackRate = rate; }
         currentAudio = a;
-        const done = ok => { if (currentAudio === a) { currentAudio = null; currentDone = null; } resolve(ok); };
-        currentDone = done;
+        const done = ok => { if (currentAudio === a) currentAudio = null; resolve(ok); };
         a.onended = () => done(true);
         a.onerror = () => done(false);
         a.onpause = () => {};
@@ -114,7 +112,6 @@
       seqToken++;
       if (synth) { try { synth.cancel(); } catch (e) {} }
       if (currentAudio) { try { currentAudio.pause(); } catch (e) {} currentAudio = null; }
-      if (currentDone) { const d = currentDone; currentDone = null; d(false); }
     },
     say(text, lang, rate) {
       const my = ++seqToken;

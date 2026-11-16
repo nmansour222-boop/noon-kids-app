@@ -4,47 +4,146 @@
   const el = UI.el;
   const AR = 'ar-SA', EN = 'en-US';
 
-  /* ترتيب الصوت: تسجيل بشري للكلمة → صوت آلي (لو الجهاز بيدعم لغة النص) */
-  function say(t, lang, rate) {
+  /* أسماء الحروف وأصواتها: تسجيلات بشرية بمفاتيح @name:<id> و@sound:<id> في audio/manifest.json */
+  let LMAP = null;
+  function letterMap() {
+    if (LMAP) return LMAP;
+    LMAP = [];
+    const Ls = (window.CURRICULUM && window.CURRICULUM.letters) || [];
+    Ls.forEach(function (l) {
+      LMAP.push({ t: l.name, k: '@name:' + l.id });
+      LMAP.push({ t: l.sound, k: '@sound:' + l.id });
+    });
+    LMAP.sort(function (a, b) { return b.t.length - a.t.length; });
+    return LMAP;
+  }
+  // كلمات ربط تُحذف عند نطق الحرف من التسجيل (الجملة المكتوبة تظهر على الشاشة)
+  const FILLER = /(?:ده|حرف|فين|فيهم|مين|بيبدأ|بصوت|أول|أحسنت|شوف|هنا|هو|مرة|تاني|فَتْحَة|ضَمَّة|كَسْرَة|سُكُون|شَدَّة|[\u064B-\u0652\s،,؟?!.:«»"'\-])/g;
+  function letterClips(t) {
+    if (!window.A3 || !A3.ready) return null;
+    const used = new Array(t.length), hits = [];
+    // كلمات الربط تُحجز أولاً حتى لا تُحسب أحرفها المشكّلة (فَتْحَة ← فَ + حَ) أصواتاً
+    let fm; FILLER.lastIndex = 0;
+    while ((fm = FILLER.exec(t)) !== null) {
+      if (fm[0].length > 1) for (let j = fm.index; j < fm.index + fm[0].length; j++) used[j] = true;
+      if (FILLER.lastIndex === fm.index) FILLER.lastIndex++;
+    }
+    letterMap().forEach(function (m) {
+      let i = t.indexOf(m.t);
+      while (i >= 0) {
+        let free = true;
+        for (let j = i; j < i + m.t.length; j++) if (used[j]) { free = false; break; }
+        if (free && A3.has(m.k, 'ar')) {
+          for (let j = i; j < i + m.t.length; j++) used[j] = true;
+          hits.push({ pos: i, k: m.k });
+        }
+        i = t.indexOf(m.t, i + 1);
+      }
+    });
+    if (!hits.length) return null;
+    let rest = '';
+    for (let j = 0; j < t.length; j++) if (!used[j]) rest += t[j];
+    if (rest.replace(FILLER, '').trim()) return null;   // فيها كلام آخر → النطق العادي
+    return hits.sort(function (a, b) { return a.pos - b.pos; }).map(function (h) { return h.k; });
+  }
+  /* جمل التعليمات والتشجيع: تُقسَّم عند علامات الترقيم، وكل مقطع له تسجيل جاهز (مفتاح ar:#المقطع) */
+  const CSEP = /[،,؟?!.:؛…]+/;
+  const IND = '٠١٢٣٤٥٦٧٨٩';
+  function normChunk(s) {
+    s = s.replace(/[«»"“”]/g, '').replace(/[٠-٩]/g, function (d) { return String(IND.indexOf(d)); });
+    return s.replace(/\s+/g, ' ').trim();
+  }
+  function chunkPlan(t) {
+    if (!window.A3 || !A3.ready) return null;
+    const parts = t.split(CSEP).map(normChunk).filter(Boolean);
+    if (!parts.length) return null;
+    const plan = [];
+    for (let i = 0; i < parts.length; i++) {
+      let c = parts[i];
+      if (/^\d+$/.test(c) && window.NUMBERS) c = window.NUMBERS.name(parseInt(c, 10));
+      if (A3.has(c, 'ar')) { plan.push({ k: c, r: 1 }); continue; }
+      if (A3.has('#' + c, 'ar')) { plan.push({ k: '#' + c, r: 1 }); continue; }
+      const lk = letterClips(c);
+      if (!lk) return null;
+      lk.forEach(function (k) { plan.push({ k: k, r: 0.95 }); });
+    }
+    return plan;
+  }
+  let sayTok = 0;
+  /* ترتيب الصوت: تسجيل بشري (حرف/كلمة) → صوت آلي (لو الجهاز بيدعم لغة النص) */
+  function sayAt(my, t, lang, rate) {
     const L = lang || AR;
     const isEn = /^en/i.test(L);
-    if (window.A3 && A3.has && A3.has(t, isEn ? 'en' : 'ar')) return A3.sayWord(t, isEn ? 'en' : 'ar', rate);
-    if (!window.Store.ttsOn()) return Promise.resolve(false);
-    return window.Audio2.say(t, L, rate);
+    const run = function () {
+      if (my !== sayTok) return Promise.resolve(false);
+      if (window.A3 && A3.has && A3.has(t, isEn ? 'en' : 'ar')) return A3.sayWord(t, isEn ? 'en' : 'ar', { rate: rate });
+      if (!isEn) {
+        const lk = letterClips(t);
+        const plan = lk ? lk.map(function (k) { return { k: k, r: 0.95 }; }) : chunkPlan(t);
+        if (plan) {
+          let i = 0;
+          const next = function () {
+            if (i >= plan.length || my !== sayTok) return Promise.resolve(true);
+            const it = plan[i++];
+            return A3.sayWord(it.k, 'ar', { rate: it.r }).then(function () {
+              return new Promise(function (res) { setTimeout(res, 140); }).then(next);
+            });
+          };
+          return next();
+        }
+      }
+      if (!window.Store.ttsOn()) return Promise.resolve(false);
+      return window.Audio2.say(t, L, rate);
+    };
+    return (window.A3 && !A3.ready && A3.load) ? A3.load().then(run) : run();
+  }
+  function say(t, lang, rate) { return sayAt(++sayTok, t, lang, rate); }
+  /* قائمة كلمات بالترتيب: كل كلمة بتسجيلها البشري لو موجود */
+  function sayWords(ws, lang, rate) {
+    const my = ++sayTok;
+    let i = 0;
+    const next = function () {
+      if (i >= ws.length || my !== sayTok) return Promise.resolve(true);
+      return sayAt(my, ws[i++], lang, rate).then(function () {
+        return new Promise(function (res) { setTimeout(res, 220); }).then(next);
+      });
+    };
+    return next();
   }
   /* سجل مؤقتات: يمنع استمرار التلاوة/الأصوات بعد مغادرة الدرس */
   const TIMERS = [];
   function later(fn, ms) { const id = setTimeout(fn, ms); TIMERS.push(id); return id; }
   function every(fn, ms) { const id = setInterval(fn, ms); TIMERS.push(id); return id; }
-  /* تنظيف موارد الشاشة (متتبّع الكتابة: مؤقت + ResizeObserver + resize) — يُستدعى عند تبديل الشاشة أو مغادرة الدرس */
-  const CLEANUPS = [];
-  function onCleanup(fn) { CLEANUPS.push(fn); }
-  function runCleanups() {
-    while (CLEANUPS.length) { try { CLEANUPS.pop()(); } catch (e) {} }
-  }
   /* إلغاء المؤقتات فقط — لا يقطع صوتًا بدأ للتو */
   function clearTimers() {
     while (TIMERS.length) { clearTimeout(TIMERS.pop()); }
   }
-  /* رقم جيل: أي ردّ متأخر (صوت خلص بعد ما الطفل خرج) يتأكد إنه لسه في نفس الدرس قبل ما يكمل */
-  let GEN = 0;
-  function alive(gen) { return gen === GEN; }
   /* إيقاف كامل: يُستدعى عند مغادرة الدرس أو الرجوع */
   function stopAll() {
-    GEN++;
     clearTimers();
-    runCleanups();
+    try { window.Audio2 && window.Audio2.stop && window.Audio2.stop(); } catch (e) {}
+    try { window.A3 && window.A3.stop && window.A3.stop(); } catch (e) {}
     try { window.LessonAudio && window.LessonAudio.stop && window.LessonAudio.stop(); } catch (e) {}
+    try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {}
+  }
+
+  /* شرح الحرف بصوت بشري (ملف لكل حرف): نوقف أي نطق آخر قبله حتى لا يتداخلوا */
+  function playExplain(id, words) {
+    sayTok++; clearTimers();
     try { window.Audio2 && window.Audio2.stop && window.Audio2.stop(); } catch (e) {}
     try { window.A3 && window.A3.stop && window.A3.stop(); } catch (e) {}
     try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {}
+    // الشرح ينتهي عند «مثالنا…» ثم نقول كلمتي الحرف في التطبيق بتسجيلهم البشري (تطابق ما على الشاشة)
+    return window.LessonAudio ? window.LessonAudio.play(id, function () {
+      if (words && words.length) sayWords(words, AR, 0.8);
+    }) : false;
   }
+  function hasExplain(id) { return !!(window.LessonAudio && window.LessonAudio.has(id)); }
 
   function clear(host) { host.innerHTML = ''; return host; }
   /** يعرض الشاشة ويحوّل كل تعليمة نصية إلى زر صوت + نص صغير (الطفل لا يقرأ) */
   function show(host, node) {
     clearTimers();
-    runCleanups();
     clear(host);
     node.classList.add('l-screen');
     host.appendChild(node);
@@ -58,7 +157,7 @@
       b.addEventListener('click', function (e) {
         e.stopPropagation();
         SFX.click();
-        say(h.dataset.text.replace(/[«»]/g, ''), h.dataset.lang === 'en' ? EN : AR, 0.72);
+        say(h.dataset.text.replace(/[«»]/g, ''), AR, 0.72);
       });
       h.parentNode.insertBefore(row, h);
       row.appendChild(b);
@@ -73,15 +172,14 @@
       const wrap = el('div', 'prompt-row');
       const spk = el('button', 'hint-spk', UI.icon('sound', 18));
       spk.setAttribute('aria-label', 'اسمع');
-      const tl = t.dataset.lang === 'en' ? EN : AR;
-      spk.addEventListener('click', function (e) { e.stopPropagation(); SFX.click(); say(txt.replace(/[«»]/g, ''), tl, 0.72); });
+      spk.addEventListener('click', function (e) { e.stopPropagation(); SFX.click(); say(txt.replace(/[«»]/g, ''), AR, 0.72); });
       t.parentNode.insertBefore(wrap, t);
       wrap.appendChild(spk);
       wrap.appendChild(t);
     });
 
     const first = node.querySelector('.l-hint');
-    if (first && first.dataset.text) later(function () { say(first.dataset.text.replace(/[«»]/g, ''), first.dataset.lang === 'en' ? EN : AR, 0.7); }, 220);
+    if (first && first.dataset.text) setTimeout(function () { say(first.dataset.text.replace(/[«»]/g, ''), AR, 0.7); }, 220);
     return node;
   }
   function center(cls) { return el('div', 'l-center ' + (cls || '')); }
@@ -125,38 +223,6 @@
     const human = window.A3 && window.A3.has(w, lang);
     return '<span class="src-dot ' + (human ? 'human' : 'tmp') + '" title="' +
       (human ? 'تسجيل بشري' : 'صوت مؤقت') + '"></span>';
-  }
-
-  /* ---------- تسجيلات الحروف البشرية (اسم الحرف + صوته بالفتحة) — كانت موجودة في الـmanifest ومش مستخدمة ---------- */
-  function sayLetterName(l) {
-    if (window.A3 && A3.has('@name:' + l.id, 'ar')) return A3.sayWord('@name:' + l.id, 'ar');
-    return say(l.name, AR, 0.72);
-  }
-  function sayLetterSound(l) {
-    if (window.A3 && A3.has('@sound:' + l.id, 'ar')) return A3.sayWord('@sound:' + l.id, 'ar');
-    return say(l.sound, AR, 0.68);
-  }
-  /* ---------- الإنجليزي: لا ننطق رمز الحرف بصوت آلي أبداً (بيطلع اسم الحرف «ess» مش الصوت /s/) ----------
-     لو فيه تسجيل بشري للفونيم (en:@sound:<رمز>) نشغّله، وإلا نسمّع كلمة المثال بتسجيل بشري. */
-  function hasPhoneme(s0) { return !!(window.A3 && A3.has('@sound:' + s0.s, 'en')); }
-  function playPhoneme(s0) {
-    if (hasPhoneme(s0)) return A3.sayWord('@sound:' + s0.s, 'en');
-    return speakWord(s0.w, EN);
-  }
-  function soundLabel(s0) { return s0.disp + (s0.tag ? ' · ' + s0.tag : ''); }
-  /** صياغة صحيحة: الكلمة «بتبدأ» بالصوت، ولا الصوت «جوّاها» (moon / book / box) */
-  function soundQuestion(s0) {
-    return s0.initial ? 'مين بيبدأ بصوت «' + soundLabel(s0) + '»؟' : 'مين فيه صوت «' + soundLabel(s0) + '»؟';
-  }
-  /** بديل عادل: كلمة ما فيهاش الصوت المطلوب، ومش من نفس الزوج المتشابه (oo/OO، th/TH) */
-  function enDistractor(s0, pool) {
-    const parts = s0.disp.split(' ');
-    const bad = function (w) { return parts.some(function (p) { return w.indexOf(p) >= 0; }); };
-    const cands = (pool || []).filter(function (x) { return x.s !== s0.s && x.disp !== s0.disp && !bad(x.w) && x.w !== s0.w; });
-    if (cands.length) return cands[Math.floor(Math.random() * cands.length)];
-    const fb = [{ w: 'sun', e: '☀️' }, { w: 'dog', e: '🐶' }, { w: 'cat', e: '🐱' }, { w: 'pig', e: '🐷' }, { w: 'bee', e: '🐝' }]
-      .filter(function (x) { return !bad(x.w) && x.w !== s0.w; });
-    return fb[0];
   }
 
   /* رسم الحرف من مساراته: حركات في مكانها دائماً */
@@ -220,7 +286,7 @@
     window.SFX.correct();
     window.UI.burst(12);
     say(text, AR, 0.85);
-    later(function () { if (onDone) onDone(); }, 1150);
+    setTimeout(function () { if (onDone) onDone(); }, 1150);
   }
 
   /* =======================================================
@@ -240,20 +306,18 @@
       s.appendChild(g);
       s.appendChild(el('div', 'glyph-name', l.name));
       s.appendChild(el('div', 'l-hint', 'دوس على الحرف عشان تسمع اسمه'));
-      if (window.LessonAudio && window.LessonAudio.has(l.id)) {
-        const lb = ghostBtn('اسمع شرح الحرف', function () {
-          SFX.click(); window.LessonAudio.play(l.id);
-        });
+      if (hasExplain(l.id)) {
+        const lb = ghostBtn('اسمع شرح الحرف', function () { SFX.click(); playExplain(l.id, l.words.map(function (x) { return x.w; })); });
         lb.style.marginTop = '10px';
         s.appendChild(lb);
       }
       show(host, s);
-      later(function () { sayLetterName(l); }, 300);
+      say('ده حرف ' + l.name, AR, 0.78);
       g.addEventListener('click', function () {
         SFX.pop();
         g.classList.add('tapped');
-        sayLetterName(l);
-        later(function () { g.classList.remove('tapped'); }, 400);
+        say(l.name, AR, 0.72);
+        setTimeout(function () { g.classList.remove('tapped'); }, 400);
         if (!stepReveal.done) {
           stepReveal.done = true;
           const n = bigBtn('يلا نعرف صوته', 'primary', function () { stepSound(); });
@@ -292,16 +356,16 @@
       s.appendChild(fr);
 
       const play = ghostBtn('اسمع تاني', function () {
-        sayLetterSound(l).then(function () { later(function () { sayLetterSound(l); }, 350); });
+        say(l.sound + '، ' + l.sound, AR, 0.68);
+        setTimeout(function () { say(l.name + ' ' + harakaAr(haraka) + ' ' + l.sound, AR, 0.7); }, 900);
       });
       s.appendChild(play);
+      if (hasExplain(l.id)) s.appendChild(ghostBtn('اسمع شرح الحرف', function () { SFX.click(); playExplain(l.id, l.words.map(function (x) { return x.w; })); }));
       const next = bigBtn('فهمته، يلا نلعب', 'primary', function () { done(); });
       s.appendChild(next);
       show(host, s);
-      const g0 = GEN;
-      later(function () {
-        sayLetterSound(l).then(function () { if (alive(g0)) later(function () { sayLetterSound(l); }, 400); });
-      }, 250);
+      say(l.sound + '، ' + l.sound, AR, 0.66);
+      setTimeout(function () { say(l.name + ' ' + harakaAr(haraka) + ' ' + l.sound, AR, 0.72); }, 1100);
     }
 
     stepReveal();
@@ -341,14 +405,14 @@
           b.classList.add('right');
           window.Store.record('ar', l.id, true); Pedagogy.Mastery.answer('ar', l.id, true);
           window.SFX.correct();
-          say('أحسنت!', AR, 0.85).then(function () { sayLetterName(l); });
-          later(function () { praise(host, 'شاطر!', done); }, 700);
+          say('أحسنت! ده ' + l.name, AR, 0.85);
+          setTimeout(function () { praise(host, 'شاطر!', done); }, 700);
         } else {
           wrong++;
           b.classList.add('wrong');
           window.Store.record('ar', l.id, false); Pedagogy.Mastery.answer('ar', l.id, false);
           window.SFX.wrong();
-          later(function () { b.classList.remove('wrong'); }, 450);
+          setTimeout(function () { b.classList.remove('wrong'); }, 450);
           if (wrong >= 2) {
             say('شوف، ' + l.name + ' هنا', AR, 0.85);
               Array.prototype.forEach.call(grid.children, function (c) {
@@ -364,32 +428,17 @@
     say('فين حرف ' + l.name + '؟', AR, 0.8);
   }
 
-  /** خطة سؤال «مين بيبدأ…»: لو فيه مثال أوله نفس المقطع (الحرف + نفس الحركة) نسأل بالصوت،
-   *  وإلا نسأل بالحرف نفسه صراحةً — عشان المسموع/المكتوب ما يناقضش المثال (تُفّاحة مش «تَ»). */
-  function arWordPlan(l) {
-    const want = splitAr(l.sound)[0];
-    const wantMark = (want && want.marks[0]) || 'fatha';
-    const same = (l.words || []).filter(function (w) {
-      const f = splitAr(w.w)[0];
-      return f && f.ch === l.ch && f.marks.indexOf(wantMark) >= 0 && f.marks.length === 1 + (f.marks.indexOf('shadda') >= 0 ? 1 : 0);
-    })[0];
-    if (same) return { word: same, mode: 'sound', prompt: 'مين بيبدأ بصوت «' + l.sound + '»؟', ask: l.sound };
-    return { word: l.words[0], mode: 'letter', prompt: 'مين بيبدأ بحرف «' + l.ch + '»؟', ask: 'حرف ' + l.name };
-  }
-
   function arWord(host, lesson, unit, done) {
     const l = unit.letter;
-    const plan = arWordPlan(l);
-    const correct = plan.word;
-    // البديل: كلمة من حرف تاني اتعلمه الطفل (عشوائي)، وما تبدأش بنفس الحرف
+    const correct = l.words[0];
+    const others = l.words[1] ? [l.words[1]] : [];
     const pool = window.Store.taughtLetters().filter(function (x) { return x.ch !== l.ch; });
-    const cand = shuffle(pool).map(function (x) { return x.words[0]; }).filter(function (w) { return splitAr(w.w)[0].ch !== l.ch; });
-    const distractor = cand[0] || (l.ch === 'ش' ? { w: 'قَمَر', e: '🌙' } : { w: 'شَمْس', e: '☀️' });
+    const distractor = (pool.length ? pool[0].words[0] : { w: 'شمس', e: '☀️' });
     const opts = shuffle([{ w: correct.w, e: correct.e, ok: true }, { w: distractor.w, e: distractor.e, ok: false }]);
     let solved = false;
 
     const s = center();
-    s.appendChild(eyebrow(plan.prompt));
+    s.appendChild(eyebrow('مين بيبدأ بصوت «' + l.sound + '»؟'));
     const grid = el('div', 'pics-grid');
     s.appendChild(grid);
     s.appendChild(el('div', 'l-hint', 'دوس على الصورة واسمع اسمها'));
@@ -401,7 +450,7 @@
           solved = true;
           btn.classList.add('right');
           window.Store.record('ar', l.id, true); Pedagogy.Mastery.answer('ar', l.id, true);
-          later(function () {
+          setTimeout(function () {
             const sp = center();
             sp.appendChild(eyebrow('أول حرف فيها'));
             sp.appendChild(el('div', 'word-big', op.w));
@@ -409,19 +458,17 @@
             const first = splitAr(op.w)[0];
             const card = el('div', 'first-letter', glyphEl(first.ch, first.marks, { size: 60, color: 'var(--coral)' }));
             sp.appendChild(card);
-            sp.appendChild(el('div', 'l-hint', plan.mode === 'sound'
-              ? '«' + op.w + '» بتبدأ بصوت «' + l.sound + '» — حرف ' + l.name
-              : '«' + op.w + '» بتبدأ بحرف ' + l.name + ' (بحركة تانية: «' + glyphText(first) + '»)'));
+            sp.appendChild(el('div', 'l-hint', '«' + op.w + '» بتبدأ بحرف ' + l.name));
             const n = bigBtn('تمام!', 'primary', function () { done(); });
             sp.appendChild(n);
             show(host, sp);
             say(op.w, AR, 0.72);
-            later(function () { say('أول حرف ' + l.name, AR, 0.72); }, 1100);
+            setTimeout(function () { say('أول حرف ' + l.name, AR, 0.72); }, 1100);
           }, 620);
         } else {
           btn.classList.add('wrong');
           window.SFX.wrong();
-          later(function () { btn.classList.remove('wrong'); }, 450);
+          setTimeout(function () { btn.classList.remove('wrong'); }, 450);
         }
       });
       tile.dataset.ok = op.ok ? '1' : '0';
@@ -430,19 +477,15 @@
     });
 
     show(host, s);
-    later(function () {
-      say('اسمع... ' + opts[0].w + '، و' + opts[1].w, AR, 0.78);
-      later(function () { say('مين فيهم بيبدأ ب' + plan.ask + '؟', AR, 0.78); }, 1700);
+    setTimeout(function () {
+      sayWords([opts[0].w, opts[1].w], AR, 0.78).then(function () {
+        later(function () { say('مين فيهم بيبدأ بصوت ' + l.sound + '؟', AR, 0.78); }, 250);
+      });
     }, 350);
   }
 
-  function glyphText(u) {
-    return u.ch + u.marks.map(function (m) { return MK[m] || ''; }).join('');
-  }
-
-  /* الكتابة بنفس الشكل اللي اتعلمه الطفل في «تعرّف» (أ بالهمزة للألف) — بلا تناقض بصري */
   function arWrite(host, lesson, unit, done) {
-    traceLesson(host, unit.letter.ch, [], false, unit, done, unit.letter.name);
+    traceLesson(host, unit.letter.base, [], false, unit, done, unit.letter.name);
   }
 
   /* =======================================================
@@ -451,47 +494,43 @@
 
   function enMeet(host, lesson, unit, done) {
     const s0 = unit.sound;
-    const lc = s0.disp;
+    const lc = s0.s.toLowerCase();
 
     function step1() {
       const s = center();
       s.appendChild(el('div', 'bubble', 'ده صوت جديد — اسمعه الأول'));
       s.appendChild(el('div', 'bubble-owl', UI.mascot(64, 'happy')));
       const g = el('button', 'glyph-tap');
-      g.setAttribute('aria-label', 'اسمع صوت ' + lc);
       g.innerHTML = glyphEl(lc, [], { size: 132, color: 'var(--teal)', latin: true });
       s.appendChild(g);
-      // الأزواج المتشابهة كتابةً بتتميّز بوسم + كلمة المثال، مش بحالة الحروف
-      s.appendChild(el('div', 'glyph-name snd-key', (s0.tag ? s0.tag + ' — ' : '') + 'زي ' + s0.e + ' ' + s0.w));
-      s.appendChild(el('div', 'l-hint', hasPhoneme(s0) ? 'دوس على الحرف عشان تسمع صوته' : 'دوس على الحرف واسمع الصوت في كلمة ' + s0.w));
+      s.appendChild(el('div', 'l-hint', 'دوس على الحرف عشان تسمع صوته'));
       show(host, s);
-      later(function () { playPhoneme(s0); }, 300);
+      say(lc, EN, 0.75);
 
       g.addEventListener('click', function () {
         SFX.pop();
         g.classList.add('tapped');
-        later(function () { g.classList.remove('tapped'); }, 380);
-        playPhoneme(s0);
+        setTimeout(function () { g.classList.remove('tapped'); }, 380);
+        say(lc + ', ' + lc, EN, 0.72);
         if (!step1.done) {
           step1.done = true;
-          later(step2, 500);
+          setTimeout(step2, 500);
         }
       });
     }
 
     function step2() {
       const s = center();
-      s.appendChild(eyebrow('«' + soundLabel(s0) + '» زي إيه؟'));
+      s.appendChild(eyebrow('«' + lc + '» زي إيه؟'));
       const row = el('div', 'pics-grid one');
       row.appendChild(picTile(s0.w, s0.e, EN, null, { large: true }));
       s.appendChild(row);
-      s.appendChild(el('div', 'l-hint', s0.initial
-        ? s0.w + ' بتبدأ بصوت «' + lc + '»'
-        : 'صوت «' + lc + '» جوّه كلمة ' + s0.w));
+      s.appendChild(el('div', 'l-hint', s0.w + ' بتبدأ بصوت «' + lc + '»'));
       const n = bigBtn('يلا نكمل', 'pk-teal', function () { done(); });
       s.appendChild(n);
       show(host, s);
-      later(function () { speakWord(s0.w, EN); }, 300);
+      say(s0.w, EN, 0.78);
+      setTimeout(function () { say(lc + '… ' + s0.w, EN, 0.72); }, 900);
     }
 
     step1();
@@ -499,13 +538,13 @@
 
   function enWord(host, lesson, unit, done) {
     const s0 = unit.sound;
-    const dis = enDistractor(s0, window.Store.taughtSounds());
+    const taught = window.Store.taughtSounds().filter(function (x) { return x.s !== s0.s; });
+    const dis = taught.length ? taught[0] : { w: 'moon', e: '🌙' };
     const opts = shuffle([{ w: s0.w, e: s0.e, ok: true }, { w: dis.w, e: dis.e, ok: false }]);
     let solved = false;
-    const mid = String(s0.idx);   // معرّف الإتقان = المعرّف الثابت للصوت (نفس اللي بتستخدمه المراجعة والتقرير)
 
     const s = center();
-    s.appendChild(eyebrow(soundQuestion(s0)));
+    s.appendChild(eyebrow('مين بيبدأ بصوت «' + s0.s.toUpperCase() + '»؟'));
     const grid = el('div', 'pics-grid');
     s.appendChild(grid);
 
@@ -515,12 +554,12 @@
         if (op.ok) {
           solved = true;
           btn.classList.add('right');
-          window.Store.record('en', mid, true); Pedagogy.Mastery.answer('en', mid, true);
-          later(function () { praise(host, 'Yes!', done); }, 650);
+          window.Store.record('en', String(unit.order), true); Pedagogy.Mastery.answer('en', String(unit.order), true);
+          setTimeout(function () { praise(host, 'Yes!', done); }, 650);
         } else {
           btn.classList.add('wrong');
           window.SFX.wrong();
-          later(function () { btn.classList.remove('wrong'); }, 450);
+          setTimeout(function () { btn.classList.remove('wrong'); }, 450);
         }
       });
       tile.dataset.ok = op.ok ? '1' : '0';
@@ -529,57 +568,11 @@
     });
 
     show(host, s);
-    later(function () { playPhoneme(s0); }, 300);
+    setTimeout(function () { say(s0.s + '... ' + s0.w, EN, 0.8); }, 300);
   }
 
   function enWrite(host, lesson, unit, done) {
-    traceLesson(host, unit.sound.disp.replace(/\s+/g, ''), [], true, unit, done, unit.sound.disp);
-  }
-
-  /* اسمع واختار الحرف — بديل الكتابة الثانية المكرّرة للأصوات الأولى (تمييز سمعي-بصري) */
-  function enPick(host, lesson, unit, done) {
-    const s0 = unit.sound;
-    const pool = window.Store.taughtSounds().filter(function (x) { return x.disp !== s0.disp; });
-    let others = shuffle(pool).slice(0, 2);
-    if (others.length < 2) {
-      const extra = window.CURRICULUM.sounds.filter(function (x) {
-        return x.disp !== s0.disp && others.every(function (o) { return o.disp !== x.disp; }) && x.disp.length === 1;
-      });
-      others = others.concat(extra.slice(0, 2 - others.length));
-    }
-    const opts = shuffle([s0].concat(others));
-    let solved = false, wrong = 0;
-    const s = center();
-    s.appendChild(eyebrow(s0.initial ? 'اسمع الكلمة… بتبدأ بأنهي حرف؟' : 'اسمع الكلمة… فيها أنهي صوت؟'));
-    const row = el('div', 'pics-grid one');
-    row.appendChild(picTile(s0.w, s0.e, EN, null, { large: true }));
-    s.appendChild(row);
-    const grid = el('div', 'letters-grid');
-    s.appendChild(grid);
-    opts.forEach(function (o) {
-      const b = el('button', 'letter-tile', glyphEl(o.disp, [], { size: 96, color: 'var(--teal)', latin: true }));
-      b.dataset.s = o.s;
-      b.setAttribute('aria-label', o.disp);
-      b.addEventListener('click', function () {
-        if (solved) return;
-        if (o.s === s0.s) {
-          solved = true;
-          b.classList.add('right');
-          Pedagogy.Mastery.answer('en', String(s0.idx), true);
-          later(function () { praise(host, 'Yes!', done); }, 500);
-        } else {
-          wrong++;
-          b.classList.add('wrong'); SFX.wrong();
-          Pedagogy.Mastery.answer('en', String(s0.idx), false);
-          later(function () { b.classList.remove('wrong'); }, 420);
-          if (wrong >= 2) Array.prototype.forEach.call(grid.children, function (c) { if (c.dataset.s === s0.s) c.classList.add('hint'); });
-          speakWord(s0.w, EN);
-        }
-      });
-      grid.appendChild(b);
-    });
-    show(host, s);
-    later(function () { speakWord(s0.w, EN); }, 300);
+    traceLesson(host, unit.sound.s.toLowerCase(), [], true, unit, done, unit.sound.s);
   }
 
   /* =======================================================
@@ -621,7 +614,7 @@
         wrap.appendChild(guide);
         canvas.addEventListener('pointerdown', function hide() {
           guide.style.opacity = '0';
-          later(function () { guide.remove(); }, 400);
+          setTimeout(function () { guide.remove(); }, 400);
           canvas.removeEventListener('pointerdown', hide);
         });
       }
@@ -654,7 +647,7 @@
     }
 
     function build() {
-      if (ready || !canvas.isConnected) return;   // الطفل خرج قبل التحميل: ما ننشئش متتبّع يتسرّب
+      if (ready) return;
       ready = true;
       tracer = new window.Tracer(canvas, ch, {
         marks: marks,
@@ -667,12 +660,10 @@
           else if (p.coverage >= 0.30 && onLetter < 0.6) msg.textContent = 'إصبعك بعيد عن الحرف — جرّب فوق الحرف نفسه';
         }
       });
-      // تنظيف إلزامي عند تبديل الشاشة/مغادرة الدرس: مؤقت الرسم + ResizeObserver + resize
-      onCleanup(function () { if (tracer) { tracer.destroy(); tracer = null; } });
     }
 
-    (window.Tracer.loadFonts ? window.Tracer.loadFonts() : Promise.resolve()).then(function () { later(build, 30); });
-    later(build, 1800);
+    (window.Tracer.loadFonts ? window.Tracer.loadFonts() : Promise.resolve()).then(function () { setTimeout(build, 30); });
+    setTimeout(build, 1800);
 
     // مساعدة تلقائية: بعد ٣ محاولات بدون نجاح نكمّل الحرف مع الطفل
     canvas.addEventListener('pointerup', function () {
@@ -731,7 +722,7 @@
       row.appendChild(bigBtn('ردّد معايا', 'primary', function () { phase = 1; step2(); }));
       s.appendChild(row);
       show(host, s);
-      later(function () { slowPlay(ayahs, 3); }, 400);
+      setTimeout(function () { slowPlay(ayahs, 3); }, 400);
     }
 
     function step2() {
@@ -746,9 +737,7 @@
       show(host, s);
 
       let i = 0;
-      const g0 = GEN;
       function runOne() {
-        if (!alive(g0) || !cur.isConnected) return;   // الطفل خرج: ما نكملش تلاوة في الخلفية
         if (i >= ayahs.length) {
           const n = bigBtn('خلصت', 'primary', function () { done(); });
           s.appendChild(n);
@@ -758,9 +747,8 @@
         cur.classList.add('current');
         mic.classList.remove('live');
         window.Audio2.playAyah(ayahs[i].audio, AR, ayahs[i].text).then(function () {
-          if (!alive(g0) || !cur.isConnected) return;
           mic.classList.add('live');
-          later(function () { i++; runOne(); }, 2200);
+          setTimeout(function () { i++; runOne(); }, 2200);
         });
       }
       runOne();
@@ -797,8 +785,7 @@
       const box = el('div', 'ayah-box blurred');
       ayahs.forEach(function (a) { box.appendChild(el('div', 'ayah-line q', a.text)); });
       s.appendChild(box);
-      s.appendChild(el('div', 'l-hint', 'قولها بصوتك لبابا أو ماما — وبعدين نلعب لعبة السمع'));
-      s.appendChild(el('div', 'q-note', 'لولي الأمر: التطبيق ما بيسمعش صوت الطفل ولا بيقيّم التلاوة. الخطوة الجاية بتختبر تمييز الآية بالسمع بس.'));
+      s.appendChild(el('div', 'l-hint', 'قولها بصوتك — وبعدين نختبر سمعك'));
       s.appendChild(bigBtn('جاهز للاختبار', 'primary', function () { check(); }));
       show(host, s);
     }
@@ -841,29 +828,18 @@
       later(function () { window.Audio2.playAyahs([target.audio]).catch(function () {}); }, 400);
     }
 
-    /* بعد النجاح: بنسجّل «تمييز سمعي» — والتسميع الحقيقي تأكيد منفصل من ولي الأمر */
+    // بعد النجاح: تسجيل الحفظ
     function verified() {
       const s = center();
       s.appendChild(el('div', 'praise-art', UI.mascot(110, 'celebrate')));
       s.appendChild(el('div', 'praise-text', 'ما شاء الله'));
-      s.appendChild(el('div', 'l-hint', 'عرفت الآية بودنك! دلوقتي سمّعها لبابا أو ماما'));
-      s.appendChild(el('div', 'q-note', 'لولي الأمر: ده اختبار تمييز بالسمع، مش تقييم للتلاوة. لو الطفل سمّع لك الآيات صح، دوس «سمّعها لي صح» عشان تتسجّل في التقرير.'));
-      let finished = false;
-      function finish(heard) {
-        if (finished) return;
-        finished = true;
+      s.appendChild(el('div', 'l-hint', 'سمّعها لبابا أو ماما عشان نثبّتها'));
+      const b = bigBtn('كمل', 'primary', function () {
         window.Store.markSurah(surah.n, lesson.start + ayahs.length, surah.ayahs.length);
-        if (heard) window.Store.markSurahHeard(surah.n);
         SFX.levelup(); UI.burst(12);
         done();
-      }
-      const row = el('div', 'row-2');
-      const bHeard = bigBtn('ولي الأمر: سمّعها لي صح ✓', 'primary', function () { finish(true); });
-      bHeard.classList.add('q-heard');
-      const bNext = ghostBtn('كمل من غير تسميع', function () { finish(false); });
-      bNext.classList.add('q-skip');
-      row.appendChild(bNext); row.appendChild(bHeard);
-      s.appendChild(row);
+      });
+      s.appendChild(b);
       show(host, s);
       say('ما شاء الله', AR, 0.85);
     }
@@ -957,7 +933,7 @@
           b.classList.add('wrong');
           SFX.wrong();
           Pedagogy.Mastery.answer('ar', 'h.' + h.key, false);
-          later(function () { b.classList.remove('wrong'); }, 420);
+          setTimeout(function () { b.classList.remove('wrong'); }, 420);
           say('لأ… ' + h.sound + ' فيها ' + h.name, AR, 0.72);
         }
       });
@@ -970,8 +946,8 @@
     function playBoth() {
       const first = opts[0], second = opts[1];
       say(L.ch + ' ' + (first.ok ? h.sound : rival.sound), AR, 0.62);
-      later(function () { say(L.ch + ' ' + (second.ok ? h.sound : rival.sound), AR, 0.62); }, 1200);
-      later(function () { say('مين فيه ' + h.name + '؟', AR, 0.72); }, 2500);
+      setTimeout(function () { say(L.ch + ' ' + (second.ok ? h.sound : rival.sound), AR, 0.62); }, 1200);
+      setTimeout(function () { say('مين فيه ' + h.name + '؟', AR, 0.72); }, 2500);
     }
     s.appendChild(ghostBtn('اسمع تاني', playBoth));
   }
@@ -1002,7 +978,7 @@
           b.classList.add('wrong');
           SFX.wrong();
           Pedagogy.Mastery.answer('ar', 'h.' + h.key, false);
-          later(function () { b.classList.remove('wrong'); }, 420);
+          setTimeout(function () { b.classList.remove('wrong'); }, 420);
         }
       });
       grid.appendChild(b);
@@ -1056,19 +1032,17 @@
       b.addEventListener('click', function () {
         if (i !== idx) {
           b.classList.add('nudge');
-          later(function () { b.classList.remove('nudge'); }, 380);
+          setTimeout(function () { b.classList.remove('nudge'); }, 380);
           say('ده مش دوره', AR, 0.72);
           return;
         }
         SFX.tap();
         b.classList.add('done');
-        // صوت الحرف: تسجيل بشري للفونيم لو موجود — ما ننطقش اسم الحرف بصوت آلي
-        const sd = window.CURRICULUM.sounds.filter(function (x) { return x.disp === snd || x.disp.split(' ').indexOf(snd) >= 0; })[0];
-        if (sd && hasPhoneme(sd)) playPhoneme(sd);
+        say(snd, EN, 0.72);
         built.textContent += snd;
         idx++;
         if (idx === sounds.length) {
-          later(function () {
+          setTimeout(function () {
             say(w.w, EN, 0.7);
             SFX.correct();
             UI.burst(14);
@@ -1088,15 +1062,15 @@
     const taught = Store.taughtSounds();
     const row = el('div', 'letters-grid');
     taught.slice(0, 3).forEach(function (t) {
-      const b = el('button', 'letter-tile', glyphEl(t.disp, [], { size: 130, color: 'var(--teal)', latin: true, emBox: true }));
-      b.addEventListener('click', function () { SFX.tap(); playPhoneme(t); });
+      const b = el('button', 'letter-tile', glyphEl(String(t.s).toLowerCase(), [], { size: 130, color: 'var(--teal)', latin: true, emBox: true }));
+      b.addEventListener('click', function () { SFX.tap(); say(t.s, EN, 0.7); });
       row.appendChild(b);
     });
     s.appendChild(row);
     const n = bigBtn('خلصت', 'primary', function () { done(); });
     s.appendChild(n);
     show(host, s);
-    later(function () { say('اسمع وكرر معايا', AR, 0.75); }, 300);
+    setTimeout(function () { say('اسمع وكرر معايا', AR, 0.75); }, 300);
   }
 
   /* =======================================================
@@ -1140,12 +1114,12 @@
             Pedagogy.Mastery.answer('ar', l.id, true);
             SFX.correct();
             round++;
-            later(run, 800);
+            setTimeout(run, 800);
           } else {
             b.classList.add('wrong');
             SFX.wrong();
             Pedagogy.Mastery.answer('ar', l.id, false);
-            later(function () { b.classList.remove('wrong'); }, 400);
+            setTimeout(function () { b.classList.remove('wrong'); }, 400);
           }
         });
         grid.appendChild(b);
@@ -1164,13 +1138,14 @@
     function run() {
       if (round >= picks.length) { done(); return; }
       const s0 = picks[round];
-      const dis = enDistractor(s0, Store.taughtSounds());
+      const taught = Store.taughtSounds().filter(function (x) { return x.s !== s0.s; });
+      const dis = taught.length ? taught[0] : { w: 'moon', e: '🌙' };
       const opts = shuffle([{ w: s0.w, e: s0.e, ok: true }, { w: dis.w, e: dis.e, ok: false }]);
       let solved = false;
 
       const s = center();
       s.appendChild(el('div', 'review-badge', 'مراجعة ' + (round + 1) + ' من ' + picks.length));
-      s.appendChild(eyebrow(soundQuestion(s0)));
+      s.appendChild(eyebrow('مين بيبدأ بصوت «' + String(s0.s).toUpperCase() + '»؟'));
       const grid = el('div', 'pics-grid');
       s.appendChild(grid);
       opts.forEach(function (op) {
@@ -1182,18 +1157,18 @@
             Pedagogy.Mastery.answer('en', String(s0.idx), true);
             SFX.correct();
             round++;
-            later(run, 750);
+            setTimeout(run, 750);
           } else {
             btn.classList.add('wrong');
             SFX.wrong();
             Pedagogy.Mastery.answer('en', String(s0.idx), false);
-            later(function () { btn.classList.remove('wrong'); }, 420);
+            setTimeout(function () { btn.classList.remove('wrong'); }, 420);
           }
         });
         grid.appendChild(tile);
       });
       show(host, s);
-      later(function () { playPhoneme(s0); }, 300);
+      setTimeout(function () { say(String(s0.s) + '… ' + s0.w, EN, 0.78); }, 300);
     }
     run();
   }
@@ -1258,27 +1233,18 @@
      التفكير: فهم · تصنيف · سبب ونتيجة · تتابع · استنتاج
      ======================================================= */
   function thinkLesson(host, lesson, unit, done) {
-    const en = unit.lang === 'en' || unit.track === 'en';
-    const L = en ? EN : AR;
-    const set = Thinking.setForCached(unit.id, unit.order || 0, en ? 'en' : 'ar');
+    const set = Thinking.setForCached(unit.id, unit.order || 0);
     const q = set[Math.min(lesson.qi || 0, set.length - 1)];
     if (!q) { done(); return; }
-    const T = en
-      ? { label: 'Think with me', ask: 'Listen', why: 'Because: ', near: 'Almost… think again', easier: 'Let us make it easier: ', ok: 'Yes! ', praise: 'Smart!', removed: 'شيلنا واحد — Try again' }
-      : { label: 'فكّر معايا', ask: 'اسمع السؤال', why: 'عشان كده: ', near: 'قرّب… فكّر تاني', easier: 'خلّينا أسهل: ', ok: 'صح! ', praise: 'ذكي!', removed: 'شيلنا واحد — فضل واحد صح' };
 
     let wrong = 0, solved = false, revealed = false;
 
     const s = center();
-    s.dataset.lang = en ? 'en' : 'ar';
     s.appendChild(el('div', 'think-head',
       '<span class="think-owl">' + UI.mascot(46, 'happy') + '</span>' +
-      '<span class="think-label">' + T.label + '</span>'));
-    const pr = el('div', 'think-prompt' + (en ? ' latin' : ''));
-    pr.textContent = q.q;
-    if (en) pr.setAttribute('dir', 'ltr');
-    s.appendChild(pr);
-    const ask = ghostBtn(T.ask, function () { say(q.q, L, 0.82); });
+      '<span class="think-label">فكّر معايا</span>'));
+    s.appendChild(el('div', 'think-prompt', q.q));
+    const ask = ghostBtn('اسمع السؤال', function () { say(q.q, AR, 0.82); });
     ask.classList.add('think-ask');
     s.appendChild(ask);
 
@@ -1286,28 +1252,26 @@
     s.appendChild(grid);
 
     show(host, s);
-    later(function () { say(q.q, L, 0.82); }, 320);
+    setTimeout(function () { say(q.q, AR, 0.82); }, 320);
 
     q.opts.forEach(function (op, i) {
-      const tile = picTile(op[1], op[0], L, function (btn) {
+      const tile = picTile(op[1], op[0], AR, function (btn) {
         if (solved) return;
         if (i === q.ok) {
           solved = true;
           btn.classList.add('right');
           Pedagogy.Mastery.answer('th', q.key, true);
-          const why = el('div', 'think-why' + (en ? ' latin' : ''));
-          why.textContent = T.why + q.hint;
-          if (en) why.setAttribute('dir', 'ltr');
+          const why = el('div', 'think-why', 'عشان كده: ' + q.hint);
           s.appendChild(why);
-          later(function () { praise(host, T.praise, done); }, 780);
-          say(T.ok + q.hint, L, 0.8);
+          setTimeout(function () { praise(host, 'ذكي!', done); }, 780);
+          say('صح! ' + q.hint, AR, 0.8);
         } else {
           wrong++;
           btn.classList.add('wrong');
           SFX.wrong();
           Pedagogy.Mastery.answer('th', q.key, false);
-          later(function () { btn.classList.remove('wrong'); }, 430);
-          if (wrong === 1) say(T.near, L, 0.82);
+          setTimeout(function () { btn.classList.remove('wrong'); }, 430);
+          if (wrong === 1) say('قرّب… فكّر تاني', AR, 0.82);
           if (wrong >= 2 && !revealed) {
             revealed = true;
             // تسهيل بلا لوم: نشيل بديل غلط من الطريق
@@ -1316,11 +1280,11 @@
             });
             if (wrongTiles[0]) {
               wrongTiles[0].classList.add('gone');
-              UI.toast(T.removed);
+              UI.toast('شيلنا واحد — فضل واحد صح');
             }
-            say(T.easier + q.hint, L, 0.8);
-          } else if (wrong > 1) {
-            say(q.hint, L, 0.8);
+            say('خلّينا أسهل: ' + q.hint, AR, 0.8);
+          } else {
+            say(q.hint, AR, 0.8);
           }
         }
       });
@@ -1351,17 +1315,6 @@
     return READ_BANK[idx % READ_BANK.length];
   }
 
-  /** صوت الحرف بحركته كما هو مكتوب في الكلمة (بَ ≠ بْ ≠ ب) — تسجيل بشري لو الحركة فتحة، وإلا النص بحركاته */
-  function sayPart(part) {
-    if (!part) return Promise.resolve(false);
-    const l = (window.CURRICULUM.letters || []).filter(function (x) { return x.ch === part.ch || x.base === part.ch; })[0];
-    const marks = part.marks.filter(function (m) { return m !== 'shadda'; });
-    if (l && marks.length === 1 && marks[0] === 'fatha' && part.marks.indexOf('shadda') < 0 && window.A3 && A3.has('@sound:' + l.id, 'ar')) {
-      return A3.sayWord('@sound:' + l.id, 'ar');
-    }
-    return say(glyphText(part), AR, 0.7);
-  }
-
   function arReadWord(host, lesson, unit, done) {
     const base = (unit.readIdx || 0) * 3 + (lesson.ri || 0);
     const item = readWordAt(base);
@@ -1387,11 +1340,10 @@
     show(host, s);
 
     let heard = 0;
-    const parts = splitAr(item.w);
     units.forEach(function (g, i) {
       g.addEventListener('click', function () {
         SFX.pop();
-        sayPart(parts[i]);
+        say(units.length && splitAr(item.w)[i] ? splitAr(item.w)[i].ch : '', AR, 0.7);
         g.classList.add('done');
         heard++;
         if (heard === units.length) revealNext();
@@ -1410,47 +1362,15 @@
       s.appendChild(n);
     }
 
-    later(function () { speakWord(item.w, AR); }, 500);
+    setTimeout(function () { speakWord(item.w, AR); }, 500);
     // مسار سريع: بعد ١٢ ثانية نعرض الزر حتى لو لم يضغط كل الحروف
-    later(revealNext, 12000);
+    setTimeout(revealNext, 12000);
   }
 
 
   /* =======================================================
      الأرقام ١–١٠٠
      ======================================================= */
-
-  /** كمية حقيقية لأي عدد ٠–١٠٠: حتى ١٠ نقاط فردية، وبعدها أعمدة عشرات (كل عمود ١٠ نقاط) + آحاد */
-  function countVisual(n) {
-    const box = el('div', 'count-box');
-    box.dataset.n = n;
-    if (n === 0) {
-      box.classList.add('zero');
-      box.appendChild(el('span', 'count-empty', 'مفيش ولا حاجة'));
-      return box;
-    }
-    if (n <= 10) {
-      for (let k = 0; k < n; k++) box.appendChild(el('span', 'count-dot'));
-      return box;
-    }
-    const tens = Math.floor(n / 10), ones = n % 10;
-    box.classList.add('tens');
-    for (let t = 0; t < tens; t++) {
-      const bar = el('span', 'count-ten');
-      for (let k = 0; k < 10; k++) bar.appendChild(el('i', 'count-dot sm'));
-      box.appendChild(bar);
-    }
-    if (ones) {
-      const rest = el('span', 'count-ones');
-      for (let k = 0; k < ones; k++) rest.appendChild(el('i', 'count-dot sm'));
-      box.appendChild(rest);
-    }
-    const cap = el('div', 'count-cap', NUMBERS.toAr(tens) + ' ' + (tens === 1 ? 'عشرة' : (tens === 2 ? 'عشرتين' : (tens <= 10 ? 'عشرات' : ''))) + (ones ? ' و' + NUMBERS.toAr(ones) : ''));
-    const wrap = el('div', 'count-wrap');
-    wrap.appendChild(box); wrap.appendChild(cap);
-    wrap.dataset.n = n;
-    return wrap;
-  }
 
   function numCount(host, lesson, unit, done) {
     const st = lesson.stage;
@@ -1468,7 +1388,9 @@
       const n = nums[i];
       const s = center();
       s.appendChild(eyebrow('عُدّ معايا'));
-      s.appendChild(countVisual(n));
+      const box = el('div', 'count-box');
+      for (let k = 0; k < Math.min(n, 20); k++) box.appendChild(el('span', 'count-dot'));
+      s.appendChild(box);
       s.appendChild(el('div', 'num-big', NUMBERS.toAr(n)));
       s.appendChild(el('div', 'l-hint', NUMBERS.name(n)));
       const nb = bigBtn('التالي', 'primary', function () {
@@ -1479,7 +1401,7 @@
       s.appendChild(nb);
       show(host, s);
       say(NUMBERS.name(n), AR, 0.72);
-      // (كان بينطق رمز الرقم بعد اسمه = تكرار نفس الكلمة؛ كفاية الاسم مرة + زر السماع)
+      setTimeout(function () { say(NUMBERS.toAr(n), AR, 0.6); }, 900);
     }
     one();
   }
@@ -1536,11 +1458,11 @@
             if (firstTry) right++;
             b.classList.add('right'); SFX.correct();
             say(NUMBERS.name(target), AR, 0.75);
-            later(function () { idx++; q(); }, 600);
+            setTimeout(function () { idx++; q(); }, 600);
           } else {
             firstTry = false;               // الغلط يُسقط درجة السؤال
             b.classList.add('wrong'); SFX.wrong();
-            later(function () { b.classList.remove('wrong'); }, 400);
+            setTimeout(function () { b.classList.remove('wrong'); }, 400);
             say('ده ' + NUMBERS.name(o) + '، دور على ' + NUMBERS.name(target), AR, 0.72);
           }
         });
@@ -1569,7 +1491,7 @@
   const MAP = {
     arMeet: arMeet, arFind: arFind, arWord: arWord, arWrite: arWrite,
     arHMeet: arHMeet, arHEar: arHEar, arHPick: arHPick,
-    enMeet: enMeet, enWord: enWord, enWrite: enWrite, enBlend: enBlend, enPick: enPick,
+    enMeet: enMeet, enWord: enWord, enWrite: enWrite, enBlend: enBlend,
     qLearn: qLearn, qRecall: qRecall,
     numCount: numCount, numWrite: numWrite, numTest: numTest,
     mixReview: mixReview, thinkIt: thinkLesson, arReadWord: arReadWord
@@ -1577,10 +1499,6 @@
 
   window.Lessons = { stopAll: stopAll,
     breakPrompt: gentleBreak,
-    // واجهات للاختبار الآلي (منطق بلا واجهة)
-    _test: { arWordPlan: arWordPlan, countVisual: countVisual, soundQuestion: soundQuestion, enDistractor: enDistractor,
-      splitAr: splitAr, glyphText: glyphText, cleanups: function () { return CLEANUPS.length; }, timers: function () { return TIMERS.length; },
-      types: function () { return Object.keys(MAP); } },
     run: function (host, lesson, unit, onDone) {
       const fn = MAP[lesson.type];
       if (!fn) { onDone(); return; }

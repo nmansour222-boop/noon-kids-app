@@ -14,86 +14,23 @@
     surahs: {},         // surahNumber -> {ayahsDone, done}
     sessions: 0,
     seconds: 0,
-    settings: { tts: true, limitMin: 10 },
-    history: [],
-    unitRewards: {}     // unitId -> timestamp: مكافأة إتمام الوحدة تُمنح مرة واحدة فقط
+    settings: { tts: true, limitMin: 10, pin: '1234' },
+    history: []
   };
-  const LIMITS = [0, 10, 15, 20];
-  const TRACK_KEYS = ['ar', 'en', 'qu', 'num', 'th'];
+
+  let state = load();
 
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
-
-  /* ---------- التحقق من البيانات (للتحميل والاستعادة): أي قيمة غير متوقعة تُستبعد ---------- */
-  function isObj(o) { return !!o && typeof o === 'object' && !Array.isArray(o); }
-  function num(v, min, max) { v = Number(v); if (!isFinite(v)) return 0; return Math.max(min, Math.min(max, Math.round(v))); }
-  function str(v, max) { return typeof v === 'string' ? v.replace(/[\u0000-\u001F<>]/g, '').slice(0, max) : ''; }
-  const DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
-  const ID_RE = /^[^<>"'`&\s\u0000-\u001F]{1,80}$/;   // يسمح بالعربي (مثل ar:read.بَاب) ويمنع رموز HTML
-  function sanitize(raw) {
-    const s = clone(DEFAULT);
-    if (!isObj(raw)) return s;
-    s.childName = str(raw.childName, 24).trim();
-    s.stars = num(raw.stars, 0, 1e6);
-    s.streak = num(raw.streak, 0, 1e5);
-    s.lastDay = (typeof raw.lastDay === 'string' && DAY_RE.test(raw.lastDay)) ? raw.lastDay : null;
-    s.sessions = num(raw.sessions, 0, 1e7);
-    s.seconds = num(raw.seconds, 0, 1e9);
-    if (isObj(raw.days)) Object.keys(raw.days).forEach(function (d) { if (DAY_RE.test(d)) s.days[d] = num(raw.days[d], 0, 86400); });
-    if (isObj(raw.lessons)) Object.keys(raw.lessons).forEach(function (k) { if (ID_RE.test(k)) s.lessons[k] = num(raw.lessons[k], 1, 9e15) || 1; });
-    if (isObj(raw.unitRewards)) Object.keys(raw.unitRewards).forEach(function (k) { if (ID_RE.test(k)) s.unitRewards[k] = num(raw.unitRewards[k], 1, 9e15) || 1; });
-    if (isObj(raw.items)) Object.keys(raw.items).forEach(function (k) {
-      const t = k.split(':')[0];
-      if (!ID_RE.test(k) || TRACK_KEYS.indexOf(t) < 0 || !isObj(raw.items[k])) return;
-      const it = raw.items[k], o = { seen: num(it.seen, 0, 1e6), ok: num(it.ok, 0, 1e6), bad: num(it.bad, 0, 1e6) };
-      ['streak', 'lvl'].forEach(function (f) { if (it[f] != null) o[f] = num(it[f], 0, 1000); });
-      if (it.due != null) o.due = num(it.due, 0, 9e15);
-      s.items[k] = o;
-    });
-    if (isObj(raw.surahs)) Object.keys(raw.surahs).forEach(function (k) {
-      const n = parseInt(k, 10);
-      if (!(n >= 1 && n <= 114) || String(n) !== k || !isObj(raw.surahs[k])) return;
-      const v = raw.surahs[k], o = { ayahsDone: num(v.ayahsDone, 0, 300), done: v.done === true };
-      if (v.at != null) o.at = num(v.at, 0, 9e15);
-      if (v.heard != null) o.heard = num(v.heard, 0, 9e15);
-      s.surahs[k] = o;
-    });
-    if (isObj(raw.settings)) {
-      const st = raw.settings;
-      s.settings.tts = st.tts !== false;
-      if (st.ttsUser === true) s.settings.ttsUser = true;
-      s.settings.limitMin = LIMITS.indexOf(Number(st.limitMin)) >= 0 ? Number(st.limitMin) : DEFAULT.settings.limitMin;
-    }
-    if (Array.isArray(raw.history)) s.history = raw.history.slice(0, 80).filter(isObj).map(function (h) {
-      return { at: num(h.at, 0, 9e15), track: TRACK_KEYS.indexOf(h.track) >= 0 ? h.track : '', label: str(h.label, 80) };
-    });
-    return s;
-  }
-
-  let storageOk = true, lastSaveError = null, warned = false;
   function load() {
     try {
       const raw = localStorage.getItem(KEY);
       if (!raw) return clone(DEFAULT);
-      return sanitize(JSON.parse(raw));
+      const s = Object.assign(clone(DEFAULT), JSON.parse(raw));
+      s.settings = Object.assign({}, DEFAULT.settings, s.settings || {});
+      return s;
     } catch (e) { return clone(DEFAULT); }
   }
-  let state = load();
-  /** الحفظ يُرجع true/false — الفشل (امتلاء/حظر التخزين) يظهر لولي الأمر بدل ما يضيع التقدّم بصمت */
-  function save() {
-    try {
-      localStorage.setItem(KEY, JSON.stringify(state));
-      storageOk = true; lastSaveError = null;
-      return true;
-    } catch (e) {
-      storageOk = false; lastSaveError = (e && e.name) || 'Error';
-      if (!warned && window.UI && UI.toast) {
-        warned = true;
-        UI.toast('تنبيه: التقدّم مش بيتحفظ على الجهاز (مساحة التخزين ممتلية أو محظورة)', 4200);
-      }
-      try { window.dispatchEvent(new CustomEvent('noon:storage-error', { detail: lastSaveError })); } catch (e2) {}
-      return false;
-    }
-  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
   function today() {
     const d = new Date();
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
@@ -127,41 +64,26 @@
     markLesson(id) {
       if (!state.lessons[id]) { state.lessons[id] = Date.now(); save(); }
     },
-    /** الوحدة الحالية والدرس التالي فيها (للتقرير): أول وحدة فيها درس غير مكتمل */
+    doneCount(track) {
+      const list = window.SYLLABUS.forTrack(track);
+      let n = 0;
+      list.forEach(function (l) { if (state.lessons[l.id]) n++; });
+      return n;
+    },
+    trackTotal(track) { return window.SYLLABUS.forTrack(track).length; },
+    trackProgress(track) { return this.doneCount(track) / Math.max(1, this.trackTotal(track)); },
     currentLesson(track) {
-      const units = window.SYLLABUS.forTrack(track);
-      for (let i = 0; i < units.length; i++) {
-        const u = units[i];
-        for (let j = 0; j < u.lessons.length; j++) {
-          if (!state.lessons[u.lessons[j].id]) return { unit: u, lesson: u.lessons[j], step: j + 1, steps: u.lessons.length, finished: false };
-        }
-      }
-      const last = units[units.length - 1];
-      return last ? { unit: last, lesson: null, step: last.lessons.length, steps: last.lessons.length, finished: true } : null;
+      const list = window.SYLLABUS.forTrack(track);
+      for (let i = 0; i < list.length; i++) if (!state.lessons[list[i].id]) return list[i];
+      return list[list.length - 1] || null;
     },
-    storageOk() { return storageOk; },
-    storageError() { return lastSaveError; },
-    /** فحص فعلي للكتابة في التخزين */
-    probeStorage() {
-      try { localStorage.setItem('noon_probe', '1'); localStorage.removeItem('noon_probe'); return true; } catch (e) { return false; }
+    isUnlocked(track, lessonId) {
+      const list = window.SYLLABUS.forTrack(track);
+      const idx = list.findIndex(function (l) { return l.id === lessonId; });
+      if (idx < 0) return false;
+      if (idx === 0) return true;
+      return !!state.lessons[list[idx - 1].id];
     },
-    /** آخر ٧ أيام تقويمية من النهارده (أيام بلا استخدام = صفر) */
-    lastDays(n) {
-      const out = [];
-      const base = new Date();
-      for (let i = (n || 7) - 1; i >= 0; i--) {
-        const d = new Date(base.getFullYear(), base.getMonth(), base.getDate() - i);
-        const k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-        out.push({ day: k, seconds: state.days[k] || 0 });
-      }
-      return out;
-    },
-    /** مكافأة إتمام الوحدة: true أول مرة فقط */
-    claimUnitReward(unitId) {
-      if (state.unitRewards[unitId]) return false;
-      state.unitRewards[unitId] = Date.now(); save(); return true;
-    },
-    unitRewarded(unitId) { return !!state.unitRewards[unitId]; },
 
     record(track, id, ok) {
       const k = track + ':' + id;
@@ -173,14 +95,6 @@
     item(track, id) { return state.items[track + ':' + id] || { seen: 0, ok: 0, bad: 0 }; },
 
     surahDone(n) { return !!(state.surahs[n] && state.surahs[n].done); },
-    /** ولي الأمر سمع السورة من الطفل فعلاً (تأكيد بشري — التطبيق لا يقيّم التلاوة صوتياً) */
-    markSurahHeard(n) {
-      if (!state.surahs[n]) state.surahs[n] = { ayahsDone: 0, done: false };
-      state.surahs[n].heard = Date.now(); save();
-    },
-    surahsHeardCount() {
-      return Object.keys(state.surahs).filter(function (k) { return state.surahs[k] && state.surahs[k].done && state.surahs[k].heard; }).length;
-    },
     markSurah(n, ayahsDone, total) {
       if (!state.surahs[n]) state.surahs[n] = { ayahsDone: 0, done: false };
       state.surahs[n].ayahsDone = Math.max(state.surahs[n].ayahsDone || 0, ayahsDone);
@@ -205,19 +119,19 @@
 
     /** نسخة احتياطية قابلة للاستعادة */
     exportJSON() {
-      return { app: 'noon', version: 3, at: Date.now(), state: state };
+      return { app: 'noon', version: 2, at: Date.now(), state: state };
     },
-    /** استعادة بعد التحقق من المخطط: أي حقل غير متوقع يُستبعد، والنصوص تُنظَّف */
     importJSON(obj) {
-      if (!isObj(obj) || obj.app !== 'noon' || !isObj(obj.state)) return false;
-      if (obj.version != null && [2, 3].indexOf(Number(obj.version)) < 0) return false;
-      state = sanitize(obj.state);
-      const ok = save();
+      if (!obj || !obj.state || obj.app !== 'noon') return false;
+      const s = Object.assign(clone(DEFAULT), obj.state);
+      s.settings = Object.assign({}, DEFAULT.settings, s.settings || {});
+      state = s;
+      save();
       Store.syncTts();
-      return ok;
+      return true;
     },
-    sanitize: sanitize,
-    reset() { state = clone(DEFAULT); const ok = save(); Store.syncTts(); return ok; },
+    save: save,
+    reset() { state = clone(DEFAULT); save(); Store.syncTts(); },
 
     /** الصوت الآلي لنطق التعليمات وأسماء الحروف: تلقائي (مفعّل) ما لم يغيّره ولي الأمر صراحةً.
      *  ملاحظة: التلاوة القرآنية لا تُنطق آلياً أبداً مهما كان هذا الإعداد. */
