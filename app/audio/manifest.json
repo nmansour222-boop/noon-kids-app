@@ -1,0 +1,4869 @@
+{
+ "version": 6,
+ "codec": "aac/m4a (iOS+Android)",
+ "sources": [
+  "Shtooka Project (CC BY 3.0 US)",
+  "Lingua Libre (CC BY-SA 4.0)"
+ ],
+ "note": "كل التسجيلات بشرية — لا يوجد توليد آلي في هذا الملف.",
+ "items": {
+  "ar:أَسَد": {
+   "file": "audio/ar/أسد.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fenakhay Recorder: Fenakhay",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fenakhay-أسد.wav",
+   "format": "m4a",
+   "bytes": 7730
+  },
+  "ar:أَرْنَب": {
+   "file": "audio/ar/أرنب.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fenakhay Recorder: Fenakhay",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fenakhay-أرنب.wav",
+   "format": "m4a",
+   "bytes": 8210
+  },
+  "ar:بَطَّة": {
+   "file": "audio/ar/بطة.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-بطة.wav",
+   "format": "m4a",
+   "bytes": 7899
+  },
+  "ar:بَاب": {
+   "file": "audio/ar/باب.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-باب.ogg",
+   "format": "m4a",
+   "bytes": 7121
+  },
+  "ar:تُفَّاحَة": {
+   "file": "audio/ar/تفاحة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-تفاحة.ogg",
+   "format": "m4a",
+   "bytes": 10045
+  },
+  "ar:تَنُّورَة": {
+   "file": "audio/ar/تنورة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-تنورة.ogg",
+   "format": "m4a",
+   "bytes": 10091
+  },
+  "ar:ثَعْلَب": {
+   "file": "audio/ar/ثعلب.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "İZAY",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-ثعلب.oga",
+   "format": "m4a",
+   "bytes": 9168
+  },
+  "ar:ثَوْر": {
+   "file": "audio/ar/ثور.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-ثور.wav",
+   "format": "m4a",
+   "bytes": 6719
+  },
+  "ar:جَمَل": {
+   "file": "audio/ar/جمل.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Spotless Mind1988 Recorder: Spotless Mind1988",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Spotless_Mind1988-جمل.wav",
+   "format": "m4a",
+   "bytes": 6716
+  },
+  "ar:جَبَل": {
+   "file": "audio/ar/جبل.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-جبل.ogg",
+   "format": "m4a",
+   "bytes": 8548
+  },
+  "ar:حِصَان": {
+   "file": "audio/ar/حصان.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-حصان.ogg",
+   "format": "m4a",
+   "bytes": 10317
+  },
+  "ar:حُوت": {
+   "file": "audio/ar/حوت.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-حوت.wav",
+   "format": "m4a",
+   "bytes": 8356
+  },
+  "ar:خُبْز": {
+   "file": "audio/ar/خبز.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-خبز.ogg",
+   "format": "m4a",
+   "bytes": 7966
+  },
+  "ar:خَرُوف": {
+   "file": "audio/ar/خروف.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-خروف.ogg",
+   "format": "m4a",
+   "bytes": 8297
+  },
+  "ar:دُبّ": {
+   "file": "audio/ar/دب.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-دب.ogg",
+   "format": "m4a",
+   "bytes": 8910
+  },
+  "ar:دِيك": {
+   "file": "audio/ar/ديك.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fjmustak Recorder: Fjmustak",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fjmustak-ديك.wav",
+   "format": "m4a",
+   "bytes": 6600
+  },
+  "ar:ذِئْب": {
+   "file": "audio/ar/ذئب.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-ذئب.wav",
+   "format": "m4a",
+   "bytes": 7286
+  },
+  "ar:ذَهَب": {
+   "file": "audio/ar/ذهب.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-ذهب.ogg",
+   "format": "m4a",
+   "bytes": 7500
+  },
+  "ar:رِيشَة": {
+   "file": "audio/ar/ريشة.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fjmustak Recorder: Fjmustak",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fjmustak-ريشة.wav",
+   "format": "m4a",
+   "bytes": 6910
+  },
+  "ar:رَمْل": {
+   "file": "audio/ar/رمل.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-رمل.ogg",
+   "format": "m4a",
+   "bytes": 8286
+  },
+  "ar:زَرَافَة": {
+   "file": "audio/ar/زرافة.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-زرافة.wav",
+   "format": "m4a",
+   "bytes": 8605
+  },
+  "ar:زَهْرَة": {
+   "file": "audio/ar/زهرة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-زهرة.ogg",
+   "format": "m4a",
+   "bytes": 9135
+  },
+  "ar:سَمَكَة": {
+   "file": "audio/ar/سمكة.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-سمكة.wav",
+   "format": "m4a",
+   "bytes": 9790
+  },
+  "ar:سَاعَة": {
+   "file": "audio/ar/ساعة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-ساعة.ogg",
+   "format": "m4a",
+   "bytes": 8260
+  },
+  "ar:شَمْس": {
+   "file": "audio/ar/شمس.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-شمس.ogg",
+   "format": "m4a",
+   "bytes": 9467
+  },
+  "ar:شَجَرَة": {
+   "file": "audio/ar/شجرة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Zannane Mohamed, Heulin Frederic",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-شجرة.ogg",
+   "format": "m4a",
+   "bytes": 8552
+  },
+  "ar:صَقْر": {
+   "file": "audio/ar/صقر.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-صقر.wav",
+   "format": "m4a",
+   "bytes": 7305
+  },
+  "ar:صَابُون": {
+   "file": "audio/ar/صابون.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-صابون.ogg",
+   "format": "m4a",
+   "bytes": 10626
+  },
+  "ar:ضِفْدَع": {
+   "file": "audio/ar/ضفدع.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-ضفدع.wav",
+   "format": "m4a",
+   "bytes": 9240
+  },
+  "ar:ضَوْء": {
+   "file": "audio/ar/ضوء.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-ضوء.ogg",
+   "format": "m4a",
+   "bytes": 10667
+  },
+  "ar:طَائِر": {
+   "file": "audio/ar/طائر.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-طائر.ogg",
+   "format": "m4a",
+   "bytes": 8683
+  },
+  "ar:طَمَاطِم": {
+   "file": "audio/ar/طماطم.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-طماطم.wav",
+   "format": "m4a",
+   "bytes": 8895
+  },
+  "ar:ظَرْف": {
+   "file": "audio/ar/ظرف.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-ظرف.ogg",
+   "format": "m4a",
+   "bytes": 7428
+  },
+  "ar:ظَبْي": {
+   "file": "audio/ar/ظبي.m4a",
+   "license": "CC BY 4.0",
+   "author": "Speaker: Al-jahbaḏ Recorder: Al-jahbaḏ",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Al-jahbaḏ-ظبي.wav",
+   "format": "m4a",
+   "bytes": 8117
+  },
+  "ar:عَيْن": {
+   "file": "audio/ar/عين.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-عين.ogg",
+   "format": "m4a",
+   "bytes": 9524
+  },
+  "ar:عِنَب": {
+   "file": "audio/ar/عنب.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-عنب.wav",
+   "format": "m4a",
+   "bytes": 7607
+  },
+  "ar:غُرَاب": {
+   "file": "audio/ar/غراب.m4a",
+   "license": "CC0",
+   "author": "Speaker: Shahjina Recorder: Shahjina",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Shahjina-غراب.wav",
+   "format": "m4a",
+   "bytes": 6926
+  },
+  "ar:غَيْمَة": {
+   "file": "audio/ar/غيمة.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fjmustak Recorder: Fjmustak",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fjmustak-غيمة.wav",
+   "format": "m4a",
+   "bytes": 6923
+  },
+  "ar:فِيل": {
+   "file": "audio/ar/فيل.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-فيل.wav",
+   "format": "m4a",
+   "bytes": 8730
+  },
+  "ar:فَرَاشَة": {
+   "file": "audio/ar/فراشة.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fjmustak Recorder: Fjmustak",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fjmustak-فراشة.wav",
+   "format": "m4a",
+   "bytes": 7999
+  },
+  "ar:قِطّ": {
+   "file": "audio/ar/قط.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-قط.ogg",
+   "format": "m4a",
+   "bytes": 6368
+  },
+  "ar:قَمَر": {
+   "file": "audio/ar/قمر.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-قمر.ogg",
+   "format": "m4a",
+   "bytes": 8632
+  },
+  "ar:كِتَاب": {
+   "file": "audio/ar/كتاب.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-كتاب.ogg",
+   "format": "m4a",
+   "bytes": 8295
+  },
+  "ar:كَلْب": {
+   "file": "audio/ar/كلب.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-كلب.ogg",
+   "format": "m4a",
+   "bytes": 6731
+  },
+  "ar:لَيْمُون": {
+   "file": "audio/ar/ليمون.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-ليمون.wav",
+   "format": "m4a",
+   "bytes": 13670
+  },
+  "ar:لُعْبَة": {
+   "file": "audio/ar/لعبة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-لعبة.ogg",
+   "format": "m4a",
+   "bytes": 10928
+  },
+  "ar:مَوْز": {
+   "file": "audio/ar/موز.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-موز.wav",
+   "format": "m4a",
+   "bytes": 9216
+  },
+  "ar:مِفْتَاح": {
+   "file": "audio/ar/مفتاح.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-مفتاح.ogg",
+   "format": "m4a",
+   "bytes": 13952
+  },
+  "ar:نَجْمَة": {
+   "file": "audio/ar/نجمة.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-نجمة.ogg",
+   "format": "m4a",
+   "bytes": 8888
+  },
+  "ar:نَمِر": {
+   "file": "audio/ar/نمر.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-نمر.wav",
+   "format": "m4a",
+   "bytes": 8516
+  },
+  "ar:هَاتِف": {
+   "file": "audio/ar/هاتف.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-هاتف.wav",
+   "format": "m4a",
+   "bytes": 9726
+  },
+  "ar:هَدِيَّة": {
+   "file": "audio/ar/هدية.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-هدية.ogg",
+   "format": "m4a",
+   "bytes": 6618
+  },
+  "ar:وَرْدَة": {
+   "file": "audio/ar/وردة.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-وردة.wav",
+   "format": "m4a",
+   "bytes": 8463
+  },
+  "ar:وَلَد": {
+   "file": "audio/ar/ولد.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Speaker: Zinou2go Recorder: Zinou2go",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Zinou2go-ولد.wav",
+   "format": "m4a",
+   "bytes": 9108
+  },
+  "ar:يَد": {
+   "file": "audio/ar/يد.m4a",
+   "license": "CC BY 3.0 us",
+   "author": "Nhaily Mustapha, Vion Nicolas",
+   "source": "https://commons.wikimedia.org/wiki/File:Ar-يد.ogg",
+   "format": "m4a",
+   "bytes": 7741
+  },
+  "ar:يَاسَمِين": {
+   "file": "audio/ar/ياسمين.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Fjmustak Recorder: Fjmustak",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q13955_(ara)-Fjmustak-ياسمين.wav",
+   "format": "m4a",
+   "bytes": 8636
+  },
+  "en:ant": {
+   "file": "audio/en/ant.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-ant.ogg",
+   "format": "m4a",
+   "bytes": 5780
+  },
+  "en:apple": {
+   "file": "audio/en/apple.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-apple.ogg",
+   "format": "m4a",
+   "bytes": 4802
+  },
+  "en:bed": {
+   "file": "audio/en/bed.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-bed.ogg",
+   "format": "m4a",
+   "bytes": 5363
+  },
+  "en:bee": {
+   "file": "audio/en/bee.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-bee.ogg",
+   "format": "m4a",
+   "bytes": 4843
+  },
+  "en:blue": {
+   "file": "audio/en/blue.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-blue.ogg",
+   "format": "m4a",
+   "bytes": 4918
+  },
+  "en:boat": {
+   "file": "audio/en/boat.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-boat.ogg",
+   "format": "m4a",
+   "bytes": 4606
+  },
+  "en:book": {
+   "file": "audio/en/book.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-book.ogg",
+   "format": "m4a",
+   "bytes": 4938
+  },
+  "en:box": {
+   "file": "audio/en/box.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-box.ogg",
+   "format": "m4a",
+   "bytes": 5738
+  },
+  "en:bus": {
+   "file": "audio/en/bus.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-bus.ogg",
+   "format": "m4a",
+   "bytes": 7682
+  },
+  "en:cat": {
+   "file": "audio/en/cat.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-cat.ogg",
+   "format": "m4a",
+   "bytes": 4682
+  },
+  "en:cheese": {
+   "file": "audio/en/cheese.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "No machine-readable author provided. Dvortygirl assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-cheese.ogg",
+   "format": "m4a",
+   "bytes": 5461
+  },
+  "en:coin": {
+   "file": "audio/en/coin.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-coin.ogg",
+   "format": "m4a",
+   "bytes": 5482
+  },
+  "en:cup": {
+   "file": "audio/en/cup.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-cup.ogg",
+   "format": "m4a",
+   "bytes": 5734
+  },
+  "en:dog": {
+   "file": "audio/en/dog.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-dog.ogg",
+   "format": "m4a",
+   "bytes": 5160
+  },
+  "en:egg": {
+   "file": "audio/en/egg.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-egg.ogg",
+   "format": "m4a",
+   "bytes": 4577
+  },
+  "en:fan": {
+   "file": "audio/en/fan.m4a",
+   "license": "CC0",
+   "author": "Speaker: Wodencafe Recorder: Wodencafe",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-Wodencafe-fan.wav",
+   "format": "m4a",
+   "bytes": 6039
+  },
+  "en:fish": {
+   "file": "audio/en/fish.m4a",
+   "license": "Public domain",
+   "author": "Lingua Libre",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-fish.ogg",
+   "format": "m4a",
+   "bytes": 5712
+  },
+  "en:flower": {
+   "file": "audio/en/flower.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-flower.ogg",
+   "format": "m4a",
+   "bytes": 5131
+  },
+  "en:goat": {
+   "file": "audio/en/goat.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-goat.ogg",
+   "format": "m4a",
+   "bytes": 4336
+  },
+  "en:hat": {
+   "file": "audio/en/hat.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-hat.ogg",
+   "format": "m4a",
+   "bytes": 5462
+  },
+  "en:house": {
+   "file": "audio/en/house.m4a",
+   "license": "CC0",
+   "author": "Speaker: Wodencafe Recorder: Wodencafe",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-Wodencafe-house.wav",
+   "format": "m4a",
+   "bytes": 6934
+  },
+  "en:insect": {
+   "file": "audio/en/insect.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-insect.ogg",
+   "format": "m4a",
+   "bytes": 8065
+  },
+  "en:jam": {
+   "file": "audio/en/jam.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-jam.ogg",
+   "format": "m4a",
+   "bytes": 6748
+  },
+  "en:juice": {
+   "file": "audio/en/juice.m4a",
+   "license": "Public domain",
+   "author": "No machine-readable author provided. Dominic assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-juice.ogg",
+   "format": "m4a",
+   "bytes": 6600
+  },
+  "en:lion": {
+   "file": "audio/en/lion.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-lion.ogg",
+   "format": "m4a",
+   "bytes": 5995
+  },
+  "en:map": {
+   "file": "audio/en/map.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-map.ogg",
+   "format": "m4a",
+   "bytes": 4636
+  },
+  "en:moon": {
+   "file": "audio/en/moon.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-moon.ogg",
+   "format": "m4a",
+   "bytes": 4857
+  },
+  "en:mouse": {
+   "file": "audio/en/mouse.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-mouse.ogg",
+   "format": "m4a",
+   "bytes": 6104
+  },
+  "en:net": {
+   "file": "audio/en/net.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-net.ogg",
+   "format": "m4a",
+   "bytes": 4868
+  },
+  "en:octopus": {
+   "file": "audio/en/octopus.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-octopus.ogg",
+   "format": "m4a",
+   "bytes": 9785
+  },
+  "en:orange": {
+   "file": "audio/en/orange.m4a",
+   "license": "CC0",
+   "author": "Speaker: Wodencafe Recorder: Wodencafe",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-Wodencafe-orange.wav",
+   "format": "m4a",
+   "bytes": 7472
+  },
+  "en:pan": {
+   "file": "audio/en/pan.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pan.ogg",
+   "format": "m4a",
+   "bytes": 6626
+  },
+  "en:pat": {
+   "file": "audio/en/pat.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pat.ogg",
+   "format": "m4a",
+   "bytes": 5248
+  },
+  "en:pen": {
+   "file": "audio/en/pen.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pen.ogg",
+   "format": "m4a",
+   "bytes": 5703
+  },
+  "en:pie": {
+   "file": "audio/en/pie.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "No machine-readable author provided. Dvortygirl assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pie.ogg",
+   "format": "m4a",
+   "bytes": 4875
+  },
+  "en:pig": {
+   "file": "audio/en/pig.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pig.ogg",
+   "format": "m4a",
+   "bytes": 4568
+  },
+  "en:pin": {
+   "file": "audio/en/pin.m4a",
+   "license": "Public domain",
+   "author": "Lingua Libre",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-pin.ogg",
+   "format": "m4a",
+   "bytes": 7940
+  },
+  "en:queen": {
+   "file": "audio/en/queen.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-queen.ogg",
+   "format": "m4a",
+   "bytes": 5161
+  },
+  "en:rabbit": {
+   "file": "audio/en/rabbit.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-rabbit.ogg",
+   "format": "m4a",
+   "bytes": 7759
+  },
+  "en:rain": {
+   "file": "audio/en/rain.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-rain.ogg",
+   "format": "m4a",
+   "bytes": 5436
+  },
+  "en:ring": {
+   "file": "audio/en/ring.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-ring.ogg",
+   "format": "m4a",
+   "bytes": 4854
+  },
+  "en:sheep": {
+   "file": "audio/en/sheep.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-sheep.ogg",
+   "format": "m4a",
+   "bytes": 5447
+  },
+  "en:shell": {
+   "file": "audio/en/shell.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-shell.ogg",
+   "format": "m4a",
+   "bytes": 7440
+  },
+  "en:sip": {
+   "file": "audio/en/sip.m4a",
+   "license": "CC BY-SA 4.0",
+   "author": "Speaker: Vealhurl Recorder: Vealhurl",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-Vealhurl-sip.wav",
+   "format": "m4a",
+   "bytes": 6633
+  },
+  "en:sit": {
+   "file": "audio/en/sit.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-sit.ogg",
+   "format": "m4a",
+   "bytes": 5136
+  },
+  "en:snap": {
+   "file": "audio/en/snap.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-snap.ogg",
+   "format": "m4a",
+   "bytes": 3493
+  },
+  "en:star": {
+   "file": "audio/en/star.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "No machine-readable author provided. Dvortygirl assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-star.ogg",
+   "format": "m4a",
+   "bytes": 5987
+  },
+  "en:sun": {
+   "file": "audio/en/sun.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-sun.ogg",
+   "format": "m4a",
+   "bytes": 7721
+  },
+  "en:tap": {
+   "file": "audio/en/tap.m4a",
+   "license": "Public domain",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-tap.ogg",
+   "format": "m4a",
+   "bytes": 4582
+  },
+  "en:this": {
+   "file": "audio/en/this.m4a",
+   "license": "Public domain",
+   "author": "Lingua Libre",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-this.ogg",
+   "format": "m4a",
+   "bytes": 7954
+  },
+  "en:three": {
+   "file": "audio/en/three.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-three.ogg",
+   "format": "m4a",
+   "bytes": 5153
+  },
+  "en:tiger": {
+   "file": "audio/en/tiger.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-tiger.ogg",
+   "format": "m4a",
+   "bytes": 7426
+  },
+  "en:tin": {
+   "file": "audio/en/tin.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "No machine-readable author provided. Dvortygirl assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-tin.ogg",
+   "format": "m4a",
+   "bytes": 5168
+  },
+  "en:tip": {
+   "file": "audio/en/tip.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-tip.ogg",
+   "format": "m4a",
+   "bytes": 7179
+  },
+  "en:top": {
+   "file": "audio/en/top.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-top.ogg",
+   "format": "m4a",
+   "bytes": 5253
+  },
+  "en:umbrella": {
+   "file": "audio/en/umbrella.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-umbrella.ogg",
+   "format": "m4a",
+   "bytes": 6301
+  },
+  "en:van": {
+   "file": "audio/en/van.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-van.ogg",
+   "format": "m4a",
+   "bytes": 7423
+  },
+  "en:water": {
+   "file": "audio/en/water.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "Dvortygirl",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-water.ogg",
+   "format": "m4a",
+   "bytes": 6072
+  },
+  "en:zebra": {
+   "file": "audio/en/zebra.m4a",
+   "license": "CC BY-SA 3.0",
+   "author": "No machine-readable author provided. Dvortygirl assumed (based on copyright claims).",
+   "source": "https://commons.wikimedia.org/wiki/File:En-us-zebra.ogg",
+   "format": "m4a",
+   "bytes": 6041
+  },
+  "en:yellow": {
+   "file": "audio/en/yellow.m4a",
+   "license": "CC0",
+   "author": "Speaker: Wodencafe\nRecorder: Wodencafe",
+   "source": "https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-Wodencafe-yellow.wav",
+   "format": "m4a",
+   "bytes": 6348
+  },
+  "ar:@name:alef": {
+   "file": "audio/ar/letters/name-alef.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:alef": {
+   "file": "audio/ar/letters/sound-alef.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:ba": {
+   "file": "audio/ar/letters/name-ba.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:ba": {
+   "file": "audio/ar/letters/sound-ba.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:ta": {
+   "file": "audio/ar/letters/name-ta.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:ta": {
+   "file": "audio/ar/letters/sound-ta.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:tha": {
+   "file": "audio/ar/letters/name-tha.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:tha": {
+   "file": "audio/ar/letters/sound-tha.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:jeem": {
+   "file": "audio/ar/letters/name-jeem.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:jeem": {
+   "file": "audio/ar/letters/sound-jeem.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:ha": {
+   "file": "audio/ar/letters/name-ha.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:ha": {
+   "file": "audio/ar/letters/sound-ha.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:kha": {
+   "file": "audio/ar/letters/name-kha.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:kha": {
+   "file": "audio/ar/letters/sound-kha.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:dal": {
+   "file": "audio/ar/letters/name-dal.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:dal": {
+   "file": "audio/ar/letters/sound-dal.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:thal": {
+   "file": "audio/ar/letters/name-thal.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:thal": {
+   "file": "audio/ar/letters/sound-thal.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:ra": {
+   "file": "audio/ar/letters/name-ra.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:ra": {
+   "file": "audio/ar/letters/sound-ra.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:zay": {
+   "file": "audio/ar/letters/name-zay.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:zay": {
+   "file": "audio/ar/letters/sound-zay.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:seen": {
+   "file": "audio/ar/letters/name-seen.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:seen": {
+   "file": "audio/ar/letters/sound-seen.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:sheen": {
+   "file": "audio/ar/letters/name-sheen.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:sheen": {
+   "file": "audio/ar/letters/sound-sheen.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:sad": {
+   "file": "audio/ar/letters/name-sad.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:sad": {
+   "file": "audio/ar/letters/sound-sad.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:dad": {
+   "file": "audio/ar/letters/name-dad.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:dad": {
+   "file": "audio/ar/letters/sound-dad.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:taa": {
+   "file": "audio/ar/letters/name-taa.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:taa": {
+   "file": "audio/ar/letters/sound-taa.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:zaa": {
+   "file": "audio/ar/letters/name-zaa.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:zaa": {
+   "file": "audio/ar/letters/sound-zaa.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:ain": {
+   "file": "audio/ar/letters/name-ain.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:ain": {
+   "file": "audio/ar/letters/sound-ain.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:ghain": {
+   "file": "audio/ar/letters/name-ghain.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:ghain": {
+   "file": "audio/ar/letters/sound-ghain.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:fa": {
+   "file": "audio/ar/letters/name-fa.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:fa": {
+   "file": "audio/ar/letters/sound-fa.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:qaf": {
+   "file": "audio/ar/letters/name-qaf.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:qaf": {
+   "file": "audio/ar/letters/sound-qaf.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:kaf": {
+   "file": "audio/ar/letters/name-kaf.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:kaf": {
+   "file": "audio/ar/letters/sound-kaf.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:lam": {
+   "file": "audio/ar/letters/name-lam.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:lam": {
+   "file": "audio/ar/letters/sound-lam.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:meem": {
+   "file": "audio/ar/letters/name-meem.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:meem": {
+   "file": "audio/ar/letters/sound-meem.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:noon": {
+   "file": "audio/ar/letters/name-noon.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:noon": {
+   "file": "audio/ar/letters/sound-noon.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:haa": {
+   "file": "audio/ar/letters/name-haa.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:haa": {
+   "file": "audio/ar/letters/sound-haa.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:waw": {
+   "file": "audio/ar/letters/name-waw.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:waw": {
+   "file": "audio/ar/letters/sound-waw.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:@name:ya": {
+   "file": "audio/ar/letters/name-ya.m4a",
+   "license": "Public domain",
+   "author": "Arabic alphabet recording (public domain)"
+  },
+  "ar:@sound:ya": {
+   "file": "audio/ar/letters/sound-ya.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:شمس": {
+   "file": "audio/ar/شمس.m4a",
+   "license": "Provided by the project owner",
+   "author": "Project lesson recording"
+  },
+  "ar:#أربعة": {
+   "file": "audio/ar/gen/g-555e79ecd7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أربعة وثلاثون": {
+   "file": "audio/ar/gen/g-3623fed0c7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أربعة وستون": {
+   "file": "audio/ar/gen/g-aa50d5bde9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أكلت": {
+   "file": "audio/ar/gen/g-426b5c2fa4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد مش بيعيش في البيت": {
+   "file": "audio/ar/gen/g-88b291777c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد مش فاكهة": {
+   "file": "audio/ar/gen/g-3781715ebb.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد مش من العربية": {
+   "file": "audio/ar/gen/g-ecc5d999ab.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أَ فيها الفَتْحَة": {
+   "file": "audio/ar/gen/g-dfe90e353a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#إحنا في الشتا": {
+   "file": "audio/ar/gen/g-708da4f4d3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اتعلمت 1 حاجات جديدة النهارده": {
+   "file": "audio/ar/gen/g-ae2606954d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اثنان": {
+   "file": "audio/ar/gen/g-656d784bc1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اثنان وثمانون": {
+   "file": "audio/ar/gen/g-38dc0afd60.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اثنان وعشرون": {
+   "file": "audio/ar/gen/g-8218dc78e6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اسمع": {
+   "file": "audio/ar/gen/g-e410567537.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اسمع وكرر معايا": {
+   "file": "audio/ar/gen/g-0b7d870b0a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف أَلِف بصباعك": {
+   "file": "audio/ar/gen/g-72cacdb586.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف جِيم بصباعك": {
+   "file": "audio/ar/gen/g-c1d6ee5372.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف ذَال بصباعك": {
+   "file": "audio/ar/gen/g-c665111813.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف شِين بصباعك": {
+   "file": "audio/ar/gen/g-6b135ff769.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف ظَاء بصباعك": {
+   "file": "audio/ar/gen/g-a6d90214d0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف قَاف بصباعك": {
+   "file": "audio/ar/gen/g-69b77bc522.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف نُون بصباعك": {
+   "file": "audio/ar/gen/g-8e371be0a1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف واحد وتسعون بصباعك": {
+   "file": "audio/ar/gen/g-e60972cac6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف واحد وسبعون بصباعك": {
+   "file": "audio/ar/gen/g-7d5a164223.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف يَاء بصباعك": {
+   "file": "audio/ar/gen/g-84c0b013d4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الأول البذرة": {
+   "file": "audio/ar/gen/g-bc18253001.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#التفاحة أكل مش حيوان": {
+   "file": "audio/ar/gen/g-a829c55558.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الزرافة في الجنينة": {
+   "file": "audio/ar/gen/g-92e6b7906f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#السُّكُون": {
+   "file": "audio/ar/gen/g-cc35380db5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الشمس طلعت": {
+   "file": "audio/ar/gen/g-e22fdea379.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الصوت بقى أْ": {
+   "file": "audio/ar/gen/g-6afc084c6b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الطفل مشي في الشمس كتير من غير كاب": {
+   "file": "audio/ar/gen/g-678691ea63.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الفَتْحَة": {
+   "file": "audio/ar/gen/g-1ecbdc195c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الكرسي بنقعد عليه": {
+   "file": "audio/ar/gen/g-9ea94ea8d4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اللي بنشوف بيه إيه": {
+   "file": "audio/ar/gen/g-e5604fd362.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اللي بنكتب بيه إيه": {
+   "file": "audio/ar/gen/g-cb67ab0ca3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#المية الساقعة بترطّب": {
+   "file": "audio/ar/gen/g-a6c317a84f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#امشي بإصبعك على الحرف": {
+   "file": "audio/ar/gen/g-811edb6ecb.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#برافو عليك": {
+   "file": "audio/ar/gen/g-1039b57f8e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بقت تلج": {
+   "file": "audio/ar/gen/g-961eedb495.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بقيت صوت": {
+   "file": "audio/ar/gen/g-d172b62a8b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بنحطه في الكالون": {
+   "file": "audio/ar/gen/g-795d758786.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بيضة تانية": {
+   "file": "audio/ar/gen/g-ff251e3d2b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بيمسك بإيدك ويعمل خط": {
+   "file": "audio/ar/gen/g-50ae971b21.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تحت الأرض": {
+   "file": "audio/ar/gen/g-4458453d41.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تسعة وتسعون": {
+   "file": "audio/ar/gen/g-d52d491a8b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تسعة وسبعون": {
+   "file": "audio/ar/gen/g-f312241570.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تفاحة": {
+   "file": "audio/ar/gen/g-d7194c79cd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثلاثة عشر": {
+   "file": "audio/ar/gen/g-664fa3f5ca.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثلاثة وثمانون": {
+   "file": "audio/ar/gen/g-7112f142db.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثلاثة وعشرون": {
+   "file": "audio/ar/gen/g-2185776f05.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثمانية عشر": {
+   "file": "audio/ar/gen/g-c55a7c1b45.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثمانية وثمانون": {
+   "file": "audio/ar/gen/g-154fc00f68.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثمانية وعشرون": {
+   "file": "audio/ar/gen/g-8bc6933a7d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#جريت": {
+   "file": "audio/ar/gen/g-0b16b40163.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#حرف ق": {
+   "file": "audio/ar/gen/g-2f9887b661.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خلصنا": {
+   "file": "audio/ar/gen/g-486c3766fa.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خمسة": {
+   "file": "audio/ar/gen/g-c3624b9ea1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خمسة وثلاثون": {
+   "file": "audio/ar/gen/g-02641fb940.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خمسة وستون": {
+   "file": "audio/ar/gen/g-5d84c49ec9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دايرة صغيرة فوق الحرف — دوس واسمع": {
+   "file": "audio/ar/gen/g-8e3f422af4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أربعة عشر": {
+   "file": "audio/ar/gen/g-226e82f6bf.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أربعة وثمانون": {
+   "file": "audio/ar/gen/g-3214970da6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أربعة وعشرون": {
+   "file": "audio/ar/gen/g-f8612fda78.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده اثنان وأربعون": {
+   "file": "audio/ar/gen/g-589f4ac01a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده اثنان وخمسون": {
+   "file": "audio/ar/gen/g-7a0c977651.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده تسعة": {
+   "file": "audio/ar/gen/g-a5c646b44a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده تسعة وثلاثون": {
+   "file": "audio/ar/gen/g-85a0b24541.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده تسعة وستون": {
+   "file": "audio/ar/gen/g-395bb37838.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثلاثة عشر": {
+   "file": "audio/ar/gen/g-0b5ed5f574.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثلاثة وثمانون": {
+   "file": "audio/ar/gen/g-5a7092fbc1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثلاثة وعشرون": {
+   "file": "audio/ar/gen/g-436efcb478.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثمانية عشر": {
+   "file": "audio/ar/gen/g-e2e785c843.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثمانية وثمانون": {
+   "file": "audio/ar/gen/g-e0095da26e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثمانية وعشرون": {
+   "file": "audio/ar/gen/g-add2c12e40.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده خمسة وتسعون": {
+   "file": "audio/ar/gen/g-c59b988c1f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده خمسة وسبعون": {
+   "file": "audio/ar/gen/g-43ea29eef1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده سبعة": {
+   "file": "audio/ar/gen/g-59e4d203b1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده سبعة وثلاثون": {
+   "file": "audio/ar/gen/g-71d5b18a39.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده سبعة وستون": {
+   "file": "audio/ar/gen/g-adb5d071e6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ستة عشر": {
+   "file": "audio/ar/gen/g-a973eb59bc.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ستة وثمانون": {
+   "file": "audio/ar/gen/g-b76d7c4ee7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ستة وعشرون": {
+   "file": "audio/ar/gen/g-1af6c57a62.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده عشرة": {
+   "file": "audio/ar/gen/g-285bba4ce0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده واحد": {
+   "file": "audio/ar/gen/g-c991ba29e5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده واحد وثمانون": {
+   "file": "audio/ar/gen/g-7c345dc285.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده واحد وعشرون": {
+   "file": "audio/ar/gen/g-ae4af5acc9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أربعة وأربعون": {
+   "file": "audio/ar/gen/g-d4c95b0d1a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أربعة وخمسون": {
+   "file": "audio/ar/gen/g-93de7c35f8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أربعون": {
+   "file": "audio/ar/gen/g-bef9a24483.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على اثنان وتسعون": {
+   "file": "audio/ar/gen/g-b0f3a387a5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على اثنان وسبعون": {
+   "file": "audio/ar/gen/g-4f549e1145.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على تسعة عشر": {
+   "file": "audio/ar/gen/g-ab89d94101.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على تسعة وثمانون": {
+   "file": "audio/ar/gen/g-57dfda0280.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على تسعة وعشرون": {
+   "file": "audio/ar/gen/g-1d1bc4bf39.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثلاثة وأربعون": {
+   "file": "audio/ar/gen/g-5fcace7da5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثلاثة وخمسون": {
+   "file": "audio/ar/gen/g-3d0a6e6e81.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثلاثون": {
+   "file": "audio/ar/gen/g-58a6a7085b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثمانية وأربعون": {
+   "file": "audio/ar/gen/g-7e5e703a66.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثمانية وخمسون": {
+   "file": "audio/ar/gen/g-8b9778b5c2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على خمسة": {
+   "file": "audio/ar/gen/g-0422f92e77.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على خمسة وثلاثون": {
+   "file": "audio/ar/gen/g-d45e9eba2d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على خمسة وستون": {
+   "file": "audio/ar/gen/g-4bbf99a777.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على سبعة عشر": {
+   "file": "audio/ar/gen/g-ee174a8709.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على سبعة وثمانون": {
+   "file": "audio/ar/gen/g-b1ed1f2294.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على سبعة وعشرون": {
+   "file": "audio/ar/gen/g-1573636c84.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ستة وأربعون": {
+   "file": "audio/ar/gen/g-cf745cf39b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ستة وخمسون": {
+   "file": "audio/ar/gen/g-c935dc266b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ستون": {
+   "file": "audio/ar/gen/g-4cd72b466b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على مئة": {
+   "file": "audio/ar/gen/g-af7d35a2ea.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على واحد وثلاثون": {
+   "file": "audio/ar/gen/g-28a56e95df.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على واحد وستون": {
+   "file": "audio/ar/gen/g-752606de30.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دوس على الحرف واسمع صوته": {
+   "file": "audio/ar/gen/g-1c932432a0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دي الفَتْحَة — علامة صغيرة بتغيّر الصوت": {
+   "file": "audio/ar/gen/g-64895bdea3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ربنا يبارك فيك": {
+   "file": "audio/ar/gen/g-39a6c8ea0b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#زرافة": {
+   "file": "audio/ar/gen/g-5ce42e5e85.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#زي التلج": {
+   "file": "audio/ar/gen/g-4e9e4c8368.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سبعة عشر": {
+   "file": "audio/ar/gen/g-3c13a39c14.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سبعة وثمانون": {
+   "file": "audio/ar/gen/g-cbb9675e28.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سبعة وعشرون": {
+   "file": "audio/ar/gen/g-4f1e92aab9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ستة وأربعون": {
+   "file": "audio/ar/gen/g-6263d9a0da.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ستة وخمسون": {
+   "file": "audio/ar/gen/g-c2088ca67e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ستون": {
+   "file": "audio/ar/gen/g-c11b61ac3c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سكارف": {
+   "file": "audio/ar/gen/g-4a37c5bbe4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سمكة": {
+   "file": "audio/ar/gen/g-f3adbd7bd3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة الإخلاص · اسمع الأول": {
+   "file": "audio/ar/gen/g-38fdb0bb73.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة العاديات · اسمع الأول": {
+   "file": "audio/ar/gen/g-2107c9d20f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة الفلق": {
+   "file": "audio/ar/gen/g-e4fcf2edba.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة المدثر · اسمع الأول": {
+   "file": "audio/ar/gen/g-d381ca0246.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#شراب": {
+   "file": "audio/ar/gen/g-1e54272fe3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#شرطة صغيرة فوق الحرف — دوس واسمع": {
+   "file": "audio/ar/gen/g-5c70604e38.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#شَمْس بتبدأ بحرف شِين": {
+   "file": "audio/ar/gen/g-560c0199cd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#صِفر": {
+   "file": "audio/ar/gen/g-4d324b56d8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#طَائِر بتبدأ بحرف طَاء": {
+   "file": "audio/ar/gen/g-208749b0a5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عشرة": {
+   "file": "audio/ar/gen/g-211adb766d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عكس سعيد إيه": {
+   "file": "audio/ar/gen/g-497ed89a5e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عملت إيه": {
+   "file": "audio/ar/gen/g-b71bd3d9bf.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عيّطنا": {
+   "file": "audio/ar/gen/g-fa8672a2fe.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فراشة": {
+   "file": "audio/ar/gen/g-15634421c5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#في وشنا": {
+   "file": "audio/ar/gen/g-e9737e24ad.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين الفَتْحَة": {
+   "file": "audio/ar/gen/g-24365582cb.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين اللي عليه الفَتْحَة": {
+   "file": "audio/ar/gen/g-d143849e8e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أربعة عشر": {
+   "file": "audio/ar/gen/g-bdd79fc118.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أربعة وثمانون": {
+   "file": "audio/ar/gen/g-65a4af45dc.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أربعة وعشرون": {
+   "file": "audio/ar/gen/g-51013219d7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم اثنان وأربعون": {
+   "file": "audio/ar/gen/g-e22e12900f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم اثنان وخمسون": {
+   "file": "audio/ar/gen/g-d79f154a64.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم تسعة": {
+   "file": "audio/ar/gen/g-c42a7647f9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم تسعة وثلاثون": {
+   "file": "audio/ar/gen/g-eec98b92e2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم تسعة وستون": {
+   "file": "audio/ar/gen/g-1dcaded9cb.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثلاثة عشر": {
+   "file": "audio/ar/gen/g-455d09275d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثلاثة وثمانون": {
+   "file": "audio/ar/gen/g-2edf733b47.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثلاثة وعشرون": {
+   "file": "audio/ar/gen/g-de57df9829.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثمانية عشر": {
+   "file": "audio/ar/gen/g-6eb2147d2a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثمانية وثمانون": {
+   "file": "audio/ar/gen/g-469a3c9ddb.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثمانية وعشرون": {
+   "file": "audio/ar/gen/g-6b0d42276f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم خمسة وتسعون": {
+   "file": "audio/ar/gen/g-1dc6408242.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم خمسة وسبعون": {
+   "file": "audio/ar/gen/g-8a6a0de7b2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم سبعة": {
+   "file": "audio/ar/gen/g-2b54bbacb0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم سبعة وثلاثون": {
+   "file": "audio/ar/gen/g-2ed8c560e6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم سبعة وستون": {
+   "file": "audio/ar/gen/g-b5027a438d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ستة عشر": {
+   "file": "audio/ar/gen/g-ce505e93b8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ستة وثمانون": {
+   "file": "audio/ar/gen/g-8f3bd68787.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ستة وعشرون": {
+   "file": "audio/ar/gen/g-49a66d9369.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم عشرون": {
+   "file": "audio/ar/gen/g-81b7796774.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم واحد وتسعون": {
+   "file": "audio/ar/gen/g-8b60b41e51.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم واحد وسبعون": {
+   "file": "audio/ar/gen/g-3757bbd108.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#قبعة": {
+   "file": "audio/ar/gen/g-ceafa813f2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#قولها بصوتك — وبعدين نختبر سمعك": {
+   "file": "audio/ar/gen/g-6d4b694704.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#كتكوت": {
+   "file": "audio/ar/gen/g-9dc3f76927.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#كِتَاب بتبدأ بحرف كَاف": {
+   "file": "audio/ar/gen/g-800fef21d4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مئة": {
+   "file": "audio/ar/gen/g-40cd0069d2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مبلولة": {
+   "file": "audio/ar/gen/g-041393e127.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#معلقة": {
+   "file": "audio/ar/gen/g-aacc257a1f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#موز": {
+   "file": "audio/ar/gen/g-068a1c67b8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مين فيه الكَسْرَة": {
+   "file": "audio/ar/gen/g-b6e2105517.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نامت": {
+   "file": "audio/ar/gen/g-518fc7cad6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نزرع": {
+   "file": "audio/ar/gen/g-583d13743c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نصحى": {
+   "file": "audio/ar/gen/g-7f32159439.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نقرا كلمات": {
+   "file": "audio/ar/gen/g-d6ff52ac7b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نملة": {
+   "file": "audio/ar/gen/g-df1deb4bc8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#هسمعك آية — دوس على الآية اللي سمعتها": {
+   "file": "audio/ar/gen/g-6cdbc653fe.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#واحد وأربعون": {
+   "file": "audio/ar/gen/g-fa6da450c3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#واحد وخمسون": {
+   "file": "audio/ar/gen/g-9bb1c752ce.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#واو صغيرة فوق الحرف — دوس واسمع": {
+   "file": "audio/ar/gen/g-ef8561f497.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#وشه بيبقى حزين": {
+   "file": "audio/ar/gen/g-50f4f718a2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#يتعب": {
+   "file": "audio/ar/gen/g-3e4c0d0ec2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أ أَ": {
+   "file": "audio/ar/gen/g-6694722900.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أحد عشر": {
+   "file": "audio/ar/gen/g-9c1e72aaf1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أربعة عشر": {
+   "file": "audio/ar/gen/g-03b5220cdc.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أربعة وثمانون": {
+   "file": "audio/ar/gen/g-8eafa4746f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أربعة وعشرون": {
+   "file": "audio/ar/gen/g-eba5190bbe.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنا نون": {
+   "file": "audio/ar/gen/g-eb612b57aa.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد مش بيكبر": {
+   "file": "audio/ar/gen/g-7ac3b1da81.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد مش من الأكل": {
+   "file": "audio/ar/gen/g-854aa9bc90.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد مش من ملابس الشتا": {
+   "file": "audio/ar/gen/g-1c595fbfe4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أَسَد بتبدأ بحرف أَلِف": {
+   "file": "audio/ar/gen/g-50948d9a8f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أْ فيها السُّكُون": {
+   "file": "audio/ar/gen/g-cab2a700ec.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#إيد": {
+   "file": "audio/ar/gen/g-bb78dbcca3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اتعلمت 3 حاجات جديدة النهارده": {
+   "file": "audio/ar/gen/g-84fab641be.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اثنان وأربعون": {
+   "file": "audio/ar/gen/g-62b921c1f9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اثنان وخمسون": {
+   "file": "audio/ar/gen/g-9966176443.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اختار تاني": {
+   "file": "audio/ar/gen/g-9e71b42384.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اسمع الآية كويس": {
+   "file": "audio/ar/gen/g-ad6c82b02e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اشرب مية وارجع": {
+   "file": "audio/ar/gen/g-50bab10107.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف بَاء بصباعك": {
+   "file": "audio/ar/gen/g-be6acea410.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف حَاء بصباعك": {
+   "file": "audio/ar/gen/g-3817fbb59e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف رَاء بصباعك": {
+   "file": "audio/ar/gen/g-14e281a040.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف صَاد بصباعك": {
+   "file": "audio/ar/gen/g-1319c2c47c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف عَيْن بصباعك": {
+   "file": "audio/ar/gen/g-c195de8aa8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف كَاف بصباعك": {
+   "file": "audio/ar/gen/g-2e61550fc5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف هَاء بصباعك": {
+   "file": "audio/ar/gen/g-40a52fb797.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف واحد وثلاثون بصباعك": {
+   "file": "audio/ar/gen/g-cde2ce3fe5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف واحد وستون بصباعك": {
+   "file": "audio/ar/gen/g-567d61b28a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الأرض بقت إيه": {
+   "file": "audio/ar/gen/g-8ad58d0adf.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الإيد بقت نضيفة": {
+   "file": "audio/ar/gen/g-b7628d650d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#التلاجة بتبرّد": {
+   "file": "audio/ar/gen/g-c209f5e5e9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#السرير الأول": {
+   "file": "audio/ar/gen/g-4c8d382293.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الشتا برد": {
+   "file": "audio/ar/gen/g-3e5979cd7a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الشورت بيبرد": {
+   "file": "audio/ar/gen/g-e0d4c13e0f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الطماطم خضار": {
+   "file": "audio/ar/gen/g-29cf7f6755.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#القطة بتخاف من الكلب": {
+   "file": "audio/ar/gen/g-f4355161a6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الكَسْرَة": {
+   "file": "audio/ar/gen/g-0fe30c531b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اللي بنشيل بيه الأكل السخن إيه": {
+   "file": "audio/ar/gen/g-8af13712f5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اللي بيحمينا من المطر إيه": {
+   "file": "audio/ar/gen/g-1730bd13c6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#المية بتبلّل": {
+   "file": "audio/ar/gen/g-f9628e0e2d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#باب": {
+   "file": "audio/ar/gen/g-b1053d2492.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بعد ما نغسل الإيد": {
+   "file": "audio/ar/gen/g-273a141711.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بقت نجمة": {
+   "file": "audio/ar/gen/g-3746c2f1b4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بقيت ضلمة": {
+   "file": "audio/ar/gen/g-e31fae86db.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بنفتحها فوق دماغنا": {
+   "file": "audio/ar/gen/g-29f2d16c8d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بيضة مقلية": {
+   "file": "audio/ar/gen/g-9d316f51d9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بَطَّة بتبدأ بحرف بَاء": {
+   "file": "audio/ar/gen/g-42e8900d30.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تسعة": {
+   "file": "audio/ar/gen/g-e5f1340b9a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تسعة وثلاثون": {
+   "file": "audio/ar/gen/g-d847bd1da3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تسعة وستون": {
+   "file": "audio/ar/gen/g-97e0e77c8b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تلج": {
+   "file": "audio/ar/gen/g-ab9f74174b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثلاثة وأربعون": {
+   "file": "audio/ar/gen/g-66849a25e5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثلاثة وخمسون": {
+   "file": "audio/ar/gen/g-9cf8a3e837.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثلاثون": {
+   "file": "audio/ar/gen/g-59293e23f1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثمانية وأربعون": {
+   "file": "audio/ar/gen/g-128c24cd1e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثمانية وخمسون": {
+   "file": "audio/ar/gen/g-3f99bf5d6c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثَعْلَب بتبدأ بحرف ثَاء": {
+   "file": "audio/ar/gen/g-9db5a6b3d1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#جنب": {
+   "file": "audio/ar/gen/g-f22ca7e628.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#حرف ن": {
+   "file": "audio/ar/gen/g-f95e109932.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خلصنا النهارده": {
+   "file": "audio/ar/gen/g-de523cc652.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خمسة عشر": {
+   "file": "audio/ar/gen/g-8debaac364.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خمسة وثمانون": {
+   "file": "audio/ar/gen/g-4d32a7a015.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خمسة وعشرون": {
+   "file": "audio/ar/gen/g-c7f833669e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دبدوب": {
+   "file": "audio/ar/gen/g-5c20620026.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أربعة وأربعون": {
+   "file": "audio/ar/gen/g-5ccf9b3d06.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أربعة وخمسون": {
+   "file": "audio/ar/gen/g-f2330ad506.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أربعون": {
+   "file": "audio/ar/gen/g-5f7c80966d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده اثنان وتسعون": {
+   "file": "audio/ar/gen/g-278125079c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده اثنان وسبعون": {
+   "file": "audio/ar/gen/g-0dbed1b275.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده تسعة عشر": {
+   "file": "audio/ar/gen/g-9cc128c2fd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده تسعة وثمانون": {
+   "file": "audio/ar/gen/g-5c15a29fed.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده تسعة وعشرون": {
+   "file": "audio/ar/gen/g-19eb93162a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثلاثة وأربعون": {
+   "file": "audio/ar/gen/g-50b530a4e4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثلاثة وخمسون": {
+   "file": "audio/ar/gen/g-d78ae37add.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثلاثون": {
+   "file": "audio/ar/gen/g-2b40a49887.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثمانية وأربعون": {
+   "file": "audio/ar/gen/g-f660d87e0e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثمانية وخمسون": {
+   "file": "audio/ar/gen/g-7fae5231f1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده خمسة": {
+   "file": "audio/ar/gen/g-d0a7e31473.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده خمسة وثلاثون": {
+   "file": "audio/ar/gen/g-d5cede5cd8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده خمسة وستون": {
+   "file": "audio/ar/gen/g-a8d58a7de4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده سبعة عشر": {
+   "file": "audio/ar/gen/g-2acec16810.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده سبعة وثمانون": {
+   "file": "audio/ar/gen/g-951522a1d7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده سبعة وعشرون": {
+   "file": "audio/ar/gen/g-afc9255482.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ستة وأربعون": {
+   "file": "audio/ar/gen/g-117e00af70.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ستة وخمسون": {
+   "file": "audio/ar/gen/g-5a28455760.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ستون": {
+   "file": "audio/ar/gen/g-6167899f22.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده عشرون": {
+   "file": "audio/ar/gen/g-b287edfc3a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده واحد وأربعون": {
+   "file": "audio/ar/gen/g-21ef4a51f4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده واحد وخمسون": {
+   "file": "audio/ar/gen/g-464293e271.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أحد عشر": {
+   "file": "audio/ar/gen/g-c7ce660d96.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أربعة وتسعون": {
+   "file": "audio/ar/gen/g-79a3eab31b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أربعة وسبعون": {
+   "file": "audio/ar/gen/g-99c2866890.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على اثنا عشر": {
+   "file": "audio/ar/gen/g-6d3bcc2eda.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على اثنان وثلاثون": {
+   "file": "audio/ar/gen/g-e09347102c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على اثنان وستون": {
+   "file": "audio/ar/gen/g-5920727bf3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على تسعة وأربعون": {
+   "file": "audio/ar/gen/g-633720c4f0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على تسعة وخمسون": {
+   "file": "audio/ar/gen/g-5e8b13e561.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على تسعون": {
+   "file": "audio/ar/gen/g-c8ec103e30.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثلاثة وتسعون": {
+   "file": "audio/ar/gen/g-7e61fd17b5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثلاثة وسبعون": {
+   "file": "audio/ar/gen/g-008e7ef08a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثمانون": {
+   "file": "audio/ar/gen/g-15929760ee.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثمانية وتسعون": {
+   "file": "audio/ar/gen/g-579c87bc45.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثمانية وسبعون": {
+   "file": "audio/ar/gen/g-22aeb48a73.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على خمسة عشر": {
+   "file": "audio/ar/gen/g-547d44fd29.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على خمسة وثمانون": {
+   "file": "audio/ar/gen/g-76f6c579a4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على خمسة وعشرون": {
+   "file": "audio/ar/gen/g-8d970d2a3f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على سبعة وأربعون": {
+   "file": "audio/ar/gen/g-c95be3ebb2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على سبعة وخمسون": {
+   "file": "audio/ar/gen/g-080245ab0a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على سبعون": {
+   "file": "audio/ar/gen/g-a68daef8c0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ستة وتسعون": {
+   "file": "audio/ar/gen/g-e0e464582c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ستة وسبعون": {
+   "file": "audio/ar/gen/g-4e50e67bfe.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على صِفر": {
+   "file": "audio/ar/gen/g-c673490b24.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على واحد": {
+   "file": "audio/ar/gen/g-7dcd82d867.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على واحد وثمانون": {
+   "file": "audio/ar/gen/g-94bff30b52.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على واحد وعشرون": {
+   "file": "audio/ar/gen/g-f63d40e234.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دوس على الصورة واسمع اسمها": {
+   "file": "audio/ar/gen/g-d2069df4d3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دي الكَسْرَة — علامة صغيرة بتغيّر الصوت": {
+   "file": "audio/ar/gen/g-be98abd779.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#رجل": {
+   "file": "audio/ar/gen/g-0ff10f99cb.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#زَرَافَة بتبدأ بحرف زَاي": {
+   "file": "audio/ar/gen/g-9ef1ef0a75.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سبعة وأربعون": {
+   "file": "audio/ar/gen/g-7655af1884.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سبعة وخمسون": {
+   "file": "audio/ar/gen/g-e00307a27c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سبعون": {
+   "file": "audio/ar/gen/g-ea64536a94.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ستة وتسعون": {
+   "file": "audio/ar/gen/g-fe4a9da49b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ستة وسبعون": {
+   "file": "audio/ar/gen/g-071462203d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سخن": {
+   "file": "audio/ar/gen/g-28ddcf4f05.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سمّعها لبابا أو ماما": {
+   "file": "audio/ar/gen/g-81b59d901c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة البروج · اسمع": {
+   "file": "audio/ar/gen/g-dcecf84180.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة الفاتحة": {
+   "file": "audio/ar/gen/g-3c844b7f0c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة الفلق · اسمع": {
+   "file": "audio/ar/gen/g-d9a4b16de4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سيبنا الموزة برّه كتير": {
+   "file": "audio/ar/gen/g-90bd6e6795.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#شرب مية وحرّك جسمك شوية": {
+   "file": "audio/ar/gen/g-8ebca465c5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#شمسية": {
+   "file": "audio/ar/gen/g-c5143e8858.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ضِفْدَع بتبدأ بحرف ضَاد": {
+   "file": "audio/ar/gen/g-a31da613ca.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ظَرْف بتبدأ بحرف ظَاء": {
+   "file": "audio/ar/gen/g-7d81cf143f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عشرون": {
+   "file": "audio/ar/gen/g-a8f641efbf.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عكس فوق إيه": {
+   "file": "audio/ar/gen/g-cae5013395.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عَيْن بتبدأ بحرف عَيْن": {
+   "file": "audio/ar/gen/g-4f7ab3c247.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فكّر تاني": {
+   "file": "audio/ar/gen/g-ba89fc747e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فيل": {
+   "file": "audio/ar/gen/g-d438223a4a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين الكَسْرَة": {
+   "file": "audio/ar/gen/g-e2a44c37ad.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين اللي عليه الكَسْرَة": {
+   "file": "audio/ar/gen/g-458a543de8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أربعة وأربعون": {
+   "file": "audio/ar/gen/g-d83d3e41ae.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أربعة وخمسون": {
+   "file": "audio/ar/gen/g-bb6a28d0ea.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أربعون": {
+   "file": "audio/ar/gen/g-edacba0d87.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم اثنان وتسعون": {
+   "file": "audio/ar/gen/g-bc6051f1db.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم اثنان وسبعون": {
+   "file": "audio/ar/gen/g-59ce638e1a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم تسعة عشر": {
+   "file": "audio/ar/gen/g-dad644eff8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم تسعة وثمانون": {
+   "file": "audio/ar/gen/g-ce4a636426.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم تسعة وعشرون": {
+   "file": "audio/ar/gen/g-e9ceec21c3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثلاثة وأربعون": {
+   "file": "audio/ar/gen/g-25a0fa1c06.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثلاثة وخمسون": {
+   "file": "audio/ar/gen/g-90596444b7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثلاثون": {
+   "file": "audio/ar/gen/g-6794a6b8b3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثمانية وأربعون": {
+   "file": "audio/ar/gen/g-8b0a4067f9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثمانية وخمسون": {
+   "file": "audio/ar/gen/g-634d6dc143.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم خمسة": {
+   "file": "audio/ar/gen/g-23e59cea47.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم خمسة وثلاثون": {
+   "file": "audio/ar/gen/g-8f28017905.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم خمسة وستون": {
+   "file": "audio/ar/gen/g-d583ef8617.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم سبعة عشر": {
+   "file": "audio/ar/gen/g-0831cdaded.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم سبعة وثمانون": {
+   "file": "audio/ar/gen/g-0a7ecb73e7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم سبعة وعشرون": {
+   "file": "audio/ar/gen/g-2964403dbe.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ستة وأربعون": {
+   "file": "audio/ar/gen/g-d039ea1fcb.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ستة وخمسون": {
+   "file": "audio/ar/gen/g-2b1591dcf5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ستون": {
+   "file": "audio/ar/gen/g-7734083a0c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم مئة": {
+   "file": "audio/ar/gen/g-8e72102bff.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم واحد وثلاثون": {
+   "file": "audio/ar/gen/g-95292574dd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم واحد وستون": {
+   "file": "audio/ar/gen/g-aafec16b3d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#قولها لوحدك": {
+   "file": "audio/ar/gen/g-88800ed7a3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#لأ": {
+   "file": "audio/ar/gen/g-4e8fcb1330.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ما شاء الله": {
+   "file": "audio/ar/gen/g-f72de652c5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مراجعة سريعة": {
+   "file": "audio/ar/gen/g-d7d938757b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مفتاح": {
+   "file": "audio/ar/gen/g-903e6a9408.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مين فيه السُّكُون": {
+   "file": "audio/ar/gen/g-298362d202.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مَوْز بتبدأ بحرف مِيم": {
+   "file": "audio/ar/gen/g-b79fc5609a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نزل مطر": {
+   "file": "audio/ar/gen/g-55e5952492.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نكمل بكره": {
+   "file": "audio/ar/gen/g-dfcc778f4a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ننام": {
+   "file": "audio/ar/gen/g-488b9250b2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#هعلّمك حرف جديد": {
+   "file": "audio/ar/gen/g-36b426bcde.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#واحد وتسعون": {
+   "file": "audio/ar/gen/g-cd54e52b25.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#واحد وسبعون": {
+   "file": "audio/ar/gen/g-e0679eb651.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#وبعدها نكمل": {
+   "file": "audio/ar/gen/g-2d505e2be8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#وضعنا الماية في التلاجة": {
+   "file": "audio/ar/gen/g-931bb51180.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ينام فوراً": {
+   "file": "audio/ar/gen/g-b37ed0776f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أحسنت": {
+   "file": "audio/ar/gen/g-a095531811.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أربعة وأربعون": {
+   "file": "audio/ar/gen/g-1ad4340db6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أربعة وخمسون": {
+   "file": "audio/ar/gen/g-b30b3433f1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أربعون": {
+   "file": "audio/ar/gen/g-c0b7b234f7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد": {
+   "file": "audio/ar/gen/g-2b7b96a50d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد مش بيلبس": {
+   "file": "audio/ar/gen/g-62347df093.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد مش من البحر": {
+   "file": "audio/ar/gen/g-9b470102db.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أول حاجة قبل ما ننام إيه": {
+   "file": "audio/ar/gen/g-9890edadbd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#إحساسنا إيه": {
+   "file": "audio/ar/gen/g-140e878f6d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#إيه يحصل": {
+   "file": "audio/ar/gen/g-1514f3dd42.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اتعلمت 4 حاجات جديدة النهارده": {
+   "file": "audio/ar/gen/g-fb22c807ec.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اثنان وتسعون": {
+   "file": "audio/ar/gen/g-b68634285e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اثنان وسبعون": {
+   "file": "audio/ar/gen/g-7f9492bc03.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ارتحنا": {
+   "file": "audio/ar/gen/g-a04243c827.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اسمع الآية مرتين وبعدها نقولها مع بعض": {
+   "file": "audio/ar/gen/g-7a57f65e4f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اقرا الكلمة — واحد واحد": {
+   "file": "audio/ar/gen/g-4335837b61.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف تَاء بصباعك": {
+   "file": "audio/ar/gen/g-291eb851e5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف خَاء بصباعك": {
+   "file": "audio/ar/gen/g-9fff8d98cd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف زَاي بصباعك": {
+   "file": "audio/ar/gen/g-06dec849e5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف ضَاد بصباعك": {
+   "file": "audio/ar/gen/g-2309b1c504.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف غَيْن بصباعك": {
+   "file": "audio/ar/gen/g-de1ffa9596.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف لَام بصباعك": {
+   "file": "audio/ar/gen/g-674fd78436.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف واحد بصباعك": {
+   "file": "audio/ar/gen/g-ccf604141c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف واحد وثمانون بصباعك": {
+   "file": "audio/ar/gen/g-ae15346015.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف واحد وعشرون بصباعك": {
+   "file": "audio/ar/gen/g-e564987c45.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الأسد عايش في الغابة": {
+   "file": "audio/ar/gen/g-61ec156c14.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الإيد هتحرق": {
+   "file": "audio/ar/gen/g-27904127b6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الدنيا بتبقى ليل": {
+   "file": "audio/ar/gen/g-7b908ff5b0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#السلحفاة بتمشي على الأرض": {
+   "file": "audio/ar/gen/g-6beedbbebe.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الشمس بتتعب": {
+   "file": "audio/ar/gen/g-7281799108.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الضَّمَّة": {
+   "file": "audio/ar/gen/g-c76ca698c3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الطوبة فضلت زي ما هي": {
+   "file": "audio/ar/gen/g-3efa54b69e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#القطة شافت الكلب": {
+   "file": "audio/ar/gen/g-5daa66ee9c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اللي بنسمع بيه إيه": {
+   "file": "audio/ar/gen/g-5ad2f9d49f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اللي بنفتح بيه الباب إيه": {
+   "file": "audio/ar/gen/g-f2727e63e5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#المرحلة اللي بعدها اتفتحت": {
+   "file": "audio/ar/gen/g-a305650a74.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#المية بتشيل العطش": {
+   "file": "audio/ar/gen/g-51defbe536.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بارد": {
+   "file": "audio/ar/gen/g-490131e14c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بعدين بتبقى إيه": {
+   "file": "audio/ar/gen/g-13d02c7fb6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بقى جعان": {
+   "file": "audio/ar/gen/g-f8e76ec77d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بقيت ملوّنة": {
+   "file": "audio/ar/gen/g-7f09c6e7a3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بيعطش": {
+   "file": "audio/ar/gen/g-704545741b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تاج": {
+   "file": "audio/ar/gen/g-1d9f32ecf6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تسعة عشر": {
+   "file": "audio/ar/gen/g-36d03033d7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تسعة وثمانون": {
+   "file": "audio/ar/gen/g-a30cb6b365.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تسعة وعشرون": {
+   "file": "audio/ar/gen/g-d9ab67d4d7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تُفَّاحَة بتبدأ بحرف تَاء": {
+   "file": "audio/ar/gen/g-4b5ae6c56f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثلاثة وتسعون": {
+   "file": "audio/ar/gen/g-9b8b810cb5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثلاثة وسبعون": {
+   "file": "audio/ar/gen/g-a38b5bce43.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثمانون": {
+   "file": "audio/ar/gen/g-478057c491.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثمانية وتسعون": {
+   "file": "audio/ar/gen/g-e1a77383ca.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثمانية وسبعون": {
+   "file": "audio/ar/gen/g-1f760d09de.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#جاكت": {
+   "file": "audio/ar/gen/g-b82a99b234.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#جَمَل بتبدأ بحرف جِيم": {
+   "file": "audio/ar/gen/g-0bee93c0dc.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#حرّانة": {
+   "file": "audio/ar/gen/g-f455cf3d81.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خلّينا أسهل": {
+   "file": "audio/ar/gen/g-be3e3067b3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خمسة وأربعون": {
+   "file": "audio/ar/gen/g-6881897600.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خمسة وخمسون": {
+   "file": "audio/ar/gen/g-5967d8f246.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خمسون": {
+   "file": "audio/ar/gen/g-a1aeb8cc8d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أحد عشر": {
+   "file": "audio/ar/gen/g-ec0c4aa1df.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أربعة وتسعون": {
+   "file": "audio/ar/gen/g-41d919de30.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أربعة وسبعون": {
+   "file": "audio/ar/gen/g-f544d73889.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده اثنا عشر": {
+   "file": "audio/ar/gen/g-96d2f9d1b1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده اثنان وثلاثون": {
+   "file": "audio/ar/gen/g-d1188825fd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده اثنان وستون": {
+   "file": "audio/ar/gen/g-4af9beebfd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده تسعة وأربعون": {
+   "file": "audio/ar/gen/g-a7d60e2431.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده تسعة وخمسون": {
+   "file": "audio/ar/gen/g-c42568ee5c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده تسعون": {
+   "file": "audio/ar/gen/g-9e04ec3440.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثلاثة وتسعون": {
+   "file": "audio/ar/gen/g-e252ec0909.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثلاثة وسبعون": {
+   "file": "audio/ar/gen/g-9a062e32cd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثمانون": {
+   "file": "audio/ar/gen/g-185389e582.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثمانية وتسعون": {
+   "file": "audio/ar/gen/g-fdfa38c37c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثمانية وسبعون": {
+   "file": "audio/ar/gen/g-425a5955b6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده خمسة عشر": {
+   "file": "audio/ar/gen/g-4283e70b96.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده خمسة وثمانون": {
+   "file": "audio/ar/gen/g-da55840df7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده خمسة وعشرون": {
+   "file": "audio/ar/gen/g-ae05f3fa3b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده سبعة وأربعون": {
+   "file": "audio/ar/gen/g-731936aa31.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده سبعة وخمسون": {
+   "file": "audio/ar/gen/g-2eb0dff2b0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده سبعون": {
+   "file": "audio/ar/gen/g-ee1e7dbb4e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ستة وتسعون": {
+   "file": "audio/ar/gen/g-ef89178150.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ستة وسبعون": {
+   "file": "audio/ar/gen/g-463ec3e111.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده صوت جديد — اسمعه الأول": {
+   "file": "audio/ar/gen/g-2fbbdbcaf6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده مئة": {
+   "file": "audio/ar/gen/g-21d291d409.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده واحد وتسعون": {
+   "file": "audio/ar/gen/g-ec6b772747.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده واحد وسبعون": {
+   "file": "audio/ar/gen/g-d3f2770c11.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أربعة": {
+   "file": "audio/ar/gen/g-aba9ac6a5d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أربعة وثلاثون": {
+   "file": "audio/ar/gen/g-bc3d730e01.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أربعة وستون": {
+   "file": "audio/ar/gen/g-5189213cd4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على اثنان": {
+   "file": "audio/ar/gen/g-e8efa7bdfe.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على اثنان وثمانون": {
+   "file": "audio/ar/gen/g-d473f772db.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على اثنان وعشرون": {
+   "file": "audio/ar/gen/g-f2fcc1555b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على تسعة وتسعون": {
+   "file": "audio/ar/gen/g-2a8209ec4f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على تسعة وسبعون": {
+   "file": "audio/ar/gen/g-7b079fd4ff.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثلاثة": {
+   "file": "audio/ar/gen/g-81f9584ebe.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثلاثة وثلاثون": {
+   "file": "audio/ar/gen/g-9f483e09dd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثلاثة وستون": {
+   "file": "audio/ar/gen/g-832de63bc8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثمانية": {
+   "file": "audio/ar/gen/g-49da2c5fab.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثمانية وثلاثون": {
+   "file": "audio/ar/gen/g-ab0d348431.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثمانية وستون": {
+   "file": "audio/ar/gen/g-09109bfb00.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على خمسة وأربعون": {
+   "file": "audio/ar/gen/g-7bb143c786.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على خمسة وخمسون": {
+   "file": "audio/ar/gen/g-406ce07ba1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على خمسون": {
+   "file": "audio/ar/gen/g-42e74ca2ea.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على سبعة وتسعون": {
+   "file": "audio/ar/gen/g-607de7858f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على سبعة وسبعون": {
+   "file": "audio/ar/gen/g-6e3b43684e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ستة": {
+   "file": "audio/ar/gen/g-831b193944.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ستة وثلاثون": {
+   "file": "audio/ar/gen/g-953f5a48d1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ستة وستون": {
+   "file": "audio/ar/gen/g-8ce58edd6d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على عشرة": {
+   "file": "audio/ar/gen/g-d8e9b209da.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على واحد وأربعون": {
+   "file": "audio/ar/gen/g-6356370b39.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على واحد وخمسون": {
+   "file": "audio/ar/gen/g-c87c0a1256.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دوس على الحرف عشان تسمع اسمه": {
+   "file": "audio/ar/gen/g-9bb151cc45.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دي السُّكُون — علامة صغيرة بتغيّر الصوت": {
+   "file": "audio/ar/gen/g-ce32e5814c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ذكي": {
+   "file": "audio/ar/gen/g-109e0ab6ab.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ردّد معايا": {
+   "file": "audio/ar/gen/g-2013f9a725.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ساقعة": {
+   "file": "audio/ar/gen/g-1595449e3a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سبعة وتسعون": {
+   "file": "audio/ar/gen/g-57f7794bb5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سبعة وسبعون": {
+   "file": "audio/ar/gen/g-265c9b344c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ستة": {
+   "file": "audio/ar/gen/g-f2c2013bc1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ستة وثلاثون": {
+   "file": "audio/ar/gen/g-89898f6fc9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ستة وستون": {
+   "file": "audio/ar/gen/g-c9f1c82412.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سخنة": {
+   "file": "audio/ar/gen/g-d17a9cf202.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سمعها صح": {
+   "file": "audio/ar/gen/g-7464e60a90.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سمّعها لبابا أو ماما عشان نثبّتها": {
+   "file": "audio/ar/gen/g-2e581a63c8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة البروج · اسمع الأول": {
+   "file": "audio/ar/gen/g-2c2e2e4663.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة الفاتحة · اسمع": {
+   "file": "audio/ar/gen/g-5818be81ca.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة الفلق · اسمع الأول": {
+   "file": "audio/ar/gen/g-6886e56458.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سَمَكَة بتبدأ بحرف سِين": {
+   "file": "audio/ar/gen/g-5801f250a2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#شربنا مية ساقعة وإحنا حرّانين": {
+   "file": "audio/ar/gen/g-68facb3125.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#شورت": {
+   "file": "audio/ar/gen/g-1c64f584ab.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#صوته إيه": {
+   "file": "audio/ar/gen/g-7e4ed53b9f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#طماطم": {
+   "file": "audio/ar/gen/g-bb53b06414.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عجلة": {
+   "file": "audio/ar/gen/g-7fcb1d16cd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عصفورة": {
+   "file": "audio/ar/gen/g-b5dae5c178.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عكس كبير إيه": {
+   "file": "audio/ar/gen/g-f141ee2bb5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عُدّ معايا": {
+   "file": "audio/ar/gen/g-028d5d1b60.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فكّر معايا": {
+   "file": "audio/ar/gen/g-d565e31654.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين السُّكُون": {
+   "file": "audio/ar/gen/g-90ee805f94.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين اللي عليه السُّكُون": {
+   "file": "audio/ar/gen/g-dd929ea6f4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أحد عشر": {
+   "file": "audio/ar/gen/g-38d181a106.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أربعة وتسعون": {
+   "file": "audio/ar/gen/g-73cd6b42a1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أربعة وسبعون": {
+   "file": "audio/ar/gen/g-d80c0f6691.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم اثنا عشر": {
+   "file": "audio/ar/gen/g-e6eb2da7b8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم اثنان وثلاثون": {
+   "file": "audio/ar/gen/g-05ea079efc.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم اثنان وستون": {
+   "file": "audio/ar/gen/g-ca8ebfd1da.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم تسعة وأربعون": {
+   "file": "audio/ar/gen/g-ad2b04365d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم تسعة وخمسون": {
+   "file": "audio/ar/gen/g-927e8e1798.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم تسعون": {
+   "file": "audio/ar/gen/g-6b392a44db.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثلاثة وتسعون": {
+   "file": "audio/ar/gen/g-3d35afc0d8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثلاثة وسبعون": {
+   "file": "audio/ar/gen/g-d1c20de05f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثمانون": {
+   "file": "audio/ar/gen/g-88f6d32779.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثمانية وتسعون": {
+   "file": "audio/ar/gen/g-96bbbf09fd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثمانية وسبعون": {
+   "file": "audio/ar/gen/g-1d820e0c45.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم خمسة عشر": {
+   "file": "audio/ar/gen/g-ee396bd739.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم خمسة وثمانون": {
+   "file": "audio/ar/gen/g-3251c22fb2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم خمسة وعشرون": {
+   "file": "audio/ar/gen/g-0225c19e13.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم سبعة وأربعون": {
+   "file": "audio/ar/gen/g-900ee8b00b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم سبعة وخمسون": {
+   "file": "audio/ar/gen/g-df7c16e23f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم سبعون": {
+   "file": "audio/ar/gen/g-682c2d4ba6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ستة وتسعون": {
+   "file": "audio/ar/gen/g-33642a0209.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ستة وسبعون": {
+   "file": "audio/ar/gen/g-a21b0df65a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم صِفر": {
+   "file": "audio/ar/gen/g-192d249ce5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم واحد": {
+   "file": "audio/ar/gen/g-15d86bd2a5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم واحد وثمانون": {
+   "file": "audio/ar/gen/g-594265f71b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم واحد وعشرون": {
+   "file": "audio/ar/gen/g-649aab3f28.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#قِطّ بتبدأ بحرف قَاف": {
+   "file": "audio/ar/gen/g-1892e9477b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#كلب": {
+   "file": "audio/ar/gen/g-f6ec7e07af.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#لسه محتاجين حروف أكتر — نسمع أصواتنا اللي اتعلمناها": {
+   "file": "audio/ar/gen/g-a42b60769c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مايوه": {
+   "file": "audio/ar/gen/g-12a63043d4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مرحبا يا بطل": {
+   "file": "audio/ar/gen/g-53ec85f5bd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مين فيه الضَّمَّة": {
+   "file": "audio/ar/gen/g-7b0539a6ae.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نروح السرير": {
+   "file": "audio/ar/gen/g-cea879fc10.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نعمل إيه": {
+   "file": "audio/ar/gen/g-f2b98a04d7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نلبس إيه": {
+   "file": "audio/ar/gen/g-3d0a0c10d4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نور الأوضة اتطفي": {
+   "file": "audio/ar/gen/g-ceb8878555.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#هَاتِف بتبدأ بحرف هَاء": {
+   "file": "audio/ar/gen/g-d79f6c7494.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#واحد وثلاثون": {
+   "file": "audio/ar/gen/g-7f9ddf9607.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#واحد وستون": {
+   "file": "audio/ar/gen/g-76b2ec5d97.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#وبعدين نردّد مع بعض": {
+   "file": "audio/ar/gen/g-d9b854e8ca.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#وَرْدَة بتبدأ بحرف وَاو": {
+   "file": "audio/ar/gen/g-ec2c97f613.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#يَد بتبدأ بحرف يَاء": {
+   "file": "audio/ar/gen/g-a644a44df9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أخطبوط": {
+   "file": "audio/ar/gen/g-a7e594267e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أربعة وتسعون": {
+   "file": "audio/ar/gen/g-3a6e7d9509.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أربعة وسبعون": {
+   "file": "audio/ar/gen/g-1f0ed88788.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أسد": {
+   "file": "audio/ar/gen/g-19edca58cc.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد مش بيدخل البيت من الباب": {
+   "file": "audio/ar/gen/g-3a9aa3ddad.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد مش طاير": {
+   "file": "audio/ar/gen/g-0306342e51.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أنهي واحد مش من الحيوانات": {
+   "file": "audio/ar/gen/g-bbcc391b06.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أول حرف فيها": {
+   "file": "audio/ar/gen/g-a452bbf5fa.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#أُ فيها الضَّمَّة": {
+   "file": "audio/ar/gen/g-f54b00c1ae.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#إحنا بنعمل إيه الأول": {
+   "file": "audio/ar/gen/g-b98c6e7b74.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اثنا عشر": {
+   "file": "audio/ar/gen/g-7c53a71280.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اثنان وثلاثون": {
+   "file": "audio/ar/gen/g-0f70f13bb1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اثنان وستون": {
+   "file": "audio/ar/gen/g-2962e175f9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#استراحة قصيرة": {
+   "file": "audio/ar/gen/g-bc6da37aef.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اسمع واختار": {
+   "file": "audio/ar/gen/g-65df567d05.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف أحد عشر بصباعك": {
+   "file": "audio/ar/gen/g-364474ec5f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف ثَاء بصباعك": {
+   "file": "audio/ar/gen/g-6f38431172.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف دَال بصباعك": {
+   "file": "audio/ar/gen/g-2873615431.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف سِين بصباعك": {
+   "file": "audio/ar/gen/g-cdc89346b5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف طَاء بصباعك": {
+   "file": "audio/ar/gen/g-bfb5c7d2a7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف فَاء بصباعك": {
+   "file": "audio/ar/gen/g-b1e302fe6e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف مِيم بصباعك": {
+   "file": "audio/ar/gen/g-f3a67c8104.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف واحد وأربعون بصباعك": {
+   "file": "audio/ar/gen/g-055b4a5c6e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف واحد وخمسون بصباعك": {
+   "file": "audio/ar/gen/g-6392b93669.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اكتب حرف وَاو بصباعك": {
+   "file": "audio/ar/gen/g-e05f8fb2c3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الأكل بتبوظ لو قعد كتير": {
+   "file": "audio/ar/gen/g-68bbf98e4a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#البيضة": {
+   "file": "audio/ar/gen/g-2432dadfb9.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الدنيا بتنوّر": {
+   "file": "audio/ar/gen/g-7e11fd8460.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#السمكة بتعيش في الماية": {
+   "file": "audio/ar/gen/g-ecfd77b3c3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الشمس بتدّي نور": {
+   "file": "audio/ar/gen/g-ada136facc.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الطفل شرب مية كتير": {
+   "file": "audio/ar/gen/g-0d3c0532cf.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#العربية بنركبها مش بنوكلها": {
+   "file": "audio/ar/gen/g-d364f44eae.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#الكتكوت بيطلع من البيضة": {
+   "file": "audio/ar/gen/g-69c6703cd5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اللي بنشرب بيه إيه": {
+   "file": "audio/ar/gen/g-e136d79a66.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#اللي بنقص بيه الورق إيه": {
+   "file": "audio/ar/gen/g-2b51b2582f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#المركب في البحر": {
+   "file": "audio/ar/gen/g-56a6b8a346.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#النور لما يطفي بنشوف بصعوبة": {
+   "file": "audio/ar/gen/g-0cf42f25c3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#باظت": {
+   "file": "audio/ar/gen/g-e8e97f7d56.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بقت إيه": {
+   "file": "audio/ar/gen/g-578e4bed68.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بقى كويس": {
+   "file": "audio/ar/gen/g-c6da46a3bd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بنحط فيه الماية": {
+   "file": "audio/ar/gen/g-2394914188.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#بيفتح وبيقفل": {
+   "file": "audio/ar/gen/g-f74a3a0422.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تسعة وأربعون": {
+   "file": "audio/ar/gen/g-f38cfa9a6c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تسعة وخمسون": {
+   "file": "audio/ar/gen/g-9ab53241bc.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#تسعون": {
+   "file": "audio/ar/gen/g-8fb74f990a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثلاثة": {
+   "file": "audio/ar/gen/g-b82a942960.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثلاثة وثلاثون": {
+   "file": "audio/ar/gen/g-e0b89e7828.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثلاثة وستون": {
+   "file": "audio/ar/gen/g-c253f09435.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثمانية": {
+   "file": "audio/ar/gen/g-355990d0e0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثمانية وثلاثون": {
+   "file": "audio/ar/gen/g-b8edc59cd3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ثمانية وستون": {
+   "file": "audio/ar/gen/g-50976db68a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#جبنة": {
+   "file": "audio/ar/gen/g-ca3468f0de.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#حاجة صغيرة خالص": {
+   "file": "audio/ar/gen/g-2a083f6d1b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#حِصَان بتبدأ بحرف حَاء": {
+   "file": "audio/ar/gen/g-8922aa4dc7.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خلّينا نرتاح شوية": {
+   "file": "audio/ar/gen/g-c6199fb066.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خمسة وتسعون": {
+   "file": "audio/ar/gen/g-a3e661f03d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خمسة وسبعون": {
+   "file": "audio/ar/gen/g-a68f1723f1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#خُبْز بتبدأ بحرف خَاء": {
+   "file": "audio/ar/gen/g-2fafea85c8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أربعة": {
+   "file": "audio/ar/gen/g-b66d47dba8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أربعة وثلاثون": {
+   "file": "audio/ar/gen/g-a1e607d8f8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده أربعة وستون": {
+   "file": "audio/ar/gen/g-ecb3db0584.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده اثنان": {
+   "file": "audio/ar/gen/g-2abe97f08e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده اثنان وثمانون": {
+   "file": "audio/ar/gen/g-08f8334bea.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده اثنان وعشرون": {
+   "file": "audio/ar/gen/g-901f184181.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده تسعة وتسعون": {
+   "file": "audio/ar/gen/g-a621c3e3aa.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده تسعة وسبعون": {
+   "file": "audio/ar/gen/g-f8d51fb27b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثلاثة": {
+   "file": "audio/ar/gen/g-97a5c85fd8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثلاثة وثلاثون": {
+   "file": "audio/ar/gen/g-e936d5d4df.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثلاثة وستون": {
+   "file": "audio/ar/gen/g-6c19846d29.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثمانية": {
+   "file": "audio/ar/gen/g-4c1f370351.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثمانية وثلاثون": {
+   "file": "audio/ar/gen/g-68a0111d2a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ثمانية وستون": {
+   "file": "audio/ar/gen/g-18f3a3cc3e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده خمسة وأربعون": {
+   "file": "audio/ar/gen/g-abdbcf2338.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده خمسة وخمسون": {
+   "file": "audio/ar/gen/g-3df78dc2b0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده خمسون": {
+   "file": "audio/ar/gen/g-08d369b42d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده سبعة وتسعون": {
+   "file": "audio/ar/gen/g-f26cff24b5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده سبعة وسبعون": {
+   "file": "audio/ar/gen/g-f628b22906.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ستة": {
+   "file": "audio/ar/gen/g-c89f515a5a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ستة وثلاثون": {
+   "file": "audio/ar/gen/g-22a3884cd4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده ستة وستون": {
+   "file": "audio/ar/gen/g-36c150f503.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده صِفر": {
+   "file": "audio/ar/gen/g-d120b0d05a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده مش دوره": {
+   "file": "audio/ar/gen/g-d2847b78df.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده واحد وثلاثون": {
+   "file": "audio/ar/gen/g-7d618c342a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ده واحد وستون": {
+   "file": "audio/ar/gen/g-2798256658.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أربعة عشر": {
+   "file": "audio/ar/gen/g-abceaa7e90.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أربعة وثمانون": {
+   "file": "audio/ar/gen/g-feac98351a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على أربعة وعشرون": {
+   "file": "audio/ar/gen/g-9a34f0cb52.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على اثنان وأربعون": {
+   "file": "audio/ar/gen/g-adfea8e6ce.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على اثنان وخمسون": {
+   "file": "audio/ar/gen/g-7121d1ce09.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على تسعة": {
+   "file": "audio/ar/gen/g-02b750edbd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على تسعة وثلاثون": {
+   "file": "audio/ar/gen/g-6badfefea1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على تسعة وستون": {
+   "file": "audio/ar/gen/g-96a53b0b1b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثلاثة عشر": {
+   "file": "audio/ar/gen/g-8c82b33336.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثلاثة وثمانون": {
+   "file": "audio/ar/gen/g-cc14efc0f3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثلاثة وعشرون": {
+   "file": "audio/ar/gen/g-9071827365.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثمانية عشر": {
+   "file": "audio/ar/gen/g-c1252295a4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثمانية وثمانون": {
+   "file": "audio/ar/gen/g-e1e6e168fa.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ثمانية وعشرون": {
+   "file": "audio/ar/gen/g-95195d1207.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على خمسة وتسعون": {
+   "file": "audio/ar/gen/g-4a406ed0b1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على خمسة وسبعون": {
+   "file": "audio/ar/gen/g-0c9650f118.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على سبعة": {
+   "file": "audio/ar/gen/g-31e93aa0da.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على سبعة وثلاثون": {
+   "file": "audio/ar/gen/g-e6947ce173.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على سبعة وستون": {
+   "file": "audio/ar/gen/g-8a7a779276.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ستة عشر": {
+   "file": "audio/ar/gen/g-0c06fb21d3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ستة وثمانون": {
+   "file": "audio/ar/gen/g-65574badc3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على ستة وعشرون": {
+   "file": "audio/ar/gen/g-a106840213.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على عشرون": {
+   "file": "audio/ar/gen/g-372e5e6bf0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على واحد وتسعون": {
+   "file": "audio/ar/gen/g-b59bf56fe6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دور على واحد وسبعون": {
+   "file": "audio/ar/gen/g-2f64c57fca.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دوس على الحرف عشان تسمع صوته": {
+   "file": "audio/ar/gen/g-f748942f9e.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#دي الضَّمَّة — علامة صغيرة بتغيّر الصوت": {
+   "file": "audio/ar/gen/g-4e13d1818b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ذِئْب بتبدأ بحرف ذَال": {
+   "file": "audio/ar/gen/g-eefc35b8c4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#رِيشَة بتبدأ بحرف رَاء": {
+   "file": "audio/ar/gen/g-21a2c308d2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#زعلنا": {
+   "file": "audio/ar/gen/g-51e2ad1837.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سبعة": {
+   "file": "audio/ar/gen/g-082a36d94f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سبعة وثلاثون": {
+   "file": "audio/ar/gen/g-1165897d87.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سبعة وستون": {
+   "file": "audio/ar/gen/g-32e0aaba90.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ستة عشر": {
+   "file": "audio/ar/gen/g-79dce932e0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ستة وثمانون": {
+   "file": "audio/ar/gen/g-8bb1765927.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ستة وعشرون": {
+   "file": "audio/ar/gen/g-b4869c2ac5.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سرير": {
+   "file": "audio/ar/gen/g-13d9c607ba.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سمعها كويس": {
+   "file": "audio/ar/gen/g-de225fa619.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة الإخلاص · اسمع": {
+   "file": "audio/ar/gen/g-ea3f20a897.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة العاديات · اسمع": {
+   "file": "audio/ar/gen/g-2c58526660.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة الفاتحة · اسمع الأول": {
+   "file": "audio/ar/gen/g-2c0602b323.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#سورة المدثر · اسمع": {
+   "file": "audio/ar/gen/g-e08f0b4067.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#شاطر": {
+   "file": "audio/ar/gen/g-3a9f34cb53.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#شرطة صغيرة تحت الحرف — دوس واسمع": {
+   "file": "audio/ar/gen/g-9516abde2d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#شوف الفرق": {
+   "file": "audio/ar/gen/g-e497da8b37.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#صَقْر بتبدأ بحرف صَاد": {
+   "file": "audio/ar/gen/g-a90272fc9a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#طوبة": {
+   "file": "audio/ar/gen/g-2ac5a3011a.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عربية": {
+   "file": "audio/ar/gen/g-c6a240993d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#عكس ساخن إيه": {
+   "file": "audio/ar/gen/g-56e3569b41.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#على جنب دماغنا": {
+   "file": "audio/ar/gen/g-b4162321b8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#غُرَاب بتبدأ بحرف غَيْن": {
+   "file": "audio/ar/gen/g-2f1d331261.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين الضَّمَّة": {
+   "file": "audio/ar/gen/g-eea8e97b33.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين اللي عليه الضَّمَّة": {
+   "file": "audio/ar/gen/g-2adb3cd8c2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أربعة": {
+   "file": "audio/ar/gen/g-1bee240250.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أربعة وثلاثون": {
+   "file": "audio/ar/gen/g-ab3419a243.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم أربعة وستون": {
+   "file": "audio/ar/gen/g-de76835de0.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم اثنان": {
+   "file": "audio/ar/gen/g-b3af2deecd.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم اثنان وثمانون": {
+   "file": "audio/ar/gen/g-61c4bd1097.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم اثنان وعشرون": {
+   "file": "audio/ar/gen/g-bd29b7b33f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم تسعة وتسعون": {
+   "file": "audio/ar/gen/g-5a1638a770.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم تسعة وسبعون": {
+   "file": "audio/ar/gen/g-6ff5020994.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثلاثة": {
+   "file": "audio/ar/gen/g-e3570259ef.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثلاثة وثلاثون": {
+   "file": "audio/ar/gen/g-acd70d238d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثلاثة وستون": {
+   "file": "audio/ar/gen/g-cc5abbef2c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثمانية": {
+   "file": "audio/ar/gen/g-a5ee982b6f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثمانية وثلاثون": {
+   "file": "audio/ar/gen/g-609ad8d8ba.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ثمانية وستون": {
+   "file": "audio/ar/gen/g-88f1760bed.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم خمسة وأربعون": {
+   "file": "audio/ar/gen/g-6fd8ce2625.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم خمسة وخمسون": {
+   "file": "audio/ar/gen/g-adb69aa146.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم خمسون": {
+   "file": "audio/ar/gen/g-d4f1d46001.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم سبعة وتسعون": {
+   "file": "audio/ar/gen/g-34180903e6.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم سبعة وسبعون": {
+   "file": "audio/ar/gen/g-2cb361dc2b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ستة": {
+   "file": "audio/ar/gen/g-7b66f42f30.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ستة وثلاثون": {
+   "file": "audio/ar/gen/g-5beadac044.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم ستة وستون": {
+   "file": "audio/ar/gen/g-546536e422.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم عشرة": {
+   "file": "audio/ar/gen/g-919441c880.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم واحد وأربعون": {
+   "file": "audio/ar/gen/g-61aec211ee.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فين رقم واحد وخمسون": {
+   "file": "audio/ar/gen/g-d85a72bf2f.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#فِيل بتبدأ بحرف فَاء": {
+   "file": "audio/ar/gen/g-6c9647ece3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#كتاب": {
+   "file": "audio/ar/gen/g-0846508a0c.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#كوباية": {
+   "file": "audio/ar/gen/g-4b56c298e4.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#لَيْمُون بتبدأ بحرف لَام": {
+   "file": "audio/ar/gen/g-c59f0914ea.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مبسوط": {
+   "file": "audio/ar/gen/g-97473d962b.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مركب": {
+   "file": "audio/ar/gen/g-abafcb51da.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مناخير": {
+   "file": "audio/ar/gen/g-a5e00b8cbb.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#مين فيه الفَتْحَة": {
+   "file": "audio/ar/gen/g-5316ad50ed.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ناكل": {
+   "file": "audio/ar/gen/g-a63431a23d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نروح المدرسة": {
+   "file": "audio/ar/gen/g-2a52d1f6e1.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نشوف الشجرة كبرت": {
+   "file": "audio/ar/gen/g-52e9ad577d.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نغسل تاني": {
+   "file": "audio/ar/gen/g-37e49ffde8.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نلعب بالأصوات": {
+   "file": "audio/ar/gen/g-85b99935c2.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#نَجْمَة بتبدأ بحرف نُون": {
+   "file": "audio/ar/gen/g-04169b0197.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#واحد": {
+   "file": "audio/ar/gen/g-b72cd1b484.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#واحد وثمانون": {
+   "file": "audio/ar/gen/g-85e43dac35.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#واحد وعشرون": {
+   "file": "audio/ar/gen/g-a7b05cc771.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#ودن": {
+   "file": "audio/ar/gen/g-3a6622bb40.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  },
+  "ar:#يبقى مبسوط": {
+   "file": "audio/ar/gen/g-8b32f11fc3.m4a",
+   "license": "Synthetic (Piper ar_JO-kareem) - license unverified",
+   "author": "Generated"
+  }
+ }
+}
