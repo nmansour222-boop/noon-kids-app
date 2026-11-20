@@ -53,6 +53,35 @@
     s = s.replace(/[«»"“”]/g, '').replace(/[٠-٩]/g, function (d) { return String(IND.indexOf(d)); });
     return s.replace(/\s+/g, ' ').trim();
   }
+  /* كلمات ربط مكتوبة على الشاشة: لو ما لهاش مقطع نكتفي بنطق الكلمة/الحرف/الرقم نفسه (بنفس الصوت بدل صوت الجهاز) */
+  const CONNECT = /^(?:اكتب|بصباعك|بتبدأ|بيبدأ|بصوت|بحرف|مين|فيهم|فيه|زي|إيه|ايه|حرف|رقم|الحرف|الرقم|فيها|السُّكُون|الكَسْرَة|الفَتْحَة|الضَّمَّة|الشَّدَّة)$/;
+  function resolveOne(c) {
+    if (A3.has(c, 'ar')) return [{ k: c, r: 1 }];
+    if (A3.has('#' + c, 'ar')) return [{ k: '#' + c, r: 1 }];
+    const lk = letterClips(c);
+    return lk ? lk.map(function (k) { return { k: k, r: 0.95 }; }) : null;
+  }
+  function resolveAr(c, allowSkip) {
+    const r = resolveOne(c);
+    if (r || !allowSkip) return r;
+    const words = c.split(' ').filter(Boolean);
+    const rest = words.filter(function (w) { return !CONNECT.test(w); });
+    if (!rest.length) return [];                       // كله ربط
+    if (rest.length === words.length) return null;     // مفيش ربط نشيله
+    const whole = resolveOne(rest.join(' '));
+    if (whole) return whole;
+    const out = [];
+    for (let i = 0; i < rest.length; i++) { const x = resolveOne(rest[i]); if (!x) return null; Array.prototype.push.apply(out, x); }
+    return out;
+  }
+  function enKey(tk) {
+    const cand = [tk, tk.toLowerCase()];
+    for (let i = 0; i < cand.length; i++) {
+      if (A3.has(cand[i], 'en')) return { k: cand[i], l: 'en', r: 0.95 };
+      if (A3.has('#' + cand[i], 'en')) return { k: '#' + cand[i], l: 'en', r: 1 };
+    }
+    return null;
+  }
   function chunkPlan(t) {
     if (!window.A3 || !A3.ready) return null;
     const parts = t.split(CSEP).map(normChunk).filter(Boolean);
@@ -61,37 +90,65 @@
     for (let i = 0; i < parts.length; i++) {
       let c = parts[i];
       if (/^\d+$/.test(c) && window.NUMBERS) c = window.NUMBERS.name(parseInt(c, 10));
-      if (A3.has(c, 'ar')) { plan.push({ k: c, r: 1 }); continue; }
-      if (A3.has('#' + c, 'ar')) { plan.push({ k: '#' + c, r: 1 }); continue; }
-      const lk = letterClips(c);
-      if (!lk) return null;
-      lk.forEach(function (k) { plan.push({ k: k, r: 0.95 }); });
+      if (/[A-Za-z]/.test(c) && /[\u0600-\u06FF]/.test(c)) {   // جملة مختلطة: «apple بتبدأ بصوت a»
+        const toks = c.match(/[A-Za-z]+(?: [A-Za-z]+)*|[^A-Za-z]+/g) || [];
+        for (let j = 0; j < toks.length; j++) {
+          const tk = normChunk(toks[j]);
+          if (!tk) continue;
+          let r;
+          if (/^[A-Za-z]/.test(tk)) { const e = enKey(tk); r = e ? [e] : null; }
+          else r = resolveAr(tk, true);
+          if (!r) return null;
+          Array.prototype.push.apply(plan, r);
+        }
+        continue;
+      }
+      const r = resolveAr(c, true);
+      if (!r) return null;
+      Array.prototype.push.apply(plan, r);
     }
+    return plan.length ? plan : null;
+  }
+  /* الإنجليزي: أصوات الحروف (en:#الصوت) والكلمات (en:كلمة) — «s… sun» و«s, s» تتركّب من مقاطع جاهزة */
+  function enPlan(t) {
+    if (!window.A3 || !A3.ready) return null;
+    const parts = t.split(/[,.…!?]+/).map(function (x) { return x.trim(); }).filter(Boolean);
+    if (!parts.length) return null;
+    const plan = [];
+    for (let i = 0; i < parts.length; i++) { const e = enKey(parts[i]); if (!e) return null; plan.push(e); }
     return plan;
   }
   let sayTok = 0;
   /* ترتيب الصوت: تسجيل بشري (حرف/كلمة) → صوت آلي (لو الجهاز بيدعم لغة النص) */
+  /* تشغيل خطة مقاطع بالترتيب؛ أي صوت أحدث ياخد القناة بيوقفها ('x') */
+  function runPlan(my, plan, isEn) {
+    let i = 0;
+    const next = function () {
+      if (i >= plan.length || my !== sayTok) return Promise.resolve(true);
+      const it = plan[i++];
+      return A3.sayWord(it.k, it.l || (isEn ? 'en' : 'ar'), { rate: it.r }).then(function (r) {
+        if (r === 'x') return 'x';   // صوت أحدث أخذ القناة: نوقف هذه السلسلة
+        return new Promise(function (res) { setTimeout(res, 140); }).then(next);
+      });
+    };
+    return next();
+  }
+  function sayPlan(plan) { return runPlan(++sayTok, plan, false); }
   function sayAt(my, t, lang, rate) {
-    const L = lang || AR;
+    // نص لاتيني بحت (مثل «Yes!») يُعامل كإنجليزي حتى لو طُلب بلغة عربية
+    const latinOnly = !/[\u0600-\u06FF]/.test(t) && /[A-Za-z]/.test(t);
+    const L = (latinOnly && !/^en/i.test(lang || '')) ? EN : (lang || AR);
     const isEn = /^en/i.test(L);
     const run = function () {
       if (my !== sayTok) return Promise.resolve(false);
       if (window.A3 && A3.has && A3.has(t, isEn ? 'en' : 'ar')) return A3.sayWord(t, isEn ? 'en' : 'ar', { rate: rate });
-      if (!isEn) {
+      let plan = null;
+      if (isEn) plan = enPlan(t);
+      else {
         const lk = letterClips(t);
-        const plan = lk ? lk.map(function (k) { return { k: k, r: 0.95 }; }) : chunkPlan(t);
-        if (plan) {
-          let i = 0;
-          const next = function () {
-            if (i >= plan.length || my !== sayTok) return Promise.resolve(true);
-            const it = plan[i++];
-            return A3.sayWord(it.k, 'ar', { rate: it.r }).then(function () {
-              return new Promise(function (res) { setTimeout(res, 140); }).then(next);
-            });
-          };
-          return next();
-        }
+        plan = lk ? lk.map(function (k) { return { k: k, r: 0.95 }; }) : chunkPlan(t);
       }
+      if (plan) return runPlan(my, plan, isEn);
       if (!window.Store.ttsOn()) return Promise.resolve(false);
       return window.Audio2.say(t, L, rate);
     };
@@ -104,7 +161,8 @@
     let i = 0;
     const next = function () {
       if (i >= ws.length || my !== sayTok) return Promise.resolve(true);
-      return sayAt(my, ws[i++], lang, rate).then(function () {
+      return sayAt(my, ws[i++], lang, rate).then(function (r) {
+        if (r === 'x') return 'x';
         return new Promise(function (res) { setTimeout(res, 220); }).then(next);
       });
     };
@@ -142,11 +200,34 @@
 
   function clear(host) { host.innerHTML = ''; return host; }
   /** يعرض الشاشة ويحوّل كل تعليمة نصية إلى زر صوت + نص صغير (الطفل لا يقرأ) */
+  /* أزرار الإجراء في آخر الشاشة بتتجمّع في شريط ثابت أسفل الشاشة (حتى لو المحتوى أطول من الشاشة الصغيرة) */
+  function isAct(n) { return n && n.nodeType === 1 && (n.classList.contains('btn') || n.classList.contains('row-2')); }
+  function dockActions(node) {
+    let dock = null;
+    function run() {
+      const kids = Array.prototype.slice.call(node.children);
+      dock = kids.filter(function (k) { return k.classList.contains('l-dock'); })[0] || null;
+      let i = kids.length - 1;
+      const tail = [];
+      while (i >= 0 && (isAct(kids[i]) || kids[i] === dock)) { if (kids[i] !== dock) tail.unshift(kids[i]); i--; }
+      if (!tail.length) return;
+      if (!dock) { dock = el('div', 'l-dock'); }
+      tail.forEach(function (k) { dock.appendChild(k); });
+      if (dock.parentNode !== node || node.lastChild !== dock) node.appendChild(dock);
+    }
+    run();
+    if (window.MutationObserver) {
+      const mo = new MutationObserver(function () { if (!node.isConnected) { mo.disconnect(); return; } run(); });
+      mo.observe(node, { childList: true });
+    }
+  }
+
   function show(host, node) {
     clearTimers();
     clear(host);
     node.classList.add('l-screen');
     host.appendChild(node);
+    dockActions(node);
     Array.prototype.forEach.call(node.querySelectorAll('.l-hint'), function (h) {
       if (h.dataset.spoken) return;
       h.dataset.spoken = '1';
@@ -172,7 +253,7 @@
       const wrap = el('div', 'prompt-row');
       const spk = el('button', 'hint-spk', UI.icon('sound', 18));
       spk.setAttribute('aria-label', 'اسمع');
-      spk.addEventListener('click', function (e) { e.stopPropagation(); SFX.click(); say(txt.replace(/[«»]/g, ''), AR, 0.72); });
+      spk.addEventListener('click', function (e) { e.stopPropagation(); SFX.click(); if (t.dataset.plan) sayPlan(JSON.parse(t.dataset.plan)); else say(txt.replace(/[«»]/g, ''), AR, 0.72); });
       t.parentNode.insertBefore(wrap, t);
       wrap.appendChild(spk);
       wrap.appendChild(t);
@@ -184,7 +265,8 @@
   }
   function center(cls) { return el('div', 'l-center ' + (cls || '')); }
 
-  function eyebrow(txt) { return el('div', 'l-eyebrow', txt); }
+  function eyebrow(txt, plan) { const e = el('div', 'l-eyebrow', txt); if (plan) e.dataset.plan = JSON.stringify(plan); return e; }
+  function sndPlan(s) { return [{ k: '#' + s, l: 'en', r: 1 }]; }
 
   function bigBtn(label, cls, onClick) {
     const b = el('button', 'btn ' + (cls || ''), label);
@@ -229,6 +311,13 @@
   const MK = { fatha: '\u064E', damma: '\u064F', kasra: '\u0650', sukun: '\u0652', shadda: '\u0651', fathatan: '\u064B', dammatan: '\u064C', kasratan: '\u064D' };
 
   /** حرف + حركات كنصّ حقيقي: الخط يضع الحركات في مكانها الصحيح */
+  /* مقاس الحرف داخل بطاقة اختيار (٣ في الصف) بحيث ما يطلعش برّه البطاقة على الشاشات الضيقة */
+  function tileFs(max, len, em) {
+    const w = Math.max(280, window.innerWidth || 360);
+    const T = Math.min((w - 40 - 24) / 3, 128);
+    return Math.round(Math.max(36, Math.min(max, 0.85 * T / (Math.max(1, len) * em))));
+  }
+
   function glyphEl(ch, marks, opts) {
     opts = opts || {};
     let txt = ch;
@@ -396,7 +485,7 @@
     s.appendChild(grid);
 
     options.forEach(function (o) {
-      const b = el('button', 'letter-tile', glyphEl(o.ch, [], { size: 66, color: 'var(--ink)' }));
+      const b = el('button', 'letter-tile', glyphEl(o.ch, [], { size: tileFs(66, 1, /[صضسشطظعغ]/.test(o.ch) ? 1.25 : 1.0), color: 'var(--ink)' }));
       b.dataset.ch = o.ch;
       b.addEventListener('click', function () {
         if (solved) return;
@@ -521,7 +610,7 @@
 
     function step2() {
       const s = center();
-      s.appendChild(eyebrow('«' + lc + '» زي إيه؟'));
+      s.appendChild(eyebrow('«' + lc + '» زي إيه؟', sndPlan(s0.s)));
       const row = el('div', 'pics-grid one');
       row.appendChild(picTile(s0.w, s0.e, EN, null, { large: true }));
       s.appendChild(row);
@@ -544,7 +633,7 @@
     let solved = false;
 
     const s = center();
-    s.appendChild(eyebrow('مين بيبدأ بصوت «' + s0.s.toUpperCase() + '»؟'));
+    s.appendChild(eyebrow('مين بيبدأ بصوت «' + s0.s.toUpperCase() + '»؟', sndPlan(s0.s)));
     const grid = el('div', 'pics-grid');
     s.appendChild(grid);
 
@@ -579,9 +668,9 @@
      الكتابة (مشتركة)
      ======================================================= */
 
-  function traceLesson(host, ch, marks, latin, unit, done, label) {
+  function traceLesson(host, ch, marks, latin, unit, done, label, kind) {
     const s = center('write');
-    s.appendChild(eyebrow('اكتب ' + (latin ? '«' + label + '»' : 'حرف ' + label) + ' بصباعك'));
+    s.appendChild(eyebrow('اكتب ' + (latin ? '«' + label + '»' : (kind || 'حرف') + ' ' + label) + ' بصباعك', latin ? sndPlan(label) : null));
 
     const wrap = el('div', 'trace-wrap');
     const L0 = Glyph.layout(ch, marks, latin);
@@ -921,7 +1010,7 @@
     s.appendChild(grid);
 
     opts.forEach(function (o) {
-      const b = el('button', 'letter-tile', glyphEl(L.ch, [o.key], { size: 150, color: 'var(--ink)', emBox: true }));
+      const b = el('button', 'letter-tile mk', glyphEl(L.ch, [o.key], { size: 100, color: 'var(--ink)', emBox: true }));
       b.addEventListener('click', function () {
         if (solved) return;
         if (o.ok) {
@@ -966,7 +1055,7 @@
     s.appendChild(grid);
 
     opts.forEach(function (o) {
-      const b = el('button', 'letter-tile', glyphEl(L.ch, [o.key], { size: 150, color: 'var(--ink)', emBox: true }));
+      const b = el('button', 'letter-tile mk', glyphEl(L.ch, [o.key], { size: 100, color: 'var(--ink)', emBox: true }));
       b.addEventListener('click', function () {
         if (solved) return;
         if (o.ok) {
@@ -1062,7 +1151,7 @@
     const taught = Store.taughtSounds();
     const row = el('div', 'letters-grid');
     taught.slice(0, 3).forEach(function (t) {
-      const b = el('button', 'letter-tile', glyphEl(String(t.s).toLowerCase(), [], { size: 130, color: 'var(--teal)', latin: true, emBox: true }));
+      const b = el('button', 'letter-tile', glyphEl(String(t.s).toLowerCase(), [], { size: tileFs(130, String(t.s).length, String(t.s).length > 1 ? 0.7 : 0.95), color: 'var(--teal)', latin: true, emBox: true }));
       b.addEventListener('click', function () { SFX.tap(); say(t.s, EN, 0.7); });
       row.appendChild(b);
     });
@@ -1104,7 +1193,7 @@
       s.appendChild(grid);
 
       opts.forEach(function (o) {
-        const b = el('button', 'letter-tile', glyphEl(o.ch, [], { size: 150, color: 'var(--ink)', emBox: true }));
+        const b = el('button', 'letter-tile', glyphEl(o.ch, [], { size: tileFs(100, 1, /[صضسشطظعغ]/.test(o.ch) ? 1.25 : 1.0), color: 'var(--ink)', emBox: true }));
         b.dataset.ch = o.ch;
         b.addEventListener('click', function () {
           if (solved) return;
@@ -1145,7 +1234,7 @@
 
       const s = center();
       s.appendChild(el('div', 'review-badge', 'مراجعة ' + (round + 1) + ' من ' + picks.length));
-      s.appendChild(eyebrow('مين بيبدأ بصوت «' + String(s0.s).toUpperCase() + '»؟'));
+      s.appendChild(eyebrow('مين بيبدأ بصوت «' + String(s0.s).toUpperCase() + '»؟', sndPlan(String(s0.s))));
       const grid = el('div', 'pics-grid');
       s.appendChild(grid);
       opts.forEach(function (op) {
@@ -1418,7 +1507,7 @@
         return;
       }
       const n = nums[i];
-      traceLesson(host, NUMBERS.toAr(n), [], false, unit, function () { i++; one(); }, NUMBERS.name(n));
+      traceLesson(host, NUMBERS.toAr(n), [], false, unit, function () { i++; one(); }, NUMBERS.name(n), 'رقم');
     }
     one();
   }

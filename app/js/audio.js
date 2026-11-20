@@ -7,6 +7,16 @@
   let voices = [];
   let currentAudio = null;
   let seqToken = 0;
+  /* بوابة الصوت: قناة واحدة فقط تتكلم في أي لحظة — أي محرك يبدأ يوقف الباقي */
+  const Gate = window.VoiceGate = window.VoiceGate || {
+    stops: {},
+    reg(name, fn) { this.stops[name] = fn; },
+    claim(name) {
+      const self = this;
+      Object.keys(this.stops).forEach(function (k) { if (k !== name) { try { self.stops[k](); } catch (e) {} } });
+    },
+    stopAll() { this.claim('__none__'); }
+  };
 
   function refreshVoices() {
     if (!synth) return;
@@ -47,6 +57,7 @@
     return new Promise(resolve => {
       if (!synth || !text || window.__ttsOff) return resolve(false);
       try {
+        Gate.claim('audio2');
         const u = new SpeechSynthesisUtterance(text);
         const v = pickVoice(lang || 'ar-SA');
         // لا ننطق العربية بلكنة أجنبية: لو مفيش صوت عربي على الجهاز نسكت بدل ما نخرّب النطق
@@ -59,7 +70,8 @@
         u.volume = 1;
         u.onend = () => resolve(true);
         u.onerror = () => resolve(false);
-        synth.speak(u);
+        if (synth.speaking || synth.pending) { try { synth.cancel(); } catch (e) {} setTimeout(function () { try { synth.speak(u); } catch (e) { resolve(false); } }, 60); }
+        else synth.speak(u);
         // أمان: بعض المتصفحات لا تطلق onend
         setTimeout(() => resolve(true), Math.min(9000, 900 + text.length * 130));
       } catch (e) { resolve(false); }
@@ -69,6 +81,8 @@
   function play(url, rate) {
     return new Promise(resolve => {
       try {
+        Gate.claim('audio2');
+        if (synth && (synth.speaking || synth.pending)) { try { synth.cancel(); } catch (e) {} }
         if (currentAudio) { currentAudio.pause(); currentAudio = null; }
         const a = new Audio();
         a.preload = 'auto';
@@ -164,5 +178,6 @@
     }
   };
 
+  Gate.reg('audio2', function () { Audio2.stop(); });
   window.Audio2 = Audio2;
 })();

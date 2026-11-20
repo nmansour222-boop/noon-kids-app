@@ -267,8 +267,10 @@
     const b = el('button', 'btn ghost', 'رجوع للمسار');
     b.style.maxWidth = '280px';
     b.addEventListener('click', function () { SFX.click(); back(); });
-    c.appendChild(b);
+    const dk = el('div', 'l-dock');
+    dk.appendChild(b);
     s.appendChild(c);
+    s.appendChild(dk);
     host.appendChild(s);
     Audio2.say('خلصنا النهارده! نكمل بكره', 'ar-SA', 0.8);
   }
@@ -334,9 +336,11 @@
     });
     const home = el('button', 'btn ghost sm', 'رجوع للمسار');
     home.addEventListener('click', function () { SFX.click(); back(); });
-    c.appendChild(next);
-    c.appendChild(home);
+    const acts = el('div', 'l-dock');
+    acts.appendChild(next);
+    acts.appendChild(home);
     s.appendChild(c);
+    s.appendChild(acts);
     host.appendChild(s);
     Store.addStars(u.track === 'qu' ? 3 : 2);
     SFX.levelup();
@@ -491,16 +495,15 @@
     // ---------- تشخيص الصوت ----------
     const diag = el('div', 'off-card');
     diag.style.marginTop = '12px';
-    const nHuman = (window.A3 && A3.coverage) ? A3.coverage().human : 0;
+    const cov = (window.A3 && A3.coverage) ? A3.coverage() : { words: 0, letters: 0, generated: 0 };
     const arVoice = window.Audio2 && Audio2.hasArabicVoice ? Audio2.hasArabicVoice() : false;
     diag.innerHTML = '<div class="off-title">الصوت على هذا الجهاز</div>' +
-      '<div class="off-status">تسجيلات بشرية جاهزة: <b>' + nHuman + '</b> كلمة — بتشتغل بدون إنترنت بعد أول مرة.<br>' +
-      'نطق الحروف (صوت آلي) ' + (arVoice ? 'متاح على الجهاز ✓' : 'غير متاح — التطبيق هيعتمد على التسجيلات البشرية والصور بدل ما ينطق بلكنة غلط') + '.</div>';
+      '<div class="off-status">كلمات بتسجيل بشري: <b>' + cov.words + '</b> — مقاطع أسماء وأصوات الحروف: <b>' + cov.letters + '</b> — جمل وتعليمات بصوت مولَّد (سلمى للعربي، جيني للإنجليزي): <b>' + cov.generated + '</b>.<br>' +
+      'كلها بتشتغل بدون إنترنت بعد أول فتح. صوت الجهاز احتياطي بس ' + (arVoice ? '(متاح ✓)' : '(غير متاح — مش مشكلة)') + '.</div>';
     body.appendChild(diag);
 
     body.appendChild(el('div', 'parent-note',
-      'بنستخدم التكرار المتباعد: كل ما الطفل يتقن حاجة بنعيدها بعد يوم، ٣ أيام، أسبوع، أسبوعين، شهر. ' +
-      'كلمات المنهج كلها بتسجيلات بشرية (١١٥/١١٥)؛ الصوت المؤقت باقي في أصوات الحروف المجردة بس.'));
+      'بنستخدم التكرار المتباعد: كل ما الطفل يتقن حاجة بنعيدها بعد يوم، ٣ أيام، أسبوع، أسبوعين، شهر.'));
 
     // ---------- اسم الطفل (للتقارير والشهادات) ----------
     const nameRow = el('div', 'setting-row');
@@ -537,6 +540,11 @@
 
     body.appendChild(el('div', 'setting-row',
       '<span class="sr-label">الصوت الآلي لنطق التعليمات وأسماء الحروف</span><div class="switch ' + (Store.ttsOn() ? 'on' : '') + '" data-set="tts" role="switch" aria-checked="' + Store.ttsOn() + '"></div>'));
+    (function checkRow() {
+      const row = el('div', 'setting-row', '<span class="sr-label">فحص الجهاز (صوت، أوفلاين، تخزين)</span>');
+      const a = el('a', 'btn ghost sm', 'افتح الفحص'); a.href = 'check.html';
+      row.appendChild(a); body.appendChild(row);
+    })();
     (function voiceRow() {
       if (!window.Audio2 || !Audio2.hasTTS()) return;
       const row = el('div', 'setting-row', '<span class="sr-label">صوت الجهاز العربي</span>');
@@ -689,7 +697,7 @@
       return 'التقدّم منتظم. الأفضل تقسيم الجلسة: ٥ دقايق مراجعة + ١٠ دقايق درس جديد.';
     })();
 
-    const av = (window.A3 && A3.coverage) ? A3.coverage() : { human: 0 };
+    const av = (window.A3 && A3.coverage) ? A3.coverage() : { words: 0, generated: 0, letters: 0 };
     const cur = Store.currentLesson('ar');
 
     wrap.innerHTML =
@@ -710,8 +718,8 @@
       '<h2>مستحق للمراجعة</h2>' + dueHtml +
       '<h2>التوصية</h2><p class="rep-note">' + rec + '</p>' +
       '<h2>الدرس القادم</h2><p class="rep-note">' + (cur ? cur.title : '—') + '</p>' +
-      '<h2>جودة الصوت</h2><p class="rep-note">كلمات المنهج كلها بتسجيلات بشرية (' + av.human +
-        ' ملفًا). الصوت المؤقت (TTS) باقٍ في أصوات الحروف المجردة فقط. المصدر: Shtooka Project وLingua Libre عبر ويكيميديا كومنز — CC BY / CC BY-SA.</p>' +
+      '<h2>جودة الصوت</h2><p class="rep-note">كلمات المنهج بتسجيلات بشرية (' + av.words +
+        ' كلمة — المصدر: Shtooka Project وLingua Libre عبر ويكيميديا كومنز، CC BY / CC BY-SA)، والجمل والتعليمات وأسماء الحروف بصوت اصطناعي عصبي (' + (av.generated + av.letters) + ' مقطع). صوت الجهاز احتياطي فقط.</p>' +
       '<div class="rep-sign"><span>توقيع ولي الأمر</span><span class="rep-line"></span><span>التاريخ</span></div>' +
       '<p class="rep-foot">تقرير آلي من تطبيق «نون» — كل البيانات على الجهاز ولا يخرج منه شيء.</p>';
 
@@ -809,7 +817,8 @@
     go: go, back: back, internalBack: internalBack, state: state, session: session,
     openUnit: openUnit, renderHome: renderHome, renderTrack: renderTrack,
     parent: function () { parentUnlocked = true; go('parent'); renderParent(); },
-    current: function () { return current; }
+    current: function () { return current; },
+    finishUnit: finishUnit, showLimit: showLimit
   };
 
   if (state.qa) window.__ready = true;

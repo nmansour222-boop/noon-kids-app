@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#FF6B45">
+<title>فحص الجهاز — نون</title>
+<style>
+:root{--bg:#FFF8F0;--fg:#2B2320;--card:#fff;--ok:#1b8a5a;--bad:#c4302b;--warn:#b7791f;--line:#eadfd3;--accent:#FF6B45}
+@media (prefers-color-scheme:dark){:root{--bg:#1d1816;--fg:#f3ece6;--card:#2a2320;--line:#3b312c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;padding:16px;max-width:680px;margin-inline:auto}
+h1{font-size:22px;margin:8px 0}
+p.lead{margin:0 0 14px;opacity:.85}
+button{font:inherit;border:0;border-radius:14px;padding:12px 18px;background:var(--accent);color:#fff;font-weight:700;min-height:48px;cursor:pointer}
+button.sec{background:transparent;color:var(--fg);border:2px solid var(--line)}
+button:disabled{opacity:.5}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin:10px 0}
+.item{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line)}
+.item:last-child{border-bottom:0}
+.dot{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px;background:#999}
+.ok .dot{background:var(--ok)}.bad .dot{background:var(--bad)}.warn .dot{background:var(--warn)}
+.t{font-weight:700}.d{font-size:14px;opacity:.8;word-break:break-word}
+.play{margin-inline-start:auto;flex:none;min-height:40px;padding:6px 12px}
+#sum{font-size:18px;font-weight:800;margin:12px 0}
+textarea{width:100%;min-height:120px;font:12px/1.4 ui-monospace,monospace;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:8px}
+</style>
+</head>
+<body>
+<h1>فحص الجهاز</h1>
+<p class="lead">اضغط «ابدأ الفحص» مرة واحدة. الفحص بيتأكد إن جهازك بيفتح ملفات الصوت ويشغّلها ومفيش صوتين مع بعض، وإن التخزين أوفلاين شغال. لو فيه علامة ✗ ابعت التقرير اللي تحت.</p>
+<div class="row"><button id="go">ابدأ الفحص</button><a href="index.html"><button class="sec" type="button">رجوع للتطبيق</button></a></div>
+<div id="sum"></div>
+<div class="card" id="list"></div>
+<div id="rep" hidden>
+  <p>التقرير (انسخه وابعته):</p>
+  <textarea id="rt" readonly></textarea>
+  <div class="row"><button id="cp" class="sec">نسخ التقرير</button></div>
+</div>
+<script src="js/audio.js"></script>
+<script src="js/audio3.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var results = [];
+  var list = $('list');
+  function add(name, status, detail, playUrl) {
+    results.push({ name: name, status: status, detail: detail });
+    var d = document.createElement('div'); d.className = 'item ' + status;
+    var dot = document.createElement('div'); dot.className = 'dot'; dot.textContent = status === 'ok' ? '✓' : status === 'warn' ? '!' : '✗';
+    var box = document.createElement('div');
+    var t = document.createElement('div'); t.className = 't'; t.textContent = name;
+    var dd = document.createElement('div'); dd.className = 'd'; dd.textContent = detail || '';
+    box.appendChild(t); box.appendChild(dd); d.appendChild(dot); d.appendChild(box);
+    if (playUrl) {
+      var b = document.createElement('button'); b.className = 'play sec'; b.textContent = '▶'; b.setAttribute('aria-label', 'تشغيل');
+      b.onclick = function () { var a = new Audio(playUrl); a.play().catch(function () {}); };
+      d.appendChild(b);
+    }
+    list.appendChild(d);
+  }
+  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+
+  function probe(url) {
+    return new Promise(function (resolve) {
+      var a = new Audio(); a.preload = 'auto';
+      var t = setTimeout(function () { resolve({ err: 'انتهت المهلة' }); }, 8000);
+      a.onloadedmetadata = function () { clearTimeout(t); resolve({ d: a.duration }); };
+      a.onerror = function () { clearTimeout(t); resolve({ err: 'الجهاز مش قادر يفتح الملف' }); };
+      a.src = url;
+    });
+  }
+  function playOnce(url) {
+    return new Promise(function (resolve) {
+      var a = new Audio(); a.volume = 0.0001; var started = false;
+      var t = setTimeout(function () { resolve({ err: started ? 'ما انتهاش' : 'ما بدأش' }); }, 9000);
+      a.onplaying = function () { started = true; };
+      a.onended = function () { clearTimeout(t); resolve({ ok: true, t: a.currentTime }); };
+      a.onerror = function () { clearTimeout(t); resolve({ err: 'خطأ تشغيل' }); };
+      a.src = url; var p = a.play(); if (p && p.catch) p.catch(function (e) { clearTimeout(t); resolve({ err: String(e && e.name || e) }); });
+    });
+  }
+
+  async function run() {
+    $('go').disabled = true; list.innerHTML = ''; results = []; $('sum').textContent = 'جاري الفحص…';
+    // 1) البيئة
+    var secure = location.protocol === 'https:' || location.hostname === 'localhost';
+    add('اتصال آمن (HTTPS)', secure ? 'ok' : 'warn', location.protocol + '//' + location.host);
+    var standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+    add('وضع التطبيق', 'ok', standalone ? 'مثبّت على الشاشة الرئيسية' : 'داخل المتصفح (عادي)');
+    try { localStorage.setItem('noon.check', '1'); var okk = localStorage.getItem('noon.check') === '1'; localStorage.removeItem('noon.check'); add('حفظ التقدّم (localStorage)', okk ? 'ok' : 'bad', okk ? 'شغال' : 'مش بيحفظ'); }
+    catch (e) { add('حفظ التقدّم (localStorage)', 'bad', 'ممنوع — جرّب خارج وضع التصفح الخاص'); }
+
+    // 2) manifest الأصوات
+    var man = null;
+    try { var r = await fetch('audio/manifest.json', { cache: 'no-cache' }); man = (await r.json()).items; add('فهرس الأصوات', 'ok', Object.keys(man).length + ' مقطع'); }
+    catch (e) { add('فهرس الأصوات', 'bad', 'ما اتحمّلش'); }
+
+    // 3) Service Worker + كاش
+    if (!('serviceWorker' in navigator)) add('العمل أوفلاين (Service Worker)', 'bad', 'الجهاز مش بيدعمه');
+    else {
+      try {
+        var reg = await navigator.serviceWorker.getRegistration();
+        if (!reg) add('العمل أوفلاين (Service Worker)', 'warn', 'لسه ما اتسجّلش — افتح التطبيق مرة بإنترنت وارجع هنا');
+        else {
+          add('العمل أوفلاين (Service Worker)', navigator.serviceWorker.controller ? 'ok' : 'warn', navigator.serviceWorker.controller ? 'مفعّل' : 'مسجّل بس ما بدأش يتحكم — حدّث الصفحة');
+          if (man && window.caches) {
+            var wc = await caches.open('noon-words'); var ks = await wc.keys();
+            var uniq = {}; Object.keys(man).forEach(function (k) { uniq[man[k].file] = 1; }); var need = Object.keys(uniq).length + 29;
+            add('تخزين الأصوات أوفلاين', ks.length >= need - 5 ? 'ok' : 'warn', ks.length + ' من حوالي ' + need + (ks.length >= need - 5 ? '' : ' — اتركه مفتوح على إنترنت دقيقتين'));
+          }
+        }
+      } catch (e) { add('العمل أوفلاين (Service Worker)', 'warn', String(e)); }
+    }
+
+    // 4) فك الترميز لعينة من كل نوع
+    if (man) {
+      var kinds = [['اسم حرف', /^ar:@name:/], ['صوت حرف', /^ar:@sound:/], ['كلمة عربي (بشري)', /^ar:[^@#]/], ['جملة عربي', /^ar:#/], ['كلمة إنجليزي', /^en:[^#]/], ['صوت إنجليزي', /^en:#/]];
+      var samples = [];
+      kinds.forEach(function (k) { var key = Object.keys(man).filter(function (x) { return k[1].test(x); })[0]; if (key) samples.push([k[0], man[key].file]); });
+      try { var ld = await (await fetch('js/lesson-audio.js')).text(); var m2 = ld.match(/audio\/ar\/lessons\/[a-z]+\.mp3/); if (m2) samples.push(['شرح حرف', m2[0]]); } catch (e) {}
+      for (var i = 0; i < samples.length; i++) {
+        var s = samples[i], pr = await probe(s[1]);
+        if (pr.err) add('فك ترميز: ' + s[0], 'bad', pr.err + ' (' + s[1] + ')');
+        else add('فك ترميز: ' + s[0], pr.d > 0.15 ? 'ok' : 'bad', pr.d.toFixed(2) + ' ثانية', s[1]);
+      }
+      // 5) تشغيل فعلي حتى النهاية (بصوت شبه صامت)
+      if (samples[0]) {
+        var pl = await playOnce(samples[0][1]);
+        add('تشغيل فعلي حتى النهاية', pl.ok ? 'ok' : 'bad', pl.ok ? 'اتشغّل وخلص' : pl.err + ' — لو آيفون: اضغط الزر مرة تانية');
+      }
+      // 6) طلبات Range (شرط سفاري)
+      try {
+        var rr = await fetch(samples[0][1], { headers: { Range: 'bytes=0-99' } });
+        add('دعم Range (سفاري/آيفون)', rr.status === 206 ? 'ok' : 'warn', 'الرد: ' + rr.status + (rr.status === 206 ? '' : ' — على آيفون ممكن الصوت ما يشتغلش لو ما اتثبّتش النسخة الأوفلاين'));
+      } catch (e) { add('دعم Range (سفاري/آيفون)', 'warn', String(e)); }
+    }
+
+    // 7) عدم التداخل بكود التطبيق الحقيقي
+    if (window.A3 && window.Audio2 && man) {
+      try {
+        await A3.load();
+        var keys = Object.keys(man).filter(function (x) { return /^ar:#/.test(x); }).slice(0, 3);
+        var maxLive = 0, stopAt = Date.now() + 2600;
+        var els = [], NA = window.Audio;
+        window.Audio = function (src) { var a = new NA(); a.volume = 0.0001; els.push(a); if (src) a.src = src; return a; };
+        var iv = setInterval(function () { var live = els.filter(function (a) { return !a.paused && !a.ended && a.currentTime > 0; }).length; if (live > maxLive) maxLive = live; }, 20);
+        A3.sayWord(keys[0].slice(3), 'ar'); await wait(250);
+        A3.sayWord(keys[1].slice(3), 'ar'); await wait(150);
+        A3.sayWord(keys[2].slice(3), 'ar');
+        while (Date.now() < stopAt) await wait(50);
+        clearInterval(iv); window.Audio = NA; A3.stop();
+        add('عدم تداخل الأصوات (3 مقاطع بسرعة)', maxLive <= 1 ? 'ok' : 'bad', 'أقصى مقاطع بتتكلم مع بعض: ' + maxLive);
+      } catch (e) { add('عدم تداخل الأصوات', 'warn', String(e)); }
+    }
+
+    // 8) نطق الجهاز (احتياطي فقط)
+    var sy = window.speechSynthesis;
+    if (!sy) add('نطق الجهاز (احتياطي)', 'warn', 'مش موجود — مش مشكلة، التطبيق بيعتمد على التسجيلات');
+    else { var vs = sy.getVoices() || []; var ar = vs.filter(function (v) { return /^ar/i.test(v.lang); }).length; add('نطق الجهاز (احتياطي)', 'ok', vs.length + ' صوت، منها ' + ar + ' عربي'); }
+
+    // الملخص
+    var bad = results.filter(function (x) { return x.status === 'bad'; }).length, warn = results.filter(function (x) { return x.status === 'warn'; }).length;
+    $('sum').textContent = bad ? ('✗ فيه ' + bad + ' مشكلة — ابعت التقرير') : warn ? ('✓ سليم، مع ' + warn + ' ملاحظة') : '✓ كل حاجة سليمة';
+    $('sum').style.color = bad ? 'var(--bad)' : warn ? 'var(--warn)' : 'var(--ok)';
+    $('rt').value = JSON.stringify({ ua: navigator.userAgent, when: new Date().toISOString(), results: results }, null, 1);
+    $('rep').hidden = false; $('go').disabled = false; $('go').textContent = 'إعادة الفحص';
+    window.__checkDone = { bad: bad, warn: warn, results: results };
+  }
+  $('go').addEventListener('click', run);
+  $('cp').addEventListener('click', function () { var t = $('rt'); t.select(); try { navigator.clipboard.writeText(t.value); } catch (e) { document.execCommand('copy'); } $('cp').textContent = 'اتنسخ ✓'; });
+})();
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /* Service Worker — التطبيق يعمل أوفلاين بعد أول فتح */
-const VERSION = 'noon-v26';
+const VERSION = 'noon-v29';
 /* كاشات لا تُمسح عند تحديث الإصدار: التلاوة المنزّلة (~53 ميجا) وأصوات الكلمات */
 const KEEP = [VERSION, 'noon-audio', 'noon-words'];
 const SHELL = [
@@ -31,6 +31,7 @@ const SHELL = [
   './fonts/quran.woff2',
   './fonts/emoji.woff2',
   './privacy.html',
+  './check.html',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',
@@ -65,6 +66,16 @@ self.addEventListener('install', e => {
           fetch(f).then(res => { if (res && res.ok) return words2.put(f, res); }).catch(() => {})
         ));
       }
+    } catch (err) {}
+    // تنظيف: نمسح من كاش الكلمات أي ملف مش موجود في الـmanifest الحالي (بقايا نسخ قديمة)
+    try {
+      const j2 = await (await fetch('audio/manifest.json', { cache: 'no-cache' })).json();
+      const keep = new Set(Object.keys(j2.items || {}).map(k => new URL(j2.items[k].file, self.registration.scope).href));
+      const txt2 = await (await fetch('js/lesson-audio.js')).text();
+      (txt2.match(/audio\/ar\/lessons\/[a-z]+\.mp3/g) || []).forEach(f => keep.add(new URL(f, self.registration.scope).href));
+      keep.add(new URL('audio/manifest.json', self.registration.scope).href);
+      const wc = await caches.open('noon-words');
+      for (const rq of await wc.keys()) { if (!keep.has(rq.url)) await wc.delete(rq); }
     } catch (err) {}
     await self.skipWaiting();
   })());
